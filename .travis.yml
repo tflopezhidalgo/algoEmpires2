@@ -1,0 +1,12 @@
+language: java
+
+
+notifications:
+  email:
+    recipients:
+      - lauraagustinatrotta@gmail.com
+      - ailu_tunci@hotmail.com
+      - fedee962@outlook.com
+      - ivobiaus@gmail.com
+    on_success: always # default: change
+    on_failure: always # default: always
