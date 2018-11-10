@@ -1,28 +1,43 @@
-public class Posicion {
 
+public class Posicion {
+	
     private int posicionX;
 
     private int posicionY;
-
-
+    
     public Posicion(){
 
         this.posicionX = 0;
         this.posicionY = 0;
     }
+	
+	Posicion(int x, int y){
+		posicionX = x;
+		posicionY = y;
+	}
+	
+	public double ejeX() {
+		return posicionX;
+	}
+	
+	public double ejeY() {
+		return posicionY;
+	}
 
-    public Posicion(int posicionX, int posicionY){
-
-        this.posicionX = posicionX;
-        this.posicionY = posicionY;
+    public void incrementarX(){ 
+    	posicionX++; 
     }
 
-    public void incrementarX(){ this.posicionX++; }
+    public void incrementarY(){ 
+    	posicionY++;
+    }
 
-    public void incrementarY(){ this.posicionY++; }
+    public void decrementarX(){ 
+    	posicionX--;
+    }
 
-    public void decrementarX(){ this.posicionX--; }
-
-    public void decrementarY(){ this.posicionY--; }
+    public void decrementarY(){ 
+    	posicionY--; 
+    }
 
 }
