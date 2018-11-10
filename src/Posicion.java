@@ -7,8 +7,8 @@ public class Posicion {
     
     public Posicion(){
 
-        this.posicionX = 0;
-        this.posicionY = 0;
+        posicionX = 0;
+        posicionY = 0;
     }
 	
 	Posicion(int x, int y){
@@ -16,11 +16,11 @@ public class Posicion {
 		posicionY = y;
 	}
 	
-	public double ejeX() {
+	public int ejeX() {
 		return posicionX;
 	}
 	
-	public double ejeY() {
+	public int ejeY() {
 		return posicionY;
 	}
 
