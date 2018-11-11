@@ -35,8 +35,7 @@ public class AldeanoTest {
         Assert.assertEquals(unAldeano.obtenerUbicacion(), casilla);
 
     }
-
-    //TODO ESTO NO VA ACA!
+    
     @Test
     public void moverAldeano() throws ErrorBasico {
 
@@ -192,7 +191,7 @@ public class AldeanoTest {
     }
 
     /*
-     *  Test de construcción de Aldeano
+     *  Test de construccion de Aldeano
      */
 
     @Test
