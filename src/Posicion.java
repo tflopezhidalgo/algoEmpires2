@@ -1,4 +1,3 @@
-
 public class Posicion {
 	
     private int posicionX;

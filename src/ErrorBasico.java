@@ -1,4 +1,3 @@
-
 public class ErrorBasico extends Exception{
 
 	String message;

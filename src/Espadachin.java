@@ -1,5 +1,4 @@
-
-public class Espadachin extends Unidad{
+public class Espadachin extends Unidad {
 	
 	Espadachin(Casilla unaCasilla){
 		super(unaCasilla);

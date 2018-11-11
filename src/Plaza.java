@@ -1,5 +1,4 @@
-
-public class Plaza extends Edificio{
+public class Plaza extends Edificio {
 	
 	static final int TAMANIO_LADO = 2;
 	

@@ -1,5 +1,4 @@
-
-public class Catapulta extends Unidad{
+public class Catapulta extends Unidad {
 	
 	Catapulta(Casilla unaCasilla){
 		super(unaCasilla);
@@ -8,11 +7,16 @@ public class Catapulta extends Unidad{
 	}
 	
 	//estado de accionado (se puede mover/atacar)
+	public void accionar() {
+		ocupado = !ocupado;
+	}
 	
 	//distancia de ataque = 5
 	
 	//TODO check si esta bien hacer ese casteo
 	public void atacar(Casilla unaCasilla) throws ErrorBasico {
+		enModoAtaque();
+		
 		Pieza unaPieza = unaCasilla.obtenerPieza();
 		
 		if(unaPieza instanceof Edificio) {
@@ -31,6 +35,13 @@ public class Catapulta extends Unidad{
 		if(distancia > 5) {
 			//TODO error
 			throw new ErrorBasico("ERROR: Objetivo fuera de area de ataque.");
+		}
+	}
+	
+	private void enModoAtaque() throws ErrorBasico {
+		if(!ocupado) {
+			//TODO error
+			throw new ErrorBasico("ERROR: Catapulta no esta en Modo Ataque.");
 		}
 	}
 	

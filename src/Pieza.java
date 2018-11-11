@@ -1,4 +1,3 @@
-
 public abstract class Pieza {
 	
 	protected int vida;

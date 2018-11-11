@@ -1,4 +1,3 @@
-
 public class Aldeano extends Unidad {
 	
 	Edificio edificioObjectivo;
@@ -44,7 +43,7 @@ public class Aldeano extends Unidad {
 		return ocupado;
 	}
 	
-	public Plaza crearPlaza(Area areaDeConstruccion) throws ErrorBasico  {
+	public Plaza crearPlaza(Area areaDeConstruccion) throws ErrorBasico {
 		siEstaOcupadoDaError();
 		siYaJugoElTurnoError();
 		
@@ -64,7 +63,7 @@ public class Aldeano extends Unidad {
 		}
 	}
 	
-	public Cuartel crearCuartel(Area areaDeConstruccion) throws ErrorBasico  {
+	public Cuartel crearCuartel(Area areaDeConstruccion) throws ErrorBasico {
 		siEstaOcupadoDaError();
 		siYaJugoElTurnoError();
 		

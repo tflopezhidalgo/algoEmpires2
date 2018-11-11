@@ -1,5 +1,4 @@
-
-public class Arquero extends Unidad{
+public class Arquero extends Unidad {
 	
 	Arquero(Casilla unaCasilla){
 		super(unaCasilla);

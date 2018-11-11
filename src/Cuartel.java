@@ -1,5 +1,4 @@
-
-public class Cuartel extends Edificio{
+public class Cuartel extends Edificio {
 	
 	static final int TAMANIO_LADO = 2;
 	

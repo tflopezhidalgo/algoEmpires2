@@ -1,5 +1,4 @@
-
-public class Castillo extends Edificio{
+public class Castillo extends Edificio {
 	
 	static final int TAMANIO_LADO = 4;
 	

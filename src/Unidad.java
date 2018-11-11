@@ -72,7 +72,7 @@ public abstract class Unidad extends Pieza {
 	}	
 	
 	//----------------PRIVATE------------------
-	protected void siEstaOcupadoDaError() throws ErrorBasico  {
+	protected void siEstaOcupadoDaError() throws ErrorBasico {
 		if(ocupado) {
 			//TODO ERROR
 			throw new ErrorBasico("ERROR: La unidad esta ocupada.");
