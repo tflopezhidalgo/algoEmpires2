@@ -1,9 +1,8 @@
-import static org.junit.jupiter.api.Assertions.*;
 import junit.framework.Assert;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
-//import org.junit.jupiter.api.Test;
 
 class TestConstruccionAldeano {
 
@@ -42,46 +41,46 @@ class TestConstruccionAldeano {
 			switch (turno) {
 			
             case 1: 
-					assertEquals(true, unAldeano.estaOcupado());
-					assertEquals(false, laNuevaPlaza.necesitaReparacion());
-					assertEquals(true, laNuevaPlaza.enConstruccion());
+					Assert.assertEquals(true, unAldeano.estaOcupado());
+					Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
+					Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
 					//TODO hay que comprobar que el de abajo tira error, 
 					// como carajo se haceasserThrows?????
 					// assertEquals(0, unAldeano.realizarTrabajoDeTurno());
             		break;
             case 2: 
-    				assertEquals(true, unAldeano.estaOcupado());
-					assertEquals(false, laNuevaPlaza.necesitaReparacion());
-					assertEquals(true, laNuevaPlaza.enConstruccion());
+    				Assert.assertEquals(true, unAldeano.estaOcupado());
+					Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
+					Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
 					oroJugador += unAldeano.realizarTrabajoDeTurno();
-            		assertEquals(0, oroJugador);
+            		Assert.assertEquals(0, oroJugador);
         			break;
             case 3: 
-        			assertEquals(true, unAldeano.estaOcupado());
-					assertEquals(false, laNuevaPlaza.necesitaReparacion());
-					assertEquals(true, laNuevaPlaza.enConstruccion());
+        			Assert.assertEquals(true, unAldeano.estaOcupado());
+					Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
+					Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
 					oroJugador += unAldeano.realizarTrabajoDeTurno();
-					assertEquals(0, oroJugador);
+					Assert.assertEquals(0, oroJugador);
         			break;
             		
             case 4: 
-					assertEquals(true, unAldeano.estaOcupado());
-					assertEquals(false, laNuevaPlaza.necesitaReparacion());
-					assertEquals(false, laNuevaPlaza.enConstruccion());
+					Assert.assertEquals(true, unAldeano.estaOcupado());
+					Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
+					Assert.assertEquals(false, laNuevaPlaza.enConstruccion());
 					oroJugador += unAldeano.realizarTrabajoDeTurno();
-					assertEquals(25, oroJugador);
+					Assert.assertEquals(25, oroJugador);
             		break;
             		
             case 5: 
-            		assertEquals(false, unAldeano.estaOcupado());
+            		Assert.assertEquals(false, unAldeano.estaOcupado());
             		oroJugador += unAldeano.realizarTrabajoDeTurno();
-            		assertEquals(50, oroJugador);
+            		Assert.assertEquals(50, oroJugador);
             		break;
            	
             case 6: 
-        		assertEquals(false, unAldeano.estaOcupado());
+        		Assert.assertEquals(false, unAldeano.estaOcupado());
         		oroJugador += unAldeano.realizarTrabajoDeTurno();
-        		assertEquals(75, oroJugador);
+        		Assert.assertEquals(75, oroJugador);
         		break;
 			}
 			
@@ -125,46 +124,46 @@ class TestConstruccionAldeano {
 			switch (turno) {
 			
             case 1: 
-					assertEquals(true, unAldeano.estaOcupado());
-					assertEquals(false, elNuevoCuartel.necesitaReparacion());
-					assertEquals(true, elNuevoCuartel.enConstruccion());
+					Assert.assertEquals(true, unAldeano.estaOcupado());
+					Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
+					Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
 					//TODO hay que comprobar que el de abajo tira error, 
 					// como carajo se haceasserThrows?????
 					// assertEquals(0, unAldeano.realizarTrabajoDeTurno());
             		break;
             case 2: 
-    				assertEquals(true, unAldeano.estaOcupado());
-					assertEquals(false, elNuevoCuartel.necesitaReparacion());
-					assertEquals(true, elNuevoCuartel.enConstruccion());
+    				Assert.assertEquals(true, unAldeano.estaOcupado());
+					Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
+					Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
 					oroJugador += unAldeano.realizarTrabajoDeTurno();
-            		assertEquals(0, oroJugador);
+            		Assert.assertEquals(0, oroJugador);
         			break;
             case 3: 
-        			assertEquals(true, unAldeano.estaOcupado());
-					assertEquals(false, elNuevoCuartel.necesitaReparacion());
-					assertEquals(true, elNuevoCuartel.enConstruccion());
+        			Assert.assertEquals(true, unAldeano.estaOcupado());
+					Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
+					Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
 					oroJugador += unAldeano.realizarTrabajoDeTurno();
-					assertEquals(0, oroJugador);
+					Assert.assertEquals(0, oroJugador);
         			break;
             		
             case 4: 
-					assertEquals(true, unAldeano.estaOcupado());
-					assertEquals(false, elNuevoCuartel.necesitaReparacion());
-					assertEquals(false, elNuevoCuartel.enConstruccion());
+					Assert.assertEquals(true, unAldeano.estaOcupado());
+					Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
+					Assert.assertEquals(false, elNuevoCuartel.enConstruccion());
 					oroJugador += unAldeano.realizarTrabajoDeTurno();
-					assertEquals(25, oroJugador);
+					Assert.assertEquals(25, oroJugador);
             		break;
             		
             case 5: 
-            		assertEquals(false, unAldeano.estaOcupado());
+            		Assert.assertEquals(false, unAldeano.estaOcupado());
             		oroJugador += unAldeano.realizarTrabajoDeTurno();
-            		assertEquals(50, oroJugador);
+            		Assert.assertEquals(50, oroJugador);
             		break;
            	
             case 6: 
-        		assertEquals(false, unAldeano.estaOcupado());
+        		Assert.assertEquals(false, unAldeano.estaOcupado());
         		oroJugador += unAldeano.realizarTrabajoDeTurno();
-        		assertEquals(75, oroJugador);
+        		Assert.assertEquals(75, oroJugador);
         		break;
 			}
 			
