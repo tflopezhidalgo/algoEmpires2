@@ -50,5 +50,35 @@ class TestColocarPiezas {
 		assertEquals(false, zonaDeConstruccion.estaLibre());
 
 	}
+	
+	
+	//TODO ESTO NO VA ACA!
+	@Test
+	public void moverAldeano() {
+		
+		Casilla miniTablero[][] = new Casilla[5][5];
+		
+		for(int y = 0; y < 5; y++ ) {
+			for(int x = 0; x < 5; x++ ) {
+				Posicion unaPosicion = new Posicion(x,y);
+				Casilla casilla = new Casilla(unaPosicion);
+				
+				miniTablero[x][y] = casilla;	
+			}
+		}
+		
+		Casilla casillaAldano = miniTablero[2][2];
+		Aldeano unAldeano = new Aldeano(casillaAldano);
+		
+		assertEquals(true, casillaAldano.estaOcupada());
+		
+		unAldeano.moverArriba();
+		assertEquals(false, casillaAldano.estaOcupada());
+		
+		Casilla casillaArriba = miniTablero[2][3];
+		assertEquals(true, casillaArriba.estaOcupada());
+	}
+	
+	
 
 }
