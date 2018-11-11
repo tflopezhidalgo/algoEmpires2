@@ -6,6 +6,7 @@ import static org.mockito.Mockito.mock;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class AldeanoTest {
 
     /*
@@ -15,7 +16,9 @@ public class AldeanoTest {
     @Test
     public void seCreaUnAldeano(){
 
-        Aldeano unAldeano = new Aldeano(new Posicion());
+    	Posicion nuevaPosicion = new Posicion();
+    	Casilla nuevaCasilla = new Casilla(nuevaPosicion);
+        Aldeano unAldeano = new Aldeano(nuevaCasilla);
         Assert.assertNotNull(unAldeano);
     }
 
@@ -63,101 +66,133 @@ public class AldeanoTest {
     @Test
     public void moverAldeanoUnaPosicionHaciaArriba(){
 
-        Aldeano unAldeano = new Aldeano(new Posicion());
-
-        Posicion posicionAldeanoMovido = new Posicion(0, 1);
-
+    	Posicion posicionCero = new Posicion(0,0);
+    	Casilla nuevaCasilla = new Casilla(posicionCero);
+    	
+    	Posicion posicionArriba = new Posicion(0,1);
+    	Casilla casillaDeArriba = new Casilla(posicionArriba);
+    	
+        Aldeano unAldeano = new Aldeano(nuevaCasilla);
+        
         unAldeano.moverArriba();
 
-        Assert.assertEquals(unAldeano.obtenerPosicion(), posicionAldeanoMovido);
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaDeArriba);
     }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaAbajo(){
 
-        Aldeano unAldeano = new Aldeano(new Posicion());
-
-        Posicion posicionAldeanoMovido = new Posicion(0, -1);
+    	Posicion posicionCero = new Posicion(0,0);
+    	Casilla nuevaCasilla = new Casilla(posicionCero);
+    	
+    	Posicion posicionAbajo = new Posicion(0,-1);
+    	Casilla casillaDeAbajo = new Casilla(posicionAbajo);
+    	
+        Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
         unAldeano.moverAbajo();
 
-        Assert.assertEquals(unAldeano.obtenerPosicion(), posicionAldeanoMovido);
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaDeAbajo);
     }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaDerecha(){
 
-        Aldeano unAldeano = new Aldeano(new Posicion());
-
-        Posicion posicionAldeanoMovido = new Posicion(1, 0);
+    	Posicion posicionCero = new Posicion(0,0);
+    	Casilla nuevaCasilla = new Casilla(posicionCero);
+    	
+    	Posicion posicionDerecha = new Posicion(1,0);
+    	Casilla casillaDeLaDerecha = new Casilla(posicionDerecha);
+    	
+        Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
         unAldeano.moverDerecha();
 
-        Assert.assertEquals(unAldeano.obtenerPosicion(), posicionAldeanoMovido);
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaDeLaDerecha);
     }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaIzquierda(){
 
-        Aldeano unAldeano = new Aldeano(new Posicion());
-
-        Posicion posicionAldeanoMovido = new Posicion(-1, 0);
+    	Posicion posicionCero = new Posicion(0,0);
+    	Casilla nuevaCasilla = new Casilla(posicionCero);
+    	
+    	Posicion posicionIzquierda = new Posicion(-1,0);
+    	Casilla casillaDeLaIzquierda = new Casilla(posicionIzquierda);
+    	
+        Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
         unAldeano.moverIzquierda();
 
-        Assert.assertEquals(unAldeano.obtenerPosicion(), posicionAldeanoMovido);
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaDeLaIzquierda);
     }
 
     @Test
     public void moverAldeanoUnaPosicionArribaDerecha(){
 
-        Aldeano unAldeano = new Aldeano(new Posicion());
-
-        Posicion posicionAldeanoMovido = new Posicion(1, 1);
+    	Posicion posicionCero = new Posicion(0,0);
+    	Casilla nuevaCasilla = new Casilla(posicionCero);
+    	
+    	Posicion posicionArribaDerecha = new Posicion(1,1);
+    	Casilla casillaArribaDerecha = new Casilla(posicionArribaDerecha);
+    	
+        Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
         unAldeano.moverArribaDerecha();
 
-        Assert.assertEquals(unAldeano.obtenerPosicion(), posicionAldeanoMovido);
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaArribaDerecha);
     }
 
     @Test
     public void moverAldeanoUnaPosicionArribaIzquierda(){
 
-        Aldeano unAldeano = new Aldeano(new Posicion());
-
-        Posicion posicionAldeanoMovido = new Posicion(-1, 1);
+    	Posicion posicionCero = new Posicion(0,0);
+    	Casilla nuevaCasilla = new Casilla(posicionCero);
+    	
+    	Posicion posicionArribaIzquierda = new Posicion(-1,1);
+    	Casilla casillaArribaIzquierda = new Casilla(posicionArribaIzquierda);
+    	
+        Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
         unAldeano.moverArribaIzquierda();
 
-        Assert.assertEquals(unAldeano.obtenerPosicion(), posicionAldeanoMovido);
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaArribaIzquierda);
     }
 
     @Test
     public void moverAldeanoUnaPosicionAbajoIzquierda(){
 
-        Aldeano unAldeano = new Aldeano(new Posicion());
-
-        Posicion posicionAldeanoMovido = new Posicion(-1, -1);
+    	Posicion posicionCero = new Posicion(0,0);
+    	Casilla nuevaCasilla = new Casilla(posicionCero);
+    	
+    	Posicion posicionAbajoIzquierda = new Posicion(-1,-1);
+    	Casilla casillaAbajoIzquierda = new Casilla(posicionAbajoIzquierda);
+    	
+        Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
         unAldeano.moverAbajoIzquierda();
 
-        Assert.assertEquals(unAldeano.obtenerPosicion(), posicionAldeanoMovido);
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaAbajoIzquierda);
     }
 
     @Test
     public void moverAldeanoUnaPosicionAbajoDerecha(){
 
-        Aldeano unAldeano = new Aldeano(new Posicion());
-
-        Posicion posicionAldeanoMovido = new Posicion(1, -1);
+    	Posicion posicionCero = new Posicion(0,0);
+    	Casilla nuevaCasilla = new Casilla(posicionCero);
+    	
+    	Posicion posicionAbajoDerecha = new Posicion(1,-1);
+    	Casilla casillaAbajoDerecha = new Casilla(posicionAbajoDerecha);
+    	
+        Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
         unAldeano.moverAbajoDerecha();
 
-        Assert.assertEquals(unAldeano.obtenerPosicion(), posicionAldeanoMovido);
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaAbajoDerecha);
     }
 
     /*
-     *  Test de construcciÃ³n de Aldeano
+     *  Test de construcción de Aldeano
      */
 
     @Test
