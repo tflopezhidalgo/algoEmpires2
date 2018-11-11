@@ -1,5 +1,5 @@
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import junit.framework.Assert;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,8 @@ class TestAtaqueUnidades {
 		//vida del aldeano == 0
 		unEspadachin.atacar(unAldeano.obtenerUbicacion());
 		
-		assertEquals(false,casillaAldeano.estaOcupada());
-		assertEquals(true,unAldeano.estaDestruida());
+		Assert.assertEquals(false,casillaAldeano.estaOcupada());
+		Assert.assertEquals(true,unAldeano.estaDestruida());
 	}
 	
 	@Test
@@ -64,8 +64,8 @@ class TestAtaqueUnidades {
 		//TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
 		//unEspadachin.atacar(unAldeano.obtenerUbicacion());
 		
-		assertEquals(true,casillaAldeano.estaOcupada());
-		assertEquals(false,unAldeano.estaDestruida());
+		Assert.assertEquals(true,casillaAldeano.estaOcupada());
+		Assert.assertEquals(false,unAldeano.estaDestruida());
 
 	}
 	
@@ -95,16 +95,16 @@ class TestAtaqueUnidades {
 		//vida del aldeano == 20
 		unArquero.atacar(unAldeano.obtenerUbicacion());
 		
-		assertEquals(false,unAldeano.estaDestruida());
-		assertEquals(true,casillaAldeano.estaOcupada());
+		Assert.assertEquals(false,unAldeano.estaDestruida());
+		Assert.assertEquals(true,casillaAldeano.estaOcupada());
 		
 		//vida del aldeano == 5
 		unArquero.atacar(casillaAldeano);
 		//vida del aldeano == 0
 		unArquero.atacar(casillaAldeano);
 		
-		assertEquals(false,casillaAldeano.estaOcupada());
-		assertEquals(true,unAldeano.estaDestruida());
+		Assert.assertEquals(false,casillaAldeano.estaOcupada());
+		Assert.assertEquals(true,unAldeano.estaDestruida());
 	}
 	
 	@Test
@@ -136,8 +136,8 @@ class TestAtaqueUnidades {
 		//unArquero.atacar(unAldeano.obtenerUbicacion());
 
 		
-		assertEquals(true,casillaAldeano.estaOcupada());
-		assertEquals(false,unAldeano.estaDestruida());
+		Assert.assertEquals(true,casillaAldeano.estaOcupada());
+		Assert.assertEquals(false,unAldeano.estaDestruida());
 	}
 	
 	
@@ -168,8 +168,8 @@ class TestAtaqueUnidades {
 		unaCatapulta.atacar(unAldeano.obtenerUbicacion());
 
 		
-		assertEquals(true,casillaAldeano.estaOcupada());
-		assertEquals(false,unAldeano.estaDestruida());
+		Assert.assertEquals(true,casillaAldeano.estaOcupada());
+		Assert.assertEquals(false,unAldeano.estaDestruida());
 	}
 	
 	@Test
@@ -204,8 +204,8 @@ class TestAtaqueUnidades {
 		//ya que, por ej tambien ocupa la casilla (5,5) que si esta en rango
 		unaCatapulta.atacar(miniTablero[6][6]);
 
-		assertEquals(true,unaPlaza.necesitaReparacion());
-		assertEquals(false,unaPlaza.estaDestruida());
+		Assert.assertEquals(true,unaPlaza.necesitaReparacion());
+		Assert.assertEquals(false,unaPlaza.estaDestruida());
 		
 		//vida de la plaza == 300
 		unaCatapulta.atacar(miniTablero[5][5]);
@@ -218,8 +218,8 @@ class TestAtaqueUnidades {
 		//vida de la plaza == 0
 		unaCatapulta.atacar(miniTablero[5][5]);
 
-		assertEquals(true,unaPlaza.estaDestruida());
-		assertEquals(true,zonaDeConstruccion.estaLibre());
+		Assert.assertEquals(true,unaPlaza.estaDestruida());
+		Assert.assertEquals(true,zonaDeConstruccion.estaLibre());
 	}
 	
 	@Test
@@ -253,8 +253,8 @@ class TestAtaqueUnidades {
 		//TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
 		//unaCatapulta.atacar(miniTablero[6][6]);
 
-		assertEquals(false,unaPlaza.necesitaReparacion());
-		assertEquals(false,unaPlaza.estaDestruida());
+		Assert.assertEquals(false,unaPlaza.necesitaReparacion());
+		Assert.assertEquals(false,unaPlaza.estaDestruida());
 
 	}
 	
