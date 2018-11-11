@@ -7,8 +7,8 @@ public class Posicion {
     
     public Posicion(){
 
-        posicionX = 0;
-        posicionY = 0;
+        this.posicionX = 0;
+        this.posicionY = 0;
     }
 	
 	Posicion(int x, int y){
