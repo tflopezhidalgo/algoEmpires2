@@ -137,7 +137,7 @@ class TestColocarPiezas {
 	
 	//TODO ESTO NO VA ACA!
 	@Test
-	public void moverAldeano() {
+	public void moverAldeano() throws ErrorBasico {
 		
 		Casilla miniTablero[][] = new Casilla[5][5];
 		
