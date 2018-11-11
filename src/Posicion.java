@@ -2,13 +2,11 @@
 public class Posicion {
 	
     private int posicionX;
-
     private int posicionY;
     
-    public Posicion(){
-
-        this.posicionX = 0;
-        this.posicionY = 0;
+    Posicion(){
+        posicionX = 0;
+        posicionY = 0;
     }
 	
 	Posicion(int x, int y){
@@ -23,21 +21,13 @@ public class Posicion {
 	public int ejeY() {
 		return posicionY;
 	}
-
-    public void incrementarX(){ 
-    	posicionX++; 
+	
+    public String aString() {
+    	return ( Integer.toString(posicionX) + "I" + Integer.toString(posicionY));
     }
-
-    public void incrementarY(){ 
-    	posicionY++;
+    
+    //USO APTO PARA TODOS    
+    static public String aString(int x , int y) {
+    	return ( Integer.toString(x) + "I" + Integer.toString(y));
     }
-
-    public void decrementarX(){ 
-    	posicionX--;
-    }
-
-    public void decrementarY(){ 
-    	posicionY--; 
-    }
-
 }
