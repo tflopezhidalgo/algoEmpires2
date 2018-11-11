@@ -8,7 +8,9 @@ public abstract class Pieza {
 	public void recibirDanio(int danio) {
 		vida -= danio;
 		if(vida <= 0) {
-			//destruir/morir/perder
+			vida = 0;
+			//TODO destruir/morir/perder
+			liberarUbicacion();
 		}
 	}
 	
@@ -22,5 +24,11 @@ public abstract class Pieza {
 	public void nuevoTurno() {
 		turnoJugado = false;
 	}
+	
+	public boolean estaDestruida() {
+		return vida == 0;
+	}
+	
+	protected abstract void liberarUbicacion();
 	
 }

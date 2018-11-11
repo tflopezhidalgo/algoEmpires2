@@ -119,32 +119,7 @@ public class Aldeano extends Unidad {
 		else {
 			return generarOro();
 		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 }
 

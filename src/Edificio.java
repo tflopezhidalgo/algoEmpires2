@@ -40,4 +40,7 @@ public abstract class Edificio extends Pieza {
 		return casillasOcupadas;
 	}
 	
+	protected void liberarUbicacion() {
+		casillasOcupadas.liberar();
+	}
 }

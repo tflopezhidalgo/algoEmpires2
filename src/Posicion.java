@@ -38,8 +38,8 @@ public class Posicion {
 		int xInicial = posicionB.ejeX();
 		int yInicial = posicionB.ejeY();
 		
-		int diferenciaX = xFinal - xInicial;
-		int diferenciaY = yFinal - yInicial;
+		int diferenciaX = Math.abs(xFinal - xInicial);
+		int diferenciaY = Math.abs(yFinal - yInicial);
 		
 		if(diferenciaX < diferenciaY) {
 			return diferenciaY;
