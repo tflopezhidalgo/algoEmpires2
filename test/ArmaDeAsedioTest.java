@@ -7,7 +7,7 @@ import java.util.List;
 public class ArmaDeAsedioTest {
 
     @Test
-    void ataqueCatapultaAUnidadNoHaceDanio() throws ErrorBasico {
+    public void ataqueCatapultaAUnidadNoHaceDanio() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[7][7];
 
@@ -38,7 +38,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    void ataqueCatapultaAEdificio() throws ErrorBasico {
+    public void ataqueCatapultaAEdificio() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[7][7];
 
@@ -88,7 +88,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    void ataqueCatapultaAEdificioFueraDeRango() throws ErrorBasico {
+    public void ataqueCatapultaAEdificioFueraDeRango() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[10][10];
 
