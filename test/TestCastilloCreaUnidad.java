@@ -32,14 +32,14 @@ class TestCastilloCreaUnidad {
 		
 		
 		Castillo unCastillo = new Castillo(zonaDeConstruccion);
-		Assert.assertEquals(true, miniTablero[3][3].estaOcupada());
+		assertEquals(true, miniTablero[3][3].estaOcupada());
 		
 		Casilla casillaParaCatapulta = miniTablero[4][4];
-		Assert.assertEquals(false, casillaParaCatapulta.estaOcupada());
+		assertEquals(false, casillaParaCatapulta.estaOcupada());
 		
 		Catapulta nuevaCatapulta = unCastillo.crearCatapulta(casillaParaCatapulta);
-		Assert.assertEquals(true, casillaParaCatapulta.estaOcupada());
-		Assert.assertEquals(casillaParaCatapulta, nuevaCatapulta.obtenerUbicacion());
+		assertEquals(true, casillaParaCatapulta.estaOcupada());
+		assertEquals(casillaParaCatapulta, nuevaCatapulta.obtenerUbicacion());
 
 	}
 }
