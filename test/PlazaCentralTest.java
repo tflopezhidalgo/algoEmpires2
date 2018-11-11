@@ -32,16 +32,16 @@ public class PlazaCentralTest {
         }
 
         Area zonaDeConstruccion = new Area(casillasParaConstruccion);
-        assertEquals(true, zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(true, zonaDeConstruccion.estaLibre());
 
         Plaza unaPlaza = new Plaza(zonaDeConstruccion);
-        assertEquals(false, zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(false, zonaDeConstruccion.estaLibre());
 
         //Las casillas adyacentes deberian estar libres
-        assertEquals(false, miniTablero[1][1].estaOcupada());
-        assertEquals(false, miniTablero[4][4].estaOcupada());
-        assertEquals(false, miniTablero[2][1].estaOcupada());
-        assertEquals(false, miniTablero[3][4].estaOcupada());
+        Assert.assertEquals(false, miniTablero[1][1].estaOcupada());
+        Assert.assertEquals(false, miniTablero[4][4].estaOcupada());
+        Assert.assertEquals(false, miniTablero[2][1].estaOcupada());
+        Assert.assertEquals(false, miniTablero[3][4].estaOcupada());
     }
 
 }
