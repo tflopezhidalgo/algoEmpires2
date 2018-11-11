@@ -4,7 +4,7 @@ import org.junit.Test;
 public class ArqueroTest {
 
     @Test
-    void ataqueArqueroADistancia() throws ErrorBasico {
+    public void ataqueArqueroADistancia() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[4][4];
 
@@ -42,7 +42,7 @@ public class ArqueroTest {
     }
 
     @Test
-    void ataqueArqueroFueraDeRango() throws ErrorBasico {
+    public void ataqueArqueroFueraDeRango() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[5][5];
 
