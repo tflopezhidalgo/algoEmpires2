@@ -195,7 +195,7 @@ public class AldeanoTest {
      */
 
     @Test
-    void ConstruccionPlaza() throws ErrorBasico {
+    public void ConstruccionPlaza() throws ErrorBasico {
         int turno = 0;
         int oroJugador = 0;
 
@@ -278,7 +278,7 @@ public class AldeanoTest {
     }
 
     @Test
-    void ConstruccionCuartel() throws ErrorBasico {
+    public void ConstruccionCuartel() throws ErrorBasico {
         int turno = 0;
         int oroJugador = 0;
 
