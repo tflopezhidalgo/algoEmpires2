@@ -1,5 +1,5 @@
 
-public class Castillo extends Edificio implements Atacante{
+public class Castillo extends Edificio{
 	
 	static final int TAMANIO_LADO = 4;
 	
@@ -14,13 +14,28 @@ public class Castillo extends Edificio implements Atacante{
 		areaAOcupar.contruir(this);
 	}
 
-	public int atacar(Pieza unaPieza) {
-		return 20;
+	public void atacar(Casilla unaCasilla) throws ErrorBasico {
+		Pieza unaPieza = unaCasilla.obtenerPieza();
+		enRangoDeAtaque(unaCasilla);
+		unaPieza.recibirDanio(20);
+		
+		if(unaPieza.estaDestruida()) {
+			unaPieza = null;
+		}
 	}
 	
 	public Catapulta crearCatapulta(Casilla ubicacion) {
 		Catapulta unaCatapulta = new Catapulta(ubicacion);
 		return unaCatapulta;
+	}
+	
+	private void enRangoDeAtaque(Casilla unaCasilla) throws ErrorBasico {
+		int distancia = areaOcupada().distanciaMinimaA(unaCasilla);
+
+		if(distancia > 3) {
+			//TODO error
+			throw new ErrorBasico("ERROR: Objetivo fuera de area de ataque.");
+		}
 	}
 
 }

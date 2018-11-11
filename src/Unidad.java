@@ -79,5 +79,9 @@ public abstract class Unidad extends Pieza {
 			throw new ErrorBasico("ERROR: La unidad esta ocupada.");
 		}
 	}
+	
+	protected void liberarUbicacion() {
+		casillaActual.liberar();
+	}
 
 }

@@ -11,15 +11,27 @@ public class Catapulta extends Unidad{
 	
 	//distancia de ataque = 5
 	
-	public int atacar(Pieza piezaEnemiga) {
-		if(piezaEnemiga instanceof Edificio) {
-			return atacarEdificio();
+	//TODO check si esta bien hacer ese casteo
+	public void atacar(Casilla unaCasilla) throws ErrorBasico {
+		Pieza unaPieza = unaCasilla.obtenerPieza();
+		
+		if(unaPieza instanceof Edificio) {
+			enRangoDeAtaque((Edificio)unaPieza);
+			unaPieza.recibirDanio(75);
 		}
-		return 0; //TODO tirar error/no permitir ataque
+		
+		if(unaPieza.estaDestruida()) {
+			unaPieza = null;
+		}
 	}
 	
-	public int atacarEdificio() {
-		return 75;
+	private void enRangoDeAtaque(Edificio unEdificio) throws ErrorBasico {
+		int distancia = unEdificio.areaOcupada().distanciaMinimaA(obtenerUbicacion());
+
+		if(distancia > 5) {
+			//TODO error
+			throw new ErrorBasico("ERROR: Objetivo fuera de area de ataque.");
+		}
 	}
 	
 }

@@ -1,5 +1,5 @@
 
-public class Espadachin extends Unidad implements Atacante{
+public class Espadachin extends Unidad{
 	
 	Espadachin(Casilla unaCasilla){
 		super(unaCasilla);
@@ -9,19 +9,42 @@ public class Espadachin extends Unidad implements Atacante{
 	
 	//distancia de ataque = 1
 	
-	public int atacar(Pieza unaPieza) {
+	//TODO check si esta bien hacer ese casteo
+	public void atacar(Casilla unaCasilla) throws ErrorBasico {
+		Pieza unaPieza = unaCasilla.obtenerPieza();
+		
 		if(unaPieza instanceof Edificio) {
-			return atacarEdificio();
+			enRangoDeAtaque((Edificio)unaPieza);
+			unaPieza.recibirDanio(15);
 		}
-		return atacarUnidad();
+		else {
+			enRangoDeAtaque(unaCasilla);
+			unaPieza.recibirDanio(25);
+		}
+		
+		if(unaPieza.estaDestruida()) {
+			unaPieza = null;
+		}
 	}
 	
-	private int atacarUnidad() {
-		return 25;
+	private void enRangoDeAtaque(Casilla casillaDeUnidad) throws ErrorBasico {
+		Posicion posicionA = casillaDeUnidad.obtenerPosicion();
+		Posicion posicionB = obtenerUbicacion().obtenerPosicion();
+		
+		int distancia = Posicion.calcularDistancia(posicionA, posicionB);
+		if(distancia > 1) {
+			//TODO error
+			throw new ErrorBasico("ERROR: Objetivo fuera de area de ataque.");
+		}
 	}
 	
-	private int atacarEdificio() {
-		return 15;
+	private void enRangoDeAtaque(Edificio unEdificio) throws ErrorBasico {
+		int distancia = unEdificio.areaOcupada().distanciaMinimaA(obtenerUbicacion());
+
+		if(distancia > 1) {
+			//TODO error
+			throw new ErrorBasico("ERROR: Objetivo fuera de area de ataque.");
+		}
 	}
-	
+
 }
