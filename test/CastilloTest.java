@@ -7,7 +7,7 @@ import java.util.List;
 public class CastilloTest {
 
     @Test
-    void castilloCreaCatapulta() {
+    public void castilloCreaCatapulta() {
 
 
         Casilla miniTablero[][] = new Casilla[6][6];
