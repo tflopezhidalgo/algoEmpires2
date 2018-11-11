@@ -33,8 +33,8 @@ public class ArmaDeAsedioTest {
         unaCatapulta.atacar(unAldeano.obtenerUbicacion());
 
 
-        assertEquals(true,casillaAldeano.estaOcupada());
-        assertEquals(false,unAldeano.estaDestruida());
+        Assert.assertEquals(true,casillaAldeano.estaOcupada());
+        Assert.assertEquals(false,unAldeano.estaDestruida());
     }
 
     @Test
@@ -69,8 +69,8 @@ public class ArmaDeAsedioTest {
         //ya que, por ej tambien ocupa la casilla (5,5) que si esta en rango
         unaCatapulta.atacar(miniTablero[6][6]);
 
-        assertEquals(true,unaPlaza.necesitaReparacion());
-        assertEquals(false,unaPlaza.estaDestruida());
+        Assert.assertEquals(true,unaPlaza.necesitaReparacion());
+        Assert.assertEquals(false,unaPlaza.estaDestruida());
 
         //vida de la plaza == 300
         unaCatapulta.atacar(miniTablero[5][5]);
@@ -83,8 +83,8 @@ public class ArmaDeAsedioTest {
         //vida de la plaza == 0
         unaCatapulta.atacar(miniTablero[5][5]);
 
-        assertEquals(true,unaPlaza.estaDestruida());
-        assertEquals(true,zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(true,unaPlaza.estaDestruida());
+        Assert.assertEquals(true,zonaDeConstruccion.estaLibre());
     }
 
     @Test
@@ -118,8 +118,8 @@ public class ArmaDeAsedioTest {
         //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
         //unaCatapulta.atacar(miniTablero[6][6]);
 
-        assertEquals(false,unaPlaza.necesitaReparacion());
-        assertEquals(false,unaPlaza.estaDestruida());
+        Assert.assertEquals(false,unaPlaza.necesitaReparacion());
+        Assert.assertEquals(false,unaPlaza.estaDestruida());
 
     }
 
