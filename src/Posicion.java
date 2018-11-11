@@ -30,4 +30,21 @@ public class Posicion {
     static public String aString(int x , int y) {
     	return ( Integer.toString(x) + "I" + Integer.toString(y));
     }
+    
+    static public int calcularDistancia(Posicion posicionA, Posicion posicionB) {
+    	
+		int xFinal = posicionA.ejeX();
+		int yFinal = posicionA.ejeY();
+		int xInicial = posicionB.ejeX();
+		int yInicial = posicionB.ejeY();
+		
+		int diferenciaX = xFinal - xInicial;
+		int diferenciaY = yFinal - yInicial;
+		
+		if(diferenciaX < diferenciaY) {
+			return diferenciaY;
+		}
+		return diferenciaX;
+
+    }
 }

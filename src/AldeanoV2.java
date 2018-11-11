@@ -1,24 +1,150 @@
 
 public class Aldeano extends Unidad {
 	
+	Edificio edificioObjectivo;
+	
 	Aldeano(Casilla unaCasilla) {
 		super(unaCasilla);
+		edificioObjectivo = null;
 		vida = 50;
 		costo = 25;
 	}
 
-	public void reparar() {
+	public void reparar(Edificio unEdificio) throws ErrorBasico {
+		siEstaOcupadoDaError();
+		siYaJugoElTurnoError();
+		
+		if(EstaADistancia(1,unEdificio)) {
+
+			if(unEdificio.necesitaReparacion()) {
+				ocupado = true;
+				unEdificio.reparar();
+				turnoJugado = true;
+			}
+			else {
+				//termino de reparar
+				ocupado = false;
+			}
+		}
+	}
+	
+	private int generarOro() throws ErrorBasico {	//hago una funcion o multiplico por cantidad de aldeanos libres?
+		siYaJugoElTurnoError();
+		
+		if(!ocupado) {
+			turnoJugado = true;
+			return 25;
+		}
+		else {
+			return 0;
+		}
+	}
+	
+	public boolean estaOcupado() {
+		return ocupado;
+	}
+	
+	public Plaza crearPlaza(Area areaDeConstruccion) throws ErrorBasico  {
+		siEstaOcupadoDaError();
+		siYaJugoElTurnoError();
+		
+		//TODO no lo puedo declarar 1 vez por turno tengo  que 
+		//guardarlo en algun lado y seguir el trabajo despues
+		if(areaDeConstruccion.estaLibre()) {
+			ocupado = true;
+			turnoJugado = true;
+			Plaza nuevaPlaza = new Plaza(areaDeConstruccion);
+			edificioObjectivo = nuevaPlaza;
+			edificioObjectivo.construir();
+			return nuevaPlaza;
+		}
+		else {
+			//TODO ERROR ZONA NO ESTA LIBRE
+			return null;
+		}
+	}
+	
+	public Cuartel crearCuartel(Area areaDeConstruccion) throws ErrorBasico  {
+		siEstaOcupadoDaError();
+		siYaJugoElTurnoError();
+		
+		//TODO no lo puedo declarar 1 vez por turno tengo  que 
+		//guardarlo en algun lado y seguir el trabajo despues
+		if(areaDeConstruccion.estaLibre()) {
+			ocupado = true;
+			turnoJugado = true;
+			Cuartel nuevoCuartel = new Cuartel(areaDeConstruccion);
+			edificioObjectivo = nuevoCuartel;
+			edificioObjectivo.construir();
+
+			return nuevoCuartel;
+		}
+		else {
+			//TODO ERROR ZONA NO ESTA LIBRE
+			return null;
+		}
+	}
+	
+	
+	//------PRIVATE------------
+	
+	private boolean EstaADistancia(int distancia, Edificio unEdificio) {
+		
+		Area areaDelEdificio = unEdificio.areaOcupada();	
+		int minimaDistancia = areaDelEdificio.distanciaMinimaA(casillaActual);
+		
+		return distancia >= minimaDistancia;
 		
 	}
 	
-	/* public void generarOro(){	//hago una funcion o multiplico por cantidad de aldeanos libres?
-	 } */
-	public void crearPlaza() {
+	public int realizarTrabajoDeTurno() throws ErrorBasico {
+		siYaJugoElTurnoError();
 		
+		//el aldeano :
+		// Genera oro, contruye o repara
+		//TODO quedo un switch de mierda, ver si se puede cambiar
+		if(edificioObjectivo != null) {
+			if(edificioObjectivo.enConstruccion() | edificioObjectivo.necesitaReparacion()) {
+				edificioObjectivo.construir();
+				edificioObjectivo.reparar();
+				turnoJugado = true;
+				return 0;
+			}
+			else {
+				ocupado = false;
+				edificioObjectivo = null;
+				return generarOro();
+			}
+		}
+		else {
+			return generarOro();
+		}
 	}
 	
-	public void crearCuartel() {
-		
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
