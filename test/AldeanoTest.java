@@ -63,7 +63,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaArriba(){
+    public void moverAldeanoUnaPosicionHaciaArriba() throws ErrorBasico {
 
     	Posicion posicionCero = new Posicion(0,0);
     	Casilla nuevaCasilla = new Casilla(posicionCero);
@@ -79,7 +79,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaAbajo(){
+    public void moverAldeanoUnaPosicionHaciaAbajo() throws ErrorBasico {
 
     	Posicion posicionCero = new Posicion(0,0);
     	Casilla nuevaCasilla = new Casilla(posicionCero);
@@ -95,7 +95,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaDerecha(){
+    public void moverAldeanoUnaPosicionHaciaDerecha() throws ErrorBasico {
 
     	Posicion posicionCero = new Posicion(0,0);
     	Casilla nuevaCasilla = new Casilla(posicionCero);
@@ -111,7 +111,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaIzquierda(){
+    public void moverAldeanoUnaPosicionHaciaIzquierda() throws ErrorBasico {
 
     	Posicion posicionCero = new Posicion(0,0);
     	Casilla nuevaCasilla = new Casilla(posicionCero);
@@ -127,7 +127,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaDerecha(){
+    public void moverAldeanoUnaPosicionArribaDerecha() throws ErrorBasico {
 
     	Posicion posicionCero = new Posicion(0,0);
     	Casilla nuevaCasilla = new Casilla(posicionCero);
@@ -143,7 +143,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaIzquierda(){
+    public void moverAldeanoUnaPosicionArribaIzquierda() throws ErrorBasico {
 
     	Posicion posicionCero = new Posicion(0,0);
     	Casilla nuevaCasilla = new Casilla(posicionCero);
@@ -159,7 +159,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoIzquierda(){
+    public void moverAldeanoUnaPosicionAbajoIzquierda() throws ErrorBasico {
 
     	Posicion posicionCero = new Posicion(0,0);
     	Casilla nuevaCasilla = new Casilla(posicionCero);
@@ -175,7 +175,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoDerecha(){
+    public void moverAldeanoUnaPosicionAbajoDerecha() throws ErrorBasico {
 
     	Posicion posicionCero = new Posicion(0,0);
     	Casilla nuevaCasilla = new Casilla(posicionCero);
