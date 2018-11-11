@@ -4,7 +4,7 @@ import org.junit.Test;
 public class EspadachinTest {
 
     @Test
-    void ataqueEspadachin() throws ErrorBasico {
+    public void ataqueEspadachin() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[3][3];
 
@@ -34,7 +34,7 @@ public class EspadachinTest {
     }
 
     @Test
-    void ataqueEspadachinFueraDeRango() throws ErrorBasico {
+    public void ataqueEspadachinFueraDeRango() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[3][3];
 
