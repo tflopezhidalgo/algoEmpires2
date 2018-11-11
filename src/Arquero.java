@@ -1,13 +1,13 @@
 
-public class Espadachin extends Unidad implements Atacante{
+public class Arquero extends Unidad implements Atacante{
 	
-	Espadachin(Casilla unaCasilla){
+	Arquero(Casilla unaCasilla){
 		super(unaCasilla);
-		vida = 100;
-		costo = 50;
+		vida = 75;
+		costo = 75;
 	}
 	
-	//distancia de ataque = 1
+	//distancia de ataque = 3
 	
 	public int atacar(Pieza unaPieza) {
 		if(unaPieza instanceof Edificio) {
@@ -17,11 +17,11 @@ public class Espadachin extends Unidad implements Atacante{
 	}
 	
 	private int atacarUnidad() {
-		return 25;
+		return 15;
 	}
 	
 	private int atacarEdificio() {
-		return 15;
+		return 10;
 	}
 	
 }

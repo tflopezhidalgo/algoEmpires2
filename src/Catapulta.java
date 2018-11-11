@@ -18,10 +18,6 @@ public class Catapulta extends Unidad{
 		return 0; //TODO tirar error/no permitir ataque
 	}
 	
-	public void mover() { //aca o lo declaro en Unidad (catapulta seria una exepcion a tratar)
-		
-	}
-	
 	public int atacarEdificio() {
 		return 75;
 	}
