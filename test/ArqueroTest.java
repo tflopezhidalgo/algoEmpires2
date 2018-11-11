@@ -29,16 +29,16 @@ public class ArqueroTest {
         //vida del aldeano == 20
         unArquero.atacar(unAldeano.obtenerUbicacion());
 
-        assertEquals(false,unAldeano.estaDestruida());
-        assertEquals(true,casillaAldeano.estaOcupada());
+        Assert.assertEquals(false,unAldeano.estaDestruida());
+        Assert.assertEquals(true,casillaAldeano.estaOcupada());
 
         //vida del aldeano == 5
         unArquero.atacar(casillaAldeano);
         //vida del aldeano == 0
         unArquero.atacar(casillaAldeano);
 
-        assertEquals(false,casillaAldeano.estaOcupada());
-        assertEquals(true,unAldeano.estaDestruida());
+        Assert.assertEquals(false,casillaAldeano.estaOcupada());
+        Assert.assertEquals(true,unAldeano.estaDestruida());
     }
 
     @Test
@@ -70,8 +70,8 @@ public class ArqueroTest {
         //unArquero.atacar(unAldeano.obtenerUbicacion());
 
 
-        assertEquals(true,casillaAldeano.estaOcupada());
-        assertEquals(false,unAldeano.estaDestruida());
+        Assert.assertEquals(true,casillaAldeano.estaOcupada());
+        Assert.assertEquals(false,unAldeano.estaDestruida());
     }
 
 
