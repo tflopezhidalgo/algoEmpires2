@@ -29,8 +29,8 @@ public class EspadachinTest {
         //vida del aldeano == 0
         unEspadachin.atacar(unAldeano.obtenerUbicacion());
 
-        assertEquals(false,casillaAldeano.estaOcupada());
-        assertEquals(true,unAldeano.estaDestruida());
+        Assert.assertEquals(false,casillaAldeano.estaOcupada());
+        Assert.assertEquals(true,unAldeano.estaDestruida());
     }
 
     @Test
@@ -61,8 +61,8 @@ public class EspadachinTest {
         //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
         //unEspadachin.atacar(unAldeano.obtenerUbicacion());
 
-        assertEquals(true,casillaAldeano.estaOcupada());
-        assertEquals(false,unAldeano.estaDestruida());
+        Assert.assertEquals(true,casillaAldeano.estaOcupada());
+        Assert.assertEquals(false,unAldeano.estaDestruida());
 
     }
 
