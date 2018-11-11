@@ -1,9 +1,8 @@
-import static org.junit.jupiter.api.Assertions.*;
 import junit.framework.Assert;
 import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
-//import org.junit.jupiter.api.Test;
 
 class TestCastilloCreaUnidad {
 
@@ -33,14 +32,14 @@ class TestCastilloCreaUnidad {
 		
 		
 		Castillo unCastillo = new Castillo(zonaDeConstruccion);
-		assertEquals(true, miniTablero[3][3].estaOcupada());
+		Assert.assertEquals(true, miniTablero[3][3].estaOcupada());
 		
 		Casilla casillaParaCatapulta = miniTablero[4][4];
-		assertEquals(false, casillaParaCatapulta.estaOcupada());
+		Assert.assertEquals(false, casillaParaCatapulta.estaOcupada());
 		
 		Catapulta nuevaCatapulta = unCastillo.crearCatapulta(casillaParaCatapulta);
-		assertEquals(true, casillaParaCatapulta.estaOcupada());
-		assertEquals(casillaParaCatapulta, nuevaCatapulta.obtenerUbicacion());
+		Assert.assertEquals(true, casillaParaCatapulta.estaOcupada());
+		Assert.assertEquals(casillaParaCatapulta, nuevaCatapulta.obtenerUbicacion());
 
 	}
 }
