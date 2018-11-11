@@ -4,7 +4,7 @@ import org.junit.Test;
 public class ArqueroTest {
 
     @Test
-    void ataqueArqueroADistancia() throws ErrorBasico {
+    public void ataqueArqueroADistancia() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[4][4];
 
@@ -29,20 +29,20 @@ public class ArqueroTest {
         //vida del aldeano == 20
         unArquero.atacar(unAldeano.obtenerUbicacion());
 
-        assertEquals(false,unAldeano.estaDestruida());
-        assertEquals(true,casillaAldeano.estaOcupada());
+        Assert.assertEquals(false,unAldeano.estaDestruida());
+        Assert.assertEquals(true,casillaAldeano.estaOcupada());
 
         //vida del aldeano == 5
         unArquero.atacar(casillaAldeano);
         //vida del aldeano == 0
         unArquero.atacar(casillaAldeano);
 
-        assertEquals(false,casillaAldeano.estaOcupada());
-        assertEquals(true,unAldeano.estaDestruida());
+        Assert.assertEquals(false,casillaAldeano.estaOcupada());
+        Assert.assertEquals(true,unAldeano.estaDestruida());
     }
 
     @Test
-    void ataqueArqueroFueraDeRango() throws ErrorBasico {
+    public void ataqueArqueroFueraDeRango() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[5][5];
 
@@ -70,8 +70,8 @@ public class ArqueroTest {
         //unArquero.atacar(unAldeano.obtenerUbicacion());
 
 
-        assertEquals(true,casillaAldeano.estaOcupada());
-        assertEquals(false,unAldeano.estaDestruida());
+        Assert.assertEquals(true,casillaAldeano.estaOcupada());
+        Assert.assertEquals(false,unAldeano.estaDestruida());
     }
 
 

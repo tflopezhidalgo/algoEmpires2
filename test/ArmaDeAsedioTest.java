@@ -5,9 +5,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArmaDeAsedioTest {
+	
+   @Test
+    public void catapultaNoAtacaSiNoFueAccionada() throws ErrorBasico {
+
+        Casilla miniTablero[][] = new Casilla[7][7];
+
+        for(int y = 0; y < 7; y++ ) {
+            for(int x = 0; x < 7; x++ ) {
+                Posicion unaPosicion = new Posicion(x,y);
+                Casilla casilla = new Casilla(unaPosicion);
+
+                miniTablero[x][y] = casilla;
+            }
+        }
+
+        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
+        for(int y = 0; y < Plaza.TAMANIO_LADO; y++) {
+            for(int x = 0; x < Plaza.TAMANIO_LADO; x++) {
+                casillasParaConstruccion.add(miniTablero[5+x][5+y]);
+            }
+        }
+        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+        Plaza unaPlaza = new Plaza(zonaDeConstruccion);
+
+        Casilla casillaCatapulta = miniTablero[0][0];
+        Catapulta unaCatapulta = new Catapulta(casillaCatapulta);
+
+        //vida de la plaza == 450
+        //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
+        //unaCatapulta.atacar(miniTablero[6][6]);
+        Assert.assertEquals(false, unaPlaza.necesitaReparacion());
+        
+        unaCatapulta.accionar();
+        
+        //vida del aldeano == 50
+        //TODO no deberia tirar error
+        unaCatapulta.atacar(miniTablero[6][6]);
+        Assert.assertEquals(true, unaPlaza.necesitaReparacion());
+    }
+   
+   @Test
+    public void catapultaNoSeMueveSiFueAccionada() throws ErrorBasico {
+
+        Casilla miniTablero[][] = new Casilla[3][3];
+
+        for(int y = 0; y < 3; y++ ) {
+            for(int x = 0; x < 3; x++ ) {
+                Posicion unaPosicion = new Posicion(x,y);
+                Casilla casilla = new Casilla(unaPosicion);
+
+                miniTablero[x][y] = casilla;
+            }
+        }
+
+        Casilla casillaCatapulta = miniTablero[0][0];
+        Catapulta unaCatapulta = new Catapulta(casillaCatapulta);
+
+        //TODO no deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
+        unaCatapulta.moverArriba();
+        
+        unaCatapulta.accionar();
+        
+        //TODO deberia tirar error
+        //unaCatapulta.moverArriba();
+        
+        unaCatapulta.accionar();
+        
+        //TODO no deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
+        unaCatapulta.moverArriba();
+    }
 
     @Test
-    void ataqueCatapultaAUnidadNoHaceDanio() throws ErrorBasico {
+    public void ataqueCatapultaAUnidadNoHaceDanio() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[7][7];
 
@@ -25,6 +95,8 @@ public class ArmaDeAsedioTest {
 
         Casilla casillaCatapulta = miniTablero[0][5];
         Catapulta unaCatapulta = new Catapulta(casillaCatapulta);
+        
+        unaCatapulta.accionar();
 
         //vida del aldeano == 50
         unaCatapulta.atacar(casillaAldeano);
@@ -33,12 +105,12 @@ public class ArmaDeAsedioTest {
         unaCatapulta.atacar(unAldeano.obtenerUbicacion());
 
 
-        assertEquals(true,casillaAldeano.estaOcupada());
-        assertEquals(false,unAldeano.estaDestruida());
+        Assert.assertEquals(true,casillaAldeano.estaOcupada());
+        Assert.assertEquals(false,unAldeano.estaDestruida());
     }
 
     @Test
-    void ataqueCatapultaAEdificio() throws ErrorBasico {
+    public void ataqueCatapultaAEdificio() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[7][7];
 
@@ -64,13 +136,15 @@ public class ArmaDeAsedioTest {
         Casilla casillaCatapulta = miniTablero[0][0];
         Catapulta unaCatapulta = new Catapulta(casillaCatapulta);
 
+        unaCatapulta.accionar();
+        
         //vida de la plaza == 375
         //Aunque la casilla que indico esta fuera del rango, el edificio que la ocupa no lo esta
         //ya que, por ej tambien ocupa la casilla (5,5) que si esta en rango
         unaCatapulta.atacar(miniTablero[6][6]);
 
-        assertEquals(true,unaPlaza.necesitaReparacion());
-        assertEquals(false,unaPlaza.estaDestruida());
+        Assert.assertEquals(true,unaPlaza.necesitaReparacion());
+        Assert.assertEquals(false,unaPlaza.estaDestruida());
 
         //vida de la plaza == 300
         unaCatapulta.atacar(miniTablero[5][5]);
@@ -83,12 +157,12 @@ public class ArmaDeAsedioTest {
         //vida de la plaza == 0
         unaCatapulta.atacar(miniTablero[5][5]);
 
-        assertEquals(true,unaPlaza.estaDestruida());
-        assertEquals(true,zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(true,unaPlaza.estaDestruida());
+        Assert.assertEquals(true,zonaDeConstruccion.estaLibre());
     }
 
     @Test
-    void ataqueCatapultaAEdificioFueraDeRango() throws ErrorBasico {
+    public void ataqueCatapultaAEdificioFueraDeRango() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[10][10];
 
@@ -118,8 +192,8 @@ public class ArmaDeAsedioTest {
         //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
         //unaCatapulta.atacar(miniTablero[6][6]);
 
-        assertEquals(false,unaPlaza.necesitaReparacion());
-        assertEquals(false,unaPlaza.estaDestruida());
+        Assert.assertEquals(false,unaPlaza.necesitaReparacion());
+        Assert.assertEquals(false,unaPlaza.estaDestruida());
 
     }
 

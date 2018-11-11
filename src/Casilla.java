@@ -82,7 +82,7 @@ public class Casilla {
 	}
 	
 	public Casilla casillaAbajoIzquierda() {
-		Casilla casillaAbajoIzquierda = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY()+1));
+		Casilla casillaAbajoIzquierda = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY()-1));
 		return casillaAbajoIzquierda;
 	}
 	

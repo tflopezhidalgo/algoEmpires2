@@ -7,7 +7,7 @@ import java.util.List;
 public class CastilloTest {
 
     @Test
-    void castilloCreaCatapulta() {
+    public void castilloCreaCatapulta() {
 
 
         Casilla miniTablero[][] = new Casilla[6][6];
@@ -32,14 +32,14 @@ public class CastilloTest {
 
 
         Castillo unCastillo = new Castillo(zonaDeConstruccion);
-        assertEquals(true, miniTablero[3][3].estaOcupada());
+        Assert.assertEquals(true, miniTablero[3][3].estaOcupada());
 
         Casilla casillaParaCatapulta = miniTablero[4][4];
-        assertEquals(false, casillaParaCatapulta.estaOcupada());
+        Assert.assertEquals(false, casillaParaCatapulta.estaOcupada());
 
         Catapulta nuevaCatapulta = unCastillo.crearCatapulta(casillaParaCatapulta);
-        assertEquals(true, casillaParaCatapulta.estaOcupada());
-        assertEquals(casillaParaCatapulta, nuevaCatapulta.obtenerUbicacion());
+        Assert.assertEquals(true, casillaParaCatapulta.estaOcupada());
+        Assert.assertEquals(casillaParaCatapulta, nuevaCatapulta.obtenerUbicacion());
 
     }
 
@@ -67,19 +67,19 @@ public class CastilloTest {
         }
 
         Area zonaDeConstruccion = new Area(casillasParaConstruccion);
-        assertEquals(true, zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(true, zonaDeConstruccion.estaLibre());
 
         Castillo unCastillo = new Castillo(zonaDeConstruccion);
-        assertEquals(false, zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(false, zonaDeConstruccion.estaLibre());
 
 
-        assertEquals(true, miniTablero[3][4].estaOcupada());
-        assertEquals(true, miniTablero[4][4].estaOcupada());
+        Assert.assertEquals(true, miniTablero[3][4].estaOcupada());
+        Assert.assertEquals(true, miniTablero[4][4].estaOcupada());
         //Las casillas adyacentes deberian estar libres
-        assertEquals(false, miniTablero[0][0].estaOcupada());
-        assertEquals(false, miniTablero[0][2].estaOcupada());
-        assertEquals(false, miniTablero[0][3].estaOcupada());
-        assertEquals(false, miniTablero[0][4].estaOcupada());
+        Assert.assertEquals(false, miniTablero[0][0].estaOcupada());
+        Assert.assertEquals(false, miniTablero[0][2].estaOcupada());
+        Assert.assertEquals(false, miniTablero[0][3].estaOcupada());
+        Assert.assertEquals(false, miniTablero[0][4].estaOcupada());
 
     }
 
