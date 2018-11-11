@@ -1,4 +1,3 @@
-
 public class Arquero extends Unidad{
 	
 	Arquero(Casilla unaCasilla){

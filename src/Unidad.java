@@ -1,4 +1,3 @@
-
 public abstract class Unidad extends Pieza {
 
 	protected boolean ocupado;

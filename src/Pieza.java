@@ -1,4 +1,3 @@
-
 public abstract class Pieza {
 	
 	protected int vida;
@@ -26,7 +25,7 @@ public abstract class Pieza {
 	}
 	
 	public boolean estaDestruida() {
-		return vida == 0;
+		return (vida == 0);
 	}
 	
 	protected abstract void liberarUbicacion();
