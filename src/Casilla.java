@@ -8,7 +8,17 @@ public class Casilla {
 	private boolean ocupada;
 	private Pieza piezaDeJuego;
 	private Posicion posicionActual;
-	
+
+	public Casilla( int x, int y ){
+
+        posicionActual = new Posicion(x, y);
+
+        casillasDelTablero.put(posicionActual.aString(), this);
+
+        ocupada = false;
+        piezaDeJuego = null;
+    }
+
 	public Casilla (Posicion unaPosicion) {
 
 		casillasDelTablero.put(unaPosicion.aString(), this);

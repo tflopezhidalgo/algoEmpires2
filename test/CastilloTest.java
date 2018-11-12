@@ -37,9 +37,9 @@ public class CastilloTest {
         Casilla casillaParaCatapulta = miniTablero[4][4];
         Assert.assertEquals(false, casillaParaCatapulta.estaOcupada());
 
-        Catapulta nuevaCatapulta = unCastillo.crearCatapulta(casillaParaCatapulta);
+        ArmaDeAsedio nuevaArmaDeAsedio = unCastillo.crearCatapulta(casillaParaCatapulta);
         Assert.assertEquals(true, casillaParaCatapulta.estaOcupada());
-        Assert.assertEquals(casillaParaCatapulta, nuevaCatapulta.obtenerUbicacion());
+        Assert.assertEquals(casillaParaCatapulta, nuevaArmaDeAsedio.obtenerUbicacion());
 
     }
 

@@ -4,11 +4,13 @@ public class Posicion {
     private int posicionY;
     
     Posicion(){
+
         posicionX = 0;
         posicionY = 0;
     }
 	
 	Posicion(int x, int y){
+
 		posicionX = x;
 		posicionY = y;
 	}

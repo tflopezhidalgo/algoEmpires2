@@ -1,6 +1,6 @@
 public class Aldeano extends Unidad {
 	
-	Edificio edificioObjectivo;
+	private Edificio edificioObjectivo;
 	
 	Aldeano(Casilla unaCasilla) {
 		super(unaCasilla);

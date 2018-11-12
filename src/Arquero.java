@@ -1,5 +1,11 @@
 public class Arquero extends Unidad {
-	
+
+	Arquero() {
+	    super(new Casilla(0, 0));
+		vida = 75;
+		costo = 72;
+	}
+
 	Arquero(Casilla unaCasilla){
 		super(unaCasilla);
 		vida = 75;

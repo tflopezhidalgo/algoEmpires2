@@ -23,9 +23,9 @@ public class Castillo extends Edificio {
 		}
 	}
 	
-	public Catapulta crearCatapulta(Casilla ubicacion) {
-		Catapulta unaCatapulta = new Catapulta(ubicacion);
-		return unaCatapulta;
+	public ArmaDeAsedio crearCatapulta(Casilla ubicacion) {
+		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(ubicacion);
+		return unaArmaDeAsedio;
 	}
 	
 	private void enRangoDeAtaque(Casilla unaCasilla) throws ErrorBasico {

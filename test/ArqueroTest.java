@@ -3,6 +3,134 @@ import org.junit.Test;
 
 public class ArqueroTest {
 
+    /*
+     * Test de movimientos de arquero
+     */
+
+    @Test
+    public void seCreaUnArquero(){
+
+        Arquero unArquero = new Arquero();
+
+        Assert.assertNotNull(unArquero);
+    }
+
+    @Test
+    public void moverArqueroUnaPosicionHaciaArriba() throws ErrorBasico{
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaDeArriba = new Casilla(0, 1);
+
+        Arquero unArquero = new Arquero(nuevaCasilla);
+
+        unArquero.moverArriba();
+
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaDeArriba);
+    }
+
+    @Test
+    public void moverAldeanoUnaPosicionHaciaAbajo() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaDeAbajo = new Casilla(0, -1);
+
+        Arquero unArquero = new Arquero(nuevaCasilla);
+
+        unArquero.moverAbajo();
+
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaDeAbajo);
+    }
+
+    @Test
+    public void moverAldeanoUnaPosicionHaciaDerecha() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaDeLaDerecha = new Casilla(1, 0);
+
+        Arquero unArquero = new Arquero(nuevaCasilla);
+
+        unArquero.moverDerecha();
+
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaDeLaDerecha);
+    }
+
+    @Test
+    public void moverAldeanoUnaPosicionHaciaIzquierda() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0,0);
+
+        Casilla casillaDeLaIzquierda = new Casilla(-1, 0);
+
+        Arquero unArquero = new Arquero(nuevaCasilla);
+
+        unArquero.moverIzquierda();
+
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaDeLaIzquierda);
+    }
+
+    @Test
+    public void moverAldeanoUnaPosicionArribaDerecha() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0 ,0);
+
+        Casilla casillaArribaDerecha = new Casilla(1, 1);
+
+         Arquero unArquero = new Arquero(nuevaCasilla);
+
+        unArquero.moverArribaDerecha();
+
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaArribaDerecha);
+    }
+
+    @Test
+    public void moverAldeanoUnaPosicionArribaIzquierda() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaArribaIzquierda = new Casilla(-1, 1);
+
+        Arquero unArquero = new Arquero(nuevaCasilla);
+
+        unArquero.moverArribaIzquierda();
+
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaArribaIzquierda);
+    }
+
+    @Test
+    public void moverAldeanoUnaPosicionAbajoIzquierda() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaAbajoIzquierda = new Casilla(-1, -1);
+
+        Arquero unArquero = new Arquero(nuevaCasilla);
+
+        unArquero.moverAbajoIzquierda();
+
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaAbajoIzquierda);
+    }
+
+    @Test
+    public void moverAldeanoUnaPosicionAbajoDerecha() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0 ,0);
+
+        Casilla casillaAbajoDerecha = new Casilla(1, -1);
+
+        Arquero unArquero = new Arquero(nuevaCasilla);
+
+        unArquero.moverAbajoDerecha();
+
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaAbajoDerecha);
+    }
+
+    /*
+     * Test ataque arquero
+     */
+
     @Test
     public void ataqueArqueroADistancia() throws ErrorBasico {
 
@@ -29,8 +157,8 @@ public class ArqueroTest {
         //vida del aldeano == 20
         unArquero.atacar(unAldeano.obtenerUbicacion());
 
-        Assert.assertEquals(false,unAldeano.estaDestruida());
-        Assert.assertEquals(true,casillaAldeano.estaOcupada());
+        Assert.assertEquals(false, unArquero.estaDestruida());
+        Assert.assertEquals(true, casillaAldeano.estaOcupada());
 
         //vida del aldeano == 5
         unArquero.atacar(casillaAldeano);
@@ -38,7 +166,7 @@ public class ArqueroTest {
         unArquero.atacar(casillaAldeano);
 
         Assert.assertEquals(false,casillaAldeano.estaOcupada());
-        Assert.assertEquals(true,unAldeano.estaDestruida());
+        Assert.assertEquals(true,unArquero.estaDestruida());
     }
 
     @Test
@@ -71,7 +199,7 @@ public class ArqueroTest {
 
 
         Assert.assertEquals(true,casillaAldeano.estaOcupada());
-        Assert.assertEquals(false,unAldeano.estaDestruida());
+        Assert.assertEquals(false, unArquero.estaDestruida());
     }
 
 

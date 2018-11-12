@@ -12,28 +12,27 @@ public class AldeanoTest {
     /*
      *  Test de movimiento de Aldeano
      */
-
     @Test
     public void seCreaUnAldeano(){
 
-    	Posicion nuevaPosicion = new Posicion();
-    	Casilla nuevaCasilla = new Casilla(nuevaPosicion);
+    	Casilla nuevaCasilla = new Casilla(new Posicion());
+
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
+
         Assert.assertNotNull(unAldeano);
     }
 
-    //Lo mismo para cualquier tipo de unidad
     @Test
-    public void UnidadColocada() {
+    public void ColocarAldeano() {
 
         Posicion nuevaPosicion = new Posicion(1,1);
+
         Casilla casilla = new Casilla(nuevaPosicion);
 
         Aldeano unAldeano = new Aldeano(casilla);
 
         Assert.assertEquals(true, casilla.estaOcupada());
         Assert.assertEquals(unAldeano.obtenerUbicacion(), casilla);
-
     }
     
     @Test
@@ -65,11 +64,9 @@ public class AldeanoTest {
     @Test
     public void moverAldeanoUnaPosicionHaciaArriba() throws ErrorBasico {
 
-    	Posicion posicionCero = new Posicion(0,0);
-    	Casilla nuevaCasilla = new Casilla(posicionCero);
-    	
-    	Posicion posicionArriba = new Posicion(0,1);
-    	Casilla casillaDeArriba = new Casilla(posicionArriba);
+    	Casilla nuevaCasilla = new Casilla(0, 0);
+
+    	Casilla casillaDeArriba = new Casilla(0, 1);
     	
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
         
@@ -81,11 +78,9 @@ public class AldeanoTest {
     @Test
     public void moverAldeanoUnaPosicionHaciaAbajo() throws ErrorBasico {
 
-    	Posicion posicionCero = new Posicion(0,0);
-    	Casilla nuevaCasilla = new Casilla(posicionCero);
-    	
-    	Posicion posicionAbajo = new Posicion(0,-1);
-    	Casilla casillaDeAbajo = new Casilla(posicionAbajo);
+    	Casilla nuevaCasilla = new Casilla(0, 0);
+
+    	Casilla casillaDeAbajo = new Casilla(0, -1);
     	
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
@@ -97,11 +92,9 @@ public class AldeanoTest {
     @Test
     public void moverAldeanoUnaPosicionHaciaDerecha() throws ErrorBasico {
 
-    	Posicion posicionCero = new Posicion(0,0);
-    	Casilla nuevaCasilla = new Casilla(posicionCero);
-    	
-    	Posicion posicionDerecha = new Posicion(1,0);
-    	Casilla casillaDeLaDerecha = new Casilla(posicionDerecha);
+    	Casilla nuevaCasilla = new Casilla(0, 0);
+
+    	Casilla casillaDeLaDerecha = new Casilla(1, 0);
     	
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
@@ -113,11 +106,9 @@ public class AldeanoTest {
     @Test
     public void moverAldeanoUnaPosicionHaciaIzquierda() throws ErrorBasico {
 
-    	Posicion posicionCero = new Posicion(0,0);
-    	Casilla nuevaCasilla = new Casilla(posicionCero);
-    	
-    	Posicion posicionIzquierda = new Posicion(-1,0);
-    	Casilla casillaDeLaIzquierda = new Casilla(posicionIzquierda);
+    	Casilla nuevaCasilla = new Casilla(0,0);
+
+    	Casilla casillaDeLaIzquierda = new Casilla(-1, 0);
     	
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
@@ -129,11 +120,9 @@ public class AldeanoTest {
     @Test
     public void moverAldeanoUnaPosicionArribaDerecha() throws ErrorBasico {
 
-    	Posicion posicionCero = new Posicion(0,0);
-    	Casilla nuevaCasilla = new Casilla(posicionCero);
-    	
-    	Posicion posicionArribaDerecha = new Posicion(1,1);
-    	Casilla casillaArribaDerecha = new Casilla(posicionArribaDerecha);
+    	Casilla nuevaCasilla = new Casilla(0 ,0);
+
+    	Casilla casillaArribaDerecha = new Casilla(1, 1);
     	
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
@@ -145,11 +134,9 @@ public class AldeanoTest {
     @Test
     public void moverAldeanoUnaPosicionArribaIzquierda() throws ErrorBasico {
 
-    	Posicion posicionCero = new Posicion(0,0);
-    	Casilla nuevaCasilla = new Casilla(posicionCero);
-    	
-    	Posicion posicionArribaIzquierda = new Posicion(-1,1);
-    	Casilla casillaArribaIzquierda = new Casilla(posicionArribaIzquierda);
+    	Casilla nuevaCasilla = new Casilla(0, 0);
+
+    	Casilla casillaArribaIzquierda = new Casilla(-1, 1);
     	
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
@@ -161,11 +148,9 @@ public class AldeanoTest {
     @Test
     public void moverAldeanoUnaPosicionAbajoIzquierda() throws ErrorBasico {
 
-    	Posicion posicionCero = new Posicion(0,0);
-    	Casilla nuevaCasilla = new Casilla(posicionCero);
-    	
-    	Posicion posicionAbajoIzquierda = new Posicion(-1,-1);
-    	Casilla casillaAbajoIzquierda = new Casilla(posicionAbajoIzquierda);
+    	Casilla nuevaCasilla = new Casilla(0, 0);
+
+    	Casilla casillaAbajoIzquierda = new Casilla(-1, -1);
     	
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
@@ -177,11 +162,9 @@ public class AldeanoTest {
     @Test
     public void moverAldeanoUnaPosicionAbajoDerecha() throws ErrorBasico {
 
-    	Posicion posicionCero = new Posicion(0,0);
-    	Casilla nuevaCasilla = new Casilla(posicionCero);
-    	
-    	Posicion posicionAbajoDerecha = new Posicion(1,-1);
-    	Casilla casillaAbajoDerecha = new Casilla(posicionAbajoDerecha);
+    	Casilla nuevaCasilla = new Casilla(0 ,0);
+
+    	Casilla casillaAbajoDerecha = new Casilla(1, -1);
     	
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
