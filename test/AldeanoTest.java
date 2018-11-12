@@ -13,7 +13,7 @@ public class AldeanoTest {
      *  Test de movimiento de Aldeano
      */
     @Test
-    public void seCreaUnAldeano(){
+    public void seCreaUnAldeano() throws ErrorBasico {
 
     	Casilla nuevaCasilla = new Casilla(new Posicion());
 
@@ -23,7 +23,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void ColocarAldeano() {
+    public void ColocarAldeano() throws ErrorBasico {
 
         Posicion nuevaPosicion = new Posicion(1,1);
 
