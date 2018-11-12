@@ -42,5 +42,89 @@ public class CuartelTest {
         Assert.assertEquals(false, miniTablero[2][1].estaOcupada());
         Assert.assertEquals(false, miniTablero[3][4].estaOcupada());
     }
+    
+    @Test
+    public void cuartelCreaEspadachin() throws ErrorBasico {
+
+        Casilla miniTablero[][] = new Casilla[5][5];
+
+        for(int y = 0; y < 5; y++ ) {
+            for(int x = 0; x < 5; x++ ) {
+                Posicion unaPosicion = new Posicion(x,y);
+                Casilla casilla = new Casilla(unaPosicion);
+
+                miniTablero[x][y] = casilla;
+            }
+        }
+
+        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
+
+        //voy a ocupar a partir de la (0,0)
+        for(int y = 0; y < Cuartel.TAMANIO_LADO; y++) {
+            for(int x = 0; x < Cuartel.TAMANIO_LADO; x++) {
+                casillasParaConstruccion.add(miniTablero[x][y]);
+            }
+        }
+
+        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+        Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+
+        Casilla casillaEspadachin = miniTablero[1][2];
+        assertEquals(false,casillaEspadachin.estaOcupada());
+        
+        Espadachin nuevoEspadachin = unCuartel.crearEspadachin(casillaEspadachin);
+        assertEquals(true,casillaEspadachin.estaOcupada());
+        
+
+        nuevoEspadachin.moverArriba();
+        Casilla casillaOtroEspadachin = miniTablero[1][3];
+        assertEquals(false,casillaEspadachin.estaOcupada());
+        assertEquals(true,casillaOtroEspadachin.estaOcupada());
+        //TODO DEBERIA LANZAR EXCEPCION
+        //Espadachin otroEspadachin = unCuartel.crearEspadachin(casillaOtroEspadachin);
+        
+    }
+    
+    @Test
+    public void cuartelCreaArquero() throws ErrorBasico {
+
+        Casilla miniTablero[][] = new Casilla[5][5];
+
+        for(int y = 0; y < 5; y++ ) {
+            for(int x = 0; x < 5; x++ ) {
+                Posicion unaPosicion = new Posicion(x,y);
+                Casilla casilla = new Casilla(unaPosicion);
+
+                miniTablero[x][y] = casilla;
+            }
+        }
+
+        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
+
+        //voy a ocupar a partir de la (0,0)
+        for(int y = 0; y < Cuartel.TAMANIO_LADO; y++) {
+            for(int x = 0; x < Cuartel.TAMANIO_LADO; x++) {
+                casillasParaConstruccion.add(miniTablero[x][y]);
+            }
+        }
+
+        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+        Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+
+        Casilla casillaArquero = miniTablero[1][2];
+        assertEquals(false,casillaArquero.estaOcupada());
+        
+        Arquero nuevoArquero = unCuartel.crearArquero(casillaArquero);
+        assertEquals(true,casillaArquero.estaOcupada());
+        
+
+        nuevoArquero.moverArriba();
+        Casilla casillaOtroArquero = miniTablero[1][3];
+        assertEquals(false,casillaArquero.estaOcupada());
+        assertEquals(true,casillaOtroArquero.estaOcupada());
+        //TODO DEBERIA LANZAR EXCEPCION
+        //Arquero otroArquero = unCuartel.crearArquero(casillaOtroArquero);
+        
+    }
 
 }
