@@ -8,7 +8,7 @@ public class ArqueroTest {
      */
 
     @Test
-    public void seCreaUnArquero(){
+    public void seCreaUnArquero() throws ErrorBasico {
 
         Arquero unArquero = new Arquero();
 
