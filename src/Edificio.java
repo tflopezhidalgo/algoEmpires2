@@ -16,17 +16,11 @@ public abstract class Edificio extends Pieza {
 	}
 	
 	public boolean necesitaReparacion() {
-		if(vida >= vidaMaxima) {
-			return false;
-		}
-		return true;
+		return(vida < vidaMaxima);
 	}
 	
 	public boolean enConstruccion() {
-		if(tiempoDeConstruccion > 0) {
-			return true;
-		}
-		return false;
+		return(tiempoDeConstruccion > 0);
 	}
 	
 	public void construir() {
