@@ -1,10 +1,13 @@
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 import junit.framework.Assert;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CuartelTest {
+
+class CuartelTest {
 
     @Test
     public void ColocarCuartel() throws ErrorBasico {
@@ -70,18 +73,22 @@ public class CuartelTest {
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
 
         Casilla casillaEspadachin = miniTablero[1][2];
-        Assert.assertEquals(false,casillaEspadachin.estaOcupada());
+        assertEquals(false,casillaEspadachin.estaOcupada());
         
         Espadachin nuevoEspadachin = unCuartel.crearEspadachin(casillaEspadachin);
-        Assert.assertEquals(true,casillaEspadachin.estaOcupada());
+        assertEquals(true,casillaEspadachin.estaOcupada());
         
 
         nuevoEspadachin.moverArriba();
         Casilla casillaOtroEspadachin = miniTablero[1][3];
-        Assert.assertEquals(false,casillaEspadachin.estaOcupada());
-        Assert.assertEquals(true,casillaOtroEspadachin.estaOcupada());
-        //TODO DEBERIA LANZAR EXCEPCION
-        //Espadachin otroEspadachin = unCuartel.crearEspadachin(casillaOtroEspadachin);
+        assertEquals(false,casillaEspadachin.estaOcupada());
+        assertEquals(true,casillaOtroEspadachin.estaOcupada());
+        
+        //tira error
+        assertThrows(ErrorBasico.class,
+                ()->{
+                	Espadachin otroEspadachin = unCuartel.crearEspadachin(casillaOtroEspadachin);
+                });
         
     }
     
@@ -112,19 +119,51 @@ public class CuartelTest {
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
 
         Casilla casillaArquero = miniTablero[1][2];
-        Assert.assertEquals(false,casillaArquero.estaOcupada());
+        assertEquals(false,casillaArquero.estaOcupada());
         
         Arquero nuevoArquero = unCuartel.crearArquero(casillaArquero);
-        Assert.assertEquals(true,casillaArquero.estaOcupada());
+        assertEquals(true,casillaArquero.estaOcupada());
         
 
         nuevoArquero.moverArriba();
         Casilla casillaOtroArquero = miniTablero[1][3];
-        Assert.assertEquals(false,casillaArquero.estaOcupada());
-        Assert.assertEquals(true,casillaOtroArquero.estaOcupada());
-        //TODO DEBERIA LANZAR EXCEPCION
-        //Arquero otroArquero = unCuartel.crearArquero(casillaOtroArquero);
+        assertEquals(false,casillaArquero.estaOcupada());
+        assertEquals(true,casillaOtroArquero.estaOcupada());
+        
+        //tira error
+        assertThrows(ErrorBasico.class,
+                ()->{
+                	Arquero otroArquero = unCuartel.crearArquero(casillaOtroArquero);
+                });
         
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
