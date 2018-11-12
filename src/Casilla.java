@@ -33,14 +33,14 @@ public class Casilla {
 	}
 	
 	//NO USAR ?
-	public void colocar(Pieza unaPieza) {
+	public void colocar(Pieza unaPieza) throws ErrorBasico {
 		if(!ocupada) {
 			ocupada = true;
 			piezaDeJuego = unaPieza;
 		}
 		else {
 			//TODO error
-			System.out.println("ERROR");
+			throw new ErrorBasico("ERROR: Casilla ocupada.");
 		}
 	}
 	
