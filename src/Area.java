@@ -22,7 +22,7 @@ public class Area {
 		}
 	}
 	
-	public void contruir(Edificio unEdificio) {
+	public void contruir(Edificio unEdificio) throws ErrorBasico {
 		for (int i = 0; i < casillasDelArea.size(); i++) {
 			casillasDelArea.get(i).colocar(unEdificio);
 		}
