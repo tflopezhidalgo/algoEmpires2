@@ -1,12 +1,12 @@
 public class Arquero extends Unidad {
 
-	Arquero() {
+	Arquero() throws ErrorBasico {
 	    super(new Casilla(0, 0));
 		vida = 75;
 		costo = 72;
 	}
 
-	Arquero(Casilla unaCasilla){
+	Arquero(Casilla unaCasilla) throws ErrorBasico {
 		super(unaCasilla);
 		vida = 75;
 		costo = 75;
