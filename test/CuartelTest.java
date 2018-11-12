@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class CuartelTest {
+public class CuartelTest {
+    
     @Test
     public void ColocarCuartel() throws ErrorBasico {
 
