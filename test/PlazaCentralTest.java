@@ -8,7 +8,7 @@ public class PlazaCentralTest {
 
 
     @Test
-    public void ColocarPlaza() { 
+    public void ColocarPlaza() throws ErrorBasico { 
 
         Casilla miniTablero[][] = new Casilla[5][5];
 
