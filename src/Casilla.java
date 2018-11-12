@@ -60,44 +60,52 @@ public class Casilla {
 	//---------------PROTOTIPO---------------
 	
 	public Casilla casillaArriba() {
-		Casilla casillaArriba = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX(), posicionActual.ejeY() + 1));
+		String unaPosicion = Posicion.aString(posicionActual.ejeX(), posicionActual.ejeY() + 1);
+		Casilla casillaArriba = casillasDelTablero.get(unaPosicion);
 		return casillaArriba;
 	}
 	
 	public Casilla casillaAbajo() {
-		Casilla casillaAbajo = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX(), posicionActual.ejeY() - 1));
+		String unaPosicion = Posicion.aString(posicionActual.ejeX(), posicionActual.ejeY() - 1);
+		Casilla casillaAbajo = casillasDelTablero.get(unaPosicion);
 		return casillaAbajo;
 	}
 	
 	public Casilla casillaIzquierda() {
-		Casilla casillaIzquierda = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX() - 1, posicionActual.ejeY()));
+		String unaPosicion = Posicion.aString(posicionActual.ejeX() - 1, posicionActual.ejeY());
+		Casilla casillaIzquierda = casillasDelTablero.get(unaPosicion);
 		return casillaIzquierda;
 	}
 	
 	public Casilla casillaDerecha() {
-		Casilla casillaDerecha = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX() + 1, posicionActual.ejeY()));
+		String unaPosicion = Posicion.aString(posicionActual.ejeX() + 1, posicionActual.ejeY());
+		Casilla casillaDerecha = casillasDelTablero.get(unaPosicion);
 		return casillaDerecha;
 	}
 	
 	//---- diagonales
 	
 	public Casilla casillaArribaIzquiera() {
-		Casilla casillaArribaIzquiera = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY() + 1));
+		String unaPosicion = Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY() + 1);
+		Casilla casillaArribaIzquiera = casillasDelTablero.get(unaPosicion);
 		return casillaArribaIzquiera;
 	}
 	
 	public Casilla casillaArribaDerecha() {
-		Casilla casillaArribaDerecha = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX()+1, posicionActual.ejeY() + 1));
+		String unaPosicion = Posicion.aString(posicionActual.ejeX()+1, posicionActual.ejeY() + 1);
+		Casilla casillaArribaDerecha = casillasDelTablero.get(unaPosicion);
 		return casillaArribaDerecha;
 	}
 	
 	public Casilla casillaAbajoIzquierda() {
-		Casilla casillaAbajoIzquierda = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY()-1));
+		String unaPosicion = Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY()-1);
+		Casilla casillaAbajoIzquierda = casillasDelTablero.get(unaPosicion);
 		return casillaAbajoIzquierda;
 	}
 	
 	public Casilla casillaAbajoDerecha() {
-		Casilla casillaAbajoDerecha = casillasDelTablero.get(Posicion.aString(posicionActual.ejeX() + 1, posicionActual.ejeY() - 1));
+		String unaPosicion = Posicion.aString(posicionActual.ejeX() + 1, posicionActual.ejeY() - 1);
+		Casilla casillaAbajoDerecha = casillasDelTablero.get(unaPosicion);
 		return casillaAbajoDerecha;
 	}
 	
