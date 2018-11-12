@@ -7,7 +7,7 @@ import java.util.List;
 public class CastilloTest {
 
     @Test
-    public void castilloCreaCatapulta() {
+    public void castilloCreaCatapulta() throws ErrorBasico {
 
 
         Casilla miniTablero[][] = new Casilla[6][6];
@@ -44,7 +44,7 @@ public class CastilloTest {
     }
 
     @Test
-    public void ColocarCastillo() {
+    public void ColocarCastillo()  throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[5][5];
 
