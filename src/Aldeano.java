@@ -2,7 +2,7 @@ public class Aldeano extends Unidad {
 	
 	private Edificio edificioObjectivo;
 	
-	Aldeano(Casilla unaCasilla) {
+	Aldeano(Casilla unaCasilla) throws ErrorBasico  {
 		super(unaCasilla);
 		edificioObjectivo = null;
 		vida = 50;
