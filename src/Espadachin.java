@@ -1,6 +1,6 @@
 public class Espadachin extends Unidad {
 	
-	Espadachin(Casilla unaCasilla){
+	Espadachin(Casilla unaCasilla) throws ErrorBasico {
 		super(unaCasilla);
 		vida = 100;
 		costo = 50;
