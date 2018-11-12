@@ -215,10 +215,13 @@ public class AldeanoTest {
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
-                    //TODO hay que comprobar que el de abajo tira error,
-                    // como carajo se haceasserThrows?????
-                    // assertEquals(0, unAldeano.realizarTrabajoDeTurno());
+                    //tira error
+                    assertThrows(ErrorBasico.class,
+                            ()->{
+                            	unAldeano.realizarTrabajoDeTurno();
+                            });
                     break;
+                    
                 case 2:
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
@@ -298,10 +301,13 @@ public class AldeanoTest {
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
-                    //TODO hay que comprobar que el de abajo tira error,
-                    // como carajo se haceasserThrows?????
-                    // assertEquals(0, unAldeano.realizarTrabajoDeTurno());
+                    //tira error
+                    assertThrows(ErrorBasico.class,
+                            ()->{
+                            	unAldeano.realizarTrabajoDeTurno();
+                            });
                     break;
+                    
                 case 2:
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
@@ -309,6 +315,7 @@ public class AldeanoTest {
                     oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oroJugador);
                     break;
+                    
                 case 3:
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
