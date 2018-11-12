@@ -2,7 +2,7 @@ public class Cuartel extends Edificio {
 	
 	static final int TAMANIO_LADO = 2;
 	
-	Cuartel(Area areaAOcupar){
+	Cuartel(Area areaAOcupar) throws ErrorBasico {
 		vida = 250;
 		vidaMaxima = vida;
 		costo = 50;
