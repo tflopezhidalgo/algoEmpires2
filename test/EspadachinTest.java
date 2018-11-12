@@ -1,4 +1,7 @@
 import junit.framework.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.Test;
 
 public class EspadachinTest {
@@ -147,6 +150,7 @@ public class EspadachinTest {
 
         //vida del aldeano == 25
         unEspadachin.atacar(casillaAldeano);
+        
         //o tambien usando
         //vida del aldeano == 0
         unEspadachin.atacar(unAldeano.obtenerUbicacion());
@@ -176,12 +180,19 @@ public class EspadachinTest {
         Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
         //vida del aldeano == 50
-        //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
-        //unEspadachin.atacar(casillaAldeano);
+        //tira error
+        assertThrows(ErrorBasico.class,
+                ()->{
+                    unEspadachin.atacar(casillaAldeano);
+                });
+        
         //o tambien usando
         //vida del aldeano == 50
-        //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
-        //unEspadachin.atacar(unAldeano.obtenerUbicacion());
+        //tira error
+        assertThrows(ErrorBasico.class,
+                ()->{
+                	unEspadachin.atacar(unAldeano.obtenerUbicacion());
+                });
 
         Assert.assertEquals(true,casillaAldeano.estaOcupada());
         Assert.assertEquals(false,unAldeano.estaDestruida());

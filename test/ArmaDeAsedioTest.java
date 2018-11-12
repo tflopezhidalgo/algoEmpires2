@@ -2,6 +2,8 @@ import com.sun.org.apache.xpath.internal.operations.NotEquals;
 import junit.framework.Assert;
 import org.junit.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -213,14 +215,17 @@ public class ArmaDeAsedioTest {
         ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio);
 
         //vida de la plaza == 450
-        //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
-        //unaArmaDeAsedio.atacar(miniTablero[6][6]);
+        //tira error
+        assertThrows(ErrorBasico.class,
+                ()->{
+                	unaArmaDeAsedio.atacar(miniTablero[6][6]);
+                });
         Assert.assertEquals(false, unaPlaza.necesitaReparacion());
         
         unaArmaDeAsedio.accionar();
         
         //vida del aldeano == 50
-        //TODO no deberia tirar error
+        //no deberia tirar error
         unaArmaDeAsedio.atacar(miniTablero[6][6]);
         Assert.assertEquals(true, unaPlaza.necesitaReparacion());
     }
@@ -242,17 +247,20 @@ public class ArmaDeAsedioTest {
         Casilla casillaCatapulta = miniTablero[0][0];
         ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(casillaCatapulta);
 
-        //TODO no deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
+        //no deberia tirar error
         unaArmaDeAsedio.moverArriba();
         
         unaArmaDeAsedio.accionar();
         
-        //TODO deberia tirar error
-        //unaArmaDeAsedio.moverArriba();
+        //tira error
+        assertThrows(ErrorBasico.class,
+                ()->{
+                	unaArmaDeAsedio.moverArriba();
+                });
         
         unaArmaDeAsedio.accionar();
         
-        //TODO no deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
+        //no deberia tirar error
         unaArmaDeAsedio.moverArriba();
     }
 
@@ -369,8 +377,11 @@ public class ArmaDeAsedioTest {
         ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(casillaCatapulta);
 
         //vida de la plaza == 450
-        //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
-        //unaArmaDeAsedio.atacar(miniTablero[6][6]);
+        //tira error
+        assertThrows(ErrorBasico.class,
+                ()->{
+                	unaArmaDeAsedio.atacar(miniTablero[6][6]);
+                });
 
         Assert.assertEquals(false,unaPlaza.necesitaReparacion());
         Assert.assertEquals(false,unaPlaza.estaDestruida());

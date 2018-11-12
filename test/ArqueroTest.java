@@ -1,4 +1,7 @@
 import junit.framework.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.Test;
 
 public class ArqueroTest {
@@ -190,12 +193,19 @@ public class ArqueroTest {
         Arquero unArquero = new Arquero(casillaArquero);
 
         //vida del aldeano == 50
-        //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
-        //unArquero.atacar(casillaAldeano);
+        //tira error
+        assertThrows(ErrorBasico.class,
+                ()->{
+                	unArquero.atacar(casillaAldeano);
+                });
+
         //o tambien usando
         //vida del aldeano == 50
-        //TODO deberia tirar error (NO SE COMO CHEQUEAR EXCEPCIONES)
-        //unArquero.atacar(unAldeano.obtenerUbicacion());
+        //tira error
+        assertThrows(ErrorBasico.class,
+                ()->{
+                	unArquero.atacar(unAldeano.obtenerUbicacion());
+                });
 
 
         Assert.assertEquals(true,casillaAldeano.estaOcupada());
