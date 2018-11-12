@@ -1,7 +1,5 @@
 import junit.framework.Assert;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import org.junit.Test;
 
 public class ArqueroTest {
@@ -133,7 +131,7 @@ public class ArqueroTest {
     /*
      * Test ataque arquero
      */
-
+    /*
     @Test
     public void ataqueArqueroADistancia() throws ErrorBasico {
 
@@ -171,7 +169,8 @@ public class ArqueroTest {
         Assert.assertEquals(false,casillaAldeano.estaOcupada());
         Assert.assertEquals(true,unAldeano.estaDestruida());
     }
-
+    */
+    /*
     @Test
     public void ataqueArqueroFueraDeRango() throws ErrorBasico {
 
@@ -211,6 +210,6 @@ public class ArqueroTest {
         Assert.assertEquals(true,casillaAldeano.estaOcupada());
         Assert.assertEquals(false, unArquero.estaDestruida());
     }
-
+    */
 
 }

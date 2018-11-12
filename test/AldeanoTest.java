@@ -176,7 +176,7 @@ public class AldeanoTest {
     /*
      *  Test de construccion de Aldeano
      */
-
+    /*
     @Test
     public void ConstruccionPlaza() throws ErrorBasico {
         int turno = 0;
@@ -349,5 +349,6 @@ public class AldeanoTest {
         }
     }
 
+    */
 }
 
