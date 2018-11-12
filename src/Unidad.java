@@ -3,7 +3,7 @@ public abstract class Unidad extends Pieza {
 	protected boolean ocupado;
 	protected Casilla casillaActual;
 	
-	public Unidad(Casilla unaCasilla) {
+	public Unidad(Casilla unaCasilla) throws ErrorBasico  {
 		casillaActual = unaCasilla;
 		casillaActual.colocar(this);
 		turnoJugado = false;
