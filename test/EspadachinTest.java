@@ -4,7 +4,7 @@ import org.junit.Test;
 public class EspadachinTest {
 
     @Test
-    public void seCreaEspadachinEnPosicionCentral(){
+    public void seCreaEspadachinEnPosicionCentral() throws ErrorBasico {
         
         Espadachin unEspadachin = new Espadachin(new Casilla(0, 0));
         
