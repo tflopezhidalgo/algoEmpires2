@@ -1,6 +1,6 @@
 public class ArmaDeAsedio extends Unidad {
 	
-	ArmaDeAsedio(Casilla unaCasilla){
+	ArmaDeAsedio(Casilla unaCasilla) throws ErrorBasico {
 		super(unaCasilla);
 		vida = 150;
 		costo = 200;
