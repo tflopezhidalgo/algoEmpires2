@@ -13,6 +13,22 @@ public class Plaza extends Edificio {
 		areaAOcupar.contruir(this);
 	}
 	
+	Plaza(Area areaAOcupar, boolean yaConstruida){
+		vida = 450;
+		vidaMaxima = vida;
+		costo = 100;
+		
+		tiempoDeConstruccion = 3;
+		if(yaConstruida) {
+			tiempoDeConstruccion = 0;
+		}
+		
+		cantidadDeCuracion = 25;
+		
+		casillasOcupadas = areaAOcupar;
+		areaAOcupar.contruir(this);
+	}
+	
 	public Aldeano crearAldeano(Casilla ubicacion) {
 		Aldeano unAldeano = new Aldeano(ubicacion);
 		return unAldeano;
