@@ -131,7 +131,7 @@ public class ArqueroTest {
     /*
      * Test ataque arquero
      */
-    /*
+    
     @Test
     public void ataqueArqueroADistancia() throws ErrorBasico {
 
@@ -169,8 +169,7 @@ public class ArqueroTest {
         Assert.assertEquals(false,casillaAldeano.estaOcupada());
         Assert.assertEquals(true,unAldeano.estaDestruida());
     }
-    */
-    /*
+
     @Test
     public void ataqueArqueroFueraDeRango() throws ErrorBasico {
 
@@ -192,24 +191,23 @@ public class ArqueroTest {
         Arquero unArquero = new Arquero(casillaArquero);
 
         //vida del aldeano == 50
-        //tira error
+        /*//tira error
         assertThrows(ErrorBasico.class,
                 ()->{
                 	unArquero.atacar(casillaAldeano);
-                });
+                });*/
 
         //o tambien usando
         //vida del aldeano == 50
-        //tira error
+        /*//tira error
         assertThrows(ErrorBasico.class,
                 ()->{
                 	unArquero.atacar(unAldeano.obtenerUbicacion());
-                });
+                });*/
 
 
         Assert.assertEquals(true,casillaAldeano.estaOcupada());
         Assert.assertEquals(false, unArquero.estaDestruida());
     }
-    */
 
 }
