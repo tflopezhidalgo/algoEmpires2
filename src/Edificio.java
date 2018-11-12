@@ -1,5 +1,4 @@
 public abstract class Edificio extends Pieza {
-	
 
 	protected Area casillasOcupadas;
 	protected int vidaMaxima;
