@@ -2,7 +2,7 @@ public class Plaza extends Edificio {
 	
 	static final int TAMANIO_LADO = 2;
 	
-	Plaza(Area areaAOcupar){
+	Plaza(Area areaAOcupar) throws ErrorBasico {
 		vida = 450;
 		vidaMaxima = vida;
 		costo = 100;
@@ -13,7 +13,7 @@ public class Plaza extends Edificio {
 		areaAOcupar.contruir(this);
 	}
 	
-	Plaza(Area areaAOcupar, boolean yaConstruida){
+	Plaza(Area areaAOcupar, boolean yaConstruida) throws ErrorBasico {
 		vida = 450;
 		vidaMaxima = vida;
 		costo = 100;
@@ -29,7 +29,7 @@ public class Plaza extends Edificio {
 		areaAOcupar.contruir(this);
 	}
 	
-	public Aldeano crearAldeano(Casilla ubicacion) {
+	public Aldeano crearAldeano(Casilla ubicacion) throws ErrorBasico {
 		Aldeano unAldeano = new Aldeano(ubicacion);
 		return unAldeano;
 	}
