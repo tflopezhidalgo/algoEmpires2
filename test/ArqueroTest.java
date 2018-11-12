@@ -157,7 +157,7 @@ public class ArqueroTest {
         //vida del aldeano == 20
         unArquero.atacar(unAldeano.obtenerUbicacion());
 
-        Assert.assertEquals(false, unArquero.estaDestruida());
+        Assert.assertEquals(false, unAldeano.estaDestruida());
         Assert.assertEquals(true, casillaAldeano.estaOcupada());
 
         //vida del aldeano == 5
@@ -166,7 +166,7 @@ public class ArqueroTest {
         unArquero.atacar(casillaAldeano);
 
         Assert.assertEquals(false,casillaAldeano.estaOcupada());
-        Assert.assertEquals(true,unArquero.estaDestruida());
+        Assert.assertEquals(true,unAldeano.estaDestruida());
     }
 
     @Test
