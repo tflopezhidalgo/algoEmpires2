@@ -2,7 +2,7 @@ public class Castillo extends Edificio {
 	
 	static final int TAMANIO_LADO = 4;
 	
-	Castillo(Area areaAOcupar){
+	Castillo(Area areaAOcupar) throws ErrorBasico {
 		vida = 1000;
 		vidaMaxima = vida;
 		costo = 0;
@@ -23,7 +23,7 @@ public class Castillo extends Edificio {
 		}
 	}
 	
-	public ArmaDeAsedio crearCatapulta(Casilla ubicacion) {
+	public ArmaDeAsedio crearCatapulta(Casilla ubicacion)  throws ErrorBasico {
 		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(ubicacion);
 		return unaArmaDeAsedio;
 	}
