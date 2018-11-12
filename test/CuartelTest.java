@@ -7,7 +7,7 @@ import java.util.List;
 public class CuartelTest {
 
     @Test
-    public void ColocarCuartel() {
+    public void ColocarCuartel() throws ErrorBasico {
 
         Casilla miniTablero[][] = new Casilla[5][5];
 
