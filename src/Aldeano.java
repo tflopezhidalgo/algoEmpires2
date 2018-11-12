@@ -17,12 +17,9 @@ public class Aldeano extends Unidad {
 
 			if(unEdificio.necesitaReparacion()) {
 				ocupado = true;
-				unEdificio.reparar();
 				turnoJugado = true;
-			}
-			else {
-				//termino de reparar
-				ocupado = false;
+				unEdificio.reparar();
+				edificioObjectivo = unEdificio;
 			}
 		}
 	}
