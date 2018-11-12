@@ -5,8 +5,9 @@ public class ArmaDeAsedio extends Unidad {
 		vida = 150;
 		costo = 200;
 	}
-	
-	//estado de accionado (se puede mover/atacar)
+
+
+    //estado de accionado (se puede mover/atacar) proximamente pasar a patrón state
 	public void accionar() {
 		ocupado = !ocupado;
 	}

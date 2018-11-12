@@ -1,3 +1,4 @@
+import com.sun.org.apache.xpath.internal.operations.NotEquals;
 import junit.framework.Assert;
 import org.junit.Test;
 
@@ -9,14 +10,182 @@ public class ArmaDeAsedioTest {
     /*
      * Test de movimiento de Arma de Asedio
      */
+    @Test
+    public void seCreaArmaDeAsedio() throws ErrorBasico {
 
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(new Casilla(0, 0));
 
+        Assert.assertNotNull(unArmaDeAsedio);
+    }
+
+    @Test
+    public void ColocarArmaDeAsedio() throws ErrorBasico {
+
+        Casilla casilla = new Casilla(1,1);
+
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casilla);
+
+        Assert.assertEquals(true, casilla.estaOcupada());
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casilla);
+    }
+
+    @Test
+    public void moverArmaDeAsedioUnaPosicionHaciaArriba() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaDeArriba = new Casilla(0, 1);
+
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(nuevaCasilla); //Se inicia en modo mover (se mueve)
+
+        unArmaDeAsedio.moverArriba();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaDeArriba);
+
+        unArmaDeAsedio.accionar();
+        unArmaDeAsedio.moverArriba();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaDeArriba);
+    }
+
+    @Test
+    public void moverArmaDeAsedioUnaPosicionHaciaAbajo() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaDeAbajo = new Casilla(0, -1);
+
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(nuevaCasilla);
+
+        unArmaDeAsedio.moverAbajo();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaDeAbajo);
+
+        unArmaDeAsedio.accionar();
+        unArmaDeAsedio.moverAbajo();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaDeAbajo);
+
+    }
+
+    @Test
+    public void moverArmaDeAsedioUnaPosicionHaciaDerecha() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaDeLaDerecha = new Casilla(1, 0);
+
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(nuevaCasilla);
+
+        unArmaDeAsedio.moverDerecha();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaDeLaDerecha);
+
+        unArmaDeAsedio.accionar();
+        unArmaDeAsedio.moverDerecha();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaDeLaDerecha);
+    }
+
+    @Test
+    public void moverArmaDeAsedioUnaPosicionHaciaIzquierda() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0,0);
+
+        Casilla casillaDeLaIzquierda = new Casilla(-1, 0);
+
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(nuevaCasilla);
+
+        unArmaDeAsedio.moverIzquierda();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaDeLaIzquierda);
+
+        unArmaDeAsedio.accionar();
+        unArmaDeAsedio.moverIzquierda();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaDeLaIzquierda);
+    }
+
+    @Test
+    public void moverArmaDeAsedioUnaPosicionArribaDerecha() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0 ,0);
+
+        Casilla casillaArribaDerecha = new Casilla(1, 1);
+
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(nuevaCasilla); //Se inicia en modo ataque (no se mueve)
+
+        unArmaDeAsedio.moverArribaDerecha();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaArribaDerecha);
+
+        unArmaDeAsedio.accionar();
+        unArmaDeAsedio.moverArribaDerecha();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaArribaDerecha);
+    }
+
+    @Test
+    public void moverArmaDeAsedioUnaPosicionArribaIzquierda() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaArribaIzquierda = new Casilla(-1, 1);
+
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(nuevaCasilla);
+
+        unArmaDeAsedio.moverArribaIzquierda();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaArribaIzquierda);
+
+        unArmaDeAsedio.accionar();
+        unArmaDeAsedio.moverArribaIzquierda();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaArribaIzquierda);
+    }
+
+    @Test
+    public void moverArmaDeAsedioUnaPosicionAbajoIzquierda() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0, 0);
+
+        Casilla casillaAbajoIzquierda = new Casilla(-1, -1);
+
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(nuevaCasilla);
+
+        unArmaDeAsedio.moverAbajoIzquierda();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaAbajoIzquierda);
+
+        unArmaDeAsedio.accionar();
+        unArmaDeAsedio.moverAbajoIzquierda();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaAbajoIzquierda);
+    }
+
+    @Test
+    public void moverArmaDeAsedioUnaPosicionAbajoDerecha() throws ErrorBasico {
+
+        Casilla nuevaCasilla = new Casilla(0 ,0);
+
+        Casilla casillaAbajoDerecha = new Casilla(1, -1);
+
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(nuevaCasilla); //Se inicia en modo ataque (no se mueve)
+
+        unArmaDeAsedio.moverAbajoDerecha();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaAbajoDerecha);;
+
+        unArmaDeAsedio.accionar();
+        unArmaDeAsedio.moverAbajoDerecha();
+
+        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaAbajoDerecha);
+    }
 
 
     /*
      * Test de ataques de Arma de Asedio
      */
-
    @Test
     public void armaDeAsedioNoAtacaSiNoFueAccionada() throws ErrorBasico {
 
@@ -207,7 +376,5 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,unaPlaza.estaDestruida());
 
     }
-
-
 
 }

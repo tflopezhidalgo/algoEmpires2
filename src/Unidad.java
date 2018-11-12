@@ -11,15 +11,17 @@ public abstract class Unidad extends Pieza {
 	}
 
 	public void mover(Casilla nuevaCasilla) throws ErrorBasico {//habria que indicar una de las 8 direcciones posibles
-		if(nuevaCasilla.estaOcupada()) {
-			//TODO ERROR CASILLA OCUPADA
-			throw new java.lang.Error("ERROR: Casilla Ocupada.");
-		}
-		siEstaOcupadoDaError();
-		
-		casillaActual.liberar();
-		casillaActual = nuevaCasilla;
-		casillaActual.colocar(this);
+		if(!ocupado) {
+            if (nuevaCasilla.estaOcupada()) {
+                //TODO ERROR CASILLA OCUPADA
+                throw new java.lang.Error("ERROR: Casilla Ocupada.");
+            }
+            siEstaOcupadoDaError();
+
+            casillaActual.liberar();
+            casillaActual = nuevaCasilla;
+            casillaActual.colocar(this);
+        }
 	}
 	
 	public Casilla obtenerUbicacion() {
