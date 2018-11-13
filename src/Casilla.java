@@ -15,9 +15,9 @@ public class Casilla {
 
         casillasDelTablero.put(posicionActual.aString(), this);
 
-        ocupada = false;
-        piezaDeJuego = null;
-    }
+        	ocupada = false;
+        	piezaDeJuego = null;
+    	}
 
 	public Casilla (Posicion unaPosicion) {
 
@@ -55,58 +55,6 @@ public class Casilla {
 	
 	public Posicion obtenerPosicion() {
 		return posicionActual;
-	}
-	
-	//---------------PROTOTIPO---------------
-	
-	public Casilla casillaArriba() {
-		String unaPosicion = Posicion.aString(posicionActual.ejeX(), posicionActual.ejeY() + 1);
-		Casilla casillaArriba = casillasDelTablero.get(unaPosicion);
-		return casillaArriba;
-	}
-	
-	public Casilla casillaAbajo() {
-		String unaPosicion = Posicion.aString(posicionActual.ejeX(), posicionActual.ejeY() - 1);
-		Casilla casillaAbajo = casillasDelTablero.get(unaPosicion);
-		return casillaAbajo;
-	}
-	
-	public Casilla casillaIzquierda() {
-		String unaPosicion = Posicion.aString(posicionActual.ejeX() - 1, posicionActual.ejeY());
-		Casilla casillaIzquierda = casillasDelTablero.get(unaPosicion);
-		return casillaIzquierda;
-	}
-	
-	public Casilla casillaDerecha() {
-		String unaPosicion = Posicion.aString(posicionActual.ejeX() + 1, posicionActual.ejeY());
-		Casilla casillaDerecha = casillasDelTablero.get(unaPosicion);
-		return casillaDerecha;
-	}
-	
-	//---- diagonales
-	
-	public Casilla casillaArribaIzquiera() {
-		String unaPosicion = Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY() + 1);
-		Casilla casillaArribaIzquiera = casillasDelTablero.get(unaPosicion);
-		return casillaArribaIzquiera;
-	}
-	
-	public Casilla casillaArribaDerecha() {
-		String unaPosicion = Posicion.aString(posicionActual.ejeX()+1, posicionActual.ejeY() + 1);
-		Casilla casillaArribaDerecha = casillasDelTablero.get(unaPosicion);
-		return casillaArribaDerecha;
-	}
-	
-	public Casilla casillaAbajoIzquierda() {
-		String unaPosicion = Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY()-1);
-		Casilla casillaAbajoIzquierda = casillasDelTablero.get(unaPosicion);
-		return casillaAbajoIzquierda;
-	}
-	
-	public Casilla casillaAbajoDerecha() {
-		String unaPosicion = Posicion.aString(posicionActual.ejeX() + 1, posicionActual.ejeY() - 1);
-		Casilla casillaAbajoDerecha = casillasDelTablero.get(unaPosicion);
-		return casillaAbajoDerecha;
 	}
 	
 	/*
