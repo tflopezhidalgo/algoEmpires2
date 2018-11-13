@@ -12,15 +12,13 @@ public class Aldeano extends Unidad {
 	public void reparar(Edificio unEdificio) throws ErrorBasico {
 		siEstaOcupadoDaError();
 		siYaJugoElTurnoError();
+		enRango(unEdificio,1);
 		
-		if(EstaADistancia(1,unEdificio)) {
-
-			if(unEdificio.necesitaReparacion()) {
-				ocupado = true;
-				turnoJugado = true;
-				unEdificio.reparar();
-				edificioObjectivo = unEdificio;
-			}
+		if(unEdificio.necesitaReparacion()) {
+			ocupado = true;
+			turnoJugado = true;
+			unEdificio.reparar();
+			edificioObjectivo = unEdificio;
 		}
 	}
 	
@@ -55,8 +53,7 @@ public class Aldeano extends Unidad {
 			return nuevaPlaza;
 		}
 		else {
-			//TODO ERROR ZONA NO ESTA LIBRE
-			return null;
+			throw new ErrorBasico("ERROR: Zona de construccion ocupada.");
 		}
 	}
 	
@@ -76,22 +73,10 @@ public class Aldeano extends Unidad {
 			return nuevoCuartel;
 		}
 		else {
-			//TODO ERROR ZONA NO ESTA LIBRE
-			return null;
+			throw new ErrorBasico("ERROR: Zona de construccion ocupada.");
 		}
 	}
 	
-	
-	//------PRIVATE------------
-	
-	private boolean EstaADistancia(int distancia, Edificio unEdificio) {
-		
-		Area areaDelEdificio = unEdificio.areaOcupada();	
-		int minimaDistancia = areaDelEdificio.distanciaMinimaA(casillaActual);
-		
-		return distancia >= minimaDistancia;
-		
-	}
 	
 	public int realizarTrabajoDeTurno() throws ErrorBasico {
 		siYaJugoElTurnoError();

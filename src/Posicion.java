@@ -30,10 +30,10 @@ public class Posicion {
     	return ( Integer.toString(x) + "I" + Integer.toString(y));
     }
     
-    static public int calcularDistancia(Posicion posicionA, Posicion posicionB) {
+    public int calcularDistanciaA(Posicion posicionB) {
     	
-		int xFinal = posicionA.ejeX();
-		int yFinal = posicionA.ejeY();
+		int xFinal = this.ejeX();
+		int yFinal = this.ejeY();
 		int xInicial = posicionB.ejeX();
 		int yInicial = posicionB.ejeY();
 		

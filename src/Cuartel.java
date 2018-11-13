@@ -10,7 +10,7 @@ public class Cuartel extends Edificio {
 		cantidadDeCuracion = 50;
 		
 		casillasOcupadas = areaAOcupar;
-		areaAOcupar.contruir(this);
+		areaAOcupar.construir(this);
 	}
 
 	public Espadachin crearEspadachin(Casilla ubicacion) throws ErrorBasico {

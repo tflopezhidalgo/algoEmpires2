@@ -1,14 +1,16 @@
 import junit.framework.Assert;
+import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mockito;
-import static org.mockito.Mockito.mock;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@SuppressWarnings("deprecation")
 public class AldeanoTest {
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
     /*
      *  Test de movimiento de Aldeano
      */
@@ -34,173 +36,162 @@ public class AldeanoTest {
         Assert.assertEquals(true, casilla.estaOcupada());
         Assert.assertEquals(unAldeano.obtenerUbicacion(), casilla);
     }
-    
-    @Test
-    public void moverAldeano() throws ErrorBasico {
-
-        Casilla miniTablero[][] = new Casilla[5][5];
-
-        for(int y = 0; y < 5; y++ ) {
-            for(int x = 0; x < 5; x++ ) {
-                Posicion unaPosicion = new Posicion(x,y);
-                Casilla casilla = new Casilla(unaPosicion);
-
-                miniTablero[x][y] = casilla;
-            }
-        }
-
-        Casilla casillaAldano = miniTablero[2][2];
-        Aldeano unAldeano = new Aldeano(casillaAldano);
-
-        Assert.assertEquals(true, casillaAldano.estaOcupada());
-
-        unAldeano.moverArriba();
-        Assert.assertEquals(false, casillaAldano.estaOcupada());
-
-        Casilla casillaArriba = miniTablero[2][3];
-        Assert.assertEquals(true, casillaArriba.estaOcupada());
-    }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaArriba() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-    	Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaAldano = unTablero.obtenerCasillaEn(1, 1);
+        Aldeano unAldeano = new Aldeano(casillaAldano);
 
-    	Casilla casillaDeArriba = new Casilla(0, 1);
-    	
-        Aldeano unAldeano = new Aldeano(nuevaCasilla);
+        Assert.assertEquals(true, casillaAldano.estaOcupada());
         
-        unAldeano.moverArriba();
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaAldano);
+        unTablero.moverHasta(unAldeano, casillaFinal);
 
-        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaDeArriba);
+        Assert.assertEquals(false, casillaAldano.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaAbajo() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-    	Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaAldano = unTablero.obtenerCasillaEn(1, 1);
+        Aldeano unAldeano = new Aldeano(casillaAldano);
 
-    	Casilla casillaDeAbajo = new Casilla(0, -1);
-    	
-        Aldeano unAldeano = new Aldeano(nuevaCasilla);
+        Assert.assertEquals(true, casillaAldano.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaAbajoDe(casillaAldano);
+        unTablero.moverHasta(unAldeano, casillaFinal);
 
-        unAldeano.moverAbajo();
-
-        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaDeAbajo);
+        Assert.assertEquals(false, casillaAldano.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaDerecha() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-    	Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaAldano = unTablero.obtenerCasillaEn(1, 1);
+        Aldeano unAldeano = new Aldeano(casillaAldano);
 
-    	Casilla casillaDeLaDerecha = new Casilla(1, 0);
-    	
-        Aldeano unAldeano = new Aldeano(nuevaCasilla);
+        Assert.assertEquals(true, casillaAldano.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaDerechaDe(casillaAldano);
+        unTablero.moverHasta(unAldeano, casillaFinal);
 
-        unAldeano.moverDerecha();
-
-        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaDeLaDerecha);
+        Assert.assertEquals(false, casillaAldano.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaIzquierda() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-    	Casilla nuevaCasilla = new Casilla(0,0);
+        Casilla casillaAldano = unTablero.obtenerCasillaEn(1, 1);
+        Aldeano unAldeano = new Aldeano(casillaAldano);
 
-    	Casilla casillaDeLaIzquierda = new Casilla(-1, 0);
-    	
-        Aldeano unAldeano = new Aldeano(nuevaCasilla);
+        Assert.assertEquals(true, casillaAldano.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaIzquierdaDe(casillaAldano);
+        unTablero.moverHasta(unAldeano, casillaFinal);
 
-        unAldeano.moverIzquierda();
-
-        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaDeLaIzquierda);
+        Assert.assertEquals(false, casillaAldano.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
     public void moverAldeanoUnaPosicionArribaDerecha() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-    	Casilla nuevaCasilla = new Casilla(0 ,0);
+        Casilla casillaAldano = unTablero.obtenerCasillaEn(1, 1);
+        Aldeano unAldeano = new Aldeano(casillaAldano);
 
-    	Casilla casillaArribaDerecha = new Casilla(1, 1);
-    	
-        Aldeano unAldeano = new Aldeano(nuevaCasilla);
+        Assert.assertEquals(true, casillaAldano.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDerechaDe(casillaAldano);
+        unTablero.moverHasta(unAldeano, casillaFinal);
 
-        unAldeano.moverArribaDerecha();
-
-        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaArribaDerecha);
+        Assert.assertEquals(false, casillaAldano.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
     public void moverAldeanoUnaPosicionArribaIzquierda() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-    	Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaAldano = unTablero.obtenerCasillaEn(1, 1);
+        Aldeano unAldeano = new Aldeano(casillaAldano);
 
-    	Casilla casillaArribaIzquierda = new Casilla(-1, 1);
-    	
-        Aldeano unAldeano = new Aldeano(nuevaCasilla);
+        Assert.assertEquals(true, casillaAldano.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaIzquierdaDe(casillaAldano);
+        unTablero.moverHasta(unAldeano, casillaFinal);
 
-        unAldeano.moverArribaIzquierda();
-
-        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaArribaIzquierda);
+        Assert.assertEquals(false, casillaAldano.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
     public void moverAldeanoUnaPosicionAbajoIzquierda() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-    	Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaAldano = unTablero.obtenerCasillaEn(1, 1);
+        Aldeano unAldeano = new Aldeano(casillaAldano);
 
-    	Casilla casillaAbajoIzquierda = new Casilla(-1, -1);
-    	
-        Aldeano unAldeano = new Aldeano(nuevaCasilla);
+        Assert.assertEquals(true, casillaAldano.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaAbajoIzquierdaDe(casillaAldano);
+        unTablero.moverHasta(unAldeano, casillaFinal);
 
-        unAldeano.moverAbajoIzquierda();
-
-        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaAbajoIzquierda);
+        Assert.assertEquals(false, casillaAldano.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
     public void moverAldeanoUnaPosicionAbajoDerecha() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-    	Casilla nuevaCasilla = new Casilla(0 ,0);
+        Casilla casillaAldano = unTablero.obtenerCasillaEn(1, 1);
+        Aldeano unAldeano = new Aldeano(casillaAldano);
 
-    	Casilla casillaAbajoDerecha = new Casilla(1, -1);
-    	
-        Aldeano unAldeano = new Aldeano(nuevaCasilla);
+        Assert.assertEquals(true, casillaAldano.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaAbajoDerechaDe(casillaAldano);
+        unTablero.moverHasta(unAldeano, casillaFinal);
 
-        unAldeano.moverAbajoDerecha();
-
-        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaAbajoDerecha);
+        Assert.assertEquals(false, casillaAldano.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unAldeano.obtenerUbicacion(), casillaFinal);
     }
 
     /*
      *  Test de construccion de Aldeano
      */
-    /*
+    
     @Test
     public void ConstruccionPlaza() throws ErrorBasico {
         int turno = 0;
         int oroJugador = 0;
 
-        Casilla miniTablero[][] = new Casilla[5][5];
+        Tablero unTablero = new Tablero(5, 5);
 
-        for(int y = 0; y < 5; y++ ) {
-            for(int x = 0; x < 5; x++ ) {
-                Posicion unaPosicion = new Posicion(x,y);
-                Casilla casilla = new Casilla(unaPosicion);
-
-                miniTablero[x][y] = casilla;
-            }
-        }
-
-        Casilla casillaAldeano = miniTablero[0][0];
+        Casilla casillaAldeano = unTablero.obtenerCasillaEn(0, 0);
         Aldeano unAldeano = new Aldeano(casillaAldeano);
 
         //---Definiendo area de construccion
         List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
         for(int y = 0; y < Plaza.TAMANIO_LADO; y++) {
             for(int x = 0; x < Plaza.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(miniTablero[1+x][1+y]);
+                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(1+x, 1+y));
             }
         }
         Area zonaDeConstruccion = new Area(casillasParaConstruccion);
@@ -216,10 +207,8 @@ public class AldeanoTest {
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
                     //tira error
-                    assertThrows(ErrorBasico.class,
-                            ()->{
-                            	unAldeano.realizarTrabajoDeTurno();
-                            });
+                	thrown.expect(ErrorBasico.class);
+                	unAldeano.realizarTrabajoDeTurno();
                     break;
                     
                 case 2:
@@ -257,8 +246,6 @@ public class AldeanoTest {
                     Assert.assertEquals(75, oroJugador);
                     break;
             }
-
-
             unAldeano.nuevoTurno();
         }
     }
@@ -268,25 +255,16 @@ public class AldeanoTest {
         int turno = 0;
         int oroJugador = 0;
 
-        Casilla miniTablero[][] = new Casilla[5][5];
+        Tablero unTablero = new Tablero(5,5);
 
-        for(int y = 0; y < 5; y++ ) {
-            for(int x = 0; x < 5; x++ ) {
-                Posicion unaPosicion = new Posicion(x,y);
-                Casilla casilla = new Casilla(unaPosicion);
-
-                miniTablero[x][y] = casilla;
-            }
-        }
-
-        Casilla casillaAldeano = miniTablero[0][0];
+        Casilla casillaAldeano = unTablero.obtenerCasillaEn(0,0);
         Aldeano unAldeano = new Aldeano(casillaAldeano);
 
         //---Definiendo area de construccion
         List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
         for(int y = 0; y < Cuartel.TAMANIO_LADO; y++) {
             for(int x = 0; x < Cuartel.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(miniTablero[1+x][1+y]);
+                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(1+x, 1+y));
             }
         }
         Area zonaDeConstruccion = new Area(casillasParaConstruccion);
@@ -302,10 +280,8 @@ public class AldeanoTest {
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
                     //tira error
-                    assertThrows(ErrorBasico.class,
-                            ()->{
-                            	unAldeano.realizarTrabajoDeTurno();
-                            });
+                	thrown.expect(ErrorBasico.class);
+                    unAldeano.realizarTrabajoDeTurno();
                     break;
                     
                 case 2:
@@ -344,11 +320,9 @@ public class AldeanoTest {
                     Assert.assertEquals(75, oroJugador);
                     break;
             }
-
             unAldeano.nuevoTurno();
         }
     }
 
-    */
 }
 

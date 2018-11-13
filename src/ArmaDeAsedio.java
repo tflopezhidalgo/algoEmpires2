@@ -13,35 +13,20 @@ public class ArmaDeAsedio extends Unidad {
 	}
 	
 	//distancia de ataque = 5
-	
-	//TODO check si esta bien hacer ese casteo
-	public void atacar(Casilla unaCasilla) throws ErrorBasico {
+
+	public void atacar(Edificio edificioEnemigo) throws ErrorBasico {
 		enModoAtaque();
 		
-		Pieza unaPieza = unaCasilla.obtenerPieza();
+		enRango(edificioEnemigo,5);
+		edificioEnemigo.recibirDanio(75);
 		
-		if(unaPieza instanceof Edificio) {
-			enRangoDeAtaque((Edificio)unaPieza);
-			unaPieza.recibirDanio(75);
-		}
-		
-		if(unaPieza.estaDestruida()) {
-			unaPieza = null;
-		}
-	}
-	
-	private void enRangoDeAtaque(Edificio unEdificio) throws ErrorBasico {
-		int distancia = unEdificio.areaOcupada().distanciaMinimaA(obtenerUbicacion());
-
-		if(distancia > 5) {
-			//TODO error
-			throw new ErrorBasico("ERROR: Objetivo fuera de area de ataque.");
+		if(edificioEnemigo.estaDestruida()) {
+			edificioEnemigo = null;
 		}
 	}
 	
 	private void enModoAtaque() throws ErrorBasico {
 		if(!ocupado) {
-			//TODO error
 			throw new ErrorBasico("ERROR: ArmaDeAsedio no esta en Modo Ataque.");
 		}
 	}
