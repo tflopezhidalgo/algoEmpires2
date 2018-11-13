@@ -3,48 +3,40 @@ import java.util.Map;
 
 public class Tablero {
 
-	private static Map<String, Casilla> casillasDelTablero = new HashMap<String, Casilla>();
+	private static Map<String, Casilla> casillasDelTablero;
 	
-	public Tablero(){
-        
-
-  }
-
-	public Casilla (Posicion unaPosicion) {
-
-		casillasDelTablero.put(unaPosicion.aString(), this);
-
-		posicionActual = unaPosicion;
-		ocupada = false;
+	public Tablero(int ancho, int alto){
+        	casillasDelTablero = new HashMap<String, Casilla>();
+		
+		for(int y=0;y<alto;y++){
+			for(int x=0;x<alto;x++){
+				Posicion nuevaPosicion = new Posicion(x,y);
+				Casilla nuevaCasilla = new Casilla(nuevaPosicion);
+				casillasDelTablero.add(nuevaPosicion.aString(),nuevaCasilla);
 			}
-	
-	public boolean estaOcupada() {
-		return ocupada;
-	}
-	
-	//NO USAR ?
-	public void colocar(Pieza unaPieza) throws ErrorBasico {
-		if(!ocupada) {
-			ocupada = true;
-			piezaDeJuego = unaPieza;
-		}
-		else {
-			//TODO error
-			throw new ErrorBasico("ERROR: Casilla ocupada.");
 		}
 	}
 	
-	public void liberar() {
-		ocupada = false;
-		piezaDeJuego = null;
+	public void colocar(Pieza unaPieza, Casilla unaCasilla) throws ErrorBasico {
+		unaCasilla.colocar(unaPieza);
 	}
 	
-	public Pieza obtenerPieza() {
-		return piezaDeJuego;
+	public void liberar(Area unArea) {
+		unArea.liberar()
 	}
 	
-	public Posicion obtenerPosicion() {
-		return posicionActual;
+	public void liberar(Casilla unaCasilla) {
+		unaCasilla.liberar()
+	}
+	
+	//TODO verificar q estamos de acuerdo en tener esta funcion
+	public Pieza obtenerPieza(Casilla unaCasilla) {
+		return unaCasilla.obtenerPieza();
+	}
+	
+	//TODO verificar q estamos de acuerdo en tener esta funcion
+	public Posicion obtenerPosicion(Casilla unaCasilla) {
+		return unaCasilla.obtenerPosicion();
 	}
 	
 	//---------------PROTOTIPO---------------
