@@ -15,18 +15,32 @@ public class Tablero {
 				casillasDelTablero.add(nuevaPosicion.aString(),nuevaCasilla);
 			}
 		}
+		
+		colocarPiezasIniciales();
 	}
 	
-	public void colocar(Pieza unaPieza, Casilla unaCasilla) throws ErrorBasico {
-		unaCasilla.colocar(unaPieza);
+	//TODO esto hacerlo aca o en Juego y que llame al metodo "colocar" inidcando las areas y casillas deseadas??
+	private void colocarPiezasIniciales(){
+		//TODO definir 4 arear random para los castillos(2) y plazas(2)
+		//TODO definir 6 casillas random para los 6 aldeanos
+	}
+	
+	//TODO check casillosfueron destruidos codearlo aca o en juego?
+	
+	public void colocar(Unidad unaUnidad, Casilla unaCasilla) throws ErrorBasico {
+		unaCasilla.colocar(unaUnidad);
+	}
+	
+	public void colocar(Edificio unEdificio, Area unArea) throws ErrorBasico {
+		unArea.construir(unEdificio);
 	}
 	
 	public void liberar(Area unArea) {
-		unArea.liberar()
+		unArea.liberar();
 	}
 	
 	public void liberar(Casilla unaCasilla) {
-		unaCasilla.liberar()
+		unaCasilla.liberar();
 	}
 	
 	//TODO verificar q estamos de acuerdo en tener esta funcion
