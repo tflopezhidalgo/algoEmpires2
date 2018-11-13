@@ -1,10 +1,15 @@
 import junit.framework.Assert;
 
-
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+@SuppressWarnings("deprecation")
 public class EspadachinTest {
 
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
     @Test
     public void seCreaEspadachinEnPosicionCentral() throws ErrorBasico {
         
@@ -15,189 +20,176 @@ public class EspadachinTest {
     
     @Test
     public void moverEspadachinUnaPosicionHaciaArriba() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1, 1);
+        Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
-        Casilla casillaDeArriba = new Casilla(0, 1);
+        Assert.assertEquals(true, casillaEspadachin.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaEspadachin);
+        unTablero.moverHasta(unEspadachin, casillaFinal);
 
-        Espadachin unEspadachin = new Espadachin(nuevaCasilla);
-
-        unEspadachin.moverArriba();
-
-        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaDeArriba);
+        Assert.assertEquals(false, casillaEspadachin.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaAbajo() throws ErrorBasico {
+    public void moverEspadachinUnaPosicionHaciaAbajo() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1, 1);
+        Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
-        Casilla casillaDeAbajo = new Casilla(0, -1);
+        Assert.assertEquals(true, casillaEspadachin.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaEspadachin);
+        unTablero.moverHasta(unEspadachin, casillaFinal);
 
-        Espadachin unEspadachin = new Espadachin(nuevaCasilla);
-
-        unEspadachin.moverAbajo();
-
-        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaDeAbajo);
+        Assert.assertEquals(false, casillaEspadachin.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaDerecha() throws ErrorBasico {
+    public void moverEspadachinUnaPosicionHaciaDerecha() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1, 1);
+        Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
-        Casilla casillaDeLaDerecha = new Casilla(1, 0);
+        Assert.assertEquals(true, casillaEspadachin.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaEspadachin);
+        unTablero.moverHasta(unEspadachin, casillaFinal);
 
-        Espadachin unEspadachin = new Espadachin(nuevaCasilla);
-
-        unEspadachin.moverDerecha();
-
-        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaDeLaDerecha);
+        Assert.assertEquals(false, casillaEspadachin.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaIzquierda() throws ErrorBasico {
+    public void moverEspadachinUnaPosicionHaciaIzquierda() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0,0);
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1, 1);
+        Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
-        Casilla casillaDeLaIzquierda = new Casilla(-1, 0);
+        Assert.assertEquals(true, casillaEspadachin.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaEspadachin);
+        unTablero.moverHasta(unEspadachin, casillaFinal);
 
-        Espadachin unEspadachin = new Espadachin(nuevaCasilla);
-
-        unEspadachin.moverIzquierda();
-
-        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaDeLaIzquierda);
+        Assert.assertEquals(false, casillaEspadachin.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaDerecha() throws ErrorBasico {
+    public void moverEspadachinUnaPosicionArribaDerecha() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0 ,0);
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1, 1);
+        Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
-        Casilla casillaArribaDerecha = new Casilla(1, 1);
+        Assert.assertEquals(true, casillaEspadachin.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaEspadachin);
+        unTablero.moverHasta(unEspadachin, casillaFinal);
 
-        Espadachin unEspadachin = new Espadachin(nuevaCasilla);
-
-        unEspadachin.moverArribaDerecha();
-
-        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaArribaDerecha);
+        Assert.assertEquals(false, casillaEspadachin.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaIzquierda() throws ErrorBasico {
+    public void moverEspadachinUnaPosicionArribaIzquierda() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1, 1);
+        Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
-        Casilla casillaArribaIzquierda = new Casilla(-1, 1);
+        Assert.assertEquals(true, casillaEspadachin.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaEspadachin);
+        unTablero.moverHasta(unEspadachin, casillaFinal);
 
-        Espadachin unEspadachin = new Espadachin(nuevaCasilla);
-
-        unEspadachin.moverArribaIzquierda();
-
-        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaArribaIzquierda);
+        Assert.assertEquals(false, casillaEspadachin.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoIzquierda() throws ErrorBasico {
+    public void moverEspadachinUnaPosicionAbajoIzquierda() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1, 1);
+        Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
-        Casilla casillaAbajoIzquierda = new Casilla(-1, -1);
+        Assert.assertEquals(true, casillaEspadachin.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaEspadachin);
+        unTablero.moverHasta(unEspadachin, casillaFinal);
 
-        Espadachin unEspadachin = new Espadachin(nuevaCasilla);
-
-        unEspadachin.moverAbajoIzquierda();
-
-        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaAbajoIzquierda);
+        Assert.assertEquals(false, casillaEspadachin.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoDerecha() throws ErrorBasico {
+    public void moverEspadachinUnaPosicionAbajoDerecha() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0 ,0);
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1, 1);
+        Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
-        Casilla casillaAbajoDerecha = new Casilla(1, -1);
+        Assert.assertEquals(true, casillaEspadachin.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaEspadachin);
+        unTablero.moverHasta(unEspadachin, casillaFinal);
 
-        Espadachin unEspadachin = new Espadachin(nuevaCasilla);
-
-        unEspadachin.moverAbajoDerecha();
-
-        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaAbajoDerecha);
+        Assert.assertEquals(false, casillaEspadachin.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unEspadachin.obtenerUbicacion(), casillaFinal);
     }
-    
-    
     
     @Test
     public void ataqueEspadachin() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla miniTablero[][] = new Casilla[3][3];
-
-        for(int y = 0; y < 3; y++ ) {
-            for(int x = 0; x < 3; x++ ) {
-                Posicion unaPosicion = new Posicion(x,y);
-                Casilla casilla = new Casilla(unaPosicion);
-
-                miniTablero[x][y] = casilla;
-            }
-        }
-
-        Casilla casillaAldeano = miniTablero[1][1];
+        Casilla casillaAldeano = unTablero.obtenerCasillaEn(1,1);
         Aldeano unAldeano = new Aldeano(casillaAldeano);
 
-        Casilla casillaEspadachin = miniTablero[2][1];
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(2,1);
         Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
         //vida del aldeano == 25
-        unEspadachin.atacar(casillaAldeano);
-        
-        //o tambien usando
+        unEspadachin.atacar(unAldeano);
         //vida del aldeano == 0
-        unEspadachin.atacar(unAldeano.obtenerUbicacion());
+        unEspadachin.atacar(unAldeano);
 
         Assert.assertEquals(false,casillaAldeano.estaOcupada());
         Assert.assertEquals(true,unAldeano.estaDestruida());
     }
-/*
+
     @Test
     public void ataqueEspadachinFueraDeRango() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla miniTablero[][] = new Casilla[3][3];
-
-        for(int y = 0; y < 3; y++ ) {
-            for(int x = 0; x < 3; x++ ) {
-                Posicion unaPosicion = new Posicion(x,y);
-                Casilla casilla = new Casilla(unaPosicion);
-
-                miniTablero[x][y] = casilla;
-            }
-        }
-
-        Casilla casillaAldeano = miniTablero[0][0];
+        Casilla casillaAldeano = unTablero.obtenerCasillaEn(0,0);
         Aldeano unAldeano = new Aldeano(casillaAldeano);
 
-        Casilla casillaEspadachin = miniTablero[0][2];
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(0,2);
         Espadachin unEspadachin = new Espadachin(casillaEspadachin);
 
         //vida del aldeano == 50
         //tira error
-        assertThrows(ErrorBasico.class,
-                ()->{
-                    unEspadachin.atacar(casillaAldeano);
-                });
-        
-        //o tambien usando
-        //vida del aldeano == 50
-        //tira error
-        assertThrows(ErrorBasico.class,
-                ()->{
-                	unEspadachin.atacar(unAldeano.obtenerUbicacion());
-                });
+        thrown.expect(ErrorBasico.class);
+        unEspadachin.atacar(unAldeano);
 
         Assert.assertEquals(true,casillaAldeano.estaOcupada());
         Assert.assertEquals(false,unAldeano.estaDestruida());
 
     }
-
-    */
-
 }

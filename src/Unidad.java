@@ -27,52 +27,7 @@ public abstract class Unidad extends Pieza {
 	public Casilla obtenerUbicacion() {
 		return casillaActual;
 	}
-	
-	
-	//----------PROTOTIPO-----------------
-	
-	public void moverArriba() throws ErrorBasico {
-		Casilla nuevaCasilla = casillaActual.casillaArriba();
-		mover(nuevaCasilla);
-	}
-	
-	public void moverAbajo() throws ErrorBasico {
-		Casilla nuevaCasilla = casillaActual.casillaAbajo();
-		mover(nuevaCasilla);
-	}
-	
-	public void moverIzquierda() throws ErrorBasico {
-		Casilla nuevaCasilla = casillaActual.casillaIzquierda();
-		mover(nuevaCasilla);
-	}
-	
-	public void moverDerecha() throws ErrorBasico {
-		Casilla nuevaCasilla = casillaActual.casillaDerecha();
-		mover(nuevaCasilla);
-	}
-	
-	//----------------DIAGONALES-------
-	
-	public void moverArribaIzquierda() throws ErrorBasico {
-		Casilla nuevaCasilla = casillaActual.casillaArribaIzquiera();
-		mover(nuevaCasilla);
-	}
-	
-	public void moverArribaDerecha() throws ErrorBasico {
-		Casilla nuevaCasilla = casillaActual.casillaArribaDerecha();
-		mover(nuevaCasilla);
-	}
-	
-	public void moverAbajoDerecha() throws ErrorBasico {
-		Casilla nuevaCasilla = casillaActual.casillaAbajoDerecha();
-		mover(nuevaCasilla);
-	}
-	
-	public void moverAbajoIzquierda() throws ErrorBasico {
-		Casilla nuevaCasilla = casillaActual.casillaAbajoIzquierda();
-		mover(nuevaCasilla);
-	}	
-	
+
 	//----------------PRIVATE------------------
 	protected void siEstaOcupadoDaError() throws ErrorBasico {
 		if(ocupado) {
@@ -83,6 +38,31 @@ public abstract class Unidad extends Pieza {
 	
 	protected void liberarUbicacion() {
 		casillaActual.liberar();
+	}
+	
+	public Posicion obtenerPosicion() {
+		return casillaActual.obtenerPosicion();
+	}
+	
+	//TODO eso es necesario para ARMADEASEDIO,ARQUERO,ESPADACHIN y ALDEANO
+	protected void  enRango(Edificio edificioEnemigo, int distanciaMaxima) throws ErrorBasico {
+		Area areaDelEdificio = edificioEnemigo.areaOcupada();
+		int minimaDistancia = areaDelEdificio.distanciaMinimaA(obtenerUbicacion());
+
+		if(minimaDistancia > distanciaMaxima) {
+			throw new ErrorBasico("ERROR: Objetivo fuera de rango.");
+		}
+	}
+
+	//TODO eso es necesario para ARQUERO y ESPADACHIN
+	protected void enRango(Unidad unidadEnemiga, int distanciaMaxima) throws ErrorBasico {
+		Posicion posicionA = unidadEnemiga.obtenerPosicion();
+		Posicion posicionB = this.obtenerPosicion();
+		
+		int distancia = posicionA.calcularDistanciaA(posicionB);
+		if(distancia > distanciaMaxima) {
+			throw new ErrorBasico("ERROR: Objetivo fuera de rango.");
+		}
 	}
 
 }
