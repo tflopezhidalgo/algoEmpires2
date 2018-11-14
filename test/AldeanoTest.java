@@ -3,9 +3,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @SuppressWarnings("deprecation")
 public class AldeanoTest {
 
@@ -187,15 +184,8 @@ public class AldeanoTest {
         Casilla casillaAldeano = unTablero.obtenerCasillaEn(0, 0);
         Aldeano unAldeano = new Aldeano(casillaAldeano);
 
-        //---Definiendo area de construccion
-        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
-        for(int y = 0; y < Plaza.TAMANIO_LADO; y++) {
-            for(int x = 0; x < Plaza.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(1+x, 1+y));
-            }
-        }
-        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
-        //-----------------------------------
+        Area zonaDeConstruccion = unTablero.definirArea(1, 1, Plaza.TAMANIO_LADO, Plaza.TAMANIO_LADO);
+        
         Plaza laNuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion);
         while(turno < 6) {
             turno ++;
@@ -260,15 +250,7 @@ public class AldeanoTest {
         Casilla casillaAldeano = unTablero.obtenerCasillaEn(0,0);
         Aldeano unAldeano = new Aldeano(casillaAldeano);
 
-        //---Definiendo area de construccion
-        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
-        for(int y = 0; y < Cuartel.TAMANIO_LADO; y++) {
-            for(int x = 0; x < Cuartel.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(1+x, 1+y));
-            }
-        }
-        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
-        //-----------------------------------
+        Area zonaDeConstruccion = unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO);
         Cuartel elNuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion);
         while(turno < 6) {
             turno ++;

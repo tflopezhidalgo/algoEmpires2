@@ -4,9 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @SuppressWarnings("deprecation")
 public class CuartelTest {
 
@@ -18,17 +15,9 @@ public class CuartelTest {
 
     	Tablero unTablero = new Tablero(5,5);
 
-        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
-
         //voy a ocupar a partir de la (2,2)
         //se ocuparan las casillas en (2,2) (2,3) (3,2) (3,3)
-        for(int y = 0; y < Cuartel.TAMANIO_LADO; y++) {
-            for(int x = 0; x < Cuartel.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(2+x,2+y));
-            }
-        }
-
-        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+        Area zonaDeConstruccion = unTablero.definirArea(2, 2, Cuartel.TAMANIO_LADO+1, Cuartel.TAMANIO_LADO+1);
         Assert.assertEquals(true, zonaDeConstruccion.estaLibre());
 
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
@@ -48,16 +37,7 @@ public class CuartelTest {
 
     	Tablero unTablero = new Tablero(5,5);
 
-        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
-
-        //voy a ocupar a partir de la (0,0)
-        for(int y = 0; y < Cuartel.TAMANIO_LADO; y++) {
-            for(int x = 0; x < Cuartel.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(x,y));
-            }
-        }
-
-        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
 
         Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1,2);
@@ -75,7 +55,8 @@ public class CuartelTest {
         
         //tira error
         thrown.expect(ErrorBasico.class);                	
-        Espadachin otroEspadachin = unCuartel.crearEspadachin(casillaOtroEspadachin);        
+        Espadachin otroEspadachin = unCuartel.crearEspadachin(casillaOtroEspadachin);    
+    	Assert.assertNull(otroEspadachin);
     }
     
     @Test
@@ -83,16 +64,7 @@ public class CuartelTest {
 
     	Tablero unTablero = new Tablero(5,5);
 
-        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
-
-        //voy a ocupar a partir de la (0,0)
-        for(int y = 0; y < Cuartel.TAMANIO_LADO; y++) {
-            for(int x = 0; x < Cuartel.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(x,y));
-            }
-        }
-
-        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
 
         Casilla casillaArquero = unTablero.obtenerCasillaEn(1,2);
@@ -111,6 +83,7 @@ public class CuartelTest {
         //tira error
     	thrown.expect(ErrorBasico.class);
     	Arquero otroArquero = unCuartel.crearArquero(casillaOtroArquero);
+    	Assert.assertNull(otroArquero);
         
     }
 }
