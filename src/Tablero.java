@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Tablero {
@@ -16,6 +18,18 @@ public class Tablero {
 			}
 		}
 		colocarPiezasIniciales();
+	}
+	
+	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) {
+        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
+        
+        for(int y = yInicial; y <= yFinal; y++) {
+            for(int x = xInicial; x <= xFinal; x++) {
+                casillasParaConstruccion.add(obtenerCasillaEn(x, y));
+            }
+        }
+        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+        return zonaDeConstruccion;
 	}
 	
 	//TODO esto hacerlo aca o en Juego y que llame al metodo "colocar" inidcando las areas y casillas deseadas??
