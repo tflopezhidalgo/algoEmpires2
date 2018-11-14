@@ -4,9 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @SuppressWarnings("deprecation")
 public class ArmaDeAsedioTest {
 
@@ -212,14 +209,8 @@ public class ArmaDeAsedioTest {
     public void armaDeAsedioNoAtacaSiNoFueAccionada() throws ErrorBasico {
 
 	   	Tablero unTablero = new Tablero(7,7);
-
-        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
-        for(int y = 0; y < Plaza.TAMANIO_LADO; y++) {
-            for(int x = 0; x < Plaza.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(5+x,5+y));
-            }
-        }
-        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+	   	
+        Area zonaDeConstruccion = unTablero.definirArea(5, 5, Plaza.TAMANIO_LADO+4, Plaza.TAMANIO_LADO+4);
         Plaza unaPlaza = new Plaza(zonaDeConstruccion);
 
         Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(0,0);
@@ -273,13 +264,7 @@ public class ArmaDeAsedioTest {
     public void ataqueArmaDeAsedioAEdificio() throws ErrorBasico {
     	Tablero unTablero = new Tablero(7, 7);
 
-        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
-        for(int y = 0; y < Plaza.TAMANIO_LADO; y++) {
-            for(int x = 0; x < Plaza.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(5+x, 5+y));
-            }
-        }
-        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+        Area zonaDeConstruccion = unTablero.definirArea(5, 5, Plaza.TAMANIO_LADO+4, Plaza.TAMANIO_LADO+4);
         Plaza unaPlaza = new Plaza(zonaDeConstruccion);
 
         Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(0, 0);
@@ -314,13 +299,7 @@ public class ArmaDeAsedioTest {
     public void ataqueArmaDeAsedioAEdificioFueraDeRango() throws ErrorBasico {
     	Tablero unTablero = new Tablero(10, 10);
 
-        List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
-        for(int y = 0; y < Plaza.TAMANIO_LADO; y++) {
-            for(int x = 0; x < Plaza.TAMANIO_LADO; x++) {
-                casillasParaConstruccion.add(unTablero.obtenerCasillaEn(6+x, 6+y));
-            }
-        }
-        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+        Area zonaDeConstruccion = unTablero.definirArea(6, 6, Plaza.TAMANIO_LADO+5, Plaza.TAMANIO_LADO+5);
         Plaza unaPlaza = new Plaza(zonaDeConstruccion);
 
         Casilla casillaCatapulta = unTablero.obtenerCasillaEn(0,0);
