@@ -13,6 +13,20 @@ public class Cuartel extends Edificio {
 		areaAOcupar.construir(this);
 	}
 
+	Cuartel(Area areaAOcupar, boolean yaConstruida) throws ErrorBasico {
+		vida = 250;
+		vidaMaxima = vida;
+		costo = 50;
+		tiempoDeConstruccion = 3;
+		if(yaConstruida){
+			tiempoDeConstruccion=0;
+		}
+		cantidadDeCuracion = 50;
+
+		casillasOcupadas = areaAOcupar;
+		areaAOcupar.construir(this);
+	}
+
 	public Espadachin crearEspadachin(Casilla ubicacion) throws ErrorBasico {
 		if(ubicacion.estaOcupada()) {
 			//TODO error

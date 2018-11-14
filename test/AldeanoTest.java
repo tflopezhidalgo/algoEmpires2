@@ -324,5 +324,172 @@ public class AldeanoTest {
         }
     }
 
+    @Test
+    public void RepararPlazaCentral() throws ErrorBasico{
+        int turno=0;
+
+        Tablero unTablero = new Tablero(5,5);
+
+        Casilla unaCasilla = unTablero.obtenerCasillaEn(0,0);
+        Aldeano unAldeano = new Aldeano(unaCasilla);
+
+        List<Casilla> unasCasillas = new ArrayList<Casilla>();
+
+        for(int y = 0; y < Plaza.TAMANIO_LADO; y++) {
+            for(int x = 0; x < Plaza.TAMANIO_LADO; x++) {
+                unasCasillas.add(unTablero.obtenerCasillaEn(1+x, 1+y));
+            }
+        }
+
+        Plaza unaPlaza = new Plaza(new Area(unasCasillas), true);
+
+        unaPlaza.recibirDanio(50);
+
+        while (turno<2) {
+            turno++;
+
+            switch (turno) {
+                case 1: {
+                    unAldeano.reparar(unaPlaza);
+                    Assert.assertEquals(true, unaPlaza.necesitaReparacion());
+                }
+                break;
+                case 2: {
+                    unAldeano.realizarTrabajoDeTurno();
+                    Assert.assertEquals(false, unaPlaza.necesitaReparacion());
+                }
+                break;
+            }
+            unAldeano.nuevoTurno();
+        }
+    }
+
+    @Test
+    public void RepararCastillo() throws ErrorBasico{
+        int turno=0;
+
+        Tablero unTablero = new Tablero(5,5);
+
+        Casilla unaCasilla = unTablero.obtenerCasillaEn(0,0);
+        Aldeano unAldeano = new Aldeano(unaCasilla);
+
+        List<Casilla> unasCasillas = new ArrayList<Casilla>();
+
+        for(int y = 0; y < Castillo.TAMANIO_LADO; y++) {
+            for(int x = 0; x < Castillo.TAMANIO_LADO; x++) {
+                unasCasillas.add(unTablero.obtenerCasillaEn(1+x, 1+y));
+            }
+        }
+
+       Castillo unCastillo = new Castillo(new Area(unasCasillas));
+
+        unCastillo.recibirDanio(30);
+
+        while (turno<2) {
+            turno++;
+
+            switch (turno) {
+                case 1: {
+                    unAldeano.reparar(unCastillo);
+                    Assert.assertEquals(true, unCastillo.necesitaReparacion());
+                }
+                break;
+                case 2: {
+                    unAldeano.realizarTrabajoDeTurno();
+                    Assert.assertEquals(false, unCastillo.necesitaReparacion());
+                }
+                break;
+            }
+            unAldeano.nuevoTurno();
+        }
+    }
+
+    @Test
+    public void RepararCuartel() throws ErrorBasico{
+        int turno=0;
+
+        Tablero unTablero = new Tablero(5,5);
+
+        Casilla unaCasilla = unTablero.obtenerCasillaEn(0,0);
+        Aldeano unAldeano = new Aldeano(unaCasilla);
+
+        List<Casilla> unasCasillas = new ArrayList<Casilla>();
+
+        for(int y = 0; y < Cuartel.TAMANIO_LADO; y++) {
+            for(int x = 0; x < Cuartel.TAMANIO_LADO; x++) {
+                unasCasillas.add(unTablero.obtenerCasillaEn(1+x, 1+y));
+            }
+        }
+
+        Cuartel unCuartel = new Cuartel(new Area(unasCasillas));
+
+        unCuartel.recibirDanio(100);
+
+        while (turno<2) {
+            turno++;
+
+            switch (turno) {
+                case 1: {
+                    unAldeano.reparar(unCuartel);
+                    Assert.assertEquals(true, unCuartel.necesitaReparacion());
+                }
+                break;
+                case 2: {
+                    unAldeano.realizarTrabajoDeTurno();
+                    Assert.assertEquals(false, unCuartel.necesitaReparacion());
+                }
+                break;
+            }
+            unAldeano.nuevoTurno();
+        }
+    }
+
+    @Test
+    public void AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion() throws ErrorBasico{
+        int turno=0;
+        int oro=0;
+
+        Tablero unTablero = new Tablero(5,5);
+
+        Casilla unaCasilla = unTablero.obtenerCasillaEn(0,0);
+        Aldeano unAldeano = new Aldeano(unaCasilla);
+
+        List<Casilla> unasCasillas = new ArrayList<Casilla>();
+
+        for(int y = 0; y < Cuartel.TAMANIO_LADO; y++) {
+            for(int x = 0; x < Cuartel.TAMANIO_LADO; x++) {
+                unasCasillas.add(unTablero.obtenerCasillaEn(1+x, 1+y));
+            }
+        }
+
+        Cuartel unCuartel = new Cuartel(new Area(unasCasillas), true);
+
+        unCuartel.recibirDanio(100);
+
+        while (turno<3) {
+            turno++;
+
+            switch (turno) {
+                case 1: {
+                    unAldeano.reparar(unCuartel);
+                    Assert.assertEquals(0, oro);
+                }
+                break;
+                case 2: {
+                    oro+=unAldeano.realizarTrabajoDeTurno();
+                    Assert.assertEquals(0, oro);
+                }
+                break;
+                case 3: {
+                    oro+=unAldeano.realizarTrabajoDeTurno();
+                    Assert.assertEquals(25, oro);
+                }
+                break;
+            }
+            unAldeano.nuevoTurno();
+        }
+
+    }
+
 }
 
