@@ -10,7 +10,7 @@ public class Plaza extends Edificio {
 		cantidadDeCuracion = 25;
 		
 		casillasOcupadas = areaAOcupar;
-		areaAOcupar.contruir(this);
+		areaAOcupar.construir(this);
 	}
 	
 	Plaza(Area areaAOcupar, boolean yaConstruida) throws ErrorBasico {
@@ -26,7 +26,7 @@ public class Plaza extends Edificio {
 		cantidadDeCuracion = 25;
 		
 		casillasOcupadas = areaAOcupar;
-		areaAOcupar.contruir(this);
+		areaAOcupar.construir(this);
 	}
 	
 	public Aldeano crearAldeano(Casilla ubicacion) throws ErrorBasico {

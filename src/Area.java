@@ -22,7 +22,7 @@ public class Area {
 		}
 	}
 	
-	public void contruir(Edificio unEdificio) throws ErrorBasico {
+	public void construir(Edificio unEdificio) throws ErrorBasico {
 		for (int i = 0; i < casillasDelArea.size(); i++) {
 			casillasDelArea.get(i).colocar(unEdificio);
 		}
@@ -41,15 +41,14 @@ public class Area {
 		return true;
 	}
 	
-	public void agregarCasilla(Casilla unaCasilla) {
+	public void agregarCasilla(Casilla unaCasilla) throws ErrorBasico {
 		if(unaCasilla == null) {
-			//TODO ERROR CASILLA NULL
+			throw new ErrorBasico("ERROR: Casilla inexistente.");
 		}
 		casillasDelArea.add(unaCasilla);
 	}
 	
 	public int distanciaMinimaA(Casilla unaCasilla) {
-		
 		int minimaDistancia = Integer.MAX_VALUE; // TODO ver si hay una mejor manera de arreglar esto
 		int distanciaNueva;
 		for (int i = 0; i < casillasDelArea.size(); i++) {
@@ -67,7 +66,7 @@ public class Area {
 		Posicion posicionA = casillaA.obtenerPosicion();
 		Posicion posicionB = casillaB.obtenerPosicion();
 		
-		int distancia = Posicion.calcularDistancia(posicionA,posicionB);
+		int distancia = posicionA.calcularDistanciaA(posicionB);
 		return distancia;
 	}
 	

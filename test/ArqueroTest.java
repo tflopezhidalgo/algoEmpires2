@@ -1,8 +1,14 @@
 import junit.framework.Assert;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+@SuppressWarnings("deprecation")
 public class ArqueroTest {
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
     /*
      * Test de movimientos de arquero
@@ -18,114 +24,138 @@ public class ArqueroTest {
 
     @Test
     public void moverArqueroUnaPosicionHaciaArriba() throws ErrorBasico{
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(1, 1);
+        Arquero unArquero = new Arquero(casillaArquero);
 
-        Casilla casillaDeArriba = new Casilla(0, 1);
+        Assert.assertEquals(true, casillaArquero.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaArquero);
+        unTablero.moverHasta(unArquero, casillaFinal);
 
-        Arquero unArquero = new Arquero(nuevaCasilla);
-
-        unArquero.moverArriba();
-
-        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaDeArriba);
+        Assert.assertEquals(false, casillaArquero.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaAbajo() throws ErrorBasico {
+    public void moverArqueroUnaPosicionHaciaAbajo() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(1, 1);
+        Arquero unArquero = new Arquero(casillaArquero);
 
-        Casilla casillaDeAbajo = new Casilla(0, -1);
+        Assert.assertEquals(true, casillaArquero.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaArquero);
+        unTablero.moverHasta(unArquero, casillaFinal);
 
-        Arquero unArquero = new Arquero(nuevaCasilla);
-
-        unArquero.moverAbajo();
-
-        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaDeAbajo);
+        Assert.assertEquals(false, casillaArquero.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaDerecha() throws ErrorBasico {
+    public void moverArqueroUnaPosicionHaciaDerecha() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(1, 1);
+        Arquero unArquero = new Arquero(casillaArquero);
 
-        Casilla casillaDeLaDerecha = new Casilla(1, 0);
+        Assert.assertEquals(true, casillaArquero.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaArquero);
+        unTablero.moverHasta(unArquero, casillaFinal);
 
-        Arquero unArquero = new Arquero(nuevaCasilla);
-
-        unArquero.moverDerecha();
-
-        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaDeLaDerecha);
+        Assert.assertEquals(false, casillaArquero.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaIzquierda() throws ErrorBasico {
+    public void moverArqueroUnaPosicionHaciaIzquierda() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0,0);
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(1, 1);
+        Arquero unArquero = new Arquero(casillaArquero);
 
-        Casilla casillaDeLaIzquierda = new Casilla(-1, 0);
+        Assert.assertEquals(true, casillaArquero.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaArquero);
+        unTablero.moverHasta(unArquero, casillaFinal);
 
-        Arquero unArquero = new Arquero(nuevaCasilla);
-
-        unArquero.moverIzquierda();
-
-        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaDeLaIzquierda);
+        Assert.assertEquals(false, casillaArquero.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaDerecha() throws ErrorBasico {
+    public void moverArqueroUnaPosicionArribaDerecha() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0 ,0);
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(1, 1);
+        Arquero unArquero = new Arquero(casillaArquero);
 
-        Casilla casillaArribaDerecha = new Casilla(1, 1);
+        Assert.assertEquals(true, casillaArquero.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaArquero);
+        unTablero.moverHasta(unArquero, casillaFinal);
 
-         Arquero unArquero = new Arquero(nuevaCasilla);
-
-        unArquero.moverArribaDerecha();
-
-        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaArribaDerecha);
+        Assert.assertEquals(false, casillaArquero.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaIzquierda() throws ErrorBasico {
+    public void moverArqueroUnaPosicionArribaIzquierda() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(1, 1);
+        Arquero unArquero = new Arquero(casillaArquero);
 
-        Casilla casillaArribaIzquierda = new Casilla(-1, 1);
+        Assert.assertEquals(true, casillaArquero.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaArquero);
+        unTablero.moverHasta(unArquero, casillaFinal);
 
-        Arquero unArquero = new Arquero(nuevaCasilla);
-
-        unArquero.moverArribaIzquierda();
-
-        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaArribaIzquierda);
+        Assert.assertEquals(false, casillaArquero.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoIzquierda() throws ErrorBasico {
+    public void moverArqueroUnaPosicionAbajoIzquierda() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0, 0);
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(1, 1);
+        Arquero unArquero = new Arquero(casillaArquero);
 
-        Casilla casillaAbajoIzquierda = new Casilla(-1, -1);
+        Assert.assertEquals(true, casillaArquero.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaArquero);
+        unTablero.moverHasta(unArquero, casillaFinal);
 
-        Arquero unArquero = new Arquero(nuevaCasilla);
-
-        unArquero.moverAbajoIzquierda();
-
-        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaAbajoIzquierda);
+        Assert.assertEquals(false, casillaArquero.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaFinal);
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoDerecha() throws ErrorBasico {
+    public void moverArqueroUnaPosicionAbajoDerecha() throws ErrorBasico {
+    	Tablero unTablero = new Tablero(3,3);
 
-        Casilla nuevaCasilla = new Casilla(0 ,0);
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(1, 1);
+        Arquero unArquero = new Arquero(casillaArquero);
 
-        Casilla casillaAbajoDerecha = new Casilla(1, -1);
+        Assert.assertEquals(true, casillaArquero.estaOcupada());
+        
+        Casilla casillaFinal = unTablero.casillaArribaDe(casillaArquero);
+        unTablero.moverHasta(unArquero, casillaFinal);
 
-        Arquero unArquero = new Arquero(nuevaCasilla);
-
-        unArquero.moverAbajoDerecha();
-
-        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaAbajoDerecha);
+        Assert.assertEquals(false, casillaArquero.estaOcupada());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertEquals(unArquero.obtenerUbicacion(), casillaFinal);
     }
 
     /*
@@ -135,36 +165,26 @@ public class ArqueroTest {
     @Test
     public void ataqueArqueroADistancia() throws ErrorBasico {
 
-        Casilla miniTablero[][] = new Casilla[4][4];
+    	Tablero unTablero = new Tablero(4,4);
 
-        for(int y = 0; y < 4; y++ ) {
-            for(int x = 0; x < 4; x++ ) {
-                Posicion unaPosicion = new Posicion(x,y);
-                Casilla casilla = new Casilla(unaPosicion);
-
-                miniTablero[x][y] = casilla;
-            }
-        }
-
-        Casilla casillaAldeano = miniTablero[0][0];
+        Casilla casillaAldeano = unTablero.obtenerCasillaEn(0,0);
         Aldeano unAldeano = new Aldeano(casillaAldeano);
 
-        Casilla casillaArquero = miniTablero[0][3];
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(0,3);
         Arquero unArquero = new Arquero(casillaArquero);
 
         //vida del aldeano == 35
-        unArquero.atacar(casillaAldeano);
-        //o tambien usando
+        unArquero.atacar(unAldeano);
         //vida del aldeano == 20
-        unArquero.atacar(unAldeano.obtenerUbicacion());
+        unArquero.atacar(unAldeano);
 
         Assert.assertEquals(false, unAldeano.estaDestruida());
         Assert.assertEquals(true, casillaAldeano.estaOcupada());
 
         //vida del aldeano == 5
-        unArquero.atacar(casillaAldeano);
+        unArquero.atacar(unAldeano);
         //vida del aldeano == 0
-        unArquero.atacar(casillaAldeano);
+        unArquero.atacar(unAldeano);
 
         Assert.assertEquals(false,casillaAldeano.estaOcupada());
         Assert.assertEquals(true,unAldeano.estaDestruida());
@@ -173,38 +193,18 @@ public class ArqueroTest {
     @Test
     public void ataqueArqueroFueraDeRango() throws ErrorBasico {
 
-        Casilla miniTablero[][] = new Casilla[5][5];
+    	Tablero unTablero = new Tablero(5,5);
 
-        for(int y = 0; y < 5; y++ ) {
-            for(int x = 0; x < 5; x++ ) {
-                Posicion unaPosicion = new Posicion(x,y);
-                Casilla casilla = new Casilla(unaPosicion);
-
-                miniTablero[x][y] = casilla;
-            }
-        }
-
-        Casilla casillaAldeano = miniTablero[0][0];
+        Casilla casillaAldeano = unTablero.obtenerCasillaEn(0,0);
         Aldeano unAldeano = new Aldeano(casillaAldeano);
 
-        Casilla casillaArquero = miniTablero[0][4];
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(0,4);
         Arquero unArquero = new Arquero(casillaArquero);
 
         //vida del aldeano == 50
-        /*//tira error
-        assertThrows(ErrorBasico.class,
-                ()->{
-                	unArquero.atacar(casillaAldeano);
-                });*/
-
-        //o tambien usando
-        //vida del aldeano == 50
-        /*//tira error
-        assertThrows(ErrorBasico.class,
-                ()->{
-                	unArquero.atacar(unAldeano.obtenerUbicacion());
-                });*/
-
+        //tira error
+        thrown.expect(ErrorBasico.class);
+        unArquero.atacar(unAldeano);
 
         Assert.assertEquals(true,casillaAldeano.estaOcupada());
         Assert.assertEquals(false, unArquero.estaDestruida());
