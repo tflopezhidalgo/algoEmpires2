@@ -14,13 +14,6 @@ public class ArqueroTest {
      * Test de movimientos de arquero
      */
 
-    @Test
-    public void seCreaUnArquero() throws ErrorBasico {
-
-        Arquero unArquero = new Arquero();
-
-        Assert.assertNotNull(unArquero);
-    }
 
     @Test
     public void moverArqueroUnaPosicionHaciaArriba() throws ErrorBasico{
