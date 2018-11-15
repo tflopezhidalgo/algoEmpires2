@@ -9,14 +9,7 @@ public class EspadachinTest {
 
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
-	
-    @Test
-    public void seCreaEspadachinEnPosicionCentral() throws ErrorBasico {
-        
-        Espadachin unEspadachin = new Espadachin(new Casilla(0, 0));
-        
-        Assert.assertNotNull(unEspadachin);
-    }
+
     
     @Test
     public void moverEspadachinUnaPosicionHaciaArriba() throws ErrorBasico {
