@@ -86,4 +86,59 @@ public class CuartelTest {
     	Assert.assertNull(otroArquero);
         
     }
+	
+	@Test
+    public void cuartelCreaEspadachin() throws ErrorBasico {
+
+    	Tablero unTablero = new Tablero(5,5);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+        Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+
+        Casilla casillaEspadachin = unTablero.obtenerCasillaEn(1,2);
+        Assert.assertEquals(false,casillaEspadachin.estaOcupada());
+        
+        Espadachin nuevoEspadachin = unCuartel.crearEspadachin(casillaEspadachin);
+        Assert.assertEquals(true,casillaEspadachin.estaOcupada());
+        
+        //mover espadachin para arriba
+        unTablero.moverHasta(nuevoEspadachin, unTablero.casillaArribaDe(casillaEspadachin));
+
+        Casilla casillaOtroEspadachin = unTablero.obtenerCasillaEn(1,3);
+        Assert.assertEquals(false,casillaEspadachin.estaOcupada());
+        Assert.assertEquals(true,casillaOtroEspadachin.estaOcupada());
+        
+        //tira error
+        thrown.expect(ErrorBasico.class);                	
+        Espadachin otroEspadachin = unCuartel.crearEspadachin(casillaOtroEspadachin);    
+    	Assert.assertNull(otroEspadachin);
+    }
+    
+    @Test
+    public void cuartelCreaArquero() throws ErrorBasico {
+
+    	Tablero unTablero = new Tablero(5,5);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+        Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+
+        Casilla casillaArquero = unTablero.obtenerCasillaEn(1,2);
+        Assert.assertEquals(false,casillaArquero.estaOcupada());
+        
+        Arquero nuevoArquero = unCuartel.crearArquero(casillaArquero);
+        Assert.assertEquals(true,casillaArquero.estaOcupada());
+        
+        //mover arquero para arriba
+        unTablero.moverHasta(nuevoArquero, unTablero.casillaArribaDe(casillaArquero));
+        
+        Casilla casillaOtroArquero = unTablero.obtenerCasillaEn(1,3);
+        Assert.assertEquals(false,casillaArquero.estaOcupada());
+        Assert.assertEquals(true,casillaOtroArquero.estaOcupada());
+        
+        //tira error
+    	thrown.expect(ErrorBasico.class);
+    	Arquero otroArquero = unCuartel.crearArquero(casillaOtroArquero);
+    	Assert.assertNull(otroArquero);
+        
+    
 }
