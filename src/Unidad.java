@@ -40,9 +40,9 @@ public abstract class Unidad extends Pieza {
 		casillaActual.liberar();
 	}
 	
-	public Posicion obtenerPosicion() {
+	/*public Posicion obtenerPosicion() {
 		return casillaActual.obtenerPosicion();
-	}
+	}*/
 	
 	//TODO eso es necesario para ARMADEASEDIO,ARQUERO,ESPADACHIN y ALDEANO
 	protected void  enRango(Edificio edificioEnemigo, int distanciaMaxima) throws ErrorBasico {
@@ -56,10 +56,12 @@ public abstract class Unidad extends Pieza {
 
 	//TODO eso es necesario para ARQUERO y ESPADACHIN
 	protected void enRango(Unidad unidadEnemiga, int distanciaMaxima) throws ErrorBasico {
-		Posicion posicionA = unidadEnemiga.obtenerPosicion();
-		Posicion posicionB = this.obtenerPosicion();
-		
-		int distancia = posicionA.calcularDistanciaA(posicionB);
+		/*Posicion posicionA = unidadEnemiga.obtenerPosicion();
+		Posicion posicionB = this.obtenerPosicion();*/
+
+		int distancia = unidadEnemiga.obtenerUbicacion().calcularDistanciaA(this.obtenerUbicacion());
+
+		/*int distancia = posicionA.calcularDistanciaA(posicionB);*/
 		if(distancia > distanciaMaxima) {
 			throw new ErrorBasico("ERROR: Objetivo fuera de rango.");
 		}

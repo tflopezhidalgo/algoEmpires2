@@ -16,7 +16,7 @@ public class AldeanoTest {
     @Test
     public void seCreaUnAldeano() throws ErrorBasico {
 
-    	Casilla nuevaCasilla = new Casilla(new Posicion());
+    	Casilla nuevaCasilla = new Casilla(0,0);
 
         Aldeano unAldeano = new Aldeano(nuevaCasilla);
 
@@ -26,9 +26,7 @@ public class AldeanoTest {
     @Test
     public void ColocarAldeano() throws ErrorBasico {
 
-        Posicion nuevaPosicion = new Posicion(1,1);
-
-        Casilla casilla = new Casilla(nuevaPosicion);
+        Casilla casilla = new Casilla(1,1);
 
         Aldeano unAldeano = new Aldeano(casilla);
 

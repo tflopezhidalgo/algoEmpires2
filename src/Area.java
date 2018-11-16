@@ -63,10 +63,10 @@ public class Area {
 	}
 	
 	private int distanciaEntre(Casilla casillaA, Casilla casillaB) {
-		Posicion posicionA = casillaA.obtenerPosicion();
+		/*Posicion posicionA = casillaA.obtenerPosicion();
 		Posicion posicionB = casillaB.obtenerPosicion();
-		
-		int distancia = posicionA.calcularDistanciaA(posicionB);
+		*/
+		int distancia = casillaA.calcularDistanciaA(casillaB);
 		return distancia;
 	}
 	
