@@ -38,7 +38,7 @@ public class Tablero {
 		//TODO definir 4 arear random para los castillos(2) y plazas(2)
 		//TODO definir 6 casillas random para los 6 aldeanos
 	}
-	
+	//no podes hacer pull request desde aca fuck
 	//TODO check casillos fueron destruidos codearlo aca o en juego?
 	
 	public void moverHasta(Unidad unaUnidad, Casilla casillaFinal) throws ErrorBasico {
