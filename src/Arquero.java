@@ -7,15 +7,16 @@ public class Arquero extends Unidad {
      *      Distancia de ataque: 3
      */
 
-	Arquero(Area unArea) throws Excepcion {
-		super(unArea);
+	Arquero(Area unEspacio) throws Excepcion {
+		super(unEspacio);
 		vida = 75;
 		costo = 75;
 	}
 
 	public void atacar(Edificio edificioEnemigo) throws Excepcion {
-		enRango(edificioEnemigo,3);
-		edificioEnemigo.recibirDanio(10);
+		if(enRango(edificioEnemigo,3)) {
+			edificioEnemigo.recibirDanio(10);
+		}
 		
 		if(edificioEnemigo.estaDestruida()) {
 			edificioEnemigo = null;
@@ -23,8 +24,9 @@ public class Arquero extends Unidad {
 	}
 	
 	public void atacar(Unidad unidadEnemiga) throws Excepcion {
-		enRango(unidadEnemiga,3);
-		unidadEnemiga.recibirDanio(15);
+		if(enRango(unidadEnemiga,3)) {
+			unidadEnemiga.recibirDanio(15);
+		}
 			
 		if(unidadEnemiga.estaDestruida()) {
 			unidadEnemiga = null;
