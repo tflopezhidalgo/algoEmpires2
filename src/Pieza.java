@@ -21,7 +21,7 @@ public abstract class Pieza {
 	}
 
 	public void nuevoTurno() {
-		jugoEnTurno = false;
+		turnoJugado = false;
 	}
 	
 	public boolean estaDestruida() {
@@ -39,7 +39,7 @@ public abstract class Pieza {
 	/*          Métodos protected.          */
     //TODO: Sacar estos métodos falopas.
     protected void siYaJugoElTurnoError() throws Excepcion {
-        if(this.jugoEnTurno) {
+        if(turnoJugado) {
 
             throw new Excepcion("ERROR: Turno ya jugado.");
         }
