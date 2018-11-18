@@ -1,12 +1,12 @@
 
 public interface EstadoAldeano {
 
-	public EstadoAldeano reparar(Edificio unEdificio) throws ErrorBasico;
+	public EstadoAldeano reparar(Edificio unEdificio) throws Excepcion;
 	
-	public Plaza crearPlaza(Area areaDeConstruccion) throws ErrorBasico;
+	public Plaza crearPlaza(Area areaDeConstruccion) throws Excepcion;
 	
-	public Cuartel crearCuartel(Area areaDeConstruccion) throws ErrorBasico;
+	public Cuartel crearCuartel(Area areaDeConstruccion) throws Excepcion;
 	
-	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo) throws ErrorBasico;
+	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo) throws Excepcion;
 		
 }
