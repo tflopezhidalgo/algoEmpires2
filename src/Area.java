@@ -3,40 +3,46 @@ import java.util.List;
 public class Area {
 
 	private List<Casilla> casillasDelArea;
+	private int xInicial;
+	private int xFinal;
+	private int yInicial;
+	private int yFinal;
 	
-	Area(List<Casilla> casillas){
-
+	Area(List<Casilla> casillas, int xInicial, int yInicial, int xFinal, int yFinal){
+		this.xInicial = xInicial;
+		this.xFinal = xFinal;
+		this.yInicial = yInicial;
+		this.yFinal = yFinal;
 		casillasDelArea = casillas;
 	}
 	
-	public int obtenerCantidadDeCasillas(){
-
+	public int obtenerTamanio(){
 		return casillasDelArea.size();
 	}
 	
 	public List<Casilla> obtenerCasillas() {
-
-	    return casillasDelArea;
+		return casillasDelArea;
 	}
 	
-	public void liberarCasillas() {
-
+	public void liberar() {
 		for (int i = 0; i < casillasDelArea.size(); i++)
 			casillasDelArea.get(i).liberar();
 	}
 	
-	public void ocuparConPieza(Pieza unaPieza) throws Excepcion {
-
-		for (int i = 0; i < casillasDelArea.size(); i++)
-			casillasDelArea.get(i).colocar(unaPieza);
+	public void ocupar() throws Exception {
+		for (int i = 0; i < casillasDelArea.size(); i++) {
+			casillasDelArea.get(i).ocupar();
+		}
 	}
 	
 	public boolean estaLibre() {
-		
-		for (int i = 0; i < casillasDelArea.size(); i++)
-			if ( casillasDelArea.get(i).estaOcupada() )
+		boolean estaOcupada = false;
+		for (int i = 0; i < casillasDelArea.size(); i++) {
+			estaOcupada = casillasDelArea.get(i).estaOcupada();
+			if (estaOcupada) {
 				return false;
-		
+			}
+		}
 		return true;
 	}
 	
@@ -66,6 +72,23 @@ public class Area {
 	private int distanciaEntre(Casilla casillaA, Casilla casillaB) {
 
 		return casillaA.calcularDistanciaA(casillaB);
+	}
+	
+		//GETTERS CHOTOS
+	public int x0(){
+		return xInicial;
+	}
+	
+	public int y0(){
+		return yInicial;
+	}
+	
+	public int x1(){
+		return xFinal;
+	}
+	
+	public int y1(){
+		return yFinal;
 	}
 	
 }
