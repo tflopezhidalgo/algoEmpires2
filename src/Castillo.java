@@ -4,7 +4,7 @@ public class Castillo extends Edificio {
 	
 	static final int TAMANIO_LADO = 4;
 	
-	Castillo(Area areaAOcupar) throws ErrorBasico {
+	Castillo(Area areaAOcupar) throws Excepcion {
 		vida = 1000;
 		vidaMaxima = vida;
 		costo = 0;
@@ -15,7 +15,7 @@ public class Castillo extends Edificio {
 		areaAOcupar.construir(this);
 	}
 
-	public void atacar(Edificio edificioEnemigo) throws ErrorBasico {
+	public void atacar(Edificio edificioEnemigo) throws Excepcion {
 		enRangoDeAtaque(edificioEnemigo);
 		edificioEnemigo.recibirDanio(20);
 		
@@ -24,7 +24,7 @@ public class Castillo extends Edificio {
 		}
 	}
 	
-	public void atacar(Unidad unidadEnemiga) throws ErrorBasico {
+	public void atacar(Unidad unidadEnemiga) throws Excepcion {
 		enRangoDeAtaque(unidadEnemiga);
 		unidadEnemiga.recibirDanio(20);
 		
@@ -33,27 +33,27 @@ public class Castillo extends Edificio {
 		}
 	}
 	
-	public ArmaDeAsedio crearCatapulta(Casilla ubicacion)  throws ErrorBasico {
+	public ArmaDeAsedio crearCatapulta(Casilla ubicacion)  throws Excepcion {
 		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(ubicacion);
 		return unaArmaDeAsedio;
 	}
 	
 	//-------------PRIVADOS----------
 	
-	private void enRangoDeAtaque(Unidad unidadEnemiga) throws ErrorBasico {
+	private void enRangoDeAtaque(Unidad unidadEnemiga) throws Excepcion {
 		int distancia = areaOcupada().distanciaMinimaA(unidadEnemiga.obtenerUbicacion());
 
 		if(distancia > 3) {
-			throw new ErrorBasico("ERROR: Objetivo fuera de area de ataque.");
+			throw new Excepcion("ERROR: Objetivo fuera de area de ataque.");
 		}
 	}
 	
-	private void enRangoDeAtaque(Edificio edificioEnemigo) throws ErrorBasico {
+	private void enRangoDeAtaque(Edificio edificioEnemigo) throws Excepcion {
 		Area areaEnemiga = edificioEnemigo.areaOcupada();
 		int distanciaMinima = distanciaMinimaA(areaEnemiga);
 
 		if(distanciaMinima > 3) {
-			throw new ErrorBasico("ERROR: Objetivo fuera de area de ataque.");
+			throw new Excepcion("ERROR: Objetivo fuera de area de ataque.");
 		}
 	}
 	
