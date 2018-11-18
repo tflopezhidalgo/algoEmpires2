@@ -6,7 +6,7 @@ public abstract class Edificio extends Pieza {
 	protected int tiempoDeConstruccion;
 	protected int cantidadDeCuracion;
 	
-	public Edificio(Area areaAOcupar){
+	public Edificio(Area areaAOcupar) throws Excepcion {
 		super(areaAOcupar);
 	}
 
