@@ -14,6 +14,7 @@ public class Plaza extends Edificio {
 	}
 	
 	public Plaza(Area areaAOcupar, boolean yaConstruida) throws Excepcion {
+		super(areaAOcupar);
 		vida = 450;
 		vidaMaxima = vida;
 		costo = 100;
@@ -24,9 +25,6 @@ public class Plaza extends Edificio {
 		}
 		
 		cantidadDeCuracion = 25;
-		
-		espacioOcupado = areaAOcupar;
-		areaAOcupar.ocupar();
 	}
 	
 	public Aldeano crearAldeano(Area unEspacio) throws Excepcion {
