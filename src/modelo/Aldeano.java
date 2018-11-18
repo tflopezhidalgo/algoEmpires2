@@ -1,3 +1,5 @@
+package modelo;
+
 public class Aldeano extends Unidad {
 	
 	private Edificio edificioObjetivo;
