@@ -19,7 +19,7 @@ public class ArmaDeAsedio extends Unidad {
 	
 	//distancia de ataque = 5
 
-	public void atacar(Edificio edificioEnemigo) throws ErrorBasico {
+	public void atacar(Edificio edificioEnemigo) throws Excepcion {
 		if(ocupado) {
 			if(enRango(edificioEnemigo,5)) {
 				edificioEnemigo.recibirDanio(75);
