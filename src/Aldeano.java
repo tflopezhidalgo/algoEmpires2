@@ -8,7 +8,6 @@ public class Aldeano extends Unidad {
 
 	private Edificio edificioObjetivo;
 
-
 	Aldeano(Area unEspacio) throws Excepcion{
 		super(unEspacio);
 		edificioObjetivo = null;
@@ -24,7 +23,7 @@ public class Aldeano extends Unidad {
 			ocupado = true;
 			turnoJugado = true;
 			unEdificio.reparar();
-			edificioObjectivo = unEdificio;
+			edificioObjetivo = unEdificio;
 		}
 	}
 	
@@ -53,8 +52,8 @@ public class Aldeano extends Unidad {
 			ocupado = true;
 			turnoJugado = true;
 			Plaza nuevaPlaza = new Plaza(areaDeConstruccion);
-			edificioObjectivo = nuevaPlaza;
-			edificioObjectivo.construir();
+			edificioObjetivo = nuevaPlaza;
+			edificioObjetivo.construir();
 			
 			return nuevaPlaza;
 		}
@@ -70,8 +69,8 @@ public class Aldeano extends Unidad {
 			ocupado = true;
 			turnoJugado = true;
 			Cuartel nuevoCuartel = new Cuartel(areaDeConstruccion);
-			edificioObjectivo = nuevoCuartel;
-			edificioObjectivo.construir();
+			edificioObjetivo = nuevoCuartel;
+			edificioObjetivo.construir();
 
 			return nuevoCuartel;
 		}
