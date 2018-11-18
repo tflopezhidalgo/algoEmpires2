@@ -9,7 +9,7 @@ public class Cuartel extends Edificio {
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 50;
 		
-		casillasOcupadas = areaAOcupar;
+		espacioOcupado = areaAOcupar;
 		areaAOcupar.ocupar();
 	}
 	
