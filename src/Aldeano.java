@@ -32,7 +32,7 @@ public class Aldeano extends Unidad {
 		siYaJugoElTurnoError();
 		
 		if(!ocupado) {
-			jugoEnTurno = true;
+			turnoJugado = true;
 			return 25;
 		}
 		else {
@@ -88,7 +88,7 @@ public class Aldeano extends Unidad {
 			if(edificioObjetivo.enConstruccion() | edificioObjetivo.necesitaReparacion()) {
 				edificioObjetivo.construir();
 				edificioObjetivo.reparar();
-				jugoEnTurno = true;
+				turnoJugado = true;
 				return 0;
 			}
 			else {
