@@ -9,7 +9,7 @@ public abstract class Pieza {
 	protected Area espacioOcupado;
 	protected boolean turnoJugado;
 	
-	public Pieza(Area espacioAOcupar){	
+	public Pieza(Area espacioAOcupar) throws Excepcion {	
 		espacioOcupado = espacioAOcupar;
 		espacioOcupado.ocupar();
 		turnoJugado = false;
