@@ -2,7 +2,7 @@ public class Plaza extends Edificio {
 	
 	static final int TAMANIO_LADO = 2;
 	
-	Plaza(Area areaAOcupar) throws ErrorBasico {
+	Plaza(Area areaAOcupar) throws Excepcion {
 		vida = 450;
 		vidaMaxima = vida;
 		costo = 100;
@@ -13,7 +13,7 @@ public class Plaza extends Edificio {
 		areaAOcupar.construir(this);
 	}
 	
-	Plaza(Area areaAOcupar, boolean yaConstruida) throws ErrorBasico {
+	Plaza(Area areaAOcupar, boolean yaConstruida) throws Excepcion {
 		vida = 450;
 		vidaMaxima = vida;
 		costo = 100;
@@ -29,13 +29,11 @@ public class Plaza extends Edificio {
 		areaAOcupar.construir(this);
 	}
 	
-	public Aldeano crearAldeano(Casilla ubicacion) throws ErrorBasico {
+	public Aldeano crearAldeano(Casilla ubicacion) throws Excepcion {
 		if(ubicacion.estaOcupada()) {
-			throw new ErrorBasico("ERROR: La ubicacion para colocar al aldeano esta ocupada.");
+			throw new Excepcion("ERROR: La ubicacion para colocar al aldeano esta ocupada.");
 		}
 		Aldeano unAldeano = new Aldeano(ubicacion);
 		return unAldeano;
 	}
-
-	
 }
