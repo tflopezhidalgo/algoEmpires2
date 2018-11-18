@@ -55,18 +55,18 @@ public abstract class Pieza {
 	return true;
     }
 
-    protected int distanciaMinimaA(Area area){
-        int minimaDistancia = Integer.MAX_VALUE; // TODO ver si hay una mejor manera de arreglar esto
-        int distanciaNueva;
-        List<Casilla> casillasEnemigas = area.obtenerCasillas();
-        for (int i = 0; i < area.obtenerCantidadDeCasillas(); i++) {
-            Casilla casillaActual = casillasEnemigas.get(i);
+	protected int distanciaMinimaA(Area area){
+		int minimaDistancia = Integer.MAX_VALUE; // TODO ver si hay una mejor manera de arreglar esto
+		int distanciaNueva;
+		List<Casilla> casillasEnemigas = area.obtenerCasillas();
+		for (int i = 0; i < area.obtenerTamanio(); i++) {
+			Casilla casillaActual = casillasEnemigas.get(i);
 
-            distanciaNueva = obtenerAreaOcupada().distanciaMinimaA(casillaActual);
-            if(distanciaNueva < minimaDistancia) {
-                minimaDistancia = distanciaNueva;
-            }
-        }
-        return minimaDistancia;
-    }
+			distanciaNueva = espacioOcupado().distanciaMinimaA(casillaActual);
+			if(distanciaNueva < minimaDistancia) {
+				minimaDistancia = distanciaNueva;
+			}
+		}
+		return minimaDistancia;
+	}
 }
