@@ -6,22 +6,41 @@ import java.util.Map;
 public class Tablero {
 
 	private Map<String, Casilla> casillasDelTablero;
+	private int alto;
+	private int ancho;
 	
 	public Tablero(int ancho, int alto){
+		this.alto = alto;
+		this.ancho = ancho;
+		
         casillasDelTablero = new HashMap<String, Casilla>();
 		
 		for(int y=0;y<alto;y++){
 			for(int x=0;x<ancho;x++){
-				/*Posicion nuevaPosicion = new Posicion(x,y);*/
 				Casilla nuevaCasilla = new Casilla(x,y);
-				/*casillasDelTablero.put(nuevaPosicion.aString(),nuevaCasilla);*/
 				casillasDelTablero.put(nuevaCasilla.aString(),nuevaCasilla);
 			}
 		}
-		colocarPiezasIniciales();
+		//TODO no ejecutar esto si permito este constructor?
+		//colocarPiezasIniciales();
 	}
 	
-	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) {
+	//Default es 16x16 TODO permitir el otro constructor?
+	public Tablero() throws ErrorBasico{
+		this.alto = 16;
+		this.ancho = 16;
+		
+        casillasDelTablero = new HashMap<String, Casilla>();
+		
+		for(int y=0;y<alto;y++){
+			for(int x=0;x<ancho;x++){
+				Casilla nuevaCasilla = new Casilla(x,y);
+				casillasDelTablero.put(nuevaCasilla.aString(),nuevaCasilla);
+			}
+		}
+	}
+	
+	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws ErrorBasico {
         List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
         
         for(int y = yInicial; y <= yFinal; y++) {
@@ -29,27 +48,62 @@ public class Tablero {
                 casillasParaConstruccion.add(obtenerCasillaEn(x, y));
             }
         }
-        Area zonaDeConstruccion = new Area(casillasParaConstruccion);
+
+        Area zonaDeConstruccion = new Area(casillasParaConstruccion, xInicial, yInicial, xFinal, yFinal);
         return zonaDeConstruccion;
 	}
 	
 	//TODO esto hacerlo aca o en Juego y que llame al metodo "colocar" inidcando las areas y casillas deseadas??
-	private void colocarPiezasIniciales(){
+	public List<Pieza> generarPiezasInicialesEquipo1() throws ErrorBasico{
+		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
+		//Castillo 1
+		int x = (int) (Math.random() * 1);
+		int y = (int) (Math.random() * 6);
+		
+		Area areaCastillo1 = definirArea(x, y, x+Castillo.TAMANIO_LADO-1, y+Castillo.TAMANIO_LADO-1);
+		Castillo castillo1 = new Castillo(areaCastillo1);
+		//-------------------
+		piezasNuevas.add(castillo1);
+		//Plaza 1
+		x = (int) (Math.random() * 1) + 5;
+		y = (int) (Math.random() * 6);
+		
+		Area areaPlaza1 = definirArea(x, y, x+Plaza.TAMANIO_LADO-1, y+Plaza.TAMANIO_LADO-1);
+		Plaza plaza1 = new Plaza(areaPlaza1);
+		//-------------------
+		piezasNuevas.add(plaza1);
+		return piezasNuevas;
+		
 		//TODO definir 4 arear random para los castillos(2) y plazas(2)
 		//TODO definir 6 casillas random para los 6 aldeanos
 	}
-
-	//TODO check casillos fueron destruidos codearlo aca o en juego?
 	
-	public void moverHasta(Unidad unaUnidad, Casilla casillaFinal) throws Excepcion {
-		if(!casillaFinal.estaOcupada()) {
-			/*int distancia = unaUnidad.obtenerPosicion().calcularDistanciaA(casillaFinal.obtenerPosicion());*/
-			int distancia = unaUnidad.obtenerUbicacion().calcularDistanciaA(casillaFinal);
-			if(distancia <= 1) {
-				unaUnidad.mover(casillaFinal);
-			}
-		}
+	//TODO esto hacerlo aca o en Juego y que llame al metodo "colocar" inidcando las areas y casillas deseadas??
+	public List<Pieza> generarPiezasInicialesEquipo2() throws ErrorBasico{
+		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
+		//Castillo 2
+		int x = (int) (Math.random() * 1) + 11;
+		int y = (int) (Math.random() * 6) + 6;
+		
+		Area areaCastillo2 = definirArea(x, y, x+Castillo.TAMANIO_LADO-1, y+Castillo.TAMANIO_LADO-1);
+		Castillo castillo2 = new Castillo(areaCastillo2);
+		//-------------------
+		piezasNuevas.add(castillo2);
+		//Plaza 2
+		x = (int) (Math.random() * 1) + 8;
+		y = (int) (Math.random() * 6) + 6;
+		
+		Area areaPlaza2 = definirArea(x, y, x+Plaza.TAMANIO_LADO-1, y+Plaza.TAMANIO_LADO-1);
+		Plaza plaza2 = new Plaza(areaPlaza2);
+		//-------------------
+		piezasNuevas.add(plaza2);
+		return piezasNuevas;
+
+		//TODO definir 4 arear random para los castillos(2) y plazas(2)
+		//TODO definir 6 casillas random para los 6 aldeanos
 	}
+	
+	//TODO check casillos fueron destruidos codearlo aca o en juego?
 	
 	public void ataqueDesdeHasta(Casilla casillaInicial, Casilla casillaFinal) {
 		//TODO casilla inicial es un edificio o unidad?
@@ -65,124 +119,150 @@ public class Tablero {
 	}
 	
 	//TODO verificar q estamos de acuerdo en tener esta funcion
-	/*public Casilla obtenerCasillaEn(Posicion unaPosicion) {
-		return casillasDelTablero.get(unaPosicion.aString());
-	}*/
-	
-	//TODO verificar q estamos de acuerdo en tener esta funcion
-	public Casilla obtenerCasillaEn(int x, int y) {
-		String posicion = Integer.toString(x) + "I" + Integer.toString(y);
+	public Casilla obtenerCasillaEn(int x, int y) throws ErrorBasico {
+		casillaNoExisteError(x, y);
+		String posicion = Casilla.aString(x, y);
 		return casillasDelTablero.get(posicion);
 	}
 	
-	//---------------PROTOTIPO---------------
+	private void casillaNoExisteError(int x, int y) throws ErrorBasico {
+		if(x > ancho-1 | x < 0 | y < 0 | y > alto-1) {
+			throw new ErrorBasico("ERROR: Casilla no existe.");
+		}
+	}
+	
+	//---------------PROTOTIPO  V2---------------
 	//TODO FIX THIS -  YA SE QUE ESTA HORRIBLE TOM, ESPERA UN TOQUE (?
 	//ESTAS 8 FUNCIONES CAPAS NI VAN
-	public Casilla casillaArribaDe(Casilla casillaActual) {
-		/*Posicion posicionActual = casillaActual.obtenerPosicion();
-		String unaPosicion = Posicion.aString(posicionActual.ejeX(), posicionActual.ejeY() + 1);
-		Casilla casillaArriba = casillasDelTablero.get(unaPosicion);
-		return casillaArriba;*/
+	
+	public void moverArriba(Unidad unaUnidad) throws ErrorBasico {
+		Area espacioAnterior = unaUnidad.espacioOcupado();
+		espacioAnterior.liberar();
+		Area nuevoEspacio = this.definirArea(espacioAnterior.x0(), espacioAnterior.y0()+1, espacioAnterior.x1(), espacioAnterior.y1()+1);
 
-		String unaPosicion = casillaActual.aString(casillaActual.obtenerFila(), casillaActual.obtenerColumna()+1);
-		Casilla casillaArriba = casillasDelTablero.get(unaPosicion);
-
-		return casillaArriba;
+		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
+			unaUnidad.mover(nuevoEspacio);
+		}
+		else {
+			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
+			espacioAnterior.ocupar();
+		}
 	}
 	
-	public Casilla casillaAbajoDe(Casilla casillaActual) {
-		/*Posicion posicionActual = casillaActual.obtenerPosicion();
-		String unaPosicion = Posicion.aString(posicionActual.ejeX(), posicionActual.ejeY() - 1);
-		Casilla casillaAbajo = casillasDelTablero.get(unaPosicion);
-		return casillaAbajo;*/
+	public void moverAbajo(Unidad unaUnidad) throws ErrorBasico {
+		Area espacioAnterior = unaUnidad.espacioOcupado();
+		espacioAnterior.liberar();
+		Area nuevoEspacio = this.definirArea(espacioAnterior.x0(), espacioAnterior.y0()-1, espacioAnterior.x1(), espacioAnterior.y1()-1);
 
-		String unaPosicion = casillaActual.aString(casillaActual.obtenerFila(), casillaActual.obtenerColumna()-1);
-		Casilla casillaAbajo = casillasDelTablero.get(unaPosicion);
-
-		return casillaAbajo;
-
+		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
+			unaUnidad.mover(nuevoEspacio);
+		}
+		else {
+			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
+			espacioAnterior.ocupar();
+		}
 	}
 	
-	public Casilla casillaIzquierdaDe(Casilla casillaActual) {
-		/*Posicion posicionActual = casillaActual.obtenerPosicion();
-		String unaPosicion = Posicion.aString(posicionActual.ejeX() - 1, posicionActual.ejeY());
-		Casilla casillaIzquierda = casillasDelTablero.get(unaPosicion);
-		return casillaIzquierda;*/
+	public void moverIzquierda(Unidad unaUnidad) throws ErrorBasico {
+		Area espacioAnterior = unaUnidad.espacioOcupado();
+		espacioAnterior.liberar();
+		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()-1, espacioAnterior.y0(), espacioAnterior.x1()-1, espacioAnterior.y1());
 
-		String unaPosicion = casillaActual.aString(casillaActual.obtenerFila()-1, casillaActual.obtenerColumna());
-		Casilla casillaIzquierda = casillasDelTablero.get(unaPosicion);
+		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
+			unaUnidad.mover(nuevoEspacio);
+		}
+		else {
+			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
+			espacioAnterior.ocupar();
+		}
+	}
+		
+	public void moverDerecha(Unidad unaUnidad) throws ErrorBasico {
+		Area espacioAnterior = unaUnidad.espacioOcupado();
+		espacioAnterior.liberar();
+		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+1, espacioAnterior.y0(), espacioAnterior.x1()+1, espacioAnterior.y1());
 
-		return casillaIzquierda;
+		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
+			unaUnidad.mover(nuevoEspacio);
+		}
+		else {
+			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
+			espacioAnterior.ocupar();
+		}
 	}
 	
-	public Casilla casillaDerechaDe(Casilla casillaActual) {
-		/*Posicion posicionActual = casillaActual.obtenerPosicion();
-		String unaPosicion = Posicion.aString(posicionActual.ejeX() + 1, posicionActual.ejeY());
-		Casilla casillaDerecha = casillasDelTablero.get(unaPosicion);
-		return casillaDerecha;*/
+	public void moverArribaDerecha(Unidad unaUnidad) throws ErrorBasico {
+		Area espacioAnterior = unaUnidad.espacioOcupado();
+		espacioAnterior.liberar();
+		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+1, espacioAnterior.y0()+1, espacioAnterior.x1()+1, espacioAnterior.y1()+1);
 
-		String unaPosicion = casillaActual.aString(casillaActual.obtenerFila()+1, casillaActual.obtenerColumna());
-		Casilla casillaDerecha = casillasDelTablero.get(unaPosicion);
-
-		return casillaDerecha;
-
+		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
+			unaUnidad.mover(nuevoEspacio);
+		}
+		else {
+			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
+			espacioAnterior.ocupar();
+		}
 	}
 	
-	//---- diagonales
-	
-	public Casilla casillaArribaIzquierdaDe(Casilla casillaActual) {
-		/*Posicion posicionActual = casillaActual.obtenerPosicion();
-		String unaPosicion = Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY() + 1);
-		Casilla casillaArribaIzquiera = casillasDelTablero.get(unaPosicion);
-		return casillaArribaIzquiera;*/
+	public void moverAbajoDerecha(Unidad unaUnidad) throws ErrorBasico {
+		Area espacioAnterior = unaUnidad.espacioOcupado();
+		espacioAnterior.liberar();
+		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+1, espacioAnterior.y0()-1, espacioAnterior.x1()+1, espacioAnterior.y1()-1);
 
-		String unaPosicion = casillaActual.aString(casillaActual.obtenerFila()-1, casillaActual.obtenerColumna()+1);
-		Casilla casillaArribaIzquierda = casillasDelTablero.get(unaPosicion);
-
-		return casillaArribaIzquierda;
-
+		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
+			unaUnidad.mover(nuevoEspacio);
+		}
+		else {
+			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
+			espacioAnterior.ocupar();
+		}
 	}
 	
-	public Casilla casillaArribaDerechaDe(Casilla casillaActual) {
-		/*Posicion posicionActual = casillaActual.obtenerPosicion();
-		String unaPosicion = Posicion.aString(posicionActual.ejeX()+1, posicionActual.ejeY() + 1);
-		Casilla casillaArribaDerecha = casillasDelTablero.get(unaPosicion);
-		return casillaArribaDerecha;*/
+	public void moverArribaIzquierda(Unidad unaUnidad) throws ErrorBasico {
+		Area espacioAnterior = unaUnidad.espacioOcupado();
+		espacioAnterior.liberar();
+		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()-1, espacioAnterior.y0()+1, espacioAnterior.x1()-1, espacioAnterior.y1()+1);
 
-		String unaPosicion = casillaActual.aString(casillaActual.obtenerFila()+1, casillaActual.obtenerColumna()+1);
-		Casilla casillaArribaDerecha = casillasDelTablero.get(unaPosicion);
-
-		return casillaArribaDerecha;
-
+		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
+			unaUnidad.mover(nuevoEspacio);
+		}
+		else {
+			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
+			espacioAnterior.ocupar();
+		}
 	}
 	
-	public Casilla casillaAbajoIzquierdaDe(Casilla casillaActual) {
-		/*Posicion posicionActual = casillaActual.obtenerPosicion();
-		String unaPosicion = Posicion.aString(posicionActual.ejeX()-1, posicionActual.ejeY()-1);
-		Casilla casillaAbajoIzquierda = casillasDelTablero.get(unaPosicion);
-		return casillaAbajoIzquierda;*/
+	public void moverAbajoIzquierda(Unidad unaUnidad) throws ErrorBasico {
+		Area espacioAnterior = unaUnidad.espacioOcupado();
+		espacioAnterior.liberar();
+		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()-1, espacioAnterior.y0()-1, espacioAnterior.x1()-1, espacioAnterior.y1()-1);
 
-		String unaPosicion = casillaActual.aString(casillaActual.obtenerFila()-1, casillaActual.obtenerColumna()-1);
-		Casilla casillaAbajoIzquierda = casillasDelTablero.get(unaPosicion);
-
-		return casillaAbajoIzquierda;
-
+		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
+			unaUnidad.mover(nuevoEspacio);
+		}
+		else {
+			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
+			espacioAnterior.ocupar();
+		}
 	}
 	
-	public Casilla casillaAbajoDerechaDe(Casilla casillaActual) {
-		/*Posicion posicionActual = casillaActual.obtenerPosicion();
-		String unaPosicion = Posicion.aString(posicionActual.ejeX() + 1, posicionActual.ejeY() - 1);
-		Casilla casillaAbajoDerecha = casillasDelTablero.get(unaPosicion);
-		return casillaAbajoDerecha;*/
+	//--------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------------------
 
-		String unaPosicion = casillaActual.aString(casillaActual.obtenerFila()+1, casillaActual.obtenerColumna()-1);
-		Casilla casillaAbajoDerecha = casillasDelTablero.get(unaPosicion);
-
-		return casillaAbajoDerecha;
+    //TODO ELIMINAR
+	public void printMapa() throws ErrorBasico {
+		for(int y = 0;y<alto;y++) {
+			for(int x = 0;x<ancho;x++) {
+				if(this.obtenerCasillaEn(x, y).estaOcupada()) {
+					System.out.print("X");
+				}
+				else {
+					System.out.print("-");
+				}
+			}
+			System.out.println("");
+		}
 	}
-	
-	//--------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------
-
 }
