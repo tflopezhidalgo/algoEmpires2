@@ -1,19 +1,30 @@
 public abstract class Unidad extends Pieza {
 
-    protected boolean ocupado;  //TODO: A futuro cambiar por patrón state.
+	protected boolean ocupado;
+	
+	public Unidad(Area unEspacio) throws Exception  {
+		espacioOcupado = unEspacio;
+		espacioOcupado.ocupar();
+		turnoJugado = false;
+		ocupado = false;
+	}
+	
+	public boolean estaOcupado() {
+		return ocupado;
+	}
 
-    //TODO: ¿No se supone que Unidad nunca puede ser instanciable porque es abstracta?
-    public Unidad(Area unArea) throws Excepcion {
-        super(unArea);
-        ocupado = false;
-    }
-
-    //TODO: REPITO: Sacar estos métodos falopas.
-    protected void siEstaOcupadoDaError() throws Excepcion {
-        if(ocupado)
-
-            throw new Excepcion("ERROR: La unidad esta ocupada.");
-    }
-
+	public void mover(Area nuevoEspacio) throws Exception {
+        if (!ocupado & nuevoEspacio.estaLibre()) {
+            espacioOcupado.liberar();
+            espacioOcupado = nuevoEspacio;
+            espacioOcupado.ocupar();
+        }
+	}
+	
+	protected void siEstaOcupadoDaError() throws Exception {
+		if(ocupado) {
+			throw new Exception("ERROR: Pieza ocupada");
+		}
+	}
 
 }
