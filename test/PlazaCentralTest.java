@@ -1,8 +1,6 @@
 import junit.framework.Assert;
+import modelo.*;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class PlazaCentralTest {
@@ -28,7 +26,7 @@ public class PlazaCentralTest {
     }
 
     @Test
-    public void PlazaCentralCreaAldeano() throws Excepcion{
+    public void PlazaCentralCreaAldeano() throws Excepcion {
         Tablero unTablero = new Tablero(5,5);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);

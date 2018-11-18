@@ -1,3 +1,5 @@
+package modelo;
+
 public class Excepcion extends Exception{
 
 	String message;

@@ -1,3 +1,5 @@
+package modelo;
+
 public class ArmaDeAsedio extends Unidad {
 
     /*     -Arma de asedio-
@@ -7,7 +9,7 @@ public class ArmaDeAsedio extends Unidad {
      *      Distancia de ataque: 5
      */
 
-	ArmaDeAsedio(Area unEspacio) throws Excepcion {
+	public ArmaDeAsedio(Area unEspacio) throws Excepcion {
 		super(unEspacio);
 		vida = 150;
 		costo = 200;

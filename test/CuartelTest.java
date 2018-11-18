@@ -1,5 +1,6 @@
 import junit.framework.Assert;
 
+import modelo.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -54,8 +55,8 @@ public class CuartelTest {
         Assert.assertEquals(true,casillaArriba.estaOcupada());
         
         //tira error
-        //thrown.expect(Excepcion.class);                	
-        //Espadachin otroEspadachin = unCuartel.crearEspadachin(casillaOtroEspadachin);    
+        //thrown.expect(modelo.Excepcion.class);
+        //modelo.Espadachin otroEspadachin = unCuartel.crearEspadachin(casillaOtroEspadachin);
         //Assert.assertNull(otroEspadachin);
     }
     
@@ -81,8 +82,8 @@ public class CuartelTest {
         Assert.assertEquals(true,casillaOtroArquero.estaOcupada());
         
         //tira error
-    	//thrown.expect(Excepcion.class);
-    	//Arquero otroArquero = unCuartel.crearArquero(casillaOtroArquero);
+    	//thrown.expect(modelo.Excepcion.class);
+    	//modelo.Arquero otroArquero = unCuartel.crearArquero(casillaOtroArquero);
     	//Assert.assertNull(otroArquero);
         
     }

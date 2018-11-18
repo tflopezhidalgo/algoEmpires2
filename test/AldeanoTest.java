@@ -1,4 +1,5 @@
 import junit.framework.Assert;
+import modelo.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -9,7 +10,7 @@ public class AldeanoTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
     /*
-     *  Test de movimiento de Aldeano
+     *  Test de movimiento de modelo.Aldeano
      */
     @Test
     public void seCreaUnAldeano() throws Excepcion {
@@ -152,7 +153,7 @@ public class AldeanoTest {
     }
 
     /*
-     *  Test de construccion de Aldeano
+     *  Test de construccion de modelo.Aldeano
      */
     
     @Test
@@ -178,7 +179,7 @@ public class AldeanoTest {
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
                     //tira error
-                	//thrown.expect(Excepcion.class);
+                	//thrown.expect(modelo.Excepcion.class);
                 	//unAldeano.realizarTrabajoDeTurno();
                 }
                     break;
@@ -248,7 +249,7 @@ public class AldeanoTest {
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
                     //tira error
-                	//thrown.expect(Excepcion.class);
+                	//thrown.expect(modelo.Excepcion.class);
                     //unAldeano.realizarTrabajoDeTurno();
                 }
                     break;
@@ -438,20 +439,20 @@ public class AldeanoTest {
     
     //TODO falta arreglar esta --- lo comento para que para el build
 /*    @Test
-    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws Excepcion{
+    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws modelo.Excepcion{
         int turno=0;
         int oro=0;
 
-        Tablero unTablero = new Tablero(5,5);
+        modelo.Tablero unTablero = new modelo.Tablero(5,5);
 
-    	Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+    	modelo.Area espacioAldeano = unTablero.definirArea(0,0,0,0);
+        modelo.Aldeano unAldeano = new modelo.Aldeano(espacioAldeano);
         
-    	Area espacioOtroAldeano = unTablero.definirArea(3,3,3,3);
-        Aldeano otroAldeano = new Aldeano(espacioOtroAldeano);
+    	modelo.Area espacioOtroAldeano = unTablero.definirArea(3,3,3,3);
+        modelo.Aldeano otroAldeano = new modelo.Aldeano(espacioOtroAldeano);
         
-        Area zonaDeConstruccion = unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO);
-        Cuartel unCuartel = new Cuartel(zonaDeConstruccion,true);
+        modelo.Area zonaDeConstruccion = unTablero.definirArea(1, 1, modelo.Cuartel.TAMANIO_LADO, modelo.Cuartel.TAMANIO_LADO);
+        modelo.Cuartel unCuartel = new modelo.Cuartel(zonaDeConstruccion,true);
 
         unCuartel.recibirDanio(100);
         

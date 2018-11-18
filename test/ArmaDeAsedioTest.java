@@ -1,5 +1,6 @@
 import junit.framework.Assert;
 
+import modelo.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -42,7 +43,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(Excepcion.class);
+    	//thrown.expect(modelo.Excepcion.class);
         //unTablero.moverArriba(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -66,7 +67,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(Excepcion.class);
+    	//thrown.expect(modelo.Excepcion.class);
         //unTablero.moverAbajo(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -90,7 +91,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(Excepcion.class);
+    	//thrown.expect(modelo.Excepcion.class);
         //unTablero.moverDerecha(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -114,7 +115,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(Excepcion.class);
+    	//thrown.expect(modelo.Excepcion.class);
         //unTablero.moverIzquierda(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -138,7 +139,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(Excepcion.class);
+    	//thrown.expect(modelo.Excepcion.class);
         //unTablero.moverArribaDerecha(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -162,7 +163,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(Excepcion.class);
+    	//thrown.expect(modelo.Excepcion.class);
         //unTablero.moverArribaIzquierda(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -186,7 +187,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(Excepcion.class);
+    	//thrown.expect(modelo.Excepcion.class);
         //unTablero.moverAbajoIzquierda(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -210,7 +211,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(Excepcion.class);
+    	//thrown.expect(modelo.Excepcion.class);
         //unTablero.moverAbajoDerecha(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());

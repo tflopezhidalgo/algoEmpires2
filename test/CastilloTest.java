@@ -1,4 +1,5 @@
 import junit.framework.Assert;
+import modelo.*;
 import org.junit.Test;
 
 @SuppressWarnings("deprecation")
