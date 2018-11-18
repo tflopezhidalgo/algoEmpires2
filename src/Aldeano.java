@@ -9,8 +9,8 @@ public class Aldeano extends Unidad {
 	private Edificio edificioObjetivo;
 
 
-	Aldeano(Area unArea) throws Excepcion{
-		super(unArea);
+	Aldeano(Area unEspacio) throws Excepcion{
+		super(unEspacio);
 		edificioObjetivo = null;
 		vida = 50;
 		costo = 25;
@@ -19,13 +19,12 @@ public class Aldeano extends Unidad {
 	public void reparar(Edificio unEdificio) throws Excepcion {
 		siEstaOcupadoDaError();
 		siYaJugoElTurnoError();
-		enRango(unEdificio,1);
 		
-		if(unEdificio.necesitaReparacion()) {
+		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
 			ocupado = true;
-			jugoEnTurno = true;
+			turnoJugado = true;
 			unEdificio.reparar();
-			edificioObjetivo = unEdificio;
+			edificioObjectivo = unEdificio;
 		}
 	}
 	
@@ -46,42 +45,37 @@ public class Aldeano extends Unidad {
 	}
 	
 	public Plaza crearPlaza(Area areaDeConstruccion) throws Excepcion {
-		siEstaOcupadoDaError();
 		siYaJugoElTurnoError();
 		
 		//TODO no lo puedo declarar 1 vez por turno tengo  que 
 		//guardarlo en algun lado y seguir el trabajo despues
-		if(areaDeConstruccion.estaLibre()) {
+		if(!ocupado & areaDeConstruccion.estaLibre() & distanciaMinimaA(areaDeConstruccion) == 1) {
 			ocupado = true;
-			jugoEnTurno = true;
+			turnoJugado = true;
 			Plaza nuevaPlaza = new Plaza(areaDeConstruccion);
-			edificioObjetivo = nuevaPlaza;
-			edificioObjetivo.construir();
+			edificioObjectivo = nuevaPlaza;
+			edificioObjectivo.construir();
+			
 			return nuevaPlaza;
 		}
-		else {
-			throw new Excepcion("ERROR: Zona de construccion ocupada.");
-		}
+		return null;
 	}
 	
 	public Cuartel crearCuartel(Area areaDeConstruccion) throws Excepcion {
-		siEstaOcupadoDaError();
 		siYaJugoElTurnoError();
 		
 		//TODO no lo puedo declarar 1 vez por turno tengo  que 
 		//guardarlo en algun lado y seguir el trabajo despues
-		if(areaDeConstruccion.estaLibre()) {
+		if(!ocupado & areaDeConstruccion.estaLibre() & distanciaMinimaA(areaDeConstruccion) == 1) {
 			ocupado = true;
-			jugoEnTurno = true;
+			turnoJugado = true;
 			Cuartel nuevoCuartel = new Cuartel(areaDeConstruccion);
-			edificioObjetivo = nuevoCuartel;
-			edificioObjetivo.construir();
+			edificioObjectivo = nuevoCuartel;
+			edificioObjectivo.construir();
 
 			return nuevoCuartel;
 		}
-		else {
-			throw new Excepcion("ERROR: Zona de construccion ocupada.");
-		}
+		return null;
 	}
 
 	public int realizarTrabajoDeTurno() throws Excepcion {
