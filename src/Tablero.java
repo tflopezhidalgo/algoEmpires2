@@ -26,7 +26,7 @@ public class Tablero {
 	}
 	
 	//Default es 16x16 TODO permitir el otro constructor?
-	public Tablero() throws ErrorBasico{
+	public Tablero() throws Excepcion{
 		this.alto = 16;
 		this.ancho = 16;
 		
@@ -40,7 +40,7 @@ public class Tablero {
 		}
 	}
 	
-	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws ErrorBasico {
+	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws Excepcion {
         List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
         
         for(int y = yInicial; y <= yFinal; y++) {
@@ -54,7 +54,7 @@ public class Tablero {
 	}
 	
 	//TODO esto hacerlo aca o en Juego y que llame al metodo "colocar" inidcando las areas y casillas deseadas??
-	public List<Pieza> generarPiezasInicialesEquipo1() throws ErrorBasico{
+	public List<Pieza> generarPiezasInicialesEquipo1() throws Excepcion{
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 		//Castillo 1
 		int x = (int) (Math.random() * 1);
@@ -79,7 +79,7 @@ public class Tablero {
 	}
 	
 	//TODO esto hacerlo aca o en Juego y que llame al metodo "colocar" inidcando las areas y casillas deseadas??
-	public List<Pieza> generarPiezasInicialesEquipo2() throws ErrorBasico{
+	public List<Pieza> generarPiezasInicialesEquipo2() throws Excepcion{
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 		//Castillo 2
 		int x = (int) (Math.random() * 1) + 11;
@@ -119,15 +119,15 @@ public class Tablero {
 	}
 	
 	//TODO verificar q estamos de acuerdo en tener esta funcion
-	public Casilla obtenerCasillaEn(int x, int y) throws ErrorBasico {
+	public Casilla obtenerCasillaEn(int x, int y) throws Excepcion {
 		casillaNoExisteError(x, y);
 		String posicion = Casilla.aString(x, y);
 		return casillasDelTablero.get(posicion);
 	}
 	
-	private void casillaNoExisteError(int x, int y) throws ErrorBasico {
+	private void casillaNoExisteError(int x, int y) throws Excepcion {
 		if(x > ancho-1 | x < 0 | y < 0 | y > alto-1) {
-			throw new ErrorBasico("ERROR: Casilla no existe.");
+			throw new Excepcion("ERROR: Casilla no existe.");
 		}
 	}
 	
@@ -135,7 +135,7 @@ public class Tablero {
 	//TODO FIX THIS -  YA SE QUE ESTA HORRIBLE TOM, ESPERA UN TOQUE (?
 	//ESTAS 8 FUNCIONES CAPAS NI VAN
 	
-	public void moverArriba(Unidad unaUnidad) throws ErrorBasico {
+	public void moverArriba(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0(), espacioAnterior.y0()+1, espacioAnterior.x1(), espacioAnterior.y1()+1);
@@ -149,7 +149,7 @@ public class Tablero {
 		}
 	}
 	
-	public void moverAbajo(Unidad unaUnidad) throws ErrorBasico {
+	public void moverAbajo(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0(), espacioAnterior.y0()-1, espacioAnterior.x1(), espacioAnterior.y1()-1);
@@ -163,7 +163,7 @@ public class Tablero {
 		}
 	}
 	
-	public void moverIzquierda(Unidad unaUnidad) throws ErrorBasico {
+	public void moverIzquierda(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()-1, espacioAnterior.y0(), espacioAnterior.x1()-1, espacioAnterior.y1());
@@ -177,7 +177,7 @@ public class Tablero {
 		}
 	}
 		
-	public void moverDerecha(Unidad unaUnidad) throws ErrorBasico {
+	public void moverDerecha(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+1, espacioAnterior.y0(), espacioAnterior.x1()+1, espacioAnterior.y1());
@@ -191,7 +191,7 @@ public class Tablero {
 		}
 	}
 	
-	public void moverArribaDerecha(Unidad unaUnidad) throws ErrorBasico {
+	public void moverArribaDerecha(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+1, espacioAnterior.y0()+1, espacioAnterior.x1()+1, espacioAnterior.y1()+1);
@@ -205,7 +205,7 @@ public class Tablero {
 		}
 	}
 	
-	public void moverAbajoDerecha(Unidad unaUnidad) throws ErrorBasico {
+	public void moverAbajoDerecha(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+1, espacioAnterior.y0()-1, espacioAnterior.x1()+1, espacioAnterior.y1()-1);
@@ -219,7 +219,7 @@ public class Tablero {
 		}
 	}
 	
-	public void moverArribaIzquierda(Unidad unaUnidad) throws ErrorBasico {
+	public void moverArribaIzquierda(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()-1, espacioAnterior.y0()+1, espacioAnterior.x1()-1, espacioAnterior.y1()+1);
@@ -233,7 +233,7 @@ public class Tablero {
 		}
 	}
 	
-	public void moverAbajoIzquierda(Unidad unaUnidad) throws ErrorBasico {
+	public void moverAbajoIzquierda(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()-1, espacioAnterior.y0()-1, espacioAnterior.x1()-1, espacioAnterior.y1()-1);
@@ -252,7 +252,7 @@ public class Tablero {
 	//--------------------------------------------------------------------------------------------------------------
 
     //TODO ELIMINAR
-	public void printMapa() throws ErrorBasico {
+	public void printMapa() throws Excepcion {
 		for(int y = 0;y<alto;y++) {
 			for(int x = 0;x<ancho;x++) {
 				if(this.obtenerCasillaEn(x, y).estaOcupada()) {
