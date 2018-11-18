@@ -8,7 +8,7 @@ import java.util.List;
 public class PlazaCentralTest {
 
     @Test
-    public void ColocarPlaza() throws ErrorBasico { 
+    public void ColocarPlaza() throws Excepcion { 
     	Tablero unTablero = new Tablero(5,5);
 
         //voy a ocupar a partir de la (2,2)
@@ -18,8 +18,7 @@ public class PlazaCentralTest {
 
         Plaza unaPlaza = new Plaza(zonaDeConstruccion);
         Assert.assertEquals(false, zonaDeConstruccion.estaLibre());
-        Assert.assertEquals(false, unaPlaza.areaOcupada().estaLibre());
-        Assert.assertEquals(zonaDeConstruccion, unaPlaza.areaOcupada());
+        Assert.assertEquals(false, unaPlaza.espacioOcupado().estaLibre());
 
         //Las casillas adyacentes deberian estar libres
         Assert.assertEquals(false, unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -29,22 +28,19 @@ public class PlazaCentralTest {
     }
 
     @Test
-    public void PlazaCentralCreaAldeano() throws ErrorBasico{
-
+    public void PlazaCentralCreaAldeano() throws Excepcion{
         Tablero unTablero = new Tablero(5,5);
 
-        Casilla unaCasilla = unTablero.obtenerCasillaEn(0,0);
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
 
-        List<Casilla> unasCasillas = new ArrayList<Casilla>();
-
-        for(int y = 0; y < Plaza.TAMANIO_LADO; y++) {
-            for(int x = 0; x < Plaza.TAMANIO_LADO; x++) {
-                unasCasillas.add(unTablero.obtenerCasillaEn(1+x, 1+y));
-            }
-        }
-
-        Plaza unaPlaza = new Plaza(new Area(unasCasillas), true);
-
-        Assert.assertNotNull(unaPlaza.crearAldeano(unaCasilla));
+        Plaza unaPlaza = new Plaza(zonaDeConstruccion);
+        Assert.assertEquals(true, unTablero.obtenerCasillaEn(1,1).estaOcupada());
+        
+        Area espacioAldeano = unTablero.definirArea(0,2,0,2);
+        Assert.assertEquals(true, espacioAldeano.estaLibre());
+        
+        Aldeano nuevoAldeano = unaPlaza.crearAldeano(espacioAldeano);
+        Assert.assertEquals(false, espacioAldeano.estaLibre());
+        Assert.assertNotNull(nuevoAldeano);
     }
 }

@@ -1,7 +1,6 @@
 public class Casilla {
 	
-	private boolean ocupada;
-	//private Posicion posicionActual;
+	private boolean ocupada; //TODO: Futuro patrón state
 	private int fila;
 	private int columna;
 
@@ -10,53 +9,33 @@ public class Casilla {
        	this.columna = columna;
         ocupada = false;
     }
-
-	/*public Casilla (Posicion unaPosicion) {
-		posicionActual = unaPosicion;
-		ocupada = false;
-	}*/
 	
 	public boolean estaOcupada() {
+
 		return ocupada;
 	}
 	
 	//NO USAR ?
-	public void colocar(Pieza unaPieza) throws ErrorBasico {
+	public void colocar(Pieza unaPieza) throws Excepcion {
 		if(!ocupada) {
 			ocupada = true;
 		}
 		else {
-			throw new ErrorBasico("ERROR: Casilla ocupada.");
+			throw new Excepcion("ERROR: Casilla ocupada.");
 		}
 	}
 	
 	public void liberar() {
-		ocupada = false;
-	}
-	
-	/*public obtenerPosicion() {
-		return posicionActual;
-	}*/
-//----------------------------------------------------------------------------------
-	/*Posicion(){
-		posicionX = 0;
-		posicionY = 0;
+
+	    ocupada = false;
 	}
 
-	Posicion(int x, int y){
-		posicionX = x;
-		posicionY = y;
-	}*/
+	public int obtenerFila() { return fila; }
 
-	public int obtenerFila() {
-		return fila;
-	}
-
-	public int obtenerColumna() {
-		return columna;
-	}
+	public int obtenerColumna() { return columna; }
 
 	public String aString() {
+
 		return ( Integer.toString(fila) + "I" + Integer.toString(columna));
 	}
 

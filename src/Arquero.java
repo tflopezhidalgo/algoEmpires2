@@ -1,20 +1,19 @@
 public class Arquero extends Unidad {
 
-	Arquero() throws ErrorBasico {
-	    super(new Casilla(0, 0));
-		vida = 75;
-		costo = 72;
-	}
+    /*      -Arquero-
+     *
+     *      Vida: 75
+     *      Costo: 75
+     *      Distancia de ataque: 3
+     */
 
-	Arquero(Casilla unaCasilla) throws ErrorBasico {
-		super(unaCasilla);
+	Arquero(Area unArea) throws Excepcion {
+		super(unArea);
 		vida = 75;
 		costo = 75;
 	}
-	
-	//distancia de ataque = 3
 
-	public void atacar(Edificio edificioEnemigo) throws ErrorBasico {
+	public void atacar(Edificio edificioEnemigo) throws Excepcion {
 		enRango(edificioEnemigo,3);
 		edificioEnemigo.recibirDanio(10);
 		
@@ -23,7 +22,7 @@ public class Arquero extends Unidad {
 		}
 	}
 	
-	public void atacar(Unidad unidadEnemiga) throws ErrorBasico {
+	public void atacar(Unidad unidadEnemiga) throws Excepcion {
 		enRango(unidadEnemiga,3);
 		unidadEnemiga.recibirDanio(15);
 			

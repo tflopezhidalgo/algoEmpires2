@@ -1,29 +1,25 @@
 public class Espadachin extends Unidad {
-	
-	Espadachin(Casilla unaCasilla) throws ErrorBasico {
-		super(unaCasilla);
+
+    /*     -Espadachín-
+     *
+     *      Distancia de ataque: 1
+     *      Vida: 100
+     *      Costo: 50
+     */
+
+	Espadachin(Area unArea) throws Excepcion {
+		super(unArea);
 		vida = 100;
 		costo = 50;
 	}
-	
-	//distancia de ataque = 1
 
-	public void atacar(Edificio edificioEnemigo) throws ErrorBasico {
-		enRango(edificioEnemigo,1);
-		edificioEnemigo.recibirDanio(15);
-		
-		if(edificioEnemigo.estaDestruida()) {
-			edificioEnemigo = null;
-		}
-	}
-	
-	public void atacar(Unidad unidadEnemiga) throws ErrorBasico {
-		enRango(unidadEnemiga,1);
-		unidadEnemiga.recibirDanio(25);
-		
-		if(unidadEnemiga.estaDestruida()) {
-			unidadEnemiga = null;
-		}
-	}
+	public void atacar(Pieza piezaEnemiga) throws Excepcion{
 
+	    enRango(piezaEnemiga, 1);
+	    piezaEnemiga.recibirDanio(15);
+
+	    if(piezaEnemiga.estaDestruida())
+
+	        piezaEnemiga.obtenerAreaOcupada().liberarCasillas();
+    }
 }

@@ -14,261 +14,272 @@ public class ArmaDeAsedioTest {
      * Test de movimiento de Arma de Asedio
      */
     @Test
-    public void seCreaArmaDeAsedio() throws ErrorBasico {
+    public void seCreaArmaDeAsedio() throws Excepcion {
+    	Tablero unTablero = new Tablero(3,3);
 
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(new Casilla(0, 0));
+    	Area espacioArmaDeAsedio = unTablero.definirArea(0, 0, 0, 0);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
 
         Assert.assertNotNull(unArmaDeAsedio);
+        Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(1,espacioArmaDeAsedio.obtenerTamanio());
     }
 
     @Test
-    public void ColocarArmaDeAsedio() throws ErrorBasico {
-
-        Casilla casilla = new Casilla(1,1);
-
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casilla);
-
-        Assert.assertEquals(true, casilla.estaOcupada());
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casilla);
-    }
-
-    @Test
-    public void moverArmaDeAsedioUnaPosicionHaciaArriba() throws ErrorBasico {
-       	Tablero unTablero = new Tablero(3,3);
+    public void moverArmaDeAsedioUnaPosicionHaciaArriba() throws Excepcion {
+    	Tablero unTablero = new Tablero(3,3);
        	
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(1, 0);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio); //Se inicia en modo mover (se mueve)
+    	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio); //Se inicia en modo mover (se mueve)
         
-        Assert.assertEquals(true, casillaArmaDeAsedio.estaOcupada());
+        Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
-        Casilla casillaFinal = unTablero.casillaArribaDe(casillaArmaDeAsedio);
-        unTablero.moverHasta(unArmaDeAsedio, casillaFinal);
-
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 2);
+        unTablero.moverArriba(unArmaDeAsedio);
+        
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
 
         unArmaDeAsedio.accionar();
-        Casilla casillaTope = unTablero.casillaArribaDe(casillaFinal);
-        unTablero.moverHasta(unArmaDeAsedio, casillaTope);
+        //tira error
+    	//thrown.expect(Excepcion.class);
+        //unTablero.moverArriba(unArmaDeAsedio);
 
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionHaciaAbajo() throws ErrorBasico {
-       	Tablero unTablero = new Tablero(3,3);
+    public void moverArmaDeAsedioUnaPosicionHaciaAbajo() throws Excepcion {
+    	Tablero unTablero = new Tablero(3,3);
        	
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(1, 2);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio); //Se inicia en modo mover (se mueve)
+    	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio); //Se inicia en modo mover (se mueve)
         
-        Assert.assertEquals(true, casillaArmaDeAsedio.estaOcupada());
+        Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
-        Casilla casillaFinal = unTablero.casillaAbajoDe(casillaArmaDeAsedio);
-        unTablero.moverHasta(unArmaDeAsedio, casillaFinal);
-
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 0);
+        unTablero.moverAbajo(unArmaDeAsedio);
+        
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
 
         unArmaDeAsedio.accionar();
-        Casilla casillaTope = unTablero.casillaAbajoDe(casillaFinal);
-        unTablero.moverHasta(unArmaDeAsedio, casillaTope);
+        //tira error
+    	//thrown.expect(Excepcion.class);
+        //unTablero.moverAbajo(unArmaDeAsedio);
 
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
-
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionHaciaDerecha() throws ErrorBasico {
-       	Tablero unTablero = new Tablero(3,3);
+    public void moverArmaDeAsedioUnaPosicionHaciaDerecha() throws Excepcion {
+    	Tablero unTablero = new Tablero(3,3);
        	
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(0, 1);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio); //Se inicia en modo mover (se mueve)
+    	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio); //Se inicia en modo mover (se mueve)
         
-        Assert.assertEquals(true, casillaArmaDeAsedio.estaOcupada());
+        Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
-        Casilla casillaFinal = unTablero.casillaDerechaDe(casillaArmaDeAsedio);
-        unTablero.moverHasta(unArmaDeAsedio, casillaFinal);
-
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 1);
+        unTablero.moverDerecha(unArmaDeAsedio);
+        
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
 
         unArmaDeAsedio.accionar();
-        Casilla casillaTope = unTablero.casillaDerechaDe(casillaFinal);
-        unTablero.moverHasta(unArmaDeAsedio, casillaTope);
+        //tira error
+    	//thrown.expect(Excepcion.class);
+        //unTablero.moverDerecha(unArmaDeAsedio);
 
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionHaciaIzquierda() throws ErrorBasico {
-       	Tablero unTablero = new Tablero(3,3);
+    public void moverArmaDeAsedioUnaPosicionHaciaIzquierda() throws Excepcion {
+    	Tablero unTablero = new Tablero(3,3);
        	
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(2, 1);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio); //Se inicia en modo mover (se mueve)
+    	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio); //Se inicia en modo mover (se mueve)
         
-        Assert.assertEquals(true, casillaArmaDeAsedio.estaOcupada());
+        Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
-        Casilla casillaFinal = unTablero.casillaIzquierdaDe(casillaArmaDeAsedio);
-        unTablero.moverHasta(unArmaDeAsedio, casillaFinal);
-
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 1);
+        unTablero.moverIzquierda(unArmaDeAsedio);
+        
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
 
         unArmaDeAsedio.accionar();
-        Casilla casillaTope = unTablero.casillaIzquierdaDe(casillaFinal);
-        unTablero.moverHasta(unArmaDeAsedio, casillaTope);
+        //tira error
+    	//thrown.expect(Excepcion.class);
+        //unTablero.moverIzquierda(unArmaDeAsedio);
 
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionArribaDerecha() throws ErrorBasico {
-       	Tablero unTablero = new Tablero(3,3);
+    public void moverArmaDeAsedioUnaPosicionArribaDerecha() throws Excepcion {
+    	Tablero unTablero = new Tablero(3,3);
        	
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(0, 0);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio); //Se inicia en modo mover (se mueve)
+    	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio); //Se inicia en modo mover (se mueve)
         
-        Assert.assertEquals(true, casillaArmaDeAsedio.estaOcupada());
+        Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
-        Casilla casillaFinal = unTablero.casillaArribaDerechaDe(casillaArmaDeAsedio);
-        unTablero.moverHasta(unArmaDeAsedio, casillaFinal);
-
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 2);
+        unTablero.moverArribaDerecha(unArmaDeAsedio);
+        
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
 
         unArmaDeAsedio.accionar();
-        Casilla casillaTope = unTablero.casillaArribaDerechaDe(casillaFinal);
-        unTablero.moverHasta(unArmaDeAsedio, casillaTope);
+        //tira error
+    	//thrown.expect(Excepcion.class);
+        //unTablero.moverArribaDerecha(unArmaDeAsedio);
 
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionArribaIzquierda() throws ErrorBasico {
-       	Tablero unTablero = new Tablero(3,3);
+    public void moverArmaDeAsedioUnaPosicionArribaIzquierda() throws Excepcion {
+    	Tablero unTablero = new Tablero(3,3);
        	
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(2, 0);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio); //Se inicia en modo mover (se mueve)
+    	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio); //Se inicia en modo mover (se mueve)
         
-        Assert.assertEquals(true, casillaArmaDeAsedio.estaOcupada());
+        Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
-        Casilla casillaFinal = unTablero.casillaArribaIzquierdaDe(casillaArmaDeAsedio);
-        unTablero.moverHasta(unArmaDeAsedio, casillaFinal);
-
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 2);
+        unTablero.moverArribaIzquierda(unArmaDeAsedio);
+        
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
 
         unArmaDeAsedio.accionar();
-        Casilla casillaTope = unTablero.casillaArribaIzquierdaDe(casillaFinal);
-        unTablero.moverHasta(unArmaDeAsedio, casillaTope);
+        //tira error
+    	//thrown.expect(Excepcion.class);
+        //unTablero.moverArribaIzquierda(unArmaDeAsedio);
 
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionAbajoIzquierda() throws ErrorBasico {
-       	Tablero unTablero = new Tablero(3,3);
+    public void moverArmaDeAsedioUnaPosicionAbajoIzquierda() throws Excepcion {
+    	Tablero unTablero = new Tablero(3,3);
        	
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(2, 2);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio); //Se inicia en modo mover (se mueve)
+    	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio); //Se inicia en modo mover (se mueve)
         
-        Assert.assertEquals(true, casillaArmaDeAsedio.estaOcupada());
+        Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
-        Casilla casillaFinal = unTablero.casillaAbajoIzquierdaDe(casillaArmaDeAsedio);
-        unTablero.moverHasta(unArmaDeAsedio, casillaFinal);
-
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 0);
+        unTablero.moverAbajoIzquierda(unArmaDeAsedio);
+        
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
 
         unArmaDeAsedio.accionar();
-        Casilla casillaTope = unTablero.casillaAbajoIzquierdaDe(casillaFinal);
-        unTablero.moverHasta(unArmaDeAsedio, casillaTope);
+        //tira error
+    	//thrown.expect(Excepcion.class);
+        //unTablero.moverAbajoIzquierda(unArmaDeAsedio);
 
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionAbajoDerecha() throws ErrorBasico {
-       	Tablero unTablero = new Tablero(3,3);
+    public void moverArmaDeAsedioUnaPosicionAbajoDerecha() throws Excepcion {
+    	Tablero unTablero = new Tablero(3,3);
        	
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(0, 2);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio); //Se inicia en modo mover (se mueve)
+    	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio); //Se inicia en modo mover (se mueve)
         
-        Assert.assertEquals(true, casillaArmaDeAsedio.estaOcupada());
+        Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
-        Casilla casillaFinal = unTablero.casillaAbajoDerechaDe(casillaArmaDeAsedio);
-        unTablero.moverHasta(unArmaDeAsedio, casillaFinal);
-
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 0);
+        unTablero.moverAbajoDerecha(unArmaDeAsedio);
+        
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
 
         unArmaDeAsedio.accionar();
-        Casilla casillaTope = unTablero.casillaAbajoDerechaDe(casillaFinal);
-        unTablero.moverHasta(unArmaDeAsedio, casillaTope);
+        //tira error
+    	//thrown.expect(Excepcion.class);
+        //unTablero.moverAbajoDerecha(unArmaDeAsedio);
 
-        Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaFinal);
+        Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(true, casillaFinal.estaOcupada());
     }
-
 
     /*
      * Test de ataques de Arma de Asedio
      */
    @Test
-    public void armaDeAsedioNoAtacaSiNoFueAccionada() throws ErrorBasico {
+    public void armaDeAsedioNoAtacaSiNoFueAccionada() throws Excepcion {
 
 	   	Tablero unTablero = new Tablero(7,7);
 	   	
         Area zonaDeConstruccion = unTablero.definirArea(5, 5, Plaza.TAMANIO_LADO+4, Plaza.TAMANIO_LADO+4);
         Plaza unaPlaza = new Plaza(zonaDeConstruccion);
 
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(0,0);
-        ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio);
+    	Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
+        ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
 
         //vida de la plaza == 450
-        //tira error
-    	thrown.expect(ErrorBasico.class);
-    	unaArmaDeAsedio.atacar(unaPlaza);
+        unaArmaDeAsedio.atacar(unaPlaza);
         Assert.assertEquals(false, unaPlaza.necesitaReparacion());
         
         unaArmaDeAsedio.accionar();
         
-        //vida del aldeano == 50
-        //no deberia tirar error
+        //vida de la plaza == 375
         unaArmaDeAsedio.atacar(unaPlaza);
         Assert.assertEquals(true, unaPlaza.necesitaReparacion());
     }
    
    @Test
-    public void armaDeAsedioNoSeMueveSiFueAccionada() throws ErrorBasico {
+    public void armaDeAsedioNoSeMueveSiFueAccionada() throws Excepcion {
 
         Tablero unTablero = new Tablero(3,3);
 
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(0, 0);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio);
+    	Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
 
-        Casilla casillaArriba1 = unTablero.casillaArribaDe(casillaArmaDeAsedio);
-        Casilla casillaArriba2 = unTablero.casillaArribaDe(casillaArriba1);
+        Casilla casillaArriba1 = unTablero.obtenerCasillaEn(0, 1);
+        Casilla casillaArriba2 = unTablero.obtenerCasillaEn(0, 2);
+        
         //no deberia tirar error
-        unTablero.moverHasta(unArmaDeAsedio, casillaArriba1);
+        unTablero.moverArriba(unArmaDeAsedio);
         
         unArmaDeAsedio.accionar();
         
         //no se mueve
-     	unTablero.moverHasta(unArmaDeAsedio, casillaArriba2);
-     	Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaArriba1);
+     	unTablero.moverArriba(unArmaDeAsedio);
      	Assert.assertEquals(true, casillaArriba1.estaOcupada());
      	Assert.assertEquals(false, casillaArriba2.estaOcupada());
  
         unArmaDeAsedio.accionar();
         
         //no deberia tirar error
-        unTablero.moverHasta(unArmaDeAsedio, casillaArriba2);
-     	Assert.assertEquals(unArmaDeAsedio.obtenerUbicacion(), casillaArriba2);
+        unTablero.moverArriba(unArmaDeAsedio);
      	Assert.assertEquals(false, casillaArriba1.estaOcupada());
      	Assert.assertEquals(true, casillaArriba2.estaOcupada());
     }
     
     @Test
-    public void ataqueArmaDeAsedioAEdificio() throws ErrorBasico {
+    public void ataqueArmaDeAsedioAEdificio() throws Excepcion {
     	Tablero unTablero = new Tablero(7, 7);
 
         Area zonaDeConstruccion = unTablero.definirArea(5, 5, Plaza.TAMANIO_LADO+4, Plaza.TAMANIO_LADO+4);
         Plaza unaPlaza = new Plaza(zonaDeConstruccion);
 
-        Casilla casillaArmaDeAsedio = unTablero.obtenerCasillaEn(0, 0);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaArmaDeAsedio);
+    	Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
 
         unArmaDeAsedio.accionar();
         
@@ -296,19 +307,23 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void ataqueArmaDeAsedioAEdificioFueraDeRango() throws ErrorBasico {
+    public void ataqueArmaDeAsedioAEdificioFueraDeRango() throws Excepcion {
     	Tablero unTablero = new Tablero(10, 10);
 
         Area zonaDeConstruccion = unTablero.definirArea(6, 6, Plaza.TAMANIO_LADO+5, Plaza.TAMANIO_LADO+5);
         Plaza unaPlaza = new Plaza(zonaDeConstruccion);
 
-        Casilla casillaCatapulta = unTablero.obtenerCasillaEn(0,0);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(casillaCatapulta);
+    	Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
 
         //vida de la plaza == 450
-        //tira error
-     	thrown.expect(ErrorBasico.class);
-     	unArmaDeAsedio.atacar(unaPlaza);
+        unArmaDeAsedio.atacar(unaPlaza);
+        unArmaDeAsedio.atacar(unaPlaza);
+        unArmaDeAsedio.atacar(unaPlaza);
+        unArmaDeAsedio.atacar(unaPlaza);
+        unArmaDeAsedio.atacar(unaPlaza);
+        unArmaDeAsedio.atacar(unaPlaza);
+        unArmaDeAsedio.atacar(unaPlaza);
 
         Assert.assertEquals(false,unaPlaza.necesitaReparacion());
         Assert.assertEquals(false,unaPlaza.estaDestruida());
