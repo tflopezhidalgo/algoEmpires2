@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Castillo extends Edificio {
 	
 	static final int TAMANIO_LADO = 4;
@@ -11,67 +9,22 @@ public class Castillo extends Edificio {
 		tiempoDeConstruccion = 0;
 		cantidadDeCuracion = 15;
 		
-		casillasOcupadas = areaAOcupar;
-		areaAOcupar.construir(this);
+		espacioOcupado = areaAOcupar;
+		areaAOcupar.ocupar();
 	}
 
-	public void atacar(Edificio edificioEnemigo) throws Excepcion {
-		enRangoDeAtaque(edificioEnemigo);
-		edificioEnemigo.recibirDanio(20);
+	public void atacar(Pieza piezaEnemiga) throws Excepcion {
+		if(enRango(piezaEnemiga,3)) {
+			piezaEnemiga.recibirDanio(20);
+		}
 		
-		if(edificioEnemigo.estaDestruida()) {
-			edificioEnemigo = null;
+		if(piezaEnemiga.estaDestruida()) {
+			piezaEnemiga = null;
 		}
 	}
 	
-	public void atacar(Unidad unidadEnemiga) throws Excepcion {
-		enRangoDeAtaque(unidadEnemiga);
-		unidadEnemiga.recibirDanio(20);
-		
-		if(unidadEnemiga.estaDestruida()) {
-			unidadEnemiga = null;
-		}
-	}
-	
-	public ArmaDeAsedio crearCatapulta(Casilla ubicacion)  throws Excepcion {
-		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(ubicacion);
+	public ArmaDeAsedio crearCatapulta(Area unEspacio)  throws Excepcion {
+		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(unEspacio);
 		return unaArmaDeAsedio;
 	}
-	
-	//-------------PRIVADOS----------
-	
-	private void enRangoDeAtaque(Unidad unidadEnemiga) throws Excepcion {
-		int distancia = areaOcupada().distanciaMinimaA(unidadEnemiga.obtenerUbicacion());
-
-		if(distancia > 3) {
-			throw new Excepcion("ERROR: Objetivo fuera de area de ataque.");
-		}
-	}
-	
-	private void enRangoDeAtaque(Edificio edificioEnemigo) throws Excepcion {
-		Area areaEnemiga = edificioEnemigo.areaOcupada();
-		int distanciaMinima = distanciaMinimaA(areaEnemiga);
-
-		if(distanciaMinima > 3) {
-			throw new Excepcion("ERROR: Objetivo fuera de area de ataque.");
-		}
-	}
-	
-	private int distanciaMinimaA(Area areaEnemiga){
-		int minimaDistancia = Integer.MAX_VALUE; // TODO ver si hay una mejor manera de arreglar esto
-		int distanciaNueva;
-		List<Casilla> casillasEnemigas = areaEnemiga.obtenerCasillas();
-		for (int i = 0; i < areaEnemiga.obtenerTamanio(); i++) {
-			
-			Casilla casillaActual = casillasEnemigas.get(i);
-			
-			distanciaNueva = areaOcupada().distanciaMinimaA(casillaActual);
-			if(distanciaNueva < minimaDistancia) {
-				minimaDistancia = distanciaNueva;
-			}
-		}
-		
-		return minimaDistancia;
-	}
-
 }
