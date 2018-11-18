@@ -1,3 +1,4 @@
+package modelo;
 
 public class AldeanoLibre implements EstadoAldeano{
 	
