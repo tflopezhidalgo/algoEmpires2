@@ -29,7 +29,7 @@ public class Area {
 			casillasDelArea.get(i).liberar();
 	}
 	
-	public void ocupar() throws Exception {
+	public void ocupar() throws Excepcion {
 		for (int i = 0; i < casillasDelArea.size(); i++) {
 			casillasDelArea.get(i).ocupar();
 		}
