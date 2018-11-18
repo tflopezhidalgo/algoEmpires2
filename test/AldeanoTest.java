@@ -20,7 +20,7 @@ public class AldeanoTest {
 
         Assert.assertNotNull(unAldeano);
         Assert.assertEquals(false,espacioAldeano.estaLibre());
-        Assert.assertEquals(1,espacioAldeano.obtenerCantidadDeCasillas());
+        Assert.assertEquals(1,espacioAldeano.obtenerTamanio());
     }
 
     @Test
