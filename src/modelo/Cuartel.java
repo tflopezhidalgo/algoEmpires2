@@ -5,14 +5,12 @@ public class Cuartel extends Edificio {
 	public static final int TAMANIO_LADO = 2;
 	
 	public Cuartel(Area areaAOcupar) throws Excepcion {
+		super(areaAOcupar);
 		vida = 250;
 		vidaMaxima = vida;
 		costo = 50;
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 50;
-		
-		espacioOcupado = areaAOcupar;
-		areaAOcupar.ocupar();
 	}
 	
 	//TODO ELIMINAR ESTO - es solo para realizar en AldeanoTest "AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion"
