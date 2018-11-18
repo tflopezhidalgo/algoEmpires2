@@ -1,22 +1,22 @@
 public class Casilla {
 	
 	private boolean ocupada; //TODO: Futuro patrón state
-	private int fila;
-	private int columna;
-
-	public Casilla(int fila, int columna){
-       	this.fila = fila;
-       	this.columna = columna;
-        ocupada = false;
-    }
+   	private int posicionX;
+   	private int posicionY;
 	
-	public boolean estaOcupada() {
+	//TODO cuando este en mi pc pongo "fila y columan " otravez y see 1 seccc
 
+	public Casilla( int x, int y ){
+		posicionX = x;
+		posicionY = y;
+        	ocupada = false;
+    	}
+	public boolean estaOcupada() {
 		return ocupada;
 	}
 	
 	//NO USAR ?
-	public void colocar(Pieza unaPieza) throws Excepcion {
+	public void ocupar() throws Excepcion {
 		if(!ocupada) {
 			ocupada = true;
 		}
@@ -26,39 +26,45 @@ public class Casilla {
 	}
 	
 	public void liberar() {
-
 	    ocupada = false;
 	}
 
-	public int obtenerFila() { return fila; }
+	//public int obtenerFila() { return fila; }
 
-	public int obtenerColumna() { return columna; }
-
-	public String aString() {
-
-		return ( Integer.toString(fila) + "I" + Integer.toString(columna));
+	//public int obtenerColumna() { return columna; }
+	
+	//TODO ya se que etsoy copiando lo de arriba pero modificar los nombres en el resto de los archivos es mucha paja, 
+	//cuando este en mi pc borro estos 2 y uso los de ailu ( los 2 de arriba )
+	public int ejeX() {
+		return posicionX;
 	}
+	
+	public int ejeY() {
+		return posicionY;
+	}
+	//-------------------------------------
 
-	//USO APTO PARA TODOS
-	static public String aString(int x , int y) {
+   	public String aString() {
+		return ( Integer.toString(posicionX) + "I" + Integer.toString(posicionY));
+    	}
+
+    	//USO APTO PARA TODOS    
+    	static public String aString(int x , int y) {
 		return ( Integer.toString(x) + "I" + Integer.toString(y));
 	}
 
 	public int calcularDistanciaA(Casilla casillaB) {
-
-		int xFinal = this.obtenerFila();
-		int yFinal = this.obtenerColumna();
-		int xInicial = casillaB.obtenerFila();
-		int yInicial = casillaB.obtenerColumna();
-
+		int xFinal = this.ejeX();
+		int yFinal = this.ejeY();
+		int xInicial = casillaB.ejeX();
+		int yInicial = casillaB.ejeY();
+		
 		int diferenciaX = Math.abs(xFinal - xInicial);
 		int diferenciaY = Math.abs(yFinal - yInicial);
-
-		int diferencia = diferenciaX;
-
+		
 		if(diferenciaX < diferenciaY) {
-			diferencia = diferenciaY;
+			return diferenciaY;
 		}
-		return diferencia;
+		return diferenciaX;
 	}
 }
