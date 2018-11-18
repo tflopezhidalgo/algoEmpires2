@@ -5,9 +5,7 @@ public abstract class Unidad extends Pieza {
 	protected boolean ocupado;
 	
 	public Unidad(Area unEspacio) throws Excepcion  {
-		espacioOcupado = unEspacio;
-		espacioOcupado.ocupar();
-		turnoJugado = false;
+		super(unEspacio);
 		ocupado = false;
 	}
 	
