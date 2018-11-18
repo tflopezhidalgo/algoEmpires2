@@ -5,9 +5,15 @@ import java.util.List;
 public abstract class Pieza {
 	
 	protected int vida;
-	protected int costo; //No sé si una pieza debería saber su costo
+	protected int costo; //No sé si una pieza debería saber su costo //A mi me parece que si (?
 	protected Area espacioOcupado;
 	protected boolean turnoJugado;
+	
+	public Pieza(Area espacioAOcupar){	
+		espacioOcupado = espacioAOcupar;
+		espacioOcupado.ocupar();
+		turnoJugado = false;
+	}
 
 	public Area obtenerAreaOcupada(){
 	    return espacioOcupado;
