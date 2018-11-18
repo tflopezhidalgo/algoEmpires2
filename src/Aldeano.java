@@ -32,7 +32,7 @@ public class Aldeano extends Unidad {
 		
 		if(!ocupado) {
 			turnoJugado = true;
-			return 25;
+			return 20;
 		}
 		else {
 			return 0;
