@@ -4,11 +4,11 @@ public abstract class Pieza {
 	
 	protected int vida;
 	protected int costo; //No sé si una pieza debería saber su costo
-    	protected Area areaOcupada;
-	protected boolean jugoEnTurno;
+	protected Area espacioOcupado;
+	protected boolean turnoJugado;
 
 	public Area obtenerAreaOcupada(){
-	    return this.areaOcupada;
+	    return espacioOcupado;
     	}
 
 	public void recibirDanio(int danio) {
