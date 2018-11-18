@@ -15,6 +15,7 @@ public class Cuartel extends Edificio {
 	
 	//TODO ELIMINAR ESTO - es solo para realizar en AldeanoTest "AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion"
 	public Cuartel(Area areaAOcupar, boolean yaConstruida) throws Excepcion {
+		super(areaAOcupar);
 		vida = 250;
 		vidaMaxima = vida;
 		costo = 50;
@@ -25,9 +26,6 @@ public class Cuartel extends Edificio {
 		}
 		
 		cantidadDeCuracion = 50;
-		
-		espacioOcupado = areaAOcupar;
-		areaAOcupar.ocupar();
 	}
 
 
