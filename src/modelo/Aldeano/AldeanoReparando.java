@@ -1,3 +1,4 @@
+package modelo;
 
 public class AldeanoReparando implements EstadoAldeano {
 	
