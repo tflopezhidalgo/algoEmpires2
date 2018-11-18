@@ -2,7 +2,7 @@ public abstract class Unidad extends Pieza {
 
 	protected boolean ocupado;
 	
-	public Unidad(Area unEspacio) throws Exception  {
+	public Unidad(Area unEspacio) throws Excepcion  {
 		espacioOcupado = unEspacio;
 		espacioOcupado.ocupar();
 		turnoJugado = false;
@@ -13,7 +13,7 @@ public abstract class Unidad extends Pieza {
 		return ocupado;
 	}
 
-	public void mover(Area nuevoEspacio) throws Exception {
+	public void mover(Area nuevoEspacio) throws Excepcion {
         if (!ocupado & nuevoEspacio.estaLibre()) {
             espacioOcupado.liberar();
             espacioOcupado = nuevoEspacio;
@@ -21,9 +21,9 @@ public abstract class Unidad extends Pieza {
         }
 	}
 	
-	protected void siEstaOcupadoDaError() throws Exception {
+	protected void siEstaOcupadoDaError() throws Excepcion {
 		if(ocupado) {
-			throw new Exception("ERROR: Pieza ocupada");
+			throw new Excepcion("ERROR: Pieza ocupada");
 		}
 	}
 
