@@ -7,8 +7,8 @@ public class ArmaDeAsedio extends Unidad {
      *      Distancia de ataque: 5
      */
 
-	ArmaDeAsedio(Area unArea) throws Excepcion {
-		super(unArea);
+	ArmaDeAsedio(Area unEspacio) throws Excepcion {
+		super(unEspacio);
 		vida = 150;
 		costo = 200;
 	}
@@ -16,22 +16,18 @@ public class ArmaDeAsedio extends Unidad {
 	public void accionar() {
 		ocupado = !ocupado;
 	}
+	
+	//distancia de ataque = 5
 
-	public void atacar(Pieza piezaEnemiga) throws Excepcion {
-		enModoAtaque();
-		
-		enRango(piezaEnemiga,5);
-		piezaEnemiga.recibirDanio(75);
-		
-		if(piezaEnemiga.estaDestruida()) {
-			piezaEnemiga = null;
+	public void atacar(Edificio edificioEnemigo) throws ErrorBasico {
+		if(ocupado) {
+			if(enRango(edificioEnemigo,5)) {
+				edificioEnemigo.recibirDanio(75);
+			}
+			
+			if(edificioEnemigo.estaDestruida()) {
+				edificioEnemigo = null;
+			}
 		}
-	}
-	
-	private void enModoAtaque() throws Excepcion {
-		if(!ocupado) {
-			throw new Excepcion("ERROR: ArmaDeAsedio no esta en Modo Ataque.");
-		}
-	}
-	
+	}	
 }
