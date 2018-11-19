@@ -1,9 +1,14 @@
-import junit.framework.Assert;
-
-import modelo.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import junit.framework.Assert;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Casilla;
+import modelo.Espadachin;
+import modelo.Excepcion;
+import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class EspadachinTest {
@@ -33,7 +38,7 @@ public class EspadachinTest {
         Assert.assertEquals(false, espacioEspadachin.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 2);
-        unTablero.moverArriba(unEspadachin);
+        unTablero.moverEnDireccion(unEspadachin,0,1);
 
         Assert.assertEquals(true, espacioEspadachin.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -49,7 +54,7 @@ public class EspadachinTest {
         Assert.assertEquals(false, espacioEspadachin.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 0);
-        unTablero.moverAbajo(unEspadachin);
+        unTablero.moverEnDireccion(unEspadachin,0,-1);
 
         Assert.assertEquals(true, espacioEspadachin.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -65,7 +70,7 @@ public class EspadachinTest {
         Assert.assertEquals(false, espacioEspadachin.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 1);
-        unTablero.moverDerecha(unEspadachin);
+        unTablero.moverEnDireccion(unEspadachin,1,0);
 
         Assert.assertEquals(true, espacioEspadachin.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -81,7 +86,7 @@ public class EspadachinTest {
         Assert.assertEquals(false, espacioEspadachin.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 1);
-        unTablero.moverIzquierda(unEspadachin);
+        unTablero.moverEnDireccion(unEspadachin,-1,0);
 
         Assert.assertEquals(true, espacioEspadachin.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -97,7 +102,7 @@ public class EspadachinTest {
         Assert.assertEquals(false, espacioEspadachin.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 2);
-        unTablero.moverArribaDerecha(unEspadachin);
+        unTablero.moverEnDireccion(unEspadachin,1,1);
 
         Assert.assertEquals(true, espacioEspadachin.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -113,7 +118,7 @@ public class EspadachinTest {
         Assert.assertEquals(false, espacioEspadachin.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 2);
-        unTablero.moverArribaIzquierda(unEspadachin);
+        unTablero.moverEnDireccion(unEspadachin,-1,1);
 
         Assert.assertEquals(true, espacioEspadachin.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -129,7 +134,7 @@ public class EspadachinTest {
         Assert.assertEquals(false, espacioEspadachin.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 0);
-        unTablero.moverAbajoIzquierda(unEspadachin);
+        unTablero.moverEnDireccion(unEspadachin,-1,-1);
 
         Assert.assertEquals(true, espacioEspadachin.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -145,7 +150,7 @@ public class EspadachinTest {
         Assert.assertEquals(false, espacioEspadachin.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 0);
-        unTablero.moverAbajoDerecha(unEspadachin);
+        unTablero.moverEnDireccion(unEspadachin,1,-1);
 
         Assert.assertEquals(true, espacioEspadachin.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());

@@ -1,9 +1,14 @@
-import junit.framework.Assert;
-
-import modelo.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import junit.framework.Assert;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Arquero;
+import modelo.Casilla;
+import modelo.Excepcion;
+import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class ArqueroTest {
@@ -37,7 +42,7 @@ public class ArqueroTest {
         Assert.assertEquals(false, espacioArquero.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 2);
-        unTablero.moverArriba(unArquero);
+        unTablero.moverEnDireccion(unArquero,0,1);
 
         Assert.assertEquals(true, espacioArquero.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -53,7 +58,7 @@ public class ArqueroTest {
         Assert.assertEquals(false, espacioArquero.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 0);
-        unTablero.moverAbajo(unArquero);
+        unTablero.moverEnDireccion(unArquero,0,-1);
 
         Assert.assertEquals(true, espacioArquero.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -69,7 +74,7 @@ public class ArqueroTest {
         Assert.assertEquals(false, espacioArquero.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 1);
-        unTablero.moverDerecha(unArquero);
+        unTablero.moverEnDireccion(unArquero,1,0);
 
         Assert.assertEquals(true, espacioArquero.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -85,7 +90,7 @@ public class ArqueroTest {
         Assert.assertEquals(false, espacioArquero.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 1);
-        unTablero.moverIzquierda(unArquero);
+        unTablero.moverEnDireccion(unArquero,-1,0);
 
         Assert.assertEquals(true, espacioArquero.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -101,7 +106,7 @@ public class ArqueroTest {
         Assert.assertEquals(false, espacioArquero.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 2);
-        unTablero.moverArribaDerecha(unArquero);
+        unTablero.moverEnDireccion(unArquero,1,1);
 
         Assert.assertEquals(true, espacioArquero.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -117,7 +122,7 @@ public class ArqueroTest {
         Assert.assertEquals(false, espacioArquero.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 2);
-        unTablero.moverArribaIzquierda(unArquero);
+        unTablero.moverEnDireccion(unArquero,-1,1);
 
         Assert.assertEquals(true, espacioArquero.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -133,7 +138,7 @@ public class ArqueroTest {
         Assert.assertEquals(false, espacioArquero.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 0);
-        unTablero.moverAbajoIzquierda(unArquero);
+        unTablero.moverEnDireccion(unArquero,-1,-1);
 
         Assert.assertEquals(true, espacioArquero.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -149,8 +154,8 @@ public class ArqueroTest {
         Assert.assertEquals(false, espacioArquero.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 0);
-        unTablero.moverAbajoDerecha(unArquero);
-
+        unTablero.moverEnDireccion(unArquero,1,-1);
+        
         Assert.assertEquals(true, espacioArquero.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
     }
