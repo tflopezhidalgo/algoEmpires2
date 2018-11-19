@@ -59,50 +59,54 @@ public class Tablero {
 	public List<Pieza> generarPiezasInicialesEquipo1() throws Excepcion{
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 		//Castillo 1
-		int x = (int) (Math.random() * 1);
-		int y = (int) (Math.random() * 6);
-		
-		Area areaCastillo1 = definirArea(x, y, x+Castillo.TAMANIO_LADO-1, y+Castillo.TAMANIO_LADO-1);
-		Castillo castillo1 = new Castillo(areaCastillo1);
+		Area areaCastillo = definirArea(1,1, 4, 4);
+		Castillo castillo = new Castillo(areaCastillo);
 		//-------------------
-		piezasNuevas.add(castillo1);
+		piezasNuevas.add(castillo);
 		//Plaza 1
-		x = (int) (Math.random() * 1) + 5;
-		y = (int) (Math.random() * 6);
-		
-		Area areaPlaza1 = definirArea(x, y, x+Plaza.TAMANIO_LADO-1, y+Plaza.TAMANIO_LADO-1);
-		Plaza plaza1 = new Plaza(areaPlaza1);
+		Area areaPlaza = definirArea(7,1,8,2);
+		Plaza plaza = new Plaza(areaPlaza);
 		//-------------------
-		piezasNuevas.add(plaza1);
+		piezasNuevas.add(plaza);
+		//Aldeanosx3
+		Area espacioAldeano1 = definirArea(6,4,6,4);
+		Aldeano aldeano1 = new Aldeano(espacioAldeano1);
+		piezasNuevas.add(aldeano1);
+		Area espacioAldeano2 = definirArea(7,4,7,4);
+		Aldeano aldeano2 = new Aldeano(espacioAldeano2);
+		piezasNuevas.add(aldeano2);
+		Area espacioAldeano3 = definirArea(8,4,8,4);
+		Aldeano aldeano3 = new Aldeano(espacioAldeano3);
+		piezasNuevas.add(aldeano3);
+		//-------------------
 		return piezasNuevas;
-		
-		//TODO definir 4 arear random para los castillos(2) y plazas(2)
-		//TODO definir 6 casillas random para los 6 aldeanos
 	}
 	
 	//TODO esto hacerlo aca o en Juego y que llame al metodo "colocar" inidcando las areas y casillas deseadas??
 	public List<Pieza> generarPiezasInicialesEquipo2() throws Excepcion{
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
-		//Castillo 2
-		int x = (int) (Math.random() * 1) + 11;
-		int y = (int) (Math.random() * 6) + 6;
-		
-		Area areaCastillo2 = definirArea(x, y, x+Castillo.TAMANIO_LADO-1, y+Castillo.TAMANIO_LADO-1);
-		Castillo castillo2 = new Castillo(areaCastillo2);
+		//Castillo 1
+		Area areaCastillo = definirArea(ancho-5, alto-5, alto-2, ancho-2);
+		Castillo castillo = new Castillo(areaCastillo);
 		//-------------------
-		piezasNuevas.add(castillo2);
-		//Plaza 2
-		x = (int) (Math.random() * 1) + 8;
-		y = (int) (Math.random() * 6) + 6;
-		
-		Area areaPlaza2 = definirArea(x, y, x+Plaza.TAMANIO_LADO-1, y+Plaza.TAMANIO_LADO-1);
-		Plaza plaza2 = new Plaza(areaPlaza2);
+		piezasNuevas.add(castillo);
+		//Plaza 1
+		Area areaPlaza = definirArea(ancho-9,alto-3,ancho-8,alto-2);
+		Plaza plaza = new Plaza(areaPlaza);
 		//-------------------
-		piezasNuevas.add(plaza2);
+		piezasNuevas.add(plaza);
+		//Aldeanosx3
+		Area espacioAldeano1 = definirArea(ancho-9,alto-5,ancho-9,alto-5);
+		Aldeano aldeano1 = new Aldeano(espacioAldeano1);
+		piezasNuevas.add(aldeano1);
+		Area espacioAldeano2 = definirArea(ancho-8,alto-5,ancho-8,alto-5);
+		Aldeano aldeano2 = new Aldeano(espacioAldeano2);
+		piezasNuevas.add(aldeano2);
+		Area espacioAldeano3 = definirArea(ancho-7,alto-5,ancho-7,alto-5);
+		Aldeano aldeano3 = new Aldeano(espacioAldeano3);
+		piezasNuevas.add(aldeano3);
+		//-------------------
 		return piezasNuevas;
-
-		//TODO definir 4 arear random para los castillos(2) y plazas(2)
-		//TODO definir 6 casillas random para los 6 aldeanos
 	}
 	
 	//TODO check casillos fueron destruidos codearlo aca o en juego?
