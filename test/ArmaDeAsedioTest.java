@@ -1,9 +1,14 @@
-import junit.framework.Assert;
-
-import modelo.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import junit.framework.Assert;
+import modelo.Area;
+import modelo.ArmaDeAsedio;
+import modelo.Casilla;
+import modelo.Excepcion;
+import modelo.Plaza;
+import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class ArmaDeAsedioTest {
@@ -36,7 +41,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 2);
-        unTablero.moverArriba(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
         
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -60,7 +65,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 0);
-        unTablero.moverAbajo(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,0,-1);
         
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -84,7 +89,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 1);
-        unTablero.moverDerecha(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,1,0);
         
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -108,7 +113,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 1);
-        unTablero.moverIzquierda(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,-1,0);
         
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -132,7 +137,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 2);
-        unTablero.moverArribaDerecha(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,1,1);
         
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -156,7 +161,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 2);
-        unTablero.moverArribaIzquierda(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,-1,1);
         
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -180,7 +185,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 0);
-        unTablero.moverAbajoIzquierda(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,-1,-1);
         
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -204,7 +209,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 0);
-        unTablero.moverAbajoDerecha(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,1,-1);
         
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -255,13 +260,13 @@ public class ArmaDeAsedioTest {
         Casilla casillaArriba2 = unTablero.obtenerCasillaEn(0, 2);
         
         //no deberia tirar error
-        unTablero.moverArriba(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
         
         unArmaDeAsedio.accionar();
         
         //no se mueve
         unArmaDeAsedio.nuevoTurno();
-     	unTablero.moverArriba(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
      	Assert.assertEquals(true, casillaArriba1.estaOcupada());
      	Assert.assertEquals(false, casillaArriba2.estaOcupada());
  
@@ -269,7 +274,7 @@ public class ArmaDeAsedioTest {
         
         //no hace falta iniciar un nuevo turno
         //no deberia tirar error
-        unTablero.moverArriba(unArmaDeAsedio);
+        unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
      	Assert.assertEquals(false, casillaArriba1.estaOcupada());
      	Assert.assertEquals(true, casillaArriba2.estaOcupada());
     }

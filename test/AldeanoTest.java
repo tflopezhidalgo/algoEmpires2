@@ -1,8 +1,16 @@
-import junit.framework.Assert;
-import modelo.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import junit.framework.Assert;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Casilla;
+import modelo.Castillo;
+import modelo.Cuartel;
+import modelo.Excepcion;
+import modelo.Plaza;
+import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class AldeanoTest {
@@ -34,7 +42,7 @@ public class AldeanoTest {
         Assert.assertEquals(false,espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 2);
-        unTablero.moverArriba(unAldeano);
+        unTablero.moverEnDireccion(unAldeano,0,1);
 
         Assert.assertEquals(true, espacioAldeano.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -50,7 +58,7 @@ public class AldeanoTest {
         Assert.assertEquals(false,espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 0);
-        unTablero.moverAbajo(unAldeano);
+        unTablero.moverEnDireccion(unAldeano,0,-1);
 
         Assert.assertEquals(true, espacioAldeano.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -66,7 +74,7 @@ public class AldeanoTest {
         Assert.assertEquals(false,espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 1);
-        unTablero.moverDerecha(unAldeano);
+        unTablero.moverEnDireccion(unAldeano,1,0);
 
         Assert.assertEquals(true, espacioAldeano.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -82,7 +90,7 @@ public class AldeanoTest {
         Assert.assertEquals(false,espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 1);
-        unTablero.moverIzquierda(unAldeano);
+        unTablero.moverEnDireccion(unAldeano,-1,0);
 
         Assert.assertEquals(true, espacioAldeano.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -98,7 +106,7 @@ public class AldeanoTest {
         Assert.assertEquals(false,espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 2);
-        unTablero.moverArribaDerecha(unAldeano);
+        unTablero.moverEnDireccion(unAldeano,1,1);
 
         Assert.assertEquals(true, espacioAldeano.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -114,7 +122,7 @@ public class AldeanoTest {
         Assert.assertEquals(false,espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 2);
-        unTablero.moverArribaIzquierda(unAldeano);
+        unTablero.moverEnDireccion(unAldeano,-1,1);
 
         Assert.assertEquals(true, espacioAldeano.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -130,7 +138,7 @@ public class AldeanoTest {
         Assert.assertEquals(false,espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 0);
-        unTablero.moverAbajoIzquierda(unAldeano);
+        unTablero.moverEnDireccion(unAldeano,-1,-1);
 
         Assert.assertEquals(true, espacioAldeano.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -146,7 +154,7 @@ public class AldeanoTest {
         Assert.assertEquals(false,espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 0);
-        unTablero.moverAbajoDerecha(unAldeano);
+        unTablero.moverEnDireccion(unAldeano,1,-1);
 
         Assert.assertEquals(true, espacioAldeano.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
@@ -501,7 +509,7 @@ public class AldeanoTest {
                 break;
                 
                 case 2: {
-                	unTablero.moverArriba(unAldeano);
+                	unTablero.moverEnDireccion(unAldeano,0,1);
                 	
                 	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
                 	
@@ -549,7 +557,7 @@ public class AldeanoTest {
                 break;
                 
                 case 2: {
-                	unTablero.moverArriba(unAldeano);
+                	unTablero.moverEnDireccion(unAldeano,0,1);
                 	
                 	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
                 	
