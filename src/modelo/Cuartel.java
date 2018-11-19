@@ -30,19 +30,25 @@ public class Cuartel extends Edificio {
 
 
 	public Espadachin crearEspadachin(Area unEspacio) throws Excepcion {
+		siYaJugoElTurnoError();
+		
 		if(!unEspacio.estaLibre()) {
 			throw new Excepcion("ERROR: La ubicacion para colocar al soldado esta ocupada.");
 		}
 		
+		turnoJugado = true;
 		Espadachin unEspadachin = new Espadachin(unEspacio);
 		return unEspadachin;
 	}
 	
 	public Arquero crearArquero(Area unEspacio) throws Excepcion {
+		siYaJugoElTurnoError();
+
 		if(!unEspacio.estaLibre()) {
 			throw new Excepcion("ERROR: La ubicacion para colocar al soldado esta ocupada.");
 		}
 		
+		turnoJugado = true;
 		Arquero unArquero = new Arquero(unEspacio);
 		return unArquero;
 	}

@@ -14,10 +14,13 @@ public abstract class Unidad extends Pieza {
 	}
 
 	public void mover(Area nuevoEspacio) throws Excepcion {
+		siYaJugoElTurnoError();
+		
         if (!ocupado & nuevoEspacio.estaLibre()) {
             espacioOcupado.liberar();
             espacioOcupado = nuevoEspacio;
             espacioOcupado.ocupar();
+			turnoJugado = true;
         }
 	}
 	
