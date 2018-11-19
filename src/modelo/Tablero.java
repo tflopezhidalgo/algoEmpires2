@@ -10,36 +10,34 @@ public class Tablero {
 	private Map<String, Casilla> casillasDelTablero;
 	private int alto;
 	private int ancho;
-	
+
+	private void crearTableroVacio(){
+
+        casillasDelTablero = new HashMap<String, Casilla>();
+
+        for(int y = 0; y < this.alto; y++){
+            for(int x = 0; x < this.ancho; x++){
+                Casilla nuevaCasilla = new Casilla(x, y);
+                casillasDelTablero.put(nuevaCasilla.aString(), nuevaCasilla);
+            }
+        }
+    }
+
 	public Tablero(int ancho, int alto){
+
+	    //TODO: Validar ancho y alto > 16
 		this.alto = alto;
 		this.ancho = ancho;
-		
-        casillasDelTablero = new HashMap<String, Casilla>();
-		
-		for(int y=0;y<alto;y++){
-			for(int x=0;x<ancho;x++){
-				Casilla nuevaCasilla = new Casilla(x,y);
-				casillasDelTablero.put(nuevaCasilla.aString(),nuevaCasilla);
-			}
-		}
-		//TODO no ejecutar esto si permito este constructor?
-		//colocarPiezasIniciales();
+
+		crearTableroVacio();
 	}
-	
-	//Default es 16x16 TODO permitir el otro constructor?
-	public Tablero() throws Excepcion{
-		this.alto = 16;
+
+	public Tablero(){
+
+	    this.alto = 16;
 		this.ancho = 16;
-		
-        casillasDelTablero = new HashMap<String, Casilla>();
-		
-		for(int y=0;y<alto;y++){
-			for(int x=0;x<ancho;x++){
-				Casilla nuevaCasilla = new Casilla(x,y);
-				casillasDelTablero.put(nuevaCasilla.aString(),nuevaCasilla);
-			}
-		}
+
+		crearTableroVacio();
 	}
 	
 	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws Excepcion {
@@ -54,8 +52,7 @@ public class Tablero {
         Area zonaDeConstruccion = new Area(casillasParaConstruccion, xInicial, yInicial, xFinal, yFinal);
         return zonaDeConstruccion;
 	}
-	
-	//TODO esto hacerlo aca o en Juego y que llame al metodo "colocar" inidcando las areas y casillas deseadas??
+
 	public List<Pieza> generarPiezasInicialesEquipo1() throws Excepcion{
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 		//Castillo 1
@@ -81,8 +78,7 @@ public class Tablero {
 		//-------------------
 		return piezasNuevas;
 	}
-	
-	//TODO esto hacerlo aca o en Juego y que llame al metodo "colocar" inidcando las areas y casillas deseadas??
+
 	public List<Pieza> generarPiezasInicialesEquipo2() throws Excepcion{
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 		//Castillo 1
@@ -109,8 +105,6 @@ public class Tablero {
 		return piezasNuevas;
 	}
 	
-	//TODO check casillos fueron destruidos codearlo aca o en juego?
-	
 	public void ataqueDesdeHasta(Casilla casillaInicial, Casilla casillaFinal) {
 		//TODO casilla inicial es un edificio o unidad?
 		//TODO casilla final es un edificio o unidad?
@@ -123,8 +117,7 @@ public class Tablero {
 	public void liberar(Casilla unaCasilla) {
 		unaCasilla.liberar();
 	}
-	
-	//TODO verificar q estamos de acuerdo en tener esta funcion
+
 	public Casilla obtenerCasillaEn(int x, int y) throws Excepcion {
 		casillaNoExisteError(x, y);
 		String posicion = Casilla.aString(x, y);

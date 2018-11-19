@@ -1,6 +1,5 @@
 package modelo;
 
-import javafx.beans.binding.ObjectExpression;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,6 +13,18 @@ public class Jugador {
     private int cantidadDeOro;
     private int poblacion;
 
+    private void recolectarOro() throws Excepcion{
+
+        int oroRecolectado = 0;
+
+        Iterator iterador = piezas.iterator();
+        while(iterador.hasNext())
+            if(iterador.next() instanceof Aldeano)
+                oroRecolectado = oroRecolectado + ((Aldeano) iterador.next()).realizarTrabajoDeTurno();
+
+    }
+
+    /*          Constructor         */
     public Jugador(String unNombre){
 
         this.nombreJugador = unNombre;
@@ -25,13 +36,15 @@ public class Jugador {
     public void asignarPiezas(List<Pieza> piezas){
 
         this.piezas = piezas;
+        actualizarPoblacion();
+    }
+
+    public void actualizarPoblacion(){
 
         Iterator iterador = piezas.iterator();
         while(iterador.hasNext())
             if(iterador.next() instanceof Unidad)
                 this.poblacion++;
-
-        //TODO: Chequear que la cantidad de Unidades iniciales son correctas.
     }
 
     public boolean castilloFueDestruido(){
@@ -46,17 +59,9 @@ public class Jugador {
 
     }
 
-    public void recolectarOro() throws Exception{
+    public void finalizarTurno() throws Excepcion{
 
-        int oroRecolectado = 0;
-
-        Iterator iterador = piezas.iterator();
-        while(iterador.hasNext())
-            if(iterador.next() instanceof Aldeano)
-                oroRecolectado = oroRecolectado + ((Aldeano) iterador.next()).realizarTrabajoDeTurno();
-
+        this.recolectarOro();
+        actualizarPoblacion();
     }
-
-    //public void crearAldeano(Area)
-
 }
