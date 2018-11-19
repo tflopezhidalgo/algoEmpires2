@@ -19,7 +19,7 @@ public class TableroTest {
 		unTablero.obtenerCasillaEn(16, 16);
 	}
 	
-	@Test
+	/*@Test
 	public void mapaSeCreaConTamanioIndicado() throws Excepcion {
 		//Desde (0,0) a (4,4), un tablero de 5x5
 		Tablero unTablero = new Tablero(5,5);
@@ -28,7 +28,7 @@ public class TableroTest {
 		
 		thrown.expect(Excepcion.class);
 		unTablero.obtenerCasillaEn(5, 5);
-	}
+	}*/
 	
 	@Test
 	public void noPuedoDefinirAreaFueraDeRango() throws Excepcion {
