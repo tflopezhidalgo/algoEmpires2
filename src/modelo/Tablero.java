@@ -133,110 +133,12 @@ public class Tablero {
 		}
 	}
 	
-	//---------------PROTOTIPO  V2---------------
+	//---------------PROTOTIPO  V3---------------
 	
-	public void moverArriba(Unidad unaUnidad) throws Excepcion {
+	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
 		espacioAnterior.liberar();
-		Area nuevoEspacio = this.definirArea(espacioAnterior.x0(), espacioAnterior.y0()+1, espacioAnterior.x1(), espacioAnterior.y1()+1);
-
-		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
-			unaUnidad.mover(nuevoEspacio);
-		}
-		else {
-			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
-			espacioAnterior.ocupar();
-		}
-	}
-	
-	public void moverAbajo(Unidad unaUnidad) throws Excepcion {
-		Area espacioAnterior = unaUnidad.espacioOcupado();
-		espacioAnterior.liberar();
-		Area nuevoEspacio = this.definirArea(espacioAnterior.x0(), espacioAnterior.y0()-1, espacioAnterior.x1(), espacioAnterior.y1()-1);
-
-		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
-			unaUnidad.mover(nuevoEspacio);
-		}
-		else {
-			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
-			espacioAnterior.ocupar();
-		}
-	}
-	
-	public void moverIzquierda(Unidad unaUnidad) throws Excepcion {
-		Area espacioAnterior = unaUnidad.espacioOcupado();
-		espacioAnterior.liberar();
-		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()-1, espacioAnterior.y0(), espacioAnterior.x1()-1, espacioAnterior.y1());
-
-		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
-			unaUnidad.mover(nuevoEspacio);
-		}
-		else {
-			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
-			espacioAnterior.ocupar();
-		}
-	}
-		
-	public void moverDerecha(Unidad unaUnidad) throws Excepcion {
-		Area espacioAnterior = unaUnidad.espacioOcupado();
-		espacioAnterior.liberar();
-		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+1, espacioAnterior.y0(), espacioAnterior.x1()+1, espacioAnterior.y1());
-
-		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
-			unaUnidad.mover(nuevoEspacio);
-		}
-		else {
-			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
-			espacioAnterior.ocupar();
-		}
-	}
-	
-	public void moverArribaDerecha(Unidad unaUnidad) throws Excepcion {
-		Area espacioAnterior = unaUnidad.espacioOcupado();
-		espacioAnterior.liberar();
-		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+1, espacioAnterior.y0()+1, espacioAnterior.x1()+1, espacioAnterior.y1()+1);
-
-		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
-			unaUnidad.mover(nuevoEspacio);
-		}
-		else {
-			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
-			espacioAnterior.ocupar();
-		}
-	}
-	
-	public void moverAbajoDerecha(Unidad unaUnidad) throws Excepcion {
-		Area espacioAnterior = unaUnidad.espacioOcupado();
-		espacioAnterior.liberar();
-		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+1, espacioAnterior.y0()-1, espacioAnterior.x1()+1, espacioAnterior.y1()-1);
-
-		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
-			unaUnidad.mover(nuevoEspacio);
-		}
-		else {
-			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
-			espacioAnterior.ocupar();
-		}
-	}
-	
-	public void moverArribaIzquierda(Unidad unaUnidad) throws Excepcion {
-		Area espacioAnterior = unaUnidad.espacioOcupado();
-		espacioAnterior.liberar();
-		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()-1, espacioAnterior.y0()+1, espacioAnterior.x1()-1, espacioAnterior.y1()+1);
-
-		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
-			unaUnidad.mover(nuevoEspacio);
-		}
-		else {
-			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
-			espacioAnterior.ocupar();
-		}
-	}
-	
-	public void moverAbajoIzquierda(Unidad unaUnidad) throws Excepcion {
-		Area espacioAnterior = unaUnidad.espacioOcupado();
-		espacioAnterior.liberar();
-		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()-1, espacioAnterior.y0()-1, espacioAnterior.x1()-1, espacioAnterior.y1()-1);
+		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+difX, espacioAnterior.y0()+difY, espacioAnterior.x1()+difX, espacioAnterior.y1()+difY);
 
 		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
 			unaUnidad.mover(nuevoEspacio);
