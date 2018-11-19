@@ -28,9 +28,13 @@ public class Plaza extends Edificio {
 	}
 	
 	public Aldeano crearAldeano(Area unEspacio) throws Excepcion {
+		siYaJugoElTurnoError();
+		
 		if(!unEspacio.estaLibre()) {
 			throw new Excepcion("ERROR: La ubicacion para colocar al aldeano esta ocupada.");
 		}
+		
+		turnoJugado = true;
 		Aldeano unAldeano = new Aldeano(unEspacio);
 		return unAldeano;
 	}

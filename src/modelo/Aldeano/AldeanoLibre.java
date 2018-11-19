@@ -1,3 +1,4 @@
+package modelo;
 
 public class AldeanoLibre implements EstadoAldeano{
 	
@@ -27,4 +28,5 @@ public class AldeanoLibre implements EstadoAldeano{
 		//return 20;
 		return this;
 	}	
+
 }

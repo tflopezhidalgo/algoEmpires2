@@ -163,6 +163,8 @@ public class EspadachinTest {
 
         //vida del aldeano == 25
         unEspadachin.atacar(unAldeano);
+        
+        unEspadachin.nuevoTurno();
         //vida del aldeano == 0
         unEspadachin.atacar(unAldeano);
 

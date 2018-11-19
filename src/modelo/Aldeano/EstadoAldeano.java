@@ -1,3 +1,4 @@
+package modelo;
 
 public interface EstadoAldeano {
 
@@ -9,4 +10,6 @@ public interface EstadoAldeano {
 	
 	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo) throws Excepcion;
 		
+
 }
+
