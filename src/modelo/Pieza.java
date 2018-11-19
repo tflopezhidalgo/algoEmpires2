@@ -17,7 +17,7 @@ public abstract class Pieza {
 		vida -= danio;
 		if(vida <= 0) {
 			vida = 0;
-			//TODO destruir/morir/perder
+
 			liberarUbicacion();
 		}
 	}
