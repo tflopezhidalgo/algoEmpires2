@@ -28,4 +28,5 @@ public class AldeanoReparando implements EstadoAldeano {
 			return (new AldeanoLibre());
 		}
 	}	
+
 }

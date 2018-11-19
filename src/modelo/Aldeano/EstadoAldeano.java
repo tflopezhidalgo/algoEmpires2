@@ -10,4 +10,6 @@ public interface EstadoAldeano {
 	
 	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo) throws Excepcion;
 		
+
 }
+
