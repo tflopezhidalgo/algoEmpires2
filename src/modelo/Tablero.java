@@ -23,17 +23,18 @@ public class Tablero {
         }
     }
 
+	//EL TABLERO DEBERA TENER UN TAMANIO MINIMO DE 16x16
 	public Tablero(int ancho, int alto){
 
 	    //TODO: Validar ancho y alto > 16
-		this.alto = alto;
-		this.ancho = ancho;
+		//o agregarle +16
+		this.alto = 16+alto;
+		this.ancho = 16+ancho;
 
 		crearTableroVacio();
 	}
 
 	public Tablero(){
-
 	    this.alto = 16;
 		this.ancho = 16;
 
@@ -150,4 +151,18 @@ public class Tablero {
 	//--------------------------------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------
 
+    //TODO ELIMINAR
+	public void printMapa() throws Excepcion {
+		for(int y = 0;y<alto;y++) {
+			for(int x = 0;x<ancho;x++) {
+				if(this.obtenerCasillaEn(x, y).estaOcupada()) {
+					System.out.print("xx");
+				}
+				else {
+					System.out.print("--");
+				}
+			}
+			System.out.println("");
+		}
+	}
 }
