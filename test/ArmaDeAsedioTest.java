@@ -260,12 +260,14 @@ public class ArmaDeAsedioTest {
         unArmaDeAsedio.accionar();
         
         //no se mueve
+        unArmaDeAsedio.nuevoTurno();
      	unTablero.moverArriba(unArmaDeAsedio);
      	Assert.assertEquals(true, casillaArriba1.estaOcupada());
      	Assert.assertEquals(false, casillaArriba2.estaOcupada());
  
         unArmaDeAsedio.accionar();
         
+        //no hace falta iniciar un nuevo turno
         //no deberia tirar error
         unTablero.moverArriba(unArmaDeAsedio);
      	Assert.assertEquals(false, casillaArriba1.estaOcupada());
@@ -293,14 +295,19 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(false,unaPlaza.estaDestruida());
 
         //vida de la plaza == 300
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.atacar(unaPlaza);
         //vida de la plaza == 225
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.atacar(unaPlaza);
         //vida de la plaza == 150
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.atacar(unaPlaza);
         //vida de la plaza == 75
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.atacar(unaPlaza);
         //vida de la plaza == 0
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.atacar(unaPlaza);
 
         Assert.assertEquals(true,unaPlaza.estaDestruida());
