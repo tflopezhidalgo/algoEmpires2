@@ -50,7 +50,7 @@ public class TableroTest {
 		Assert.assertNotNull(unAldeano);
 		
 		thrown.expect(Excepcion.class);
-		unTablero.moverDerecha(unAldeano);
+		unTablero.moverEnDireccion(unAldeano,1,0);
 	}
 	
 }
