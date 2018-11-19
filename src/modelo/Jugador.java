@@ -57,6 +57,6 @@ public class Jugador {
 
     }
 
-    public void crearAldeano(Area)
+    //public void crearAldeano(Area)
 
 }
