@@ -72,8 +72,7 @@ public class Area {
 
 		return casillaA.calcularDistanciaA(casillaB);
 	}
-	
-		//GETTERS CHOTOS
+
 	public int x0(){
 		return xInicial;
 	}
