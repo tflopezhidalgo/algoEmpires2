@@ -1,11 +1,8 @@
-import static org.junit.Assert.*;
-
+import modelo.*;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import modelo.*;
 
 public class TableroTest {
 	

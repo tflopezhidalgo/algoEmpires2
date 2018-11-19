@@ -23,7 +23,7 @@ public abstract class Pieza {
 		vida -= danio;
 		if(vida <= 0) {
 			vida = 0;
-			//TODO destruir/morir/perder
+
 			liberarUbicacion();
 		}
 	}
@@ -45,8 +45,6 @@ public abstract class Pieza {
 	}	
 
 	/*          Métodos protected.          */
-    //TODO: Sacar estos métodos falopas.
-	//que te pasa si estan re bien estos metodos
     protected void siYaJugoElTurnoError() throws Excepcion {
         if(turnoJugado) {
 

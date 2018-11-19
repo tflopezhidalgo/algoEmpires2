@@ -134,8 +134,6 @@ public class Tablero {
 	}
 	
 	//---------------PROTOTIPO  V2---------------
-	//TODO FIX THIS -  YA SE QUE ESTA HORRIBLE TOM, ESPERA UN TOQUE (?
-	//ESTAS 8 FUNCIONES CAPAS NI VAN
 	
 	public void moverArriba(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
@@ -253,18 +251,4 @@ public class Tablero {
 	//--------------------------------------------------------------------------------------------------------------
 	//--------------------------------------------------------------------------------------------------------------
 
-    //TODO ELIMINAR
-	public void printMapa() throws Excepcion {
-		for(int y = 0;y<alto;y++) {
-			for(int x = 0;x<ancho;x++) {
-				if(this.obtenerCasillaEn(x, y).estaOcupada()) {
-					System.out.print("X");
-				}
-				else {
-					System.out.print("-");
-				}
-			}
-			System.out.println("");
-		}
-	}
 }

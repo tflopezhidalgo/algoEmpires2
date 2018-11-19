@@ -38,13 +38,10 @@ public class Area {
 	}
 	
 	public boolean estaLibre() {
-		boolean estaOcupada = false;
-		for (int i = 0; i < casillasDelArea.size(); i++) {
-			estaOcupada = casillasDelArea.get(i).estaOcupada();
-			if (estaOcupada) {
+
+		for (int i = 0; i < casillasDelArea.size(); i++)
+			if (casillasDelArea.get(i).estaOcupada())
 				return false;
-			}
-		}
 		return true;
 	}
 	
@@ -75,8 +72,7 @@ public class Area {
 
 		return casillaA.calcularDistanciaA(casillaB);
 	}
-	
-		//GETTERS CHOTOS
+
 	public int x0(){
 		return xInicial;
 	}
