@@ -16,8 +16,11 @@ public class Espadachin extends Unidad {
 	}
 
 	public void atacar(Edificio edificioEnemigo) throws Excepcion {
+		siYaJugoElTurnoError();
+		
 		if(enRango(edificioEnemigo,1)) {
 			edificioEnemigo.recibirDanio(15);
+			turnoJugado = true;
 		}
 		
 		if(edificioEnemigo.estaDestruida()) {
@@ -26,8 +29,11 @@ public class Espadachin extends Unidad {
 	}
 	
 	public void atacar(Unidad unidadEnemiga) throws Excepcion {
+		siYaJugoElTurnoError();
+		
 		if(enRango(unidadEnemiga,1)) {
 			unidadEnemiga.recibirDanio(25);
+			turnoJugado = true;
 		}
 		
 		if(unidadEnemiga.estaDestruida()) {

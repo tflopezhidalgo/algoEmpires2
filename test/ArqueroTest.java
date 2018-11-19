@@ -172,14 +172,19 @@ public class ArqueroTest {
 
         //vida del aldeano == 35
         unArquero.atacar(unAldeano);
+        
+        unArquero.nuevoTurno();
         //vida del aldeano == 20
         unArquero.atacar(unAldeano);
 
         Assert.assertEquals(false, unAldeano.estaDestruida());
         Assert.assertEquals(false, espacioAldeano.estaLibre());
 
+        unArquero.nuevoTurno();
         //vida del aldeano == 5
         unArquero.atacar(unAldeano);
+        
+        unArquero.nuevoTurno();
         //vida del aldeano == 0
         unArquero.atacar(unAldeano);
 

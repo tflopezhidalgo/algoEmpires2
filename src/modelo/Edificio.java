@@ -5,6 +5,10 @@ public abstract class Edificio extends Pieza {
 	protected int vidaMaxima;
 	protected int tiempoDeConstruccion;
 	protected int cantidadDeCuracion;
+	
+	public Edificio(Area areaAOcupar) throws Excepcion {
+		super(areaAOcupar);
+	}
 
 	public void reparar() {
 		vida += cantidadDeCuracion;
