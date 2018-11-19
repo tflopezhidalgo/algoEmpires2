@@ -134,8 +134,6 @@ public class Tablero {
 	}
 	
 	//---------------PROTOTIPO  V2---------------
-	//TODO FIX THIS -  YA SE QUE ESTA HORRIBLE TOM, ESPERA UN TOQUE (?
-	//ESTAS 8 FUNCIONES CAPAS NI VAN
 	
 	public void moverArriba(Unidad unaUnidad) throws Excepcion {
 		Area espacioAnterior = unaUnidad.espacioOcupado();
