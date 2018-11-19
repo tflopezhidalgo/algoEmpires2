@@ -48,7 +48,7 @@ public class CuartelTest {
         Assert.assertEquals(false,espacioEspadachin.estaLibre());
         
         //mover espadachin para arriba
-        unTablero.moverArriba(nuevoEspadachin);
+        unTablero.moverEnDireccion(nuevoEspadachin,0,1);
 
         Casilla casillaArriba = unTablero.obtenerCasillaEn(1,3);
         Assert.assertEquals(true,espacioEspadachin.estaLibre());
@@ -75,7 +75,7 @@ public class CuartelTest {
         Assert.assertEquals(false,espacioArquero.estaLibre());
         
         //mover arquero para arriba
-        unTablero.moverArriba(nuevoArquero);
+        unTablero.moverEnDireccion(nuevoArquero,0,1);
         
         Casilla casillaOtroArquero = unTablero.obtenerCasillaEn(1,3);
         Assert.assertEquals(true,espacioArquero.estaLibre());
