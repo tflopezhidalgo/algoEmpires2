@@ -17,8 +17,6 @@ public class Juego {
 
     //TODO: Chequear explícitamente que devuelve valores válidos.
     private Estado seleccionarJugadorInicial(){
-    	//No preferis usar :
-    	//int numeroRandom = (int)(Math.random() * 1) //(numero 0 o 1)
         int numeroRandom = ThreadLocalRandom.current().nextInt(0, 2);
 
         if(numeroRandom == 0)
@@ -41,6 +39,7 @@ public class Juego {
     }
 
     public void iniciarJuego() throws Excepcion{
+
         this.estadoJuego = seleccionarJugadorInicial();
 
         jugadores.get(0).asignarPiezas(tablero.generarPiezasInicialesEquipo1());

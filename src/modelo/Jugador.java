@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+//TODO: Falta implementar decuento de oro por crear Pieza
+
 public class Jugador {
 
     static final int POBLACION_MAX = 50;
@@ -14,7 +16,7 @@ public class Jugador {
     private int poblacion;
 
     private void recolectarOro() throws Excepcion{
-       
+
     	for(int i=0; i<piezas.size(); i++) {
     		Pieza piezaActual = piezas.get(i);
     		if(piezaActual instanceof Aldeano) {
@@ -26,7 +28,9 @@ public class Jugador {
         /*Iterator iterador = piezas.iterator();
         while(iterador.hasNext())
             if(iterador.next() instanceof Aldeano)
-                oroRecolectado = oroRecolectado + ((Aldeano) iterador.next()).realizarTrabajoDeTurno();*/
+                oroRecolectado = oroRecolectado + ((Aldeano) iterador.next()).realizarTrabajoDeTurno();
+
+        this.cantidadDeOro = cantidadDeOro + oroRecolectado;   */
     }
 
     /*          Constructor         */
@@ -41,17 +45,24 @@ public class Jugador {
         this.piezas = piezas;
         actualizarPoblacion();
     }
-    
-    public void asignarPieza(Pieza pieza){
-        this.piezas.add(pieza);
-        actualizarPoblacion();
+
+    public void agregarPieza(Pieza nuevaPieza) throws Excepcion{
+        if(nuevaPieza instanceof Unidad && (this.poblacion >= POBLACION_MAX)){
+            throw new Excepcion("Poblacion limite superada");
+            //TODO: Refactorizar.
+        }
+        this.piezas.add(nuevaPieza);
+        this.actualizarPoblacion();
     }
 
-    public void actualizarPoblacion(){
+    public void actualizarPoblacion() {
+        this.poblacion = 0;
         Iterator iterador = piezas.iterator();
-        while(iterador.hasNext())
-            if(iterador.next() instanceof Unidad)
+        while (iterador.hasNext()){
+            if (iterador.next() instanceof Unidad) {
                 this.poblacion++;
+            }
+        }
     }
 
     public boolean castilloFueDestruido(){
@@ -62,7 +73,11 @@ public class Jugador {
                 return false;
 
         return true;
+    }
 
+    public int getPoblacion(){
+
+        return this.poblacion;
     }
 
     public void finalizarTurno() throws Excepcion{
@@ -74,13 +89,19 @@ public class Jugador {
     }
     
     private void finalizarTurnoDePiezas() {
-    	for(int i=0; i<piezas.size(); i++) {
+    	for(int i = 0; i < piezas.size(); i++) {
     		Pieza piezaActual = piezas.get(i);
     		piezaActual.nuevoTurno();
     	}
     }
     
     public String obtenerNombre() {
+
     	return nombreJugador;
+    }
+
+    public int obtenerOro(){
+
+        return this.cantidadDeOro;
     }
 }

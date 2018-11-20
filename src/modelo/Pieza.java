@@ -8,11 +8,20 @@ public abstract class Pieza {
 	protected int costo; //No sé si una pieza debería saber su costo //A mi me parece que si (?
 	protected Area espacioOcupado;
 	protected boolean turnoJugado;
-	
+
+	public Pieza(){
+
+        turnoJugado = false;
+        vida = 0;
+        costo = 0;
+    }
+
 	public Pieza(Area espacioAOcupar) throws Excepcion {	
 		espacioOcupado = espacioAOcupar;
 		espacioOcupado.ocupar();
 		turnoJugado = false;
+		vida = 0;
+		costo = 0;
 	}
 
 	public Area obtenerAreaOcupada(){

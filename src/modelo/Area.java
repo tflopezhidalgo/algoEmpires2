@@ -10,7 +10,7 @@ public class Area {
 	private int yInicial;
 	private int yFinal;
 	
-	Area(List<Casilla> casillas, int xInicial, int yInicial, int xFinal, int yFinal){
+	public Area(List<Casilla> casillas, int xInicial, int yInicial, int xFinal, int yFinal){
 		this.xInicial = xInicial;
 		this.xFinal = xFinal;
 		this.yInicial = yInicial;
