@@ -1,6 +1,9 @@
-package modelo;
+package modelo.estadoAldeano;
 
-public class AldeanoReparando implements EstadoAldeano {
+import modelo.*;
+import modelo.excepciones.Excepcion;
+
+public class AldeanoConstruyendo implements EstadoAldeano {
 	
 	public EstadoAldeano reparar(Edificio unEdificio) throws Excepcion {
 		return this;
@@ -15,10 +18,10 @@ public class AldeanoReparando implements EstadoAldeano {
 	}
 	
 	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo) throws Excepcion {
-		if(edificioObjetivo.necesitaReparacion()) {
+		if(edificioObjetivo.enConstruccion()) {
 			//turnoJugado = true;
 			//return 0;
-			edificioObjetivo.reparar();
+			edificioObjetivo.construir();
 			return this;
 		}
 		else {

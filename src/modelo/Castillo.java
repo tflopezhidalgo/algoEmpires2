@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.excepciones.Excepcion;
+
 public class Castillo extends Edificio {
 	
 	public static final int TAMANIO_LADO = 4;

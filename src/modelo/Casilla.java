@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.excepciones.Excepcion;
+
 public class Casilla {
 	
 	private boolean ocupada; //TODO: Futuro patrón state

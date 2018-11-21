@@ -1,13 +1,17 @@
 package modelo;
 
+import modelo.excepciones.Excepcion;
+
 import java.util.List;
 
 public abstract class Pieza {
 	
 	protected int vida;
-	protected int costo; //No sé si una pieza debería saber su costo //A mi me parece que si (?
+	protected int costo;
 	protected Area espacioOcupado;
 	protected boolean turnoJugado;
+
+	/*          Constructor             */
 
 	public Pieza(){
 
@@ -24,9 +28,7 @@ public abstract class Pieza {
 		costo = 0;
 	}
 
-	public Area obtenerAreaOcupada(){
-	    return espacioOcupado;
-    	}
+	public Area obtenerAreaOcupada(){  return espacioOcupado; }
 
 	public void recibirDanio(int danio) {
 		vida -= danio;
@@ -37,23 +39,16 @@ public abstract class Pieza {
 		}
 	}
 
-	public void nuevoTurno() {
-		turnoJugado = false;
-	}
+	public void nuevoTurno() { turnoJugado = false; }
 	
-	public boolean estaDestruida() {
-		return (vida == 0);
-	}
+	public boolean estaDestruida() { return (vida == 0); }
 	
-	protected void liberarUbicacion() {
-		espacioOcupado.liberar();
-	}
+	protected void liberarUbicacion() { espacioOcupado.liberar(); }
 	
-	public Area espacioOcupado() {
-		return espacioOcupado;
-	}	
+	public Area espacioOcupado() { return espacioOcupado; }
 
 	/*          Métodos protected.          */
+
     protected void siYaJugoElTurnoError() throws Excepcion {
         if(turnoJugado) {
 

@@ -7,7 +7,7 @@ import modelo.Aldeano;
 import modelo.Area;
 import modelo.Casilla;
 import modelo.Espadachin;
-import modelo.Excepcion;
+import modelo.excepciones.Excepcion;
 import modelo.Tablero;
 
 @SuppressWarnings("deprecation")

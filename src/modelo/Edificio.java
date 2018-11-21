@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.excepciones.Excepcion;
+
 public abstract class Edificio extends Pieza {
 
 	protected int vidaMaxima;

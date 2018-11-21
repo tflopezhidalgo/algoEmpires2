@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.excepciones.Excepcion;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -46,7 +48,7 @@ public class Jugador {
         actualizarPoblacion();
     }
 
-    public void agregarPieza(Pieza nuevaPieza) throws Excepcion{
+    public void agregarPieza(Pieza nuevaPieza) throws Excepcion {
         if(nuevaPieza instanceof Unidad && (this.poblacion >= POBLACION_MAX)){
             throw new Excepcion("Poblacion limite superada");
             //TODO: Refactorizar.

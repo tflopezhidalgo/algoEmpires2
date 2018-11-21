@@ -1,6 +1,9 @@
-package modelo;
+package modelo.estadoAldeano;
 
-public class AldeanoLibre implements EstadoAldeano{
+import modelo.*;
+import modelo.excepciones.Excepcion;
+
+public class AldeanoLibre implements EstadoAldeano {
 	
 	public EstadoAldeano reparar(Edificio unEdificio) throws Excepcion {
 		unEdificio.reparar();

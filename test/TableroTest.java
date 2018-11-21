@@ -1,4 +1,5 @@
 import modelo.*;
+import modelo.excepciones.Excepcion;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

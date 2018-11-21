@@ -8,7 +8,7 @@ import modelo.Area;
 import modelo.Casilla;
 import modelo.Castillo;
 import modelo.Cuartel;
-import modelo.Excepcion;
+import modelo.excepciones.Excepcion;
 import modelo.Plaza;
 import modelo.Tablero;
 
@@ -187,7 +187,7 @@ public class AldeanoTest {
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
                     //tira error
-                	//thrown.expect(modelo.Excepcion.class);
+                	//thrown.expect(modelo.excepciones.Excepcion.class);
                 	//unAldeano.realizarTrabajoDeTurno();
                 }
                     break;
@@ -257,7 +257,7 @@ public class AldeanoTest {
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
                     //tira error
-                	//thrown.expect(modelo.Excepcion.class);
+                	//thrown.expect(modelo.excepciones.Excepcion.class);
                     //unAldeano.realizarTrabajoDeTurno();
                 }
                     break;
@@ -447,7 +447,7 @@ public class AldeanoTest {
     
     //TODO falta arreglar esta --- lo comento para que para el build
 /*    @Test
-    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws modelo.Excepcion{
+    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws modelo.excepciones.Excepcion{
         int turno=0;
         int oro=0;
 

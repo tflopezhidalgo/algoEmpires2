@@ -1,9 +1,8 @@
 import modelo.*;
+import modelo.excepciones.Excepcion;
 import org.junit.Test;
 import org.junit.Assert;
-import java.util.List;
-import java.util.ArrayList;
-import org.mockito.Mockito;
+
 /*
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
@@ -29,7 +28,7 @@ public class JugadorTest {
          Assert.assertTrue(unJugador.castilloFueDestruido());
      }
      @Test
-    public void castilloNoFueDestruido() throws Excepcion{
+    public void castilloNoFueDestruido() throws Excepcion {
     	 Tablero unTablero = new Tablero();
          Jugador unJugador = new Jugador("Tomas");
          Area areaCasillo = unTablero.definirArea(0, 0, 3, 3);

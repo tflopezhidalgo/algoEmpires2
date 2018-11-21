@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.excepciones.Excepcion;
+
 public class Arquero extends Unidad {
 
     /*      -Arquero-

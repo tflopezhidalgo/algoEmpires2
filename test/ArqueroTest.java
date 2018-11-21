@@ -7,7 +7,7 @@ import modelo.Aldeano;
 import modelo.Area;
 import modelo.Arquero;
 import modelo.Casilla;
-import modelo.Excepcion;
+import modelo.excepciones.Excepcion;
 import modelo.Tablero;
 
 @SuppressWarnings("deprecation")

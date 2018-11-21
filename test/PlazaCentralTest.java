@@ -1,5 +1,6 @@
 import junit.framework.Assert;
 import modelo.*;
+import modelo.excepciones.Excepcion;
 import org.junit.Test;
 
 @SuppressWarnings("deprecation")

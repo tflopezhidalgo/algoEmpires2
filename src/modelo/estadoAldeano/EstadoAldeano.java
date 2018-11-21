@@ -1,4 +1,7 @@
-package modelo;
+package modelo.estadoAldeano;
+
+import modelo.*;
+import modelo.excepciones.Excepcion;
 
 public interface EstadoAldeano {
 

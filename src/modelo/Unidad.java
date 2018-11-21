@@ -1,10 +1,12 @@
 package modelo;
 
+import modelo.excepciones.Excepcion;
+
 public abstract class Unidad extends Pieza {
 
 	protected boolean ocupado;
 	
-	public Unidad(Area unEspacio) throws Excepcion  {
+	public Unidad(Area unEspacio) throws Excepcion {
 		super(unEspacio);
 		ocupado = false;
 	}

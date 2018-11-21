@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.excepciones.Excepcion;
+
 public class ArmaDeAsedio extends Unidad {
 
     /*     -Arma de asedio-

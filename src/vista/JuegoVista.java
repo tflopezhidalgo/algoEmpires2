@@ -1,6 +1,6 @@
 package vista;
 
-import vista.*;
+import modelo.excepciones.Excepcion;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -8,11 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import modelo.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import controlador.*;
 
 
 enum Estado {NO_COMENZADO, JUEGA_JUGADOR1, JUEGA_JUGADOR2, TERMINADO};
@@ -70,7 +65,7 @@ public class JuegoVista extends Application{
 		//-------------------
 	}
 
-	public void generarPiezasInicialesEquipo2() throws Excepcion{
+	public void generarPiezasInicialesEquipo2() throws Excepcion {
 		
 		//Castillo
 		CastilloVista castillo = new CastilloVista(ANCHO-5,ALTO-5);

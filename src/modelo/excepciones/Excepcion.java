@@ -1,4 +1,4 @@
-package modelo;
+package modelo.excepciones;
 
 public class Excepcion extends Exception{
 

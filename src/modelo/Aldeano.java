@@ -1,5 +1,8 @@
 package modelo;
 
+import modelo.estadoAldeano.*;
+import modelo.excepciones.Excepcion;
+
 public class Aldeano extends Unidad {
 	
 	private Edificio edificioObjetivo;
@@ -18,7 +21,7 @@ public class Aldeano extends Unidad {
 		
 		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
 			estadoActual = estadoActual.reparar(unEdificio);
-			if(estadoActual instanceof AldeanoReparando ) {
+			if(estadoActual instanceof AldeanoReparando) {
 				edificioObjetivo = unEdificio;
 				ocupado = true;
 				turnoJugado = true;
