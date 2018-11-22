@@ -10,7 +10,7 @@ public class AldeanoReparando extends EstadoAldeano {
         this.edificioObjetivo = unEdificio;
     }
 
-    public EstadoAldeano reparar(Edificio unEdificio)throws AldeanoOcupadoConOtroEdificioError{
+    public EstadoAldeano reparar(Edificio unEdificio){
 
         if(unEdificio != this.edificioObjetivo)
             throw new AldeanoOcupadoConOtroEdificioError();
@@ -20,7 +20,7 @@ public class AldeanoReparando extends EstadoAldeano {
         return this;
     }
 
-    public EstadoAldeano construir(Edificio unEdificio)throws AldeanoReparandoNoPuedeConstruir{
+    public EstadoAldeano construir(Edificio unEdificio){
 
         throw new AldeanoReparandoNoPuedeConstruir();
     }

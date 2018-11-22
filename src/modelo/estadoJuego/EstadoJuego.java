@@ -8,14 +8,14 @@ import java.util.List;
 
 public abstract class EstadoJuego {
 
-     abstract public Jugador getJugadorActual(List<Jugador> jugadores) throws NoExistenJugadoresActualesError;
+     abstract public Jugador getJugadorActual(List<Jugador> jugadores);
 
-     public EstadoJuego finalizarTurno() throws NoHayJuegoEnProcesoError{
+     public EstadoJuego finalizarTurno(){
 
          throw new NoHayJuegoEnProcesoError();
      }
 
-     public Jugador seleccionarGanador(List<Jugador> jugadores) throws Exception{
+     public Jugador seleccionarGanador(List<Jugador> jugadores){
 
          throw new JuegoNoTerminadoError();
      }

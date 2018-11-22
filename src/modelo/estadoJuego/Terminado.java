@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Terminado extends EstadoJuego {
 
-    public Jugador getJugadorActual(List<Jugador> jugadores) throws NoExistenJugadoresActualesError{
+    public Jugador getJugadorActual(List<Jugador> jugadores){
 
         throw new NoExistenJugadoresActualesError();
     }

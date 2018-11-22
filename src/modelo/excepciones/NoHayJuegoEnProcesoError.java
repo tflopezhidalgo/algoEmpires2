@@ -1,6 +1,6 @@
 package modelo.excepciones;
 
-public class NoHayJuegoEnProcesoError extends Exception {
+public class NoHayJuegoEnProcesoError extends RuntimeException {
 
 
 }

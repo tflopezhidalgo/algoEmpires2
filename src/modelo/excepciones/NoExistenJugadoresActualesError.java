@@ -1,6 +1,6 @@
 package modelo.excepciones;
 
-public class NoExistenJugadoresActualesError extends Exception{
+public class NoExistenJugadoresActualesError extends RuntimeException{
 
 
 }

@@ -7,7 +7,7 @@ public class Plaza extends Edificio {
 	
 	public static final int TAMANIO_LADO = 2;
 	
-	public Plaza(Area areaAOcupar) throws CasillaOcupadaError {
+	public Plaza(Area areaAOcupar) {
 		super(areaAOcupar);
 		vida = 450;
 		vidaMaxima = vida;
@@ -16,7 +16,7 @@ public class Plaza extends Edificio {
 		cantidadDeCuracion = 25;
 	}
 	
-	public Plaza(Area areaAOcupar, boolean yaConstruida) throws CasillaOcupadaError {
+	public Plaza(Area areaAOcupar, boolean yaConstruida) {
 		super(areaAOcupar);
 		vida = 450;
 		vidaMaxima = vida;
@@ -30,7 +30,7 @@ public class Plaza extends Edificio {
 		cantidadDeCuracion = 25;
 	}
 
-	public Aldeano crearAldeano(Area unEspacio) throws Exception {
+	public Aldeano crearAldeano(Area unEspacio) {
 		siYaJugoElTurnoError();
 		
 		turnoJugado = true;

@@ -12,7 +12,8 @@ public class Espadachin extends Unidad {
      *      Costo: 50
      */
 
-	public Espadachin(Area unEspacio) throws CasillaOcupadaError {
+    //TODO: Espadachin tiene varios estados: atacar a Unidad y atacar a Edificio
+	public Espadachin(Area unEspacio) {
 		super(unEspacio);
 		vida = 100;
 		costo = 50;
@@ -20,7 +21,7 @@ public class Espadachin extends Unidad {
 
 	//TODO: SAME ARQUERO; SOLUCIONAR!!
 
-	public void atacar(Edificio edificioEnemigo) throws Exception {
+	public void atacar(Edificio edificioEnemigo) {
 		siYaJugoElTurnoError();
 		
 		if(enRango(edificioEnemigo,1)) {
@@ -33,7 +34,7 @@ public class Espadachin extends Unidad {
 		}
 	}
 	
-	public void atacar(Unidad unidadEnemiga) throws Exception {
+	public void atacar(Unidad unidadEnemiga) {
 		siYaJugoElTurnoError();
 		
 		if(enRango(unidadEnemiga,1)) {

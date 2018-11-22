@@ -1,5 +1,5 @@
 package modelo.excepciones;
 
-public class CastilloDeJugadorFueDestruido extends Exception{
+public class CastilloDeJugadorFueDestruido extends RuntimeException{
 
 }

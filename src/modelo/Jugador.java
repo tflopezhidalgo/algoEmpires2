@@ -14,7 +14,7 @@ public class Jugador {
     private int cantidadDeOro;
     private int poblacion;
 
-    private void recolectarOro() throws Exception{
+    private void recolectarOro(){
 
     	for(int i=0; i<piezas.size(); i++) {
     		Pieza piezaActual = piezas.get(i);
@@ -52,7 +52,7 @@ public class Jugador {
         actualizarPoblacion();
     }
 
-    public void agregarPieza(Pieza nuevaPieza) throws PoblacionLimiteSuperadaError {
+    public void agregarPieza(Pieza nuevaPieza) {
         if(nuevaPieza instanceof Unidad && (this.poblacion >= POBLACION_MAX))
 
             throw new PoblacionLimiteSuperadaError();
@@ -76,7 +76,7 @@ public class Jugador {
         return this.poblacion;
     }
 
-    public void finalizarTurno() throws Exception{
+    public void finalizarTurno(){
         this.recolectarOro();
         actualizarPoblacion();
         

@@ -1,6 +1,6 @@
 package modelo.excepciones;
 
-public class PoblacionLimiteSuperadaError extends Exception {
+public class PoblacionLimiteSuperadaError extends RuntimeException {
 
 
 }

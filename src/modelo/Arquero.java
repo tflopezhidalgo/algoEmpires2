@@ -1,7 +1,6 @@
 package modelo;
 
-import modelo.excepciones.CasillaOcupadaError;
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.*;
 
 public class Arquero extends Unidad {
 
@@ -12,7 +11,9 @@ public class Arquero extends Unidad {
      *      Distancia de ataque: 3
      */
 
-	public Arquero(Area unEspacio) throws CasillaOcupadaError {
+
+    //TODO: El arquero tiene varios estados, uno es atacando a unidad y otro atacando a edificio.
+	public Arquero(Area unEspacio) {
 
 		super(unEspacio);
 		vida = 75;
@@ -22,7 +23,7 @@ public class Arquero extends Unidad {
 
 	//TODO: CODIGO REPETIDO!!
 
-	public void atacar(Edificio edificioEnemigo) throws Exception {
+	public void atacar(Edificio edificioEnemigo) {
 		siYaJugoElTurnoError();
 		
 		if(enRango(edificioEnemigo,3)) {
@@ -34,7 +35,7 @@ public class Arquero extends Unidad {
 			edificioEnemigo = null;
 	}
 	
-	public void atacar(Unidad unidadEnemiga) throws Exception {
+	public void atacar(Unidad unidadEnemiga) {
 		siYaJugoElTurnoError();
 		
 		if(enRango(unidadEnemiga,3)) {

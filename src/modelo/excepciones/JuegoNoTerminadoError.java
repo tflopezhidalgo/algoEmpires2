@@ -1,5 +1,5 @@
 package modelo.excepciones;
 
-public class JuegoNoTerminadoError extends Exception {
+public class JuegoNoTerminadoError extends RuntimeException {
 
 }

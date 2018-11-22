@@ -1,20 +1,18 @@
 package modelo;
 
-import modelo.excepciones.CasillaOcupadaError;
-import modelo.excepciones.PiezaOcupadaNoPuedeAccionarError;
-import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
+import modelo.excepciones.*;
 
 public abstract class Unidad extends Pieza {
 
 	protected boolean ocupado;
 
-    protected void siEstaOcupadoDaError() throws PiezaOcupadaNoPuedeAccionarError {
+    protected void siEstaOcupadoDaError() {
         if(ocupado) {
             throw new PiezaOcupadaNoPuedeAccionarError();
         }
     }
 	
-	public Unidad(Area unEspacio) throws CasillaOcupadaError {
+	public Unidad(Area unEspacio) {
 
 	    super(unEspacio);
 		ocupado = false;
@@ -25,7 +23,7 @@ public abstract class Unidad extends Pieza {
 		return ocupado;
 	}
 
-	public void mover(Area nuevoEspacio) throws PiezaYaJugoEnTurnoActualError, CasillaOcupadaError{
+	public void mover(Area nuevoEspacio){
 
 	    this.siYaJugoElTurnoError();
 		

@@ -1,5 +1,5 @@
 package modelo.excepciones;
 
-public class PiezaOcupadaNoPuedeAccionarError extends Exception {
+public class PiezaOcupadaNoPuedeAccionarError extends RuntimeException {
 
 }

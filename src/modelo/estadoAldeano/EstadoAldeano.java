@@ -6,9 +6,9 @@ public abstract class EstadoAldeano {
 
     protected Edificio edificioObjetivo;
 
-    public abstract EstadoAldeano reparar(Edificio unEdificio) throws Exception;
+    public abstract EstadoAldeano reparar(Edificio unEdificio);
 
-    public abstract EstadoAldeano construir(Edificio nuevoEdificio) throws Exception;
+    public abstract EstadoAldeano construir(Edificio nuevoEdificio);
 
 	public abstract EstadoAldeano realizarTrabajoDeTurno();
 

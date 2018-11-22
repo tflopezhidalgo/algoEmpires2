@@ -1,5 +1,5 @@
 package modelo.excepciones;
 
-public class PiezaYaJugoEnTurnoActualError extends Exception {
+public class PiezaYaJugoEnTurnoActualError extends RuntimeException {
 
 }

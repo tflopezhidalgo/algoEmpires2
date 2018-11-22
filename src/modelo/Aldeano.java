@@ -10,14 +10,14 @@ public class Aldeano extends Unidad {
 
 	private EstadoAldeano estadoActual;
 	
-	public Aldeano(Area unEspacio) throws CasillaOcupadaError{
+	public Aldeano(Area unEspacio){
 		super(unEspacio);
 		estadoActual = new AldeanoLibre();
 		vida = VIDA_ALDEANO;
 		costo = COSTO_ALDEANO;
 	}
 
-	public void reparar(Edificio unEdificio) throws Exception {
+	public void reparar(Edificio unEdificio) {
 
 	    siYaJugoElTurnoError();
 		
@@ -29,7 +29,7 @@ public class Aldeano extends Unidad {
 
 	}
 	
-	public Plaza crearPlaza(Area areaDeConstruccion) throws Exception {
+	public Plaza crearPlaza(Area areaDeConstruccion) {
 		siYaJugoElTurnoError();
 
         if(distanciaMinimaA(areaDeConstruccion) > 1) {
@@ -44,7 +44,7 @@ public class Aldeano extends Unidad {
 
 	}
 	
-	public Cuartel crearCuartel(Area areaDeConstruccion) throws Exception {
+	public Cuartel crearCuartel(Area areaDeConstruccion) {
 
         siYaJugoElTurnoError();
 
@@ -59,7 +59,7 @@ public class Aldeano extends Unidad {
         return (Cuartel)estadoActual.obtenerEdificioObjetivo();
 	}
 
-	public int realizarTrabajoDeTurno() throws Exception {
+	public int realizarTrabajoDeTurno() {
 		siYaJugoElTurnoError();
 		
 		estadoActual = estadoActual.realizarTrabajoDeTurno();

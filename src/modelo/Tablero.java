@@ -24,7 +24,7 @@ public class Tablero {
         }
     }
 
-    private void casillaNoExisteError(int x, int y) throws CasillaInvalidaError {
+    private void casillaNoExisteError(int x, int y) {
         if(x > ancho-1 | x < 0 | y < 0 | y > alto-1)
             throw new CasillaInvalidaError();
     }
@@ -49,7 +49,7 @@ public class Tablero {
 		crearTableroVacio();
 	}
 	
-	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws CasillaInvalidaError{
+	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal){
 
         List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
         
@@ -63,7 +63,8 @@ public class Tablero {
         return zonaDeConstruccion;
 	}
 
-	public List<Pieza> generarPiezasInicialesEquipo1() throws Exception{
+
+	public List<Pieza> generarPiezasInicialesEquipo1(){
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 		//Castillo 1
 		Area areaCastillo = definirArea(1,1, 4, 4);
@@ -89,7 +90,7 @@ public class Tablero {
 		return piezasNuevas;
 	}
 
-	public List<Pieza> generarPiezasInicialesEquipo2() throws Exception{
+	public List<Pieza> generarPiezasInicialesEquipo2(){
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 		//Castillo 1
 		Area areaCastillo = definirArea(ancho-5, alto-5, alto-2, ancho-2);
@@ -128,7 +129,7 @@ public class Tablero {
 		unaCasilla.liberar();
 	}
 
-	public Casilla obtenerCasillaEn(int x, int y) throws CasillaInvalidaError {
+	public Casilla obtenerCasillaEn(int x, int y) {
 		casillaNoExisteError(x, y);
 		String posicion = Casilla.aString(x, y);
 		return casillasDelTablero.get(posicion);
@@ -136,7 +137,7 @@ public class Tablero {
 	
 	//---------------PROTOTIPO  V3---------------
 	
-	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) throws Exception {
+	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) {
 		Area espacioAnterior = unaUnidad.obtenerAreaOcupada();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+difX, espacioAnterior.y0()+difY, espacioAnterior.x1()+difX, espacioAnterior.y1()+difY);

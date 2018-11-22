@@ -18,8 +18,7 @@ public class ArmaDeAsedio extends Unidad {
      */
 
     //TODO: Usar state para estado Armado y Desarmado
-
-	public ArmaDeAsedio(Area unEspacio) throws CasillaOcupadaError {
+	public ArmaDeAsedio(Area unEspacio) {
 
 		super(unEspacio);
 		vida = VIDA;
@@ -31,7 +30,7 @@ public class ArmaDeAsedio extends Unidad {
 		ocupado = !ocupado;
 	}
 
-	public void atacar(Edificio edificioEnemigo) throws Exception {
+	public void atacar(Edificio edificioEnemigo) {
 		siYaJugoElTurnoError();
 		
 		if(ocupado) {

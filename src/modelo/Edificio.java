@@ -8,8 +8,7 @@ public abstract class Edificio extends Pieza {
 	protected int tiempoDeConstruccion;
 	protected int cantidadDeCuracion;
 	
-	public Edificio(Area areaAOcupar) throws CasillaOcupadaError {
-
+	public Edificio(Area areaAOcupar) {
 	    super(areaAOcupar);
 	    this.vidaMaxima = 0;
 	    this.tiempoDeConstruccion = 0;

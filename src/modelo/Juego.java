@@ -25,7 +25,7 @@ public class Juego {
     }
 
     //TODO: Agregar posibilidad de definir un tamaño inicial de tablero.
-    public Juego(String nombreJugador1, String nombreJugador2) throws Exception{
+    public Juego(String nombreJugador1, String nombreJugador2){
 
         jugadores = new ArrayList<>();
         jugadores.add(new Jugador(nombreJugador1));
@@ -38,7 +38,7 @@ public class Juego {
         this.controlador = controlador;
     }
 
-    public void iniciarJuego() throws Exception {
+    public void iniciarJuego() {
 
         seleccionarJugadorInicial();
 
@@ -51,12 +51,12 @@ public class Juego {
         return this.tablero;
     }
 
-    public Jugador getJugadorActual() throws NoExistenJugadoresActualesError{
+    public Jugador getJugadorActual(){
 
         return (this.estado.getJugadorActual(this.jugadores));
     }
 
-    public void finalizarTurno() throws Exception{
+    public void finalizarTurno(){
 
         this.estado.getJugadorActual(jugadores).finalizarTurno();
         this.estado = estado.finalizarTurno();
@@ -65,7 +65,7 @@ public class Juego {
             this.estado = new Terminado();
     }
 
-    public Jugador seleccionarGanador() throws Exception{
+    public Jugador seleccionarGanador(){
 
         return (estado.seleccionarGanador(this.jugadores));
 

@@ -1,5 +1,5 @@
 package modelo.excepciones;
 
-public class CasillaInvalidaError extends Exception {
+public class CasillaInvalidaError extends RuntimeException {
 
 }

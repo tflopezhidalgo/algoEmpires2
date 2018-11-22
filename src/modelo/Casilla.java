@@ -19,7 +19,7 @@ public class Casilla {
 		return ocupada;
 	}
 
-	public void ocupar() throws CasillaOcupadaError {
+	public void ocupar() {
 		if(ocupada)
             throw new CasillaOcupadaError();
 

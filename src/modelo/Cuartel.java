@@ -7,7 +7,7 @@ public class Cuartel extends Edificio {
 	
 	public static final int TAMANIO_LADO = 2;
 	
-	public Cuartel(Area areaAOcupar) throws CasillaOcupadaError {
+	public Cuartel(Area areaAOcupar) {
 		super(areaAOcupar);
 		vida = 250;
 		vidaMaxima = vida;
@@ -17,7 +17,7 @@ public class Cuartel extends Edificio {
 	}
 	
 	//TODO: ELIMINAR ESTO - es solo para realizar en AldeanoTest "AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion"
-	public Cuartel(Area areaAOcupar, boolean yaConstruida) throws CasillaOcupadaError {
+	public Cuartel(Area areaAOcupar, boolean yaConstruida) {
 		super(areaAOcupar);
 		vida = 250;
 		vidaMaxima = vida;
@@ -33,7 +33,7 @@ public class Cuartel extends Edificio {
 
 	//Nota: No hace falta preguntar si unEspacio está libre porque de eso se encarga el constructor de cada Unidad.
 
-	public Espadachin crearEspadachin(Area unEspacio) throws Exception {
+	public Espadachin crearEspadachin(Area unEspacio) {
 		siYaJugoElTurnoError();
 		
 		turnoJugado = true;
@@ -41,7 +41,7 @@ public class Cuartel extends Edificio {
 		return unEspadachin;
 	}
 	
-	public Arquero crearArquero(Area unEspacio) throws Exception {
+	public Arquero crearArquero(Area unEspacio) {
 		siYaJugoElTurnoError();
 		
 		turnoJugado = true;

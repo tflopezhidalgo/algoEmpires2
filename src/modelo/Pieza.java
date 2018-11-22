@@ -1,9 +1,6 @@
 package modelo;
 
-import modelo.excepciones.CasillaInvalidaError;
-import modelo.excepciones.CasillaOcupadaError;
-import modelo.excepciones.CastilloDeJugadorFueDestruido;
-import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
+import modelo.excepciones.*;
 
 import java.util.List;
 
@@ -16,11 +13,12 @@ public abstract class Pieza {
 
     protected void liberarUbicacion() { espacioOcupado.liberar(); }
 
-    protected void siYaJugoElTurnoError() throws PiezaYaJugoEnTurnoActualError {
+    protected void siYaJugoElTurnoError(){
 
-        if(turnoJugado)
+        if(turnoJugado){
 
             throw new PiezaYaJugoEnTurnoActualError();
+        }
     }
 
     protected boolean enRango(Pieza piezaEnemiga, int distanciaMaxima){
@@ -60,7 +58,7 @@ public abstract class Pieza {
         turnoJugado = false;
     }
 
-	public Pieza(Area espacioAOcupar) throws CasillaOcupadaError {
+	public Pieza(Area espacioAOcupar) {
 
 		espacioOcupado = espacioAOcupar;
 		espacioOcupado.ocupar();
@@ -71,7 +69,7 @@ public abstract class Pieza {
 
 	public Area obtenerAreaOcupada() { return espacioOcupado; }
 
-	public void recibirDanio(int danio) throws CastilloDeJugadorFueDestruido {
+	public void recibirDanio(int danio) {
 		vida = vida - danio;
 		if(vida <= 0) {
 

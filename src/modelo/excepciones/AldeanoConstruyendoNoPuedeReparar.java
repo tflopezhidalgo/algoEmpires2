@@ -1,6 +1,6 @@
 package modelo.excepciones;
 
-public class AldeanoConstruyendoNoPuedeReparar extends Exception {
+public class AldeanoConstruyendoNoPuedeReparar extends RuntimeException {
 
 
 }

@@ -1,4 +1,4 @@
 package modelo.excepciones;
 
-public class AldeanoOcupadoConOtroEdificioError extends Exception {
+public class AldeanoOcupadoConOtroEdificioError extends RuntimeException {
 }

@@ -40,7 +40,7 @@ public class Area {
 			casillasDelArea.get(i).liberar();
 	}
 	
-	public void ocupar() throws CasillaOcupadaError {
+	public void ocupar() {
 
 		for (int i = 0; i < casillasDelArea.size(); i++)
 			casillasDelArea.get(i).ocupar();
@@ -54,7 +54,7 @@ public class Area {
 		return true;
 	}
 	
-	public void agregarCasilla(Casilla unaCasilla) throws NullPointerCasillaError {
+	public void agregarCasilla(Casilla unaCasilla) {
 
 		if(unaCasilla == null)
 			throw new NullPointerCasillaError();
