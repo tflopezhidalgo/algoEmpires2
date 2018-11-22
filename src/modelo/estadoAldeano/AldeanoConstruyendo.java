@@ -1,38 +1,38 @@
 package modelo.estadoAldeano;
 
 import modelo.*;
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.*;
 
-public class AldeanoConstruyendo implements EstadoAldeano {
-	
-	public EstadoAldeano reparar(Edificio unEdificio){
+public class AldeanoConstruyendo extends EstadoAldeano {
 
-		return this;
-	}
-	
-	public Plaza crearPlaza(Area areaDeConstruccion){
+    public AldeanoConstruyendo(Edificio unEdificio){
 
-		return null;
-	}
-	
-	public Cuartel crearCuartel(Area areaDeConstruccion) {
+        this.edificioObjetivo = unEdificio;
+    }
 
-		return null;
-	}
-	
-	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo) {
-		if(edificioObjetivo.enConstruccion()) {
-			//turnoJugado = true;
-			//return 0;
-			edificioObjetivo.construir();
-			return this;
-		}
-		else {
-			//ocupado = false;
-			//turnoJugado = true;
-			//return 20;
-			return (new AldeanoLibre());
-		}
-	}	
+    public EstadoAldeano reparar(Edificio unEdificio) throws AldeanoConstruyendoNoPuedeReparar {
+
+        throw new AldeanoConstruyendoNoPuedeReparar();
+    }
+
+    public EstadoAldeano construir(Edificio unEdificio)throws AldeanoOcupadoConOtroEdificioError{
+
+        if(unEdificio != this.edificioObjetivo)
+            throw new AldeanoOcupadoConOtroEdificioError();
+
+        this.edificioObjetivo = unEdificio;
+        unEdificio.construir();
+        return this;
+    }
+
+    public EstadoAldeano realizarTrabajoDeTurno() {
+        if(this.edificioObjetivo.enConstruccion()) {
+
+            edificioObjetivo.construir();
+            return this;
+        }else
+
+            return (new AldeanoLibre());
+    }
 
 }

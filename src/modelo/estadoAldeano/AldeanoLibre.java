@@ -1,37 +1,35 @@
 package modelo.estadoAldeano;
 
 import modelo.*;
-import modelo.excepciones.*;
 
-public class AldeanoLibre implements EstadoAldeano {
-	
+public class AldeanoLibre extends EstadoAldeano {
+
+    public AldeanoLibre(){
+
+        this.edificioObjetivo = null;
+    }
+
 	public EstadoAldeano reparar(Edificio unEdificio){
 
 		unEdificio.reparar();
-		return (new AldeanoReparando());
+		return (new AldeanoReparando(unEdificio));
 	}
 
-	public Plaza crearPlaza(Area areaDeConstruccion) throws CasillaOcupadaError {
+	public EstadoAldeano construir(Edificio unEdificio){
 
-		Plaza nuevaPlaza = new Plaza(areaDeConstruccion);
-		nuevaPlaza.construir();
-		
-		return nuevaPlaza;
-	}
-
-	public Cuartel crearCuartel(Area areaDeConstruccion) throws Exception {
-
-		Cuartel nuevoCuartel = new Cuartel(areaDeConstruccion);
-		nuevoCuartel.construir();
-
-		return nuevoCuartel;
-	}
+        unEdificio.construir();
+        return (new AldeanoConstruyendo(unEdificio));
+    }
 	
-	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo){
-		//ocupado = false;
-		//turnoJugado = true;
-		//return 20;
+	public EstadoAldeano realizarTrabajoDeTurno(){
+
 		return this;
-	}	
+	}
+
+	@Override
+	public int generarOro(){ return 20;}
+
+	@Override
+    public Edificio obtenerEdificioObjetivo(){ return null; }
 
 }

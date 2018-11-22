@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-//TODO: Falta implementar decuento de oro por crear Pieza
-
 public class Jugador {
 
     static final int POBLACION_MAX = 50;
@@ -55,10 +53,10 @@ public class Jugador {
     }
 
     public void agregarPieza(Pieza nuevaPieza) throws PoblacionLimiteSuperadaError {
-        if(nuevaPieza instanceof Unidad && (this.poblacion >= POBLACION_MAX)){
+        if(nuevaPieza instanceof Unidad && (this.poblacion >= POBLACION_MAX))
+
             throw new PoblacionLimiteSuperadaError();
-            //TODO: Refactorizar.
-        }
+
         this.cantidadDeOro = this.cantidadDeOro - nuevaPieza.costo;
         this.piezas.add(nuevaPieza);
         this.actualizarPoblacion();
@@ -67,11 +65,10 @@ public class Jugador {
     public void actualizarPoblacion() {
         this.poblacion = 0;
         Iterator iterador = piezas.iterator();
-        while (iterador.hasNext()){
-            if (iterador.next() instanceof Unidad) {
+        while (iterador.hasNext())
+            if (iterador.next() instanceof Unidad)
                 this.poblacion++;
-            }
-        }
+
     }
 
     public int getPoblacion(){

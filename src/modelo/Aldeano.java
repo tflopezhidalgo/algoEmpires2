@@ -8,13 +8,11 @@ public class Aldeano extends Unidad {
     final int VIDA_ALDEANO = 50;
     final int COSTO_ALDEANO = 25;
 
-	private Edificio edificioObjetivo;
 	private EstadoAldeano estadoActual;
 	
 	public Aldeano(Area unEspacio) throws CasillaOcupadaError{
 		super(unEspacio);
 		estadoActual = new AldeanoLibre();
-		edificioObjetivo = null;
 		vida = VIDA_ALDEANO;
 		costo = COSTO_ALDEANO;
 	}
@@ -25,56 +23,54 @@ public class Aldeano extends Unidad {
 		
 		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
 			estadoActual = estadoActual.reparar(unEdificio);
-			if(estadoActual instanceof AldeanoReparando) {
-				edificioObjetivo = unEdificio;
-				ocupado = true;
-				turnoJugado = true;
-			}
+			ocupado = true;     //TODO: Si esta en estadoOcupado es al pedo el boolean de ocupado
+			turnoJugado = true;
 		}
+
 	}
 	
 	public Plaza crearPlaza(Area areaDeConstruccion) throws Exception {
 		siYaJugoElTurnoError();
 
-		if(!ocupado & areaDeConstruccion.estaLibre() & distanciaMinimaA(areaDeConstruccion) == 1) {
-			edificioObjetivo = estadoActual.crearPlaza(areaDeConstruccion);
-			if(edificioObjetivo != null) {
-				ocupado = true;
-				turnoJugado = true;
-				estadoActual = new AldeanoConstruyendo();
-                return (Plaza)edificioObjetivo;
-			}
-		}
-		return null;
+        if(distanciaMinimaA(areaDeConstruccion) > 1) {
+            throw  new NoSePuedeConstruirTanLejosError();
+        }
+
+        estadoActual = estadoActual.construir(new Plaza(areaDeConstruccion));
+        ocupado = true;
+        turnoJugado = true;
+
+        return (Plaza)estadoActual.obtenerEdificioObjetivo();
+
 	}
 	
 	public Cuartel crearCuartel(Area areaDeConstruccion) throws Exception {
-		siYaJugoElTurnoError();
-		
-		if(!ocupado & areaDeConstruccion.estaLibre() & distanciaMinimaA(areaDeConstruccion) == 1) {
-			edificioObjetivo = estadoActual.crearCuartel(areaDeConstruccion);
-			if(edificioObjetivo != null) {
-				ocupado = true;
-				turnoJugado = true;
-				estadoActual = new AldeanoConstruyendo();
-				return (Cuartel)edificioObjetivo;
-			}
-		}
-		return null;
+
+        siYaJugoElTurnoError();
+
+        if(distanciaMinimaA(areaDeConstruccion) > 1) {
+            throw new NoSePuedeConstruirTanLejosError();
+        }
+
+        estadoActual = estadoActual.construir(new Cuartel(areaDeConstruccion));
+        ocupado = true;
+        turnoJugado = true;
+
+        return (Cuartel)estadoActual.obtenerEdificioObjetivo();
 	}
 
 	public int realizarTrabajoDeTurno() throws Exception {
 		siYaJugoElTurnoError();
 		
-		estadoActual = estadoActual.realizarTrabajoDeTurno(edificioObjetivo);
+		estadoActual = estadoActual.realizarTrabajoDeTurno();
 		
 		if(estadoActual instanceof AldeanoLibre) {
-			edificioObjetivo = null;
 			ocupado = false;
-			return 20;
 		}
+
 		turnoJugado = true;
-		return 0;
+
+		return estadoActual.generarOro();
 	}	
 	
 }
