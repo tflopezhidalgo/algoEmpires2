@@ -5,6 +5,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.*;
+
 public class TableroTest {
 	
 	@Rule
@@ -53,5 +55,86 @@ public class TableroTest {
 		thrown.expect(Excepcion.class);
 		unTablero.moverEnDireccion(unAldeano,1,0);
 	}
-	
+
+	@Test
+	public void piezasInicialesDelEquipo1BienGeneradas() throws Exception {
+
+		Tablero unTablero = new Tablero();
+		List<Pieza> piezas = unTablero.generarPiezasInicialesEquipo1();
+		int cantidadDePiezasIniciales = piezas.size();
+
+		boolean cumple=false;
+		for (int i=0; i<cantidadDePiezasIniciales; i++){
+			if (piezas.get(i) instanceof Aldeano){
+				cumple=true;
+			}
+			else{
+				if (piezas.get(i) instanceof Castillo){
+					cumple=true;
+				}
+				else{
+					if (piezas.get(i) instanceof Plaza)
+					{
+						cumple=true;
+					}
+				}
+			}
+		}
+
+		Assert.assertEquals(true, cumple);
+	}
+
+	@Test
+	public void piezasInicialesDelEquipo2BienGeneradas() throws Exception {
+
+		Tablero unTablero = new Tablero();
+		List<Pieza> piezas = unTablero.generarPiezasInicialesEquipo2();
+		int cantidadDePiezasIniciales = piezas.size();
+
+		boolean cumple=false;
+		for (int i=0; i<cantidadDePiezasIniciales; i++){
+			if (piezas.get(i) instanceof Aldeano){
+				cumple=true;
+			}
+			else{
+				if (piezas.get(i) instanceof Castillo){
+					cumple=true;
+				}
+				else{
+					if (piezas.get(i) instanceof Plaza)
+					{
+						cumple=true;
+					}
+				}
+			}
+		}
+
+		Assert.assertEquals(true, cumple);
+	}
+
+	@Test
+	public void liberarUnArea() throws Exception {
+
+		Tablero unTablero = new Tablero();
+		Area unArea = unTablero.definirArea(0, 0, 5, 5);
+
+		unArea.ocupar();
+		Assert.assertEquals(false, unArea.estaLibre());
+
+		unTablero.liberar(unArea);
+		Assert.assertEquals(true, unArea.estaLibre());
+	}
+
+	@Test
+	public void liberarUnaCasilla() throws Exception {
+
+		Tablero unTablero = new Tablero();
+		Casilla unaCasilla = new Casilla(1,1);
+
+		unaCasilla.ocupar();
+		Assert.assertEquals(true, unaCasilla.estaOcupada());
+
+		unTablero.liberar(unaCasilla);
+		Assert.assertEquals(false, unaCasilla.estaOcupada());
+	}
 }
