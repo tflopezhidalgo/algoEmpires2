@@ -58,7 +58,11 @@ public class Juego {
 
     public void finalizarTurno() throws Exception{
 
+        this.estado.getJugadorActual(jugadores).finalizarTurno();
         this.estado = estado.finalizarTurno();
+
+        if(this.estado.getJugadorActual(jugadores).castilloFueDestruido())
+            this.estado = new Terminado();
     }
 
     public Jugador seleccionarGanador() throws Exception{

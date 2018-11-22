@@ -12,8 +12,8 @@ public class JugadorTest {
         Assert.assertEquals(100, unJugador.obtenerOro());
         Assert.assertEquals(0, unJugador.getPoblacion());
     }
-  /*   @Test
-    public void seAgregaUnaPiezaAJugador() throws CastilloDeJugadorFueDestruido{
+    @Test
+    public void seAgregaUnaPiezaAJugador() throws Exception{
     	 Tablero unTablero = new Tablero();
          Jugador unJugador = new Jugador("Tomas");
          Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
@@ -31,7 +31,7 @@ public class JugadorTest {
          unJugador.agregarPieza(unCastillo);
          Assert.assertEquals( 0, unJugador.getPoblacion());
         Assert.assertFalse(unJugador.castilloFueDestruido());
-    }       */ //TODO: Corregir castilloFueDestruido()
+    }
      @Test
     public void seActualizaLaPoblacion() throws Exception{
     	 Tablero unTablero = new Tablero();

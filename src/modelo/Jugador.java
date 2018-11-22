@@ -34,6 +34,13 @@ public class Jugador {
         this.cantidadDeOro = cantidadDeOro + oroRecolectado;   */
     }
 
+    private void finalizarTurnoDePiezas() {
+        for(int i = 0; i < piezas.size(); i++) {
+            Pieza piezaActual = piezas.get(i);
+            piezaActual.nuevoTurno();
+        }
+    }
+
     /*          Constructor         */
     public Jugador(String unNombre){
         this.nombreJugador = unNombre;
@@ -52,6 +59,7 @@ public class Jugador {
             throw new PoblacionLimiteSuperadaError();
             //TODO: Refactorizar.
         }
+        this.cantidadDeOro = this.cantidadDeOro - nuevaPieza.costo;
         this.piezas.add(nuevaPieza);
         this.actualizarPoblacion();
     }
@@ -79,13 +87,6 @@ public class Jugador {
         finalizarTurnoDePiezas();
     }
     
-    private void finalizarTurnoDePiezas() {
-    	for(int i = 0; i < piezas.size(); i++) {
-    		Pieza piezaActual = piezas.get(i);
-    		piezaActual.nuevoTurno();
-    	}
-    }
-    
     public String obtenerNombre() {
 
     	return nombreJugador;
@@ -94,5 +95,16 @@ public class Jugador {
     public int obtenerOro(){
 
         return this.cantidadDeOro;
+    }
+
+    public boolean castilloFueDestruido(){
+
+        Iterator iterador = piezas.iterator();
+        while (iterador.hasNext()){
+            if (iterador.next() instanceof Castillo) {
+                return false;
+            }
+        }
+        return true;
     }
 }

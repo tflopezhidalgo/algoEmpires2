@@ -10,7 +10,7 @@ public class Terminado extends EstadoJuego {
 
         throw new NoExistenJugadoresActualesError();
     }
-/*
+
     @Override
     public Jugador seleccionarGanador(List<Jugador> jugadores){
 
@@ -19,5 +19,5 @@ public class Terminado extends EstadoJuego {
             return jugadores.get(0);
         else
             return jugadores.get(1);
-    }   */
+    }
 }
