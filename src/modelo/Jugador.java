@@ -1,7 +1,6 @@
 package modelo;
 
-import modelo.excepciones.Excepcion;
-
+import modelo.excepciones.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,7 +16,7 @@ public class Jugador {
     private int cantidadDeOro;
     private int poblacion;
 
-    private void recolectarOro() throws Excepcion{
+    private void recolectarOro() throws Exception{
 
     	for(int i=0; i<piezas.size(); i++) {
     		Pieza piezaActual = piezas.get(i);
@@ -48,9 +47,9 @@ public class Jugador {
         actualizarPoblacion();
     }
 
-    public void agregarPieza(Pieza nuevaPieza) throws Excepcion {
+    public void agregarPieza(Pieza nuevaPieza) throws PoblacionLimiteSuperadaError {
         if(nuevaPieza instanceof Unidad && (this.poblacion >= POBLACION_MAX)){
-            throw new Excepcion("Poblacion limite superada");
+            throw new PoblacionLimiteSuperadaError();
             //TODO: Refactorizar.
         }
         this.piezas.add(nuevaPieza);
@@ -67,22 +66,12 @@ public class Jugador {
         }
     }
 
-    public boolean castilloFueDestruido(){
-        Iterator iterator = piezas.iterator();
-
-        while(iterator.hasNext())
-            if(iterator.next() instanceof Castillo)
-                return false;
-
-        return true;
-    }
-
     public int getPoblacion(){
 
         return this.poblacion;
     }
 
-    public void finalizarTurno() throws Excepcion{
+    public void finalizarTurno() throws Exception{
         this.recolectarOro();
         actualizarPoblacion();
         

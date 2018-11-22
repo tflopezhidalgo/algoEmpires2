@@ -1,18 +1,17 @@
 package modelo.estadoAldeano;
 
 import modelo.*;
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.*;
 
 public interface EstadoAldeano {
 
-	public EstadoAldeano reparar(Edificio unEdificio) throws Excepcion;
+    EstadoAldeano reparar(Edificio unEdificio) throws Excepcion;
 	
-	public Plaza crearPlaza(Area areaDeConstruccion) throws Excepcion;
+    Plaza crearPlaza(Area areaDeConstruccion) throws CasillaOcupadaError;
 	
-	public Cuartel crearCuartel(Area areaDeConstruccion) throws Excepcion;
+	Cuartel crearCuartel(Area areaDeConstruccion) throws Exception;
 	
-	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo) throws Excepcion;
-		
+	EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo);
 
 }
 

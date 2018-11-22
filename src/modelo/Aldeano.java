@@ -1,23 +1,27 @@
 package modelo;
 
 import modelo.estadoAldeano.*;
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.*;
 
 public class Aldeano extends Unidad {
-	
+
+    final int VIDA_ALDEANO = 50;
+    final int COSTO_ALDEANO = 25;
+
 	private Edificio edificioObjetivo;
 	private EstadoAldeano estadoActual;
 	
-	public Aldeano(Area unEspacio) throws Excepcion  {
+	public Aldeano(Area unEspacio) throws CasillaOcupadaError{
 		super(unEspacio);
 		estadoActual = new AldeanoLibre();
 		edificioObjetivo = null;
-		vida = 50;
-		costo = 25;
+		vida = VIDA_ALDEANO;
+		costo = COSTO_ALDEANO;
 	}
 
-	public void reparar(Edificio unEdificio) throws Excepcion {
-		siYaJugoElTurnoError();
+	public void reparar(Edificio unEdificio) throws Exception {
+
+	    siYaJugoElTurnoError();
 		
 		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
 			estadoActual = estadoActual.reparar(unEdificio);
@@ -29,7 +33,7 @@ public class Aldeano extends Unidad {
 		}
 	}
 	
-	public Plaza crearPlaza(Area areaDeConstruccion) throws Excepcion {
+	public Plaza crearPlaza(Area areaDeConstruccion) throws Exception {
 		siYaJugoElTurnoError();
 
 		if(!ocupado & areaDeConstruccion.estaLibre() & distanciaMinimaA(areaDeConstruccion) == 1) {
@@ -44,7 +48,7 @@ public class Aldeano extends Unidad {
 		return null;
 	}
 	
-	public Cuartel crearCuartel(Area areaDeConstruccion) throws Excepcion {
+	public Cuartel crearCuartel(Area areaDeConstruccion) throws Exception {
 		siYaJugoElTurnoError();
 		
 		if(!ocupado & areaDeConstruccion.estaLibre() & distanciaMinimaA(areaDeConstruccion) == 1) {
@@ -58,9 +62,8 @@ public class Aldeano extends Unidad {
 		}
 		return null;
 	}
-	
-	
-	public int realizarTrabajoDeTurno() throws Excepcion {
+
+	public int realizarTrabajoDeTurno() throws Exception {
 		siYaJugoElTurnoError();
 		
 		estadoActual = estadoActual.realizarTrabajoDeTurno(edificioObjetivo);

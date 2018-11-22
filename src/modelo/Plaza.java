@@ -1,12 +1,13 @@
 package modelo;
 
+import modelo.excepciones.CasillaOcupadaError;
 import modelo.excepciones.Excepcion;
 
 public class Plaza extends Edificio {
 	
 	public static final int TAMANIO_LADO = 2;
 	
-	public Plaza(Area areaAOcupar) throws Excepcion {
+	public Plaza(Area areaAOcupar) throws CasillaOcupadaError {
 		super(areaAOcupar);
 		vida = 450;
 		vidaMaxima = vida;
@@ -15,7 +16,7 @@ public class Plaza extends Edificio {
 		cantidadDeCuracion = 25;
 	}
 	
-	public Plaza(Area areaAOcupar, boolean yaConstruida) throws Excepcion {
+	public Plaza(Area areaAOcupar, boolean yaConstruida) throws CasillaOcupadaError {
 		super(areaAOcupar);
 		vida = 450;
 		vidaMaxima = vida;
@@ -28,13 +29,9 @@ public class Plaza extends Edificio {
 		
 		cantidadDeCuracion = 25;
 	}
-	
-	public Aldeano crearAldeano(Area unEspacio) throws Excepcion {
+
+	public Aldeano crearAldeano(Area unEspacio) throws Exception {
 		siYaJugoElTurnoError();
-		
-		if(!unEspacio.estaLibre()) {
-			throw new Excepcion("ERROR: La ubicacion para colocar al aldeano esta ocupada.");
-		}
 		
 		turnoJugado = true;
 		Aldeano unAldeano = new Aldeano(unEspacio);

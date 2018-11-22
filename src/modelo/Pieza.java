@@ -1,6 +1,9 @@
 package modelo;
 
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.CasillaInvalidaError;
+import modelo.excepciones.CasillaOcupadaError;
+import modelo.excepciones.CastilloDeJugadorFueDestruido;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 
 import java.util.List;
 
@@ -11,16 +14,54 @@ public abstract class Pieza {
 	protected Area espacioOcupado;
 	protected boolean turnoJugado;
 
+    protected void liberarUbicacion() { espacioOcupado.liberar(); }
+
+    protected void siYaJugoElTurnoError() throws PiezaYaJugoEnTurnoActualError {
+
+        if(turnoJugado)
+
+            throw new PiezaYaJugoEnTurnoActualError();
+    }
+
+    protected boolean enRango(Pieza piezaEnemiga, int distanciaMaxima){
+
+        Area espacioEnemigo = piezaEnemiga.obtenerAreaOcupada();
+        int distanciaMinima = distanciaMinimaA(espacioEnemigo);
+
+        if(distanciaMinima > distanciaMaxima) {
+            return false;
+        }
+        return true;
+    }
+
+    protected int distanciaMinimaA(Area area) {
+
+        int minimaDistancia = Integer.MAX_VALUE; // TODO ver si hay una mejor manera de arreglar esto
+        int distanciaNueva;
+        List<Casilla> casillasEnemigas = area.obtenerCasillas();
+        for (int i = 0; i < area.obtenerCantidadDeCasillas(); i++) {
+            Casilla casillaActual = casillasEnemigas.get(i);
+
+            distanciaNueva = obtenerAreaOcupada().distanciaMinimaA(casillaActual);
+            if(distanciaNueva < minimaDistancia) {
+                minimaDistancia = distanciaNueva;
+            }
+        }
+        return minimaDistancia;
+    }
+
 	/*          Constructor             */
 
 	public Pieza(){
 
-        turnoJugado = false;
         vida = 0;
         costo = 0;
+        espacioOcupado = null;
+        turnoJugado = false;
     }
 
-	public Pieza(Area espacioAOcupar) throws Excepcion {	
+	public Pieza(Area espacioAOcupar) throws CasillaOcupadaError {
+
 		espacioOcupado = espacioAOcupar;
 		espacioOcupado.ocupar();
 		turnoJugado = false;
@@ -28,56 +69,19 @@ public abstract class Pieza {
 		costo = 0;
 	}
 
-	public Area obtenerAreaOcupada(){  return espacioOcupado; }
+	public Area obtenerAreaOcupada() { return espacioOcupado; }
 
-	public void recibirDanio(int danio) {
-		vida -= danio;
+	public void recibirDanio(int danio) throws CastilloDeJugadorFueDestruido {
+		vida = vida - danio;
 		if(vida <= 0) {
-			vida = 0;
 
-			liberarUbicacion();
+			vida = 0;
+			this.liberarUbicacion();
 		}
 	}
 
 	public void nuevoTurno() { turnoJugado = false; }
 	
 	public boolean estaDestruida() { return (vida == 0); }
-	
-	protected void liberarUbicacion() { espacioOcupado.liberar(); }
-	
-	public Area espacioOcupado() { return espacioOcupado; }
 
-	/*          Métodos protected.          */
-
-    protected void siYaJugoElTurnoError() throws Excepcion {
-        if(turnoJugado) {
-
-            throw new Excepcion("ERROR: Turno ya jugado.");
-        }
-    }
-
-    protected boolean enRango(Pieza pieza, int distanciaMaxima) throws Excepcion {
-	Area espacioEnemigo = pieza.espacioOcupado();
-	int distanciaMinima = distanciaMinimaA(espacioEnemigo);
-
-	if(distanciaMinima > distanciaMaxima) {
-		return false;
-	}
-	return true;
-    }
-
-	protected int distanciaMinimaA(Area area){
-		int minimaDistancia = Integer.MAX_VALUE; // TODO ver si hay una mejor manera de arreglar esto
-		int distanciaNueva;
-		List<Casilla> casillasEnemigas = area.obtenerCasillas();
-		for (int i = 0; i < area.obtenerTamanio(); i++) {
-			Casilla casillaActual = casillasEnemigas.get(i);
-
-			distanciaNueva = espacioOcupado().distanciaMinimaA(casillaActual);
-			if(distanciaNueva < minimaDistancia) {
-				minimaDistancia = distanciaNueva;
-			}
-		}
-		return minimaDistancia;
-	}
 }

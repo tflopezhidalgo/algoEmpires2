@@ -1,5 +1,5 @@
 import modelo.*;
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.*;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,37 +13,37 @@ public class TableroTest {
 	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
-	public void mapaSeCreaPorDefaultConTamanio16() throws Excepcion {
+	public void mapaSeCreaPorDefaultConTamanio16() throws Exception {
 		Tablero unTablero = new Tablero();
 		Assert.assertNotNull(unTablero.obtenerCasillaEn(15, 15));
 		Assert.assertNotNull(unTablero.obtenerCasillaEn(0, 0));
 		
-		thrown.expect(Excepcion.class);
+		thrown.expect(Exception.class);
 		unTablero.obtenerCasillaEn(16, 16);
 	}
 	
 	/*@Test
-	public void mapaSeCreaConTamanioIndicado() throws Excepcion {
+	public void mapaSeCreaConTamanioIndicado() throws Exception {
 		//Desde (0,0) a (4,4), un tablero de 5x5
 		Tablero unTablero = new Tablero(5,5);
 		Assert.assertNotNull(unTablero.obtenerCasillaEn(4, 4));
 		Assert.assertNotNull(unTablero.obtenerCasillaEn(0, 0));
 		
-		thrown.expect(Excepcion.class);
+		thrown.expect(Exception.class);
 		unTablero.obtenerCasillaEn(5, 5);
 	}*/
 	
 	@Test
-	public void noPuedoDefinirAreaFueraDeRango() throws Excepcion {
+	public void noPuedoDefinirAreaFueraDeRango() throws Exception {
 		Tablero unTablero = new Tablero();
 		
-		thrown.expect(Excepcion.class);
+		thrown.expect(Exception.class);
 		Area area = unTablero.definirArea(0, 0, 16, 16);
 		Assert.assertNull(area);
 	}
 	
 	@Test
-	public void noSePuedeMoverUnidadesFueraDelMapa() throws Excepcion {
+	public void noSePuedeMoverUnidadesFueraDelMapa() throws Exception {
 		//16x16
 		Tablero unTablero = new Tablero();
 		Area espacioBorde = unTablero.definirArea(15,15,15,15);
@@ -52,7 +52,7 @@ public class TableroTest {
 		Assert.assertNotNull(espacioBorde);
 		Assert.assertNotNull(unAldeano);
 		
-		thrown.expect(Excepcion.class);
+		thrown.expect(Exception.class);
 		unTablero.moverEnDireccion(unAldeano,1,0);
 	}
 

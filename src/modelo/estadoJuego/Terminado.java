@@ -4,13 +4,13 @@ import modelo.excepciones.*;
 import modelo.Jugador;
 import java.util.List;
 
-public class Terminado extends estadoJuego {
+public class Terminado extends EstadoJuego {
 
     public Jugador getJugadorActual(List<Jugador> jugadores) throws NoExistenJugadoresActualesError{
 
         throw new NoExistenJugadoresActualesError();
     }
-
+/*
     @Override
     public Jugador seleccionarGanador(List<Jugador> jugadores){
 
@@ -19,5 +19,5 @@ public class Terminado extends estadoJuego {
             return jugadores.get(0);
         else
             return jugadores.get(1);
-    }
+    }   */
 }

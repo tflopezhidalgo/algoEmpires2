@@ -1,22 +1,33 @@
 package modelo;
 
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.CasillaOcupadaError;
+import modelo.excepciones.PiezaOcupadaNoPuedeAccionarError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 
 public abstract class Unidad extends Pieza {
 
 	protected boolean ocupado;
+
+    protected void siEstaOcupadoDaError() throws PiezaOcupadaNoPuedeAccionarError {
+        if(ocupado) {
+            throw new PiezaOcupadaNoPuedeAccionarError();
+        }
+    }
 	
-	public Unidad(Area unEspacio) throws Excepcion {
-		super(unEspacio);
+	public Unidad(Area unEspacio) throws CasillaOcupadaError {
+
+	    super(unEspacio);
 		ocupado = false;
 	}
 	
 	public boolean estaOcupado() {
+
 		return ocupado;
 	}
 
-	public void mover(Area nuevoEspacio) throws Excepcion {
-		siYaJugoElTurnoError();
+	public void mover(Area nuevoEspacio) throws PiezaYaJugoEnTurnoActualError, CasillaOcupadaError{
+
+	    this.siYaJugoElTurnoError();
 		
         if (!ocupado & nuevoEspacio.estaLibre()) {
             espacioOcupado.liberar();
@@ -24,12 +35,6 @@ public abstract class Unidad extends Pieza {
             espacioOcupado.ocupar();
 			turnoJugado = true;
         }
-	}
-	
-	protected void siEstaOcupadoDaError() throws Excepcion {
-		if(ocupado) {
-			throw new Excepcion("ERROR: Pieza ocupada");
-		}
 	}
 
 }

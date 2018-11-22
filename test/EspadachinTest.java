@@ -3,12 +3,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.Aldeano;
-import modelo.Area;
-import modelo.Casilla;
-import modelo.Espadachin;
-import modelo.excepciones.Excepcion;
-import modelo.Tablero;
+import modelo.*;
+import modelo.excepciones.*;
 
 @SuppressWarnings("deprecation")
 public class EspadachinTest {
@@ -17,7 +13,7 @@ public class EspadachinTest {
 	public ExpectedException thrown = ExpectedException.none();
 	
     @Test
-    public void seCreaEspadachin() throws Excepcion {
+    public void seCreaEspadachin() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
     	
     	Area espacioEspadachin = unTablero.definirArea(0, 0, 0, 0);
@@ -25,11 +21,11 @@ public class EspadachinTest {
         
         Assert.assertNotNull(unEspadachin);
         Assert.assertEquals(false,espacioEspadachin.estaLibre());
-        Assert.assertEquals(1,espacioEspadachin.obtenerTamanio());
+        Assert.assertEquals(1,espacioEspadachin.obtenerCantidadDeCasillas());
     }
     
     @Test
-    public void moverEspadachinUnaPosicionHaciaArriba() throws Excepcion {
+    public void moverEspadachinUnaPosicionHaciaArriba() throws Exception {
     	Tablero unTablero = new Tablero(3,3);    	
     	
         Area espacioEspadachin = unTablero.definirArea(1, 1, 1, 1);
@@ -45,7 +41,7 @@ public class EspadachinTest {
     }
 
     @Test
-    public void moverEspadachinUnaPosicionHaciaAbajo() throws Excepcion {
+    public void moverEspadachinUnaPosicionHaciaAbajo() throws Exception {
     	Tablero unTablero = new Tablero(3,3);    	
     	
         Area espacioEspadachin = unTablero.definirArea(1, 1, 1, 1);
@@ -61,7 +57,7 @@ public class EspadachinTest {
     }
 
     @Test
-    public void moverEspadachinUnaPosicionHaciaDerecha() throws Excepcion {
+    public void moverEspadachinUnaPosicionHaciaDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);    	
     	
         Area espacioEspadachin = unTablero.definirArea(1, 1, 1, 1);
@@ -77,7 +73,7 @@ public class EspadachinTest {
     }
 
     @Test
-    public void moverEspadachinUnaPosicionHaciaIzquierda() throws Excepcion {
+    public void moverEspadachinUnaPosicionHaciaIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);    	
     	
         Area espacioEspadachin = unTablero.definirArea(1, 1, 1, 1);
@@ -93,7 +89,7 @@ public class EspadachinTest {
     }
 
     @Test
-    public void moverEspadachinUnaPosicionArribaDerecha() throws Excepcion {
+    public void moverEspadachinUnaPosicionArribaDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);    	
     	
         Area espacioEspadachin = unTablero.definirArea(1, 1, 1, 1);
@@ -109,7 +105,7 @@ public class EspadachinTest {
     }
 
     @Test
-    public void moverEspadachinUnaPosicionArribaIzquierda() throws Excepcion {
+    public void moverEspadachinUnaPosicionArribaIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);    	
     	
         Area espacioEspadachin = unTablero.definirArea(1, 1, 1, 1);
@@ -125,7 +121,7 @@ public class EspadachinTest {
     }
 
     @Test
-    public void moverEspadachinUnaPosicionAbajoIzquierda() throws Excepcion {
+    public void moverEspadachinUnaPosicionAbajoIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);    	
     	
         Area espacioEspadachin = unTablero.definirArea(1, 1, 1, 1);
@@ -141,7 +137,7 @@ public class EspadachinTest {
     }
 
     @Test
-    public void moverEspadachinUnaPosicionAbajoDerecha() throws Excepcion {
+    public void moverEspadachinUnaPosicionAbajoDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);    	
     	
         Area espacioEspadachin = unTablero.definirArea(1, 1, 1, 1);
@@ -157,7 +153,7 @@ public class EspadachinTest {
     }
     
     @Test
-    public void ataqueEspadachin() throws Excepcion {
+    public void ataqueEspadachin() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
         Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -178,7 +174,7 @@ public class EspadachinTest {
     }
 
     @Test
-    public void ataqueEspadachinFueraDeRango() throws Excepcion {
+    public void ataqueEspadachinFueraDeRango() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
         Area espacioAldeano = unTablero.definirArea(0,0,0,0);

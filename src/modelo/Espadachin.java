@@ -1,5 +1,6 @@
 package modelo;
 
+import modelo.excepciones.CasillaOcupadaError;
 import modelo.excepciones.Excepcion;
 
 public class Espadachin extends Unidad {
@@ -11,13 +12,15 @@ public class Espadachin extends Unidad {
      *      Costo: 50
      */
 
-	public Espadachin(Area unEspacio) throws Excepcion {
+	public Espadachin(Area unEspacio) throws CasillaOcupadaError {
 		super(unEspacio);
 		vida = 100;
 		costo = 50;
 	}
 
-	public void atacar(Edificio edificioEnemigo) throws Excepcion {
+	//TODO: SAME ARQUERO; SOLUCIONAR!!
+
+	public void atacar(Edificio edificioEnemigo) throws Exception {
 		siYaJugoElTurnoError();
 		
 		if(enRango(edificioEnemigo,1)) {
@@ -30,7 +33,7 @@ public class Espadachin extends Unidad {
 		}
 	}
 	
-	public void atacar(Unidad unidadEnemiga) throws Excepcion {
+	public void atacar(Unidad unidadEnemiga) throws Exception {
 		siYaJugoElTurnoError();
 		
 		if(enRango(unidadEnemiga,1)) {

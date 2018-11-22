@@ -1,7 +1,7 @@
 package modelo;
 
-import modelo.excepciones.Excepcion;
-
+import modelo.excepciones.CasillaOcupadaError;
+import modelo.excepciones.NullPointerCasillaError;
 import java.util.List;
 
 public class Area {
@@ -11,7 +11,13 @@ public class Area {
 	private int xFinal;
 	private int yInicial;
 	private int yFinal;
-	
+
+    //TODO: Refactoring.
+    private int distanciaEntre(Casilla casillaA, Casilla casillaB) {
+
+        return casillaA.calcularDistanciaA(casillaB);
+    }
+
 	public Area(List<Casilla> casillas, int xInicial, int yInicial, int xFinal, int yFinal){
 		this.xInicial = xInicial;
 		this.xFinal = xFinal;
@@ -20,7 +26,7 @@ public class Area {
 		casillasDelArea = casillas;
 	}
 	
-	public int obtenerTamanio(){
+	public int obtenerCantidadDeCasillas(){
 		return casillasDelArea.size();
 	}
 	
@@ -29,14 +35,15 @@ public class Area {
 	}
 	
 	public void liberar() {
+
 		for (int i = 0; i < casillasDelArea.size(); i++)
 			casillasDelArea.get(i).liberar();
 	}
 	
-	public void ocupar() throws Excepcion {
-		for (int i = 0; i < casillasDelArea.size(); i++) {
+	public void ocupar() throws CasillaOcupadaError {
+
+		for (int i = 0; i < casillasDelArea.size(); i++)
 			casillasDelArea.get(i).ocupar();
-		}
 	}
 	
 	public boolean estaLibre() {
@@ -47,32 +54,27 @@ public class Area {
 		return true;
 	}
 	
-	public void agregarCasilla(Casilla unaCasilla) throws Excepcion {
+	public void agregarCasilla(Casilla unaCasilla) throws NullPointerCasillaError {
+
 		if(unaCasilla == null)
-			throw new Excepcion("ERROR: Casilla inexistente.");
+			throw new NullPointerCasillaError();
 
 		casillasDelArea.add(unaCasilla);
 	}
 
 	//TODO: Refactoring .
 	public int distanciaMinimaA(Casilla unaCasilla) {
+
 		int minimaDistancia = Integer.MAX_VALUE;
 		int distanciaNueva;
 		for (int i = 0; i < casillasDelArea.size(); i++) {
 			Casilla casillaActual = casillasDelArea.get(i);
 			
 			distanciaNueva = distanciaEntre(casillaActual, unaCasilla);
-			if(distanciaNueva < minimaDistancia) {
+			if(distanciaNueva < minimaDistancia)
 				minimaDistancia = distanciaNueva;
-			}
 		}
 		return minimaDistancia;
-	}
-
-	//TODO: Refactoring.
-	private int distanciaEntre(Casilla casillaA, Casilla casillaB) {
-
-		return casillaA.calcularDistanciaA(casillaB);
 	}
 
 	public int x0(){

@@ -1,7 +1,6 @@
 package modelo;
 
-import modelo.excepciones.Excepcion;
-
+import modelo.excepciones.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,9 +19,14 @@ public class Tablero {
         for(int y = 0; y < this.alto; y++){
             for(int x = 0; x < this.ancho; x++){
                 Casilla nuevaCasilla = new Casilla(x, y);
-                casillasDelTablero.put(nuevaCasilla.aString(), nuevaCasilla);
+                casillasDelTablero.put(nuevaCasilla.aString(), new Casilla(x,y));
             }
         }
+    }
+
+    private void casillaNoExisteError(int x, int y) throws CasillaInvalidaError {
+        if(x > ancho-1 | x < 0 | y < 0 | y > alto-1)
+            throw new CasillaInvalidaError();
     }
 
 	//EL TABLERO DEBERA TENER UN TAMANIO MINIMO DE 16x16
@@ -30,20 +34,23 @@ public class Tablero {
 
 	    //TODO: Validar ancho y alto > 16
 		//o agregarle +16
-		this.alto = 16+alto;
-		this.ancho = 16+ancho;
+        // TODO: Cambiarlo si es posible.
+		this.alto = 16 + alto;
+		this.ancho = 16 + ancho;
 
 		crearTableroVacio();
 	}
 
 	public Tablero(){
+
 	    this.alto = 16;
 		this.ancho = 16;
 
 		crearTableroVacio();
 	}
 	
-	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws Excepcion {
+	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws CasillaInvalidaError{
+
         List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
         
         for(int y = yInicial; y <= yFinal; y++) {
@@ -56,7 +63,7 @@ public class Tablero {
         return zonaDeConstruccion;
 	}
 
-	public List<Pieza> generarPiezasInicialesEquipo1() throws Excepcion{
+	public List<Pieza> generarPiezasInicialesEquipo1() throws Exception{
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 		//Castillo 1
 		Area areaCastillo = definirArea(1,1, 4, 4);
@@ -82,7 +89,7 @@ public class Tablero {
 		return piezasNuevas;
 	}
 
-	public List<Pieza> generarPiezasInicialesEquipo2() throws Excepcion{
+	public List<Pieza> generarPiezasInicialesEquipo2() throws Exception{
 		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 		//Castillo 1
 		Area areaCastillo = definirArea(ancho-5, alto-5, alto-2, ancho-2);
@@ -121,22 +128,16 @@ public class Tablero {
 		unaCasilla.liberar();
 	}
 
-	public Casilla obtenerCasillaEn(int x, int y) throws Excepcion {
+	public Casilla obtenerCasillaEn(int x, int y) throws CasillaInvalidaError {
 		casillaNoExisteError(x, y);
 		String posicion = Casilla.aString(x, y);
 		return casillasDelTablero.get(posicion);
 	}
 	
-	private void casillaNoExisteError(int x, int y) throws Excepcion {
-		if(x > ancho-1 | x < 0 | y < 0 | y > alto-1) {
-			throw new Excepcion("ERROR: Casilla no existe.");
-		}
-	}
-	
 	//---------------PROTOTIPO  V3---------------
 	
-	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) throws Excepcion {
-		Area espacioAnterior = unaUnidad.espacioOcupado();
+	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) throws Exception {
+		Area espacioAnterior = unaUnidad.obtenerAreaOcupada();
 		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+difX, espacioAnterior.y0()+difY, espacioAnterior.x1()+difX, espacioAnterior.y1()+difY);
 
@@ -148,23 +149,5 @@ public class Tablero {
 			espacioAnterior.ocupar();
 		}
 	}
-	
-	//--------------------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------------------
 
-    //TODO ELIMINAR
-	public void printMapa() throws Excepcion {
-		for(int y = 0;y<alto;y++) {
-			for(int x = 0;x<ancho;x++) {
-				if(this.obtenerCasillaEn(x, y).estaOcupada()) {
-					System.out.print("xx");
-				}
-				else {
-					System.out.print("--");
-				}
-			}
-			System.out.println("");
-		}
-	}
 }

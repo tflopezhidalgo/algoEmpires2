@@ -5,19 +5,22 @@ import modelo.excepciones.Excepcion;
 
 public class AldeanoConstruyendo implements EstadoAldeano {
 	
-	public EstadoAldeano reparar(Edificio unEdificio) throws Excepcion {
+	public EstadoAldeano reparar(Edificio unEdificio){
+
 		return this;
 	}
 	
-	public Plaza crearPlaza(Area areaDeConstruccion) throws Excepcion {
+	public Plaza crearPlaza(Area areaDeConstruccion){
+
 		return null;
 	}
 	
-	public Cuartel crearCuartel(Area areaDeConstruccion) throws Excepcion {
+	public Cuartel crearCuartel(Area areaDeConstruccion) {
+
 		return null;
 	}
 	
-	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo) throws Excepcion {
+	public EstadoAldeano realizarTrabajoDeTurno(Edificio edificioObjetivo) {
 		if(edificioObjetivo.enConstruccion()) {
 			//turnoJugado = true;
 			//return 0;

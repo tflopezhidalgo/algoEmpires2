@@ -1,20 +1,18 @@
 package modelo;
 
 import controlador.Controlador;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import modelo.estadoJuego.*;
-import modelo.excepciones.Excepcion;
-import modelo.excepciones.NoExistenJugadoresActualesError;
+import modelo.excepciones.*;
 
 public class Juego {
 
     private Controlador controlador;
     private List<Jugador> jugadores;
     private Tablero tablero;
-    private estadoJuego estado;
+    private EstadoJuego estado;
 
     //TODO: Chequear explícitamente que devuelve valores válidos.
     private void seleccionarJugadorInicial(){
@@ -40,7 +38,7 @@ public class Juego {
         this.controlador = controlador;
     }
 
-    public void iniciarJuego() throws Excepcion {
+    public void iniciarJuego() throws Exception {
 
         seleccionarJugadorInicial();
 
@@ -60,10 +58,7 @@ public class Juego {
 
     public void finalizarTurno() throws Exception{
 
-        if(estado.getJugadorActual(this.jugadores).castilloFueDestruido())
-            this.estado = new Terminado();
-        else
-            this.estado = estado.finalizarTurno();
+        this.estado = estado.finalizarTurno();
     }
 
     public Jugador seleccionarGanador() throws Exception{
@@ -71,7 +66,5 @@ public class Juego {
         return (estado.seleccionarGanador(this.jugadores));
 
     }
-
-
 
 }

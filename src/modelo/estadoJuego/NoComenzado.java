@@ -4,7 +4,7 @@ import modelo.excepciones.*;
 import modelo.*;
 import java.util.List;
 
-public class NoComenzado extends estadoJuego{
+public class NoComenzado extends EstadoJuego{
 
     public Jugador getJugadorActual(List<Jugador> jugadores) throws NoExistenJugadoresActualesError {
 

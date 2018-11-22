@@ -3,14 +3,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.Aldeano;
-import modelo.Area;
-import modelo.Casilla;
-import modelo.Castillo;
-import modelo.Cuartel;
-import modelo.excepciones.Excepcion;
-import modelo.Plaza;
-import modelo.Tablero;
+import modelo.*;
+import modelo.excepciones.*;
 
 @SuppressWarnings("deprecation")
 public class AldeanoTest {
@@ -21,7 +15,7 @@ public class AldeanoTest {
      *  Test de movimiento de modelo.Aldeano
      */
     @Test
-    public void seCreaUnAldeano() throws Excepcion {
+    public void seCreaUnAldeano() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
@@ -29,11 +23,11 @@ public class AldeanoTest {
 
         Assert.assertNotNull(unAldeano);
         Assert.assertEquals(false,espacioAldeano.estaLibre());
-        Assert.assertEquals(1,espacioAldeano.obtenerTamanio());
+        Assert.assertEquals(1,espacioAldeano.obtenerCantidadDeCasillas());
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaArriba() throws Excepcion {
+    public void moverAldeanoUnaPosicionHaciaArriba() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -49,7 +43,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaAbajo() throws Excepcion {
+    public void moverAldeanoUnaPosicionHaciaAbajo() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -65,7 +59,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaDerecha() throws Excepcion {
+    public void moverAldeanoUnaPosicionHaciaDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -81,7 +75,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaIzquierda() throws Excepcion {
+    public void moverAldeanoUnaPosicionHaciaIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -97,7 +91,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaDerecha() throws Excepcion {
+    public void moverAldeanoUnaPosicionArribaDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -113,7 +107,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaIzquierda() throws Excepcion {
+    public void moverAldeanoUnaPosicionArribaIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -129,7 +123,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoIzquierda() throws Excepcion {
+    public void moverAldeanoUnaPosicionAbajoIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -145,7 +139,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoDerecha() throws Excepcion {
+    public void moverAldeanoUnaPosicionAbajoDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -165,7 +159,7 @@ public class AldeanoTest {
      */
     
     @Test
-    public void ConstruccionPlaza() throws Excepcion {
+    public void ConstruccionPlaza() throws Exception {
         int turno = 0;
         int oroJugador = 0;
 
@@ -187,7 +181,7 @@ public class AldeanoTest {
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
                     //tira error
-                	//thrown.expect(modelo.excepciones.Excepcion.class);
+                	//thrown.expect(modelo.Exceptiones.Exception.class);
                 	//unAldeano.realizarTrabajoDeTurno();
                 }
                     break;
@@ -237,7 +231,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void ConstruccionCuartel() throws Excepcion {
+    public void ConstruccionCuartel() throws Exception {
         int turno = 0;
         int oroJugador = 0;
 
@@ -257,7 +251,7 @@ public class AldeanoTest {
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
                     //tira error
-                	//thrown.expect(modelo.excepciones.Excepcion.class);
+                	//thrown.expect(modelo.Exceptiones.Exception.class);
                     //unAldeano.realizarTrabajoDeTurno();
                 }
                     break;
@@ -308,7 +302,7 @@ public class AldeanoTest {
     }
     
     @Test
-    public void RepararPlazaCentral() throws Excepcion{
+    public void RepararPlazaCentral() throws Exception{
         int turno=0;
 
         Tablero unTablero = new Tablero(5,5);
@@ -341,7 +335,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void RepararCastillo() throws Excepcion{
+    public void RepararCastillo() throws Exception{
         int turno=0;
 
         Tablero unTablero = new Tablero(5,5);
@@ -374,7 +368,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void RepararCuartel() throws Excepcion{
+    public void RepararCuartel() throws Exception{
         int turno=0;
 
         Tablero unTablero = new Tablero(5,5);
@@ -407,7 +401,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion() throws Excepcion{
+    public void AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion() throws Exception{
         int turno=0;
         int oro=0;
 
@@ -447,7 +441,7 @@ public class AldeanoTest {
     
     //TODO falta arreglar esta --- lo comento para que para el build
 /*    @Test
-    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws modelo.excepciones.Excepcion{
+    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws modelo.Exceptiones.Exception{
         int turno=0;
         int oro=0;
 
@@ -483,7 +477,7 @@ public class AldeanoTest {
     }*/ 
     
     @Test
-    public void aldeanoNoPuedaRealizarOtraAccionSiEstaReparando() throws Excepcion{
+    public void aldeanoNoPuedaRealizarOtraAccionSiEstaReparando() throws Exception{
         int turno=0;
 
         Tablero unTablero = new Tablero(5,5);
@@ -532,7 +526,7 @@ public class AldeanoTest {
     }
     
     @Test
-    public void aldeanoNoPuedaRealizarOtraAccionSiEstaConstruyendo() throws Excepcion{
+    public void aldeanoNoPuedaRealizarOtraAccionSiEstaConstruyendo() throws Exception{
         int turno=0;
 
         Tablero unTablero = new Tablero(5,5);

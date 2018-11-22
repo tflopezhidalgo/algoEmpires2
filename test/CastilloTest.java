@@ -1,13 +1,13 @@
 import junit.framework.Assert;
 import modelo.*;
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.*;
 import org.junit.Test;
 
 @SuppressWarnings("deprecation")
 public class CastilloTest {
 
     @Test
-    public void castilloCreaCatapulta() throws Excepcion {
+    public void castilloCreaCatapulta() throws Exception {
     	Tablero unTablero = new Tablero(6,6);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
@@ -24,7 +24,7 @@ public class CastilloTest {
     }
 
     @Test
-    public void ColocarCastillo()  throws Excepcion {
+    public void ColocarCastillo()  throws Exception {
     	Tablero unTablero = new Tablero(5,5);
 
         Area zonaDeConstruccion = unTablero.definirArea(1, 1, Castillo.TAMANIO_LADO, Castillo.TAMANIO_LADO);
@@ -32,7 +32,7 @@ public class CastilloTest {
 
         Castillo unCastillo = new Castillo(zonaDeConstruccion);
         Assert.assertEquals(false, zonaDeConstruccion.estaLibre());
-        Assert.assertEquals(false, unCastillo.espacioOcupado().estaLibre());
+        Assert.assertEquals(false, unCastillo.obtenerAreaOcupada().estaLibre());
 
         Assert.assertEquals(true, unTablero.obtenerCasillaEn(3,4).estaOcupada());
         Assert.assertEquals(true, unTablero.obtenerCasillaEn(4,4).estaOcupada());

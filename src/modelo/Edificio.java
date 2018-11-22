@@ -1,6 +1,6 @@
 package modelo;
 
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.CasillaOcupadaError;
 
 public abstract class Edificio extends Pieza {
 
@@ -8,12 +8,16 @@ public abstract class Edificio extends Pieza {
 	protected int tiempoDeConstruccion;
 	protected int cantidadDeCuracion;
 	
-	public Edificio(Area areaAOcupar) throws Excepcion {
-		super(areaAOcupar);
+	public Edificio(Area areaAOcupar) throws CasillaOcupadaError {
+
+	    super(areaAOcupar);
+	    this.vidaMaxima = 0;
+	    this.tiempoDeConstruccion = 0;
+	    this.cantidadDeCuracion = 0;
 	}
 
 	public void reparar() {
-		vida += cantidadDeCuracion;
+		vida = vida + cantidadDeCuracion;
 		if(vida >= vidaMaxima) {
 			vida = vidaMaxima;
 			// liberar al aldeano de su labor
@@ -21,21 +25,24 @@ public abstract class Edificio extends Pieza {
 	}
 	
 	public boolean necesitaReparacion() {
+
 		return(vida < vidaMaxima);
 	}
 	
 	public boolean enConstruccion() {
+
 		return(tiempoDeConstruccion > 0);
 	}
 	
 	public void construir() {
 		if(enConstruccion()) {
-			tiempoDeConstruccion --;
+			tiempoDeConstruccion--;
 		}
 	}
 	
 	public int tamanioArea() {
-		return espacioOcupado.obtenerTamanio();
+
+		return espacioOcupado.obtenerCantidadDeCasillas();
 	}
 
 }

@@ -6,11 +6,11 @@ import modelo.excepciones.NoExistenJugadoresActualesError;
 import modelo.excepciones.NoHayJuegoEnProcesoError;
 import java.util.List;
 
-public abstract class estadoJuego {
+public abstract class EstadoJuego {
 
      abstract public Jugador getJugadorActual(List<Jugador> jugadores) throws NoExistenJugadoresActualesError;
 
-     public estadoJuego finalizarTurno() throws NoHayJuegoEnProcesoError{
+     public EstadoJuego finalizarTurno() throws NoHayJuegoEnProcesoError{
 
          throw new NoHayJuegoEnProcesoError();
      }

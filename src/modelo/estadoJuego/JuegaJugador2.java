@@ -3,7 +3,7 @@ package modelo.estadoJuego;
 import modelo.Jugador;
 import java.util.List;
 
-public class JuegaJugador2 extends estadoJuego {
+public class JuegaJugador2 extends EstadoJuego {
 
     public Jugador getJugadorActual(List<Jugador> jugadores){
 
@@ -11,7 +11,7 @@ public class JuegaJugador2 extends estadoJuego {
     }
 
     @Override
-    public estadoJuego finalizarTurno(){
+    public EstadoJuego finalizarTurno(){
 
         return (new JuegaJugador1());
     }
