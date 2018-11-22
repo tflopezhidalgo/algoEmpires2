@@ -56,9 +56,9 @@ public class JugadorTest {
          Assert.assertEquals(100, unJugador.obtenerOro());
          unJugador.agregarPieza(unAldeano);
          unJugador.finalizarTurno();
-         Assert.assertEquals(120, unJugador.obtenerOro());
+         Assert.assertEquals(95, unJugador.obtenerOro());
          unJugador.finalizarTurno();
-         Assert.assertEquals(140, unJugador.obtenerOro());
+         Assert.assertEquals(115, unJugador.obtenerOro());
      }
 
 }
