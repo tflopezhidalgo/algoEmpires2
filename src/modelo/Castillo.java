@@ -37,8 +37,11 @@ public class Castillo extends Edificio {
 	}
 	
 	public ArmaDeAsedio crearCatapulta(Area unEspacio) {
-
 	    siYaJugoElTurnoError();
+	    
+        if(distanciaMinimaA(unEspacio) > 1) {
+            throw  new NoSePuedeConstruirTanLejosError();
+        }
 		
 		turnoJugado = true;
 		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(unEspacio);

@@ -1,7 +1,7 @@
 package modelo;
 
-import modelo.excepciones.CasillaOcupadaError;
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
+import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
 
 public class Plaza extends Edificio {
 	
@@ -32,6 +32,14 @@ public class Plaza extends Edificio {
 
 	public Aldeano crearAldeano(Area unEspacio) {
 		siYaJugoElTurnoError();
+		
+        if(distanciaMinimaA(unEspacio) > 1) {
+            throw  new NoSePuedeConstruirTanLejosError();
+        }
+        
+        if(enConstruccion() == true) {
+        	throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
+        }
 		
 		turnoJugado = true;
 		Aldeano unAldeano = new Aldeano(unEspacio);

@@ -1,7 +1,7 @@
 package modelo;
 
-import modelo.excepciones.CasillaOcupadaError;
-import modelo.excepciones.Excepcion;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
+import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
 
 public class Cuartel extends Edificio {
 	
@@ -36,6 +36,14 @@ public class Cuartel extends Edificio {
 	public Espadachin crearEspadachin(Area unEspacio) {
 		siYaJugoElTurnoError();
 		
+        if(distanciaMinimaA(unEspacio) > 1) {
+            throw  new NoSePuedeConstruirTanLejosError();
+        }
+        
+        if(enConstruccion() == true) {
+        	throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
+        }
+		
 		turnoJugado = true;
 		Espadachin unEspadachin = new Espadachin(unEspacio);
 		return unEspadachin;
@@ -43,6 +51,14 @@ public class Cuartel extends Edificio {
 	
 	public Arquero crearArquero(Area unEspacio) {
 		siYaJugoElTurnoError();
+		
+        if(distanciaMinimaA(unEspacio) > 1) {
+            throw  new NoSePuedeConstruirTanLejosError();
+        }
+        
+        if(enConstruccion() == true) {
+        	throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
+        }
 		
 		turnoJugado = true;
 		Arquero unArquero = new Arquero(unEspacio);
