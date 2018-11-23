@@ -1,43 +1,87 @@
 package vista;
 
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import modelo.Area;
+import modelo.ArmaDeAsedio;
+import modelo.Arquero;
+import modelo.Castillo;
+import modelo.Cuartel;
+import modelo.Espadachin;
 
-public class CuartelVista extends StackPane{
-
-	public static int TAMANIO_CASILLA = CasillaVista.TAMANIO_CASILLA;
+public class CuartelVista extends EdificioVista{
 	
-	public CuartelVista(int x, int y) {
-		
-		setWidth(TAMANIO_CASILLA*4);
-		setHeight(TAMANIO_CASILLA*4);
-		
-		//calcula la ubicacion
-		int ultimaX = x * TAMANIO_CASILLA;
-		int ultimaY = y * TAMANIO_CASILLA;
-		
-		//ubica la pieza en la pantalla
-		relocate(ultimaX, ultimaY);
-		
-		//le da forma a la pieza
-		Rectangle rectangulo = new Rectangle(TAMANIO_CASILLA*(2-0.05), TAMANIO_CASILLA*(2-0.05));
-		//TODO colocar color del equipo que representa ? o.. no colocar ningun color remplazar por imagen?
-		rectangulo.setFill(Color.ORANGE);
-		
-		//Le hace un borde negro a la ficha
-		rectangulo.setStroke(Color.BLACK);
-		rectangulo.setStrokeWidth(TAMANIO_CASILLA*0.05);
-		
-		getChildren().addAll(rectangulo);
+	public CuartelVista(int x, int y, Cuartel unModelo, JuegoVista unJuego) {
+		super(x,y,unModelo, unJuego);
 	}
 	
-	public void reubicar(int x, int y) {
-		//calcula la ubicacion
-		int ultimaX = x * TAMANIO_CASILLA;
-		int ultimaY = y * TAMANIO_CASILLA;
+	@Override
+	protected void crearRepresentacion() {
+		Image image = new Image("barrack.png");
+		ImageView imageView = new ImageView(image);
+		imageView.setFitHeight(60);
+		imageView.setFitWidth(60);
 		
-		//ubica la pieza en la pantalla
-		relocate(ultimaX, ultimaY);
+		//-----------------------------------------
+		//-----------------------------------------
+		getChildren().add(imageView);		
 	}
+	
+	@Override
+	protected void prepararBotones() {		
+		Menu menuHabilidades = new Menu("Habilidades");
+		//menu.setGraphic(new ImageView("file:imagen.png"));
+
+		MenuItem crearEspadachin = new MenuItem("Crear Espadachin");
+		crearEspadachin.setOnAction(e -> crearEspadachin());
+		MenuItem crearArquero = new MenuItem("Crear Arquero");
+		crearArquero.setOnAction(e -> crearArquero());
+
+		menuHabilidades.getItems().addAll(crearEspadachin,crearArquero);
+		acciones.getMenus().add(menuHabilidades);
+	}
+	
+	//------------------------------------------------------------------------------------
+	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
+	//------------------------------------------------------------------------------------
+	private void crearEspadachin() {
+		try {
+			int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+			int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+			
+			//TODO los mismos comentarios que en construir Plaza
+			Area espacioEspadachin = elJuego.obtenerTablero().definirArea(x0, y0, x0, y0);
+			Espadachin espadachin = ((Cuartel)modelo).crearEspadachin(espacioEspadachin);
+			if(espadachin != null) {
+				EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elJuego);
+				elJuego.aniadirPieza(espadachinVista);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+	
+	private void crearArquero() {
+		try {
+			int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+			int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+			
+			//TODO los mismos comentarios que en construir Plaza
+			Area espacioArquero = elJuego.obtenerTablero().definirArea(x0, y0, x0, y0);
+			Arquero arquero = ((Cuartel)modelo).crearArquero(espacioArquero);
+			if(arquero != null) {
+				ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elJuego);
+				elJuego.aniadirPieza(arqueroVista);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+	//----------------------------------   FIN    ----------------------------------------
+	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
+	//----------------------------------   FIN    ----------------------------------------
+
+
 }

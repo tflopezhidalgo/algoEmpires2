@@ -1,43 +1,69 @@
 package vista;
 
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Arquero;
+import modelo.Cuartel;
+import modelo.Espadachin;
+import modelo.Plaza;
 
-public class PlazaVista extends StackPane {
+public class PlazaVista extends EdificioVista {
+	
+	public PlazaVista(int x, int y, Plaza unModelo, JuegoVista unJuego) {
+		super(x,y,unModelo, unJuego);
+	}
 
-	public static int TAMANIO_CASILLA = CasillaVista.TAMANIO_CASILLA;
-	
-	public PlazaVista(int x, int y) {
+	@Override
+	protected void crearRepresentacion() {
+ 		Image image = new Image("plazaA.png");
+		ImageView imageView = new ImageView(image);
+		imageView.setFitHeight(60);
+		imageView.setFitWidth(60);
 		
-		setWidth(TAMANIO_CASILLA*2);
-		setHeight(TAMANIO_CASILLA*2);
-		
-		//calcula la ubicacion
-		int ultimaX = x * TAMANIO_CASILLA;
-		int ultimaY = y * TAMANIO_CASILLA;
-		
-		//ubica la pieza en la pantalla
-		relocate(ultimaX, ultimaY);
-		
-		//le da forma a la pieza
-		Rectangle rectangulo = new Rectangle(TAMANIO_CASILLA*(2-0.05), TAMANIO_CASILLA*(2-0.05));
-		//TODO colocar color del equipo que representa ? o.. no colocar ningun color remplazar por imagen?
-		rectangulo.setFill(Color.ORANGE);
-		
-		//Le hace un borde negro a la ficha
-		rectangulo.setStroke(Color.BLACK);
-		rectangulo.setStrokeWidth(TAMANIO_CASILLA*0.05);
-		
-		getChildren().addAll(rectangulo);
+		//-----------------------------------------
+		//-----------------------------------------
+		getChildren().add(imageView);
 	}
-	
-	public void reubicar(int x, int y) {
-		//calcula la ubicacion
-		int ultimaX = x * TAMANIO_CASILLA;
-		int ultimaY = y * TAMANIO_CASILLA;
-		
-		//ubica la pieza en la pantalla
-		relocate(ultimaX, ultimaY);
+
+	@Override
+	protected void prepararBotones() {
+		Menu menuHabilidades = new Menu("Habilidades");
+		//menu.setGraphic(new ImageView("file:imagen.png"));
+
+		MenuItem crearAldeano = new MenuItem("Crear Aldeano");
+		crearAldeano.setOnAction(e -> crearAldeano());
+
+		menuHabilidades.getItems().addAll(crearAldeano);
+		acciones.getMenus().add(menuHabilidades);
 	}
+
+	//------------------------------------------------------------------------------------
+	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
+	//------------------------------------------------------------------------------------
+	private void crearAldeano() {
+		try {
+			int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+			int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+			
+			//TODO los mismos comentarios que en construir Plaza
+			Area espacioAldeano = elJuego.obtenerTablero().definirArea(x0, y0, x0, y0);
+			Aldeano aldeano = ((Plaza)modelo).crearAldeano(espacioAldeano);
+			if(aldeano != null) {
+				AldeanoVista aldeanoVista = new AldeanoVista(x0,y0,aldeano,elJuego);
+				elJuego.aniadirPieza(aldeanoVista);
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	//----------------------------------   FIN    ----------------------------------------
+	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
+	//----------------------------------   FIN    ----------------------------------------
+
+	
 }
