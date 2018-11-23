@@ -41,6 +41,11 @@ public class CuartelTest {
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+        
+        //El cuartel debe estar construido para poder crear unidades (3 turnos)
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
 
         Area espacioEspadachin = unTablero.definirArea(1,2,1,2);
         Assert.assertEquals(true,espacioEspadachin.estaLibre());
@@ -68,6 +73,11 @@ public class CuartelTest {
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+        
+        //El cuartel debe estar construido para poder crear unidades (3 turnos)
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
 
         Area espacioArquero = unTablero.definirArea(1,2,1,2);
         Assert.assertEquals(true,espacioArquero.estaLibre());

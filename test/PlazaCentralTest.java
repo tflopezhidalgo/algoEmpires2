@@ -35,6 +35,11 @@ public class PlazaCentralTest {
         Plaza unaPlaza = new Plaza(zonaDeConstruccion);
         Assert.assertEquals(true, unTablero.obtenerCasillaEn(1,1).estaOcupada());
         
+        //La Plaza debe estar construida para poder crear unidades (3 turnos)
+        unaPlaza.construir();
+        unaPlaza.construir();
+        unaPlaza.construir();
+        
         Area espacioAldeano = unTablero.definirArea(0,2,0,2);
         Assert.assertEquals(true, espacioAldeano.estaLibre());
         
