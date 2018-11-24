@@ -170,6 +170,7 @@ public class AldeanoTest {
 
         Area zonaDeConstruccion = unTablero.definirArea(1, 1, Plaza.TAMANIO_LADO, Plaza.TAMANIO_LADO);
         
+        //esa linea es parte del turno 1
         Plaza laNuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion);
         while(turno < 6) {
             turno ++;
@@ -180,53 +181,47 @@ public class AldeanoTest {
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
-                    //tira error
-                	//thrown.expect(modelo.Exceptiones.Exception.class);
-                	//unAldeano.realizarTrabajoDeTurno();
+                    Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
                     
                 case 2:{
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
+                    
                 case 3:{
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
 
                 case 4:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
+                    Assert.assertEquals(false, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(false, laNuevaPlaza.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(20, oroJugador);
                 }
-                    break;
+                break;
 
                 case 5:{
                     Assert.assertEquals(false, unAldeano.estaOcupado());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(40, oroJugador);
                 }
-                    break;
+                break;
 
                 case 6:{
                     Assert.assertEquals(false, unAldeano.estaOcupado());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(60, oroJugador);
                 }
-                    break;
+                break;
             }
-            unAldeano.nuevoTurno();
+            oroJugador += unAldeano.nuevoTurno();
         }
     }
 
@@ -250,54 +245,46 @@ public class AldeanoTest {
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
-                    //tira error
-                	//thrown.expect(modelo.Exceptiones.Exception.class);
-                    //unAldeano.realizarTrabajoDeTurno();
                 }
-                    break;
+                break;
                     
                 case 2:{
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
                     
                 case 3:{
                     Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
 
                 case 4:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
+                    Assert.assertEquals(false, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(false, elNuevoCuartel.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(20, oroJugador);
                 }
-                    break;
+                break;
 
                 case 5:{
                     Assert.assertEquals(false, unAldeano.estaOcupado());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(40, oroJugador);
                 }
-                    break;
+                break;
 
                 case 6:{
                     Assert.assertEquals(false, unAldeano.estaOcupado());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(60, oroJugador);
                 }
-                    break;
+                break;
             }
-            unAldeano.nuevoTurno();
+            oroJugador += unAldeano.nuevoTurno();
         }
     }
     
@@ -421,21 +408,20 @@ public class AldeanoTest {
             switch (turno) {
                 case 1: {
                     unAldeano.reparar(unCuartel);
-                    Assert.assertEquals(0, oro);
                 }
                 break;
+                
                 case 2: {
-                    oro+=unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oro);
                 }
                 break;
+                
                 case 3: {
-                    oro+=unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(20, oro);
                 }
                 break;
             }
-            unAldeano.nuevoTurno();
+            oro += unAldeano.nuevoTurno();
         }
     }  
     
