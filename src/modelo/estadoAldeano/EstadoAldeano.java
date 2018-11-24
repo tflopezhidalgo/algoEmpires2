@@ -15,7 +15,6 @@ public abstract class EstadoAldeano {
 	public Edificio obtenerEdificioObjetivo(){ return this.edificioObjetivo; }
 
 	public int generarOro(){
-
         return 0;
     }
 

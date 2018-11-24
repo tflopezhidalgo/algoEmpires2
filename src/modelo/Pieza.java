@@ -78,7 +78,10 @@ public abstract class Pieza {
 		}
 	}
 
-	public void nuevoTurno() { turnoJugado = false; }
+	public int nuevoTurno() { 
+		turnoJugado = false; 
+		return 0;
+	}
 	
 	public boolean estaDestruida() { return (vida == 0); }
 

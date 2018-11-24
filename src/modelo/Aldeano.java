@@ -23,7 +23,7 @@ public class Aldeano extends Unidad {
 		
 		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
 			estadoActual = estadoActual.reparar(unEdificio);
-			ocupado = true;     //TODO: Si esta en estadoOcupado es al pedo el boolean de ocupado
+			ocupado = true;     //TODO: Si esta en estadoOcupado no sirve el boolean de ocupado?
 			turnoJugado = true;
 		}
 
@@ -45,7 +45,6 @@ public class Aldeano extends Unidad {
 	}
 	
 	public Cuartel crearCuartel(Area areaDeConstruccion) {
-
         siYaJugoElTurnoError();
 
         if(distanciaMinimaA(areaDeConstruccion) > 1) {
@@ -60,8 +59,6 @@ public class Aldeano extends Unidad {
 	}
 
 	public int realizarTrabajoDeTurno() {
-		siYaJugoElTurnoError();
-		
 		estadoActual = estadoActual.realizarTrabajoDeTurno();
 		
 		if(estadoActual instanceof AldeanoLibre) {
@@ -71,6 +68,14 @@ public class Aldeano extends Unidad {
 		turnoJugado = true;
 
 		return estadoActual.generarOro();
-	}	
+	}
+	
+	@Override
+	public int nuevoTurno() {
+		//TODO tengo que devolver oro a JUGADOR
+		int oro = realizarTrabajoDeTurno();
+		super.nuevoTurno();
+		return oro;
+	}
 	
 }

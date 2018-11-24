@@ -10,19 +10,14 @@ public class AldeanoLibre extends EstadoAldeano {
     }
 
 	public EstadoAldeano reparar(Edificio unEdificio){
-
-		unEdificio.reparar();
 		return (new AldeanoReparando(unEdificio));
 	}
 
 	public EstadoAldeano construir(Edificio unEdificio){
-
-        unEdificio.construir();
         return (new AldeanoConstruyendo(unEdificio));
     }
 	
 	public EstadoAldeano realizarTrabajoDeTurno(){
-
 		return this;
 	}
 
