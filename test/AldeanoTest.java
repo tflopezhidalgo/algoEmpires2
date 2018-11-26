@@ -215,6 +215,7 @@ public class AldeanoTest {
                 }
                 break;
             }
+	    unAldeano.realizarTrabajoDeTurno();
             oroJugador += unAldeano.generarOro();
         }
     }
@@ -272,6 +273,7 @@ public class AldeanoTest {
                 }
                 break;
             }
+	    unAldeano.realizarTrabajoDeTurno();
             oroJugador += unAldeano.generarOro();
         }
     }
