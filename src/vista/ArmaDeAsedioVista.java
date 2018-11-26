@@ -54,14 +54,14 @@ public class ArmaDeAsedioVista extends UnidadVista{
 		((ArmaDeAsedio)modelo).accionar();
 		//TODO IF- fue accionado exitosamente{ }
 		//estaOcupado == modo ataque ESTO SE VA A MODIFICAR CON LOS ESTADOS
-		if(((ArmaDeAsedio)modelo).estaOcupado()) {
+		/*if(((ArmaDeAsedio)modelo).estaOcupado()) {
 			viewAtaque.setVisible(true);
 			viewMover.setVisible(false);
 		}
 		else {
 			viewAtaque.setVisible(false);
 			viewMover.setVisible(true);
-		}
+		} */
 	}
 	//----------------------------------   FIN    ----------------------------------------
 	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------

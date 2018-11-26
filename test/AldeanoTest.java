@@ -178,7 +178,6 @@ public class AldeanoTest {
             switch (turno) {
 
                 case 1:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
@@ -186,7 +185,6 @@ public class AldeanoTest {
                 break;
                     
                 case 2:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
@@ -194,7 +192,6 @@ public class AldeanoTest {
                 break;
                     
                 case 3:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
@@ -202,7 +199,6 @@ public class AldeanoTest {
                 break;
 
                 case 4:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(false, laNuevaPlaza.enConstruccion());
                     Assert.assertEquals(20, oroJugador);
@@ -210,18 +206,16 @@ public class AldeanoTest {
                 break;
 
                 case 5:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
                     Assert.assertEquals(40, oroJugador);
                 }
                 break;
 
                 case 6:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
                     Assert.assertEquals(60, oroJugador);
                 }
                 break;
             }
-            oroJugador += unAldeano.nuevoTurno();
+            oroJugador += unAldeano.generarOro();
         }
     }
 
@@ -242,14 +236,12 @@ public class AldeanoTest {
             switch (turno) {
 
                 case 1:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
                 }
                 break;
                     
                 case 2:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
@@ -257,7 +249,6 @@ public class AldeanoTest {
                 break;
                     
                 case 3:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
@@ -265,7 +256,6 @@ public class AldeanoTest {
                 break;
 
                 case 4:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(false, elNuevoCuartel.enConstruccion());
                     Assert.assertEquals(20, oroJugador);
@@ -273,18 +263,16 @@ public class AldeanoTest {
                 break;
 
                 case 5:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
                     Assert.assertEquals(40, oroJugador);
                 }
                 break;
 
                 case 6:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
                     Assert.assertEquals(60, oroJugador);
                 }
                 break;
             }
-            oroJugador += unAldeano.nuevoTurno();
+            oroJugador += unAldeano.generarOro();
         }
     }
     
@@ -421,7 +409,7 @@ public class AldeanoTest {
                 }
                 break;
             }
-            oro += unAldeano.nuevoTurno();
+            oro += unAldeano.generarOro();
         }
     }  
     
@@ -540,24 +528,24 @@ public class AldeanoTest {
                 case 2: {
                 	unTablero.moverEnDireccion(unAldeano,0,1);
                 	
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
+                	Assert.assertTrue(zonaDeConstruccion2.estaLibre());
                 	
 //                	Cuartel nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
 //                	Assert.assertNull(nuevoCuartel);
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
+                	Assert.assertTrue(zonaDeConstruccion2.estaLibre());
                 	
  //               	Plaza nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
  //               	Assert.assertNull(nuevaPlaza);
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
+                	Assert.assertTrue(zonaDeConstruccion2.estaLibre());
                 	
                 	unAldeano.realizarTrabajoDeTurno();
-                    Assert.assertEquals(unCuartel.necesitaReparacion(),false);
+                    Assert.assertFalse(unCuartel.necesitaReparacion());
                 }
                 break;
                 
                 case 3: {
                 	unAldeano.realizarTrabajoDeTurno();
-                    Assert.assertEquals(unCuartel.enConstruccion(),false);
+                    Assert.assertFalse(unCuartel.enConstruccion());
                 }
                 break;
 

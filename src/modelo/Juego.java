@@ -1,20 +1,16 @@
 package modelo;
 
-import controlador.Controlador;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import modelo.estadoJuego.*;
-import modelo.excepciones.*;
 
 public class Juego {
 
-    private Controlador controlador;
     private List<Jugador> jugadores;
     private Tablero tablero;
     private EstadoJuego estado;
 
-    //TODO: Chequear explícitamente que devuelve valores válidos.
     private void seleccionarJugadorInicial(){
         int numeroRandom = ThreadLocalRandom.current().nextInt(0, 2);
 
@@ -32,10 +28,6 @@ public class Juego {
         jugadores.add(new Jugador(nombreJugador2));
         this.tablero = new Tablero();
         this.estado = new NoComenzado();
-    }
-
-    public void setControlador(Controlador controlador) {
-        this.controlador = controlador;
     }
 
     public void iniciarJuego() {

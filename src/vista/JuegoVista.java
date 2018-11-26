@@ -77,11 +77,11 @@ public class JuegoVista extends Application{
     	
     	MenuBar menuAcciones = new MenuBar();
     	botones = new HBox(botonFinTurno, menuAcciones);
-    	MapaVista mapa = new MapaVista(grupoCasillas,grupoPiezas);
-    	VBox paneles = new VBox(mapa,botones);
+    	//MapaVista mapa = new MapaVista(grupoCasillas,grupoPiezas);
+   // 	VBox paneles = new VBox(mapa,botones);
 
     	//mapa.getChildren().addAll(grupoCasillas,grupoPiezas);
-    	root.getChildren().add(paneles);
+    //	root.getChildren().add(paneles);
     	return root;
     }
     
