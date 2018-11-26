@@ -20,12 +20,10 @@ public class Aldeano extends Unidad {
 	@Override
     public void mover(Area nuevaArea) {
 	    estadoActual.mover();
-        if (nuevaArea.estaLibre()) {
             espacioOcupado.liberar();
             espacioOcupado = nuevaArea;
             espacioOcupado.ocupar();
             turnoJugado = true;
-        }
     }
 
 	public void reparar(Edificio unEdificio) {
