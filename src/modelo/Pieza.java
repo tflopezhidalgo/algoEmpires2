@@ -23,10 +23,9 @@ public abstract class Pieza {
 
     protected boolean enRango(Pieza piezaEnemiga, int distanciaMaxima){
 
-        Area espacioEnemigo = piezaEnemiga.obtenerAreaOcupada();
-        int distanciaMinima = distanciaMinimaA(espacioEnemigo);
+        int distanciaAPieza = distanciaMinimaA(piezaEnemiga.obtenerAreaOcupada());
 
-        if(distanciaMinima > distanciaMaxima) {
+        if(distanciaAPieza > distanciaMaxima) {
             return false;
         }
         return true;
@@ -78,10 +77,9 @@ public abstract class Pieza {
 		}
 	}
 
-	public int nuevoTurno() {
+	public void nuevoTurno() {
 
-		turnoJugado = false; 
-		return 0;
+		turnoJugado = false;
 	}
 	
 	public boolean estaDestruida() { return (vida == 0); }

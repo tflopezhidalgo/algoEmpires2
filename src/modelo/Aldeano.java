@@ -64,20 +64,22 @@ public class Aldeano extends Unidad {
         return (Cuartel)estadoActual.obtenerEdificioObjetivo();
 	}
 
-	public int realizarTrabajoDeTurno() {
+	public void realizarTrabajoDeTurno() {
+
 		estadoActual = estadoActual.realizarTrabajoDeTurno();
-
 		turnoJugado = true;
-
-		return estadoActual.generarOro();
 	}
+
+	public int generarOro(){
+
+	    return (estadoActual.generarOro());
+    }
 	
 	@Override
-	public int nuevoTurno() {
-		//TODO: Tengo que devolver oro a JUGADOR
-		int oro = realizarTrabajoDeTurno();
+	public void nuevoTurno() {
+
+		realizarTrabajoDeTurno();
 		super.nuevoTurno();
-		return oro;
 	}
 	
 }

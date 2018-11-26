@@ -45,7 +45,8 @@ public class Area {
 		for (int i = 0; i < casillasDelArea.size(); i++)
 			casillasDelArea.get(i).ocupar();
 	}
-	
+
+	//TODO: Esto tiene que sacarse
 	public boolean estaLibre() {
 
 		for (int i = 0; i < casillasDelArea.size(); i++)

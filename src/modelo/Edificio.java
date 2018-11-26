@@ -46,7 +46,7 @@ public abstract class Edificio extends Pieza {
 		return espacioOcupado.obtenerCantidadDeCasillas();
 	}
 
-	public void recibirDañoDe(Arquero unArquero){
+	public void recibirDanioDe(Arquero unArquero){
 
 	    this.recibirDanio(10);
     }

@@ -1,34 +1,35 @@
 package modelo;
 
+import modelo.estadoCasilla.CasillaLibre;
+import modelo.estadoCasilla.EstadoCasilla;
 import modelo.excepciones.CasillaOcupadaError;
 
 public class Casilla {
-	
-	private boolean ocupada; //TODO: Futuro patrón state
+
    	private int posicionX;
    	private int posicionY;
+   	private EstadoCasilla estadoActual;
 
 	public Casilla( int x, int y ){
 
 		this.posicionX = x;
 		this.posicionY = y;
-		this.ocupada = false;
+		this.estadoActual = new CasillaLibre();
 	}
 
 	public boolean estaOcupada() {
-		return ocupada;
+
+		return estadoActual.estaOcupada();
 	}
 
 	public void ocupar() {
-		if(ocupada)
-            throw new CasillaOcupadaError();
 
-		this.ocupada = true;
+	    estadoActual = estadoActual.ocupar();
 	}
 	
 	public void liberar() {
 
-	    ocupada = false;
+	    estadoActual = estadoActual.liberar();
 	}
 
 	public int ejeX() {

@@ -16,20 +16,13 @@ public class Jugador {
 
     private void recolectarOro(){
 
-    	for(int i=0; i<piezas.size(); i++) {
+    	for(int i=0; i < piezas.size(); i++) {
     		Pieza piezaActual = piezas.get(i);
     		if(piezaActual instanceof Aldeano) {
-    			cantidadDeOro += ((Aldeano)piezaActual).realizarTrabajoDeTurno();
+    			cantidadDeOro = cantidadDeOro + ((Aldeano) piezaActual).generarOro();
     		}
 
     	}
-    	//TODO perdon tom pero ese codigo me da error en el test, asique lo cambie por el de arriba
-        /*Iterator iterador = piezas.iterator();
-        while(iterador.hasNext())
-            if(iterador.next() instanceof Aldeano)
-                oroRecolectado = oroRecolectado + ((Aldeano) iterador.next()).realizarTrabajoDeTurno();
-
-        this.cantidadDeOro = cantidadDeOro + oroRecolectado;   */
     }
 
     private void finalizarTurnoDePiezas() {
@@ -53,6 +46,7 @@ public class Jugador {
     }
 
     public void agregarPieza(Pieza nuevaPieza) {
+
         if(nuevaPieza instanceof Unidad && (this.poblacion >= POBLACION_MAX))
 
             throw new PoblacionLimiteSuperadaError();
@@ -77,10 +71,10 @@ public class Jugador {
     }
 
     public void finalizarTurno(){
+
         this.recolectarOro();
         actualizarPoblacion();
-        
-        //TODO temporal - ver si usar esto o si crear una clase Turno que lo haga
+
         finalizarTurnoDePiezas();
     }
     
@@ -98,9 +92,8 @@ public class Jugador {
 
         Iterator iterador = piezas.iterator();
         while (iterador.hasNext()){
-            if (iterador.next() instanceof Castillo) {
+            if (iterador.next() instanceof Castillo)
                 return false;
-            }
         }
         return true;
     }
