@@ -129,15 +129,10 @@ public class Tablero {
 	
 	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) {
 		Area espacioAnterior = unaUnidad.obtenerAreaOcupada();
-		espacioAnterior.liberar();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+difX, espacioAnterior.y0()+difY, espacioAnterior.x1()+difX, espacioAnterior.y1()+difY);
 
 		if(nuevoEspacio.estaLibre()) {
 			unaUnidad.mover(nuevoEspacio);
-		}
-		else {
-			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
-			espacioAnterior.ocupar();
 		}
 	}
 
