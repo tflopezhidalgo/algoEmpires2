@@ -1,7 +1,5 @@
 package modelo;
 
-import modelo.excepciones.*;
-
 public class Arquero extends Unidad {
 
     /*      -Arquero-
@@ -11,8 +9,6 @@ public class Arquero extends Unidad {
      *      Distancia de ataque: 3
      */
 
-
-    //TODO: El arquero tiene varios estados, uno es atacando a unidad y otro atacando a edificio.
 	public Arquero(Area unEspacio) {
 
 		super(unEspacio);
@@ -20,32 +16,17 @@ public class Arquero extends Unidad {
 		costo = 75;
 	}
 
+	public void atacar(Pieza unaPieza){
 
-	//TODO: CODIGO REPETIDO!!
+        siYaJugoElTurnoError();
 
-	public void atacar(Edificio edificioEnemigo) {
-		siYaJugoElTurnoError();
-		
-		if(enRango(edificioEnemigo,3)) {
-			edificioEnemigo.recibirDanio(10);
-			turnoJugado = true;
-		}
-		
-		if(edificioEnemigo.estaDestruida())
-			edificioEnemigo = null;
-	}
-	
-	public void atacar(Unidad unidadEnemiga) {
-		siYaJugoElTurnoError();
-		
-		if(enRango(unidadEnemiga,3)) {
-			unidadEnemiga.recibirDanio(15);
-			turnoJugado = true;
-		}
-			
-		if(unidadEnemiga.estaDestruida())
-			unidadEnemiga = null;
+        if(enRango(unaPieza,3)) {
+            unaPieza.recibirDanioDe(this);
+            turnoJugado = true;
+        }
 
-	}
-	
+        if(unaPieza.estaDestruida())
+            unaPieza = null;
+
+    }
 }

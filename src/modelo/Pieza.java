@@ -35,10 +35,10 @@ public abstract class Pieza {
     protected int distanciaMinimaA(Area area) {
 
         int minimaDistancia = Integer.MAX_VALUE; // TODO ver si hay una mejor manera de arreglar esto
-        int distanciaNueva;
-        List<Casilla> casillasEnemigas = area.obtenerCasillas();
+        int distanciaNueva = 0;
+
         for (int i = 0; i < area.obtenerCantidadDeCasillas(); i++) {
-            Casilla casillaActual = casillasEnemigas.get(i);
+            Casilla casillaActual = area.obtenerCasillas().get(i);
 
             distanciaNueva = obtenerAreaOcupada().distanciaMinimaA(casillaActual);
             if(distanciaNueva < minimaDistancia) {
@@ -71,18 +71,21 @@ public abstract class Pieza {
 
 	public void recibirDanio(int danio) {
 		vida = vida - danio;
-		if(vida <= 0) {
+		if(vida < 0) {
 
 			vida = 0;
 			this.liberarUbicacion();
 		}
 	}
 
-	public int nuevoTurno() { 
+	public int nuevoTurno() {
+
 		turnoJugado = false; 
 		return 0;
 	}
 	
 	public boolean estaDestruida() { return (vida == 0); }
 
+	public abstract void recibirDanioDe(Arquero unArquero);
+	public abstract void recibirDanioDe(Espadachin unEspadachin);
 }

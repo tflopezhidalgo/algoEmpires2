@@ -34,11 +34,11 @@ public class Plaza extends Edificio {
 		siYaJugoElTurnoError();
 		
         if(distanciaMinimaA(unEspacio) > 1) {
-            throw  new NoSePuedeConstruirTanLejosError();
+            throw new NoSePuedeConstruirTanLejosError();
         }
         
         if(enConstruccion() == true) {
-        	throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
+        	throw new NoSePuedeCrearUnidadesDuranteConstruccionError();
         }
 		
 		turnoJugado = true;

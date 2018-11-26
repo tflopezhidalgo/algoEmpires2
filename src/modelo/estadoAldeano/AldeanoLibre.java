@@ -25,6 +25,11 @@ public class AldeanoLibre extends EstadoAldeano {
 	public int generarOro(){ return 20;}
 
 	@Override
+    public void mover(){
+
+    }
+
+    @Override
     public Edificio obtenerEdificioObjetivo(){ return null; }
 
 }

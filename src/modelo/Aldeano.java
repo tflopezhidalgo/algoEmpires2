@@ -17,13 +17,23 @@ public class Aldeano extends Unidad {
 		costo = COSTO_ALDEANO;
 	}
 
+	@Override
+    public void mover(Area nuevaArea) {
+	    estadoActual.mover();
+        if (nuevaArea.estaLibre()) {
+            espacioOcupado.liberar();
+            espacioOcupado = nuevaArea;
+            espacioOcupado.ocupar();
+            turnoJugado = true;
+        }
+    }
+
 	public void reparar(Edificio unEdificio) {
 
 	    siYaJugoElTurnoError();
 		
 		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
 			estadoActual = estadoActual.reparar(unEdificio);
-			ocupado = true;     //TODO: Si esta en estadoOcupado no sirve el boolean de ocupado?
 			turnoJugado = true;
 		}
 
@@ -32,12 +42,10 @@ public class Aldeano extends Unidad {
 	public Plaza crearPlaza(Area areaDeConstruccion) {
 		siYaJugoElTurnoError();
 
-        if(distanciaMinimaA(areaDeConstruccion) > 1) {
-            throw  new NoSePuedeConstruirTanLejosError();
-        }
+        if(distanciaMinimaA(areaDeConstruccion) > 1)
+            throw new NoSePuedeConstruirTanLejosError();
 
         estadoActual = estadoActual.construir(new Plaza(areaDeConstruccion));
-        ocupado = true;
         turnoJugado = true;
 
         return (Plaza)estadoActual.obtenerEdificioObjetivo();
@@ -47,12 +55,10 @@ public class Aldeano extends Unidad {
 	public Cuartel crearCuartel(Area areaDeConstruccion) {
         siYaJugoElTurnoError();
 
-        if(distanciaMinimaA(areaDeConstruccion) > 1) {
+        if(distanciaMinimaA(areaDeConstruccion) > 1)
             throw new NoSePuedeConstruirTanLejosError();
-        }
 
         estadoActual = estadoActual.construir(new Cuartel(areaDeConstruccion));
-        ocupado = true;
         turnoJugado = true;
 
         return (Cuartel)estadoActual.obtenerEdificioObjetivo();
@@ -60,10 +66,6 @@ public class Aldeano extends Unidad {
 
 	public int realizarTrabajoDeTurno() {
 		estadoActual = estadoActual.realizarTrabajoDeTurno();
-		
-		if(estadoActual instanceof AldeanoLibre) {
-			ocupado = false;
-		}
 
 		turnoJugado = true;
 
@@ -72,7 +74,7 @@ public class Aldeano extends Unidad {
 	
 	@Override
 	public int nuevoTurno() {
-		//TODO tengo que devolver oro a JUGADOR
+		//TODO: Tengo que devolver oro a JUGADOR
 		int oro = realizarTrabajoDeTurno();
 		super.nuevoTurno();
 		return oro;

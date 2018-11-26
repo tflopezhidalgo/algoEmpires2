@@ -1,12 +1,14 @@
 package modelo;
 
-import modelo.excepciones.CasillaOcupadaError;
+import modelo.estadoEdificio.EstadoEdificio;
 
 public abstract class Edificio extends Pieza {
 
 	protected int vidaMaxima;
 	protected int tiempoDeConstruccion;
 	protected int cantidadDeCuracion;
+
+	protected EstadoEdificio estado;
 	
 	public Edificio(Area areaAOcupar) {
 	    super(areaAOcupar);
@@ -44,4 +46,13 @@ public abstract class Edificio extends Pieza {
 		return espacioOcupado.obtenerCantidadDeCasillas();
 	}
 
+	public void recibirDañoDe(Arquero unArquero){
+
+	    this.recibirDanio(10);
+    }
+
+    public void recibirDanioDe(Espadachin unEspadachin){
+
+	    this.recibirDanio(15);
+    }
 }

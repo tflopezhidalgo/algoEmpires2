@@ -1,6 +1,7 @@
 package modelo.estadoAldeano;
 
 import modelo.*;
+import modelo.excepciones.AldeanOcupadoNoPuedeMoverse;
 
 public abstract class EstadoAldeano {
 
@@ -18,5 +19,9 @@ public abstract class EstadoAldeano {
         return 0;
     }
 
+    public void mover() {
+
+	    throw new AldeanOcupadoNoPuedeMoverse();
+    }
 }
 

@@ -27,4 +27,5 @@ public class AldeanoConstruyendo extends EstadoAldeano {
         return (new AldeanoLibre());
     }
 
+
 }
