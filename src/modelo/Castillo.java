@@ -1,6 +1,7 @@
 package modelo;
 
-import modelo.excepciones.*;
+import modelo.excepciones.CastilloDeJugadorFueDestruido;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class Castillo extends Edificio {
 	

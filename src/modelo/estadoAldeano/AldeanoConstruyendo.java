@@ -1,7 +1,11 @@
 package modelo.estadoAldeano;
 
-import modelo.*;
-import modelo.excepciones.*;
+import modelo.Area;
+import modelo.Cuartel;
+import modelo.Edificio;
+import modelo.Plaza;
+import modelo.excepciones.AldeanoConstruyendoNoPuedeReparar;
+import modelo.excepciones.AldeanoOcupadoConOtroEdificioError;
 
 public class AldeanoConstruyendo extends EstadoAldeano {
 
@@ -10,22 +14,23 @@ public class AldeanoConstruyendo extends EstadoAldeano {
     }
 
     public EstadoAldeano reparar(Edificio unEdificio) {
-        return this;
+    	throw new AldeanoConstruyendoNoPuedeReparar();
     }
 
-    public EstadoAldeano construir(Edificio unEdificio){
-        return this;
-    }
+	public EstadoAldeano construir(Cuartel nuevoCuartel, Area areaDeConstruccion) {
+    	throw new AldeanoOcupadoConOtroEdificioError();
+	}
+
+	public EstadoAldeano construir(Plaza nuevaPlaza, Area areaDeConstruccion) {
+    	throw new AldeanoOcupadoConOtroEdificioError();
+	}
 
     public EstadoAldeano realizarTrabajoDeTurno() {
+        edificioObjetivo.construir();
         if(this.edificioObjetivo.enConstruccion()) {
-            edificioObjetivo.construir();
-            if(this.edificioObjetivo.enConstruccion()) {
-                return this;
-            }
+            return this;
         }
         return (new AldeanoLibre());
     }
-
 
 }

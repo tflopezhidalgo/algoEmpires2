@@ -1,11 +1,13 @@
 package modelo.estadoAldeano;
 
-import modelo.*;
+import modelo.Area;
+import modelo.Cuartel;
+import modelo.Edificio;
+import modelo.Plaza;
 
 public class AldeanoLibre extends EstadoAldeano {
 
     public AldeanoLibre(){
-
         this.edificioObjetivo = null;
     }
 
@@ -13,8 +15,14 @@ public class AldeanoLibre extends EstadoAldeano {
 		return (new AldeanoReparando(unEdificio));
 	}
 
-	public EstadoAldeano construir(Edificio unEdificio){
-        return (new AldeanoConstruyendo(unEdificio));
+	public EstadoAldeano construir(Plaza unaPlaza, Area areaDeConstruccion){
+		unaPlaza = new Plaza(areaDeConstruccion);
+        return (new AldeanoConstruyendo(unaPlaza));
+    }
+	
+	public EstadoAldeano construir(Cuartel unCuartel, Area areaDeConstruccion){
+		unCuartel = new Cuartel(areaDeConstruccion);
+        return (new AldeanoConstruyendo(unCuartel));
     }
 	
 	public EstadoAldeano realizarTrabajoDeTurno(){

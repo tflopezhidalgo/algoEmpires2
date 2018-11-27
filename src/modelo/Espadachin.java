@@ -2,7 +2,7 @@ package modelo;
 
 public class Espadachin extends Unidad {
 
-    /*     -Espadachín-
+    /*     -Espadachin-
      *
      *      Distancia de ataque: 1
      *      Vida: 100
@@ -20,6 +20,7 @@ public class Espadachin extends Unidad {
         siYaJugoElTurnoError();
 
         if(enRango(unaPieza,1)) {
+
             unaPieza.recibirDanioDe(this);
             turnoJugado = true;
         }

@@ -1,6 +1,6 @@
 package modelo.estadoArmaDeAsedio;
 
-import modelo.*;
+import modelo.Edificio;
 
 public abstract class EstadoCatapulta {
 

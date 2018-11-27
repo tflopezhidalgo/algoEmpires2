@@ -1,6 +1,5 @@
 package modelo;
 
-import modelo.excepciones.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +55,7 @@ public class Tablero {
 		crearTableroVacio();
 	}
 	
-	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal){
+	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws Exception{
 
         List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
         
@@ -70,7 +69,7 @@ public class Tablero {
         return zonaDeConstruccion;
 	}
 
-	public List<Pieza> generarPiezasInicialesEquipo1(){
+	public List<Pieza> generarPiezasInicialesEquipo1() throws Exception{
 
 	    List<Area> listaAreas = new ArrayList<>();
 
@@ -88,7 +87,7 @@ public class Tablero {
 		return generarPiezasInicialesConAreas(listaAreas);
 	}
 
-	public List<Pieza> generarPiezasInicialesEquipo2(){
+	public List<Pieza> generarPiezasInicialesEquipo2() throws Exception{
 
 	    List<Area> listaAreas = new ArrayList<>();
 
@@ -120,14 +119,22 @@ public class Tablero {
 		unaCasilla.liberar();
 	}
 
-	public Casilla obtenerCasillaEn(int x, int y) {
+	public Casilla obtenerCasillaEn(int x, int y) throws Exception {
+		casillaNoExisteError(x, y);
 		String posicion = Casilla.aString(x, y);
 		return casillasDelTablero.get(posicion);
 	}
 	
+	//TODO decidir si sacamos esto o no
+	private void casillaNoExisteError(int x, int y) throws Exception {
+		if(x > ancho-1 | x < 0 | y < 0 | y > alto-1) {
+			throw new Exception("ERROR: Casilla no existe.");
+		}
+	}
+	
 	//---------------PROTOTIPO  V3---------------
 	
-	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) {
+	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) throws Exception {
 		Area espacioAnterior = unaUnidad.obtenerAreaOcupada();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+difX, espacioAnterior.y0()+difY, espacioAnterior.x1()+difX, espacioAnterior.y1()+difY);
 

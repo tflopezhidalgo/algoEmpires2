@@ -10,7 +10,6 @@ public class Arquero extends Unidad {
      */
 
 	public Arquero(Area unEspacio) {
-
 		super(unEspacio);
 		vida = 75;
 		costo = 75;
@@ -25,8 +24,9 @@ public class Arquero extends Unidad {
             turnoJugado = true;
         }
 
-        if(unaPieza.estaDestruida())
+        if(unaPieza.estaDestruida()) {
             unaPieza = null;
-
+        }
     }
+	
 }

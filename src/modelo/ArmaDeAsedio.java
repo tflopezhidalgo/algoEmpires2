@@ -1,7 +1,7 @@
 package modelo;
 
-import modelo.excepciones.*;
-import modelo.estadoArmaDeAsedio.*;
+import modelo.estadoArmaDeAsedio.CatapultaDesarmada;
+import modelo.estadoArmaDeAsedio.EstadoCatapulta;
 
 public class ArmaDeAsedio extends Unidad {
 

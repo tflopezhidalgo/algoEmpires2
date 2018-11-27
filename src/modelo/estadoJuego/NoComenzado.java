@@ -1,8 +1,10 @@
 package modelo.estadoJuego;
 
-import modelo.excepciones.*;
-import modelo.*;
 import java.util.List;
+
+import modelo.Jugador;
+import modelo.excepciones.NoExistenJugadoresActualesError;
+import modelo.excepciones.NoHayJuegoEnProcesoError;
 
 public class NoComenzado extends EstadoJuego{
 

@@ -1,8 +1,9 @@
 package modelo.estadoJuego;
 
-import modelo.excepciones.*;
-import modelo.Jugador;
 import java.util.List;
+
+import modelo.Jugador;
+import modelo.excepciones.NoExistenJugadoresActualesError;
 
 public class Terminado extends EstadoJuego {
 

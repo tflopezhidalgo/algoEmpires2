@@ -1,10 +1,10 @@
 package modelo.estadoJuego;
 
+import java.util.List;
+
 import modelo.Jugador;
 import modelo.excepciones.JuegoNoTerminadoError;
-import modelo.excepciones.NoExistenJugadoresActualesError;
 import modelo.excepciones.NoHayJuegoEnProcesoError;
-import java.util.List;
 
 public abstract class EstadoJuego {
 

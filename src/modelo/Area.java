@@ -1,8 +1,8 @@
 package modelo;
 
-import modelo.excepciones.CasillaOcupadaError;
-import modelo.excepciones.NullPointerCasillaError;
 import java.util.List;
+
+import modelo.excepciones.NullPointerCasillaError;
 
 public class Area {
 
@@ -35,7 +35,6 @@ public class Area {
 	}
 	
 	public void liberar() {
-
 		for (int i = 0; i < casillasDelArea.size(); i++)
 			casillasDelArea.get(i).liberar();
 	}

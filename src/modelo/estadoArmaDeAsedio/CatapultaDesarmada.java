@@ -1,6 +1,6 @@
 package modelo.estadoArmaDeAsedio;
 
-import modelo.*;
+import modelo.Edificio;
 import modelo.excepciones.CatapultaDesarmadaNoPuedeAtacarError;
 
 public class CatapultaDesarmada extends EstadoCatapulta {

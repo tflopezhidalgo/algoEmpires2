@@ -1,9 +1,10 @@
 package modelo;
 
-import modelo.excepciones.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import modelo.excepciones.PoblacionLimiteSuperadaError;
 
 public class Jugador {
 

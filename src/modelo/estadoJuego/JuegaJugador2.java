@@ -1,7 +1,8 @@
 package modelo.estadoJuego;
 
-import modelo.Jugador;
 import java.util.List;
+
+import modelo.Jugador;
 
 public class JuegaJugador2 extends EstadoJuego {
 

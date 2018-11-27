@@ -2,7 +2,6 @@ package modelo;
 
 import modelo.estadoCasilla.CasillaLibre;
 import modelo.estadoCasilla.EstadoCasilla;
-import modelo.excepciones.CasillaOcupadaError;
 
 public class Casilla {
 

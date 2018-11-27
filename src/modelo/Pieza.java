@@ -1,8 +1,6 @@
 package modelo;
 
-import modelo.excepciones.*;
-
-import java.util.List;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 
 public abstract class Pieza {
 	
@@ -11,7 +9,7 @@ public abstract class Pieza {
 	protected Area espacioOcupado;
 	protected boolean turnoJugado;
 
-    protected void liberarUbicacion() { espacioOcupado.liberar(); }
+    protected void liberarUbicacion() {espacioOcupado.liberar(); }
 
     protected void siYaJugoElTurnoError(){
 
@@ -70,8 +68,7 @@ public abstract class Pieza {
 
 	public void recibirDanio(int danio) {
 		vida = vida - danio;
-		if(vida < 0) {
-
+		if(vida <= 0) {
 			vida = 0;
 			this.liberarUbicacion();
 		}
