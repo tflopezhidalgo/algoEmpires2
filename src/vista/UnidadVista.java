@@ -1,5 +1,6 @@
 package vista;
 
+import modelo.Atacante;
 import modelo.Unidad;
 import modelo.excepciones.Excepcion;
 
@@ -19,5 +20,19 @@ public abstract class UnidadVista extends PiezaVista {
 	}
 	
 	protected abstract void prepararBotones();
+	
+	@Override
+	protected void realizarAccionSobrePieza() {
+		//Unidad esta siendo atacada
+		PiezaVista piezaAtacante = elJuego.piezaSeleccionada();
+		//TODO hace falta el if? ya se lanza excepcion si la piezaAtacante 
+		//no es instancia de Atacante , porque no se puede castear
+		//if(piezaAtacante.modelo() instanceof Atacante) { 
+			((Atacante)(piezaAtacante.modelo())).atacar(modelo);
+			if(modelo.estaDestruida()) {
+				elJuego.removerPieza(this);
+			}
+		//}
+	}
 
 }

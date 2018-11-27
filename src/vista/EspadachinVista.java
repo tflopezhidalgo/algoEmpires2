@@ -13,20 +13,19 @@ public class EspadachinVista extends UnidadVista{
 
 	@Override
 	protected void crearRepresentacion() {
- 		Image image = new Image("unitsTemp\\espadachin.png");
+ 		Image image = new Image("Imagenes\\Unidades\\Espadachin\\espadachin.png");
 		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(27);
 		imageView.setFitHeight(30);
-		
-		//-----------------------------------------
 		//-----------------------------------------
 		getChildren().add(imageView);
 	}
 
 	@Override
 	protected void prepararBotones() {
-		// TODO Auto-generated method stub
-		
+		//Creo que no hace falta porque:
+		//Click derecho sobre casilla = mover
+		//Click derecho sobre Pieza = atacar
 	}	
 
 }

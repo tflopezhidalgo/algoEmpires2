@@ -1,7 +1,5 @@
 package vista;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -38,12 +36,13 @@ public class CasillaVista extends StackPane{
 			}
 			if(e.getButton() == MouseButton.SECONDARY ) {
 				//la casilla esta desocupada asique implica moviemiento
-				moverPiezSeleccionada();
+				try {moverPiezSeleccionada();} 
+				catch (Exception e1) {e1.printStackTrace();}
 			}
 		});
 	}
 	
-	private void moverPiezSeleccionada() {
+	private void moverPiezSeleccionada() throws Exception {
 		PiezaVista piezaSeleccionada = elJuego.piezaSeleccionada();
 		if(piezaSeleccionada instanceof UnidadVista) {
 			int x0 = piezaSeleccionada.modelo().obtenerAreaOcupada().x0();
@@ -56,18 +55,13 @@ public class CasillaVista extends StackPane{
 			if( Math.abs(difX) <=1 & Math.abs(difY) <=1 ) {
 				UnidadVista unidadVista = (UnidadVista)(piezaSeleccionada);
 				Unidad laUnidad = (Unidad)unidadVista.modelo();
-				try {
-					elJuego.obtenerTablero().moverEnDireccion(laUnidad, difX, difY);
-					
-					int xActual = laUnidad.obtenerAreaOcupada().x0();
-					int yActual = laUnidad.obtenerAreaOcupada().y0();
-					//Si el modelo efectivamente se movio, la vista se reubicara correctamente, 
-					//de lo contrario se quedara en su lugar
-					unidadVista.reubicar(xActual,yActual);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				elJuego.obtenerTablero().moverEnDireccion(laUnidad, difX, difY);
+				
+				int xActual = laUnidad.obtenerAreaOcupada().x0();
+				int yActual = laUnidad.obtenerAreaOcupada().y0();
+				//Si el modelo efectivamente se movio, la vista se reubicara correctamente, 
+				//de lo contrario se quedara en su lugar
+				unidadVista.reubicar(xActual,yActual);
 			}
 		}
 	}
@@ -93,36 +87,15 @@ public class CasillaVista extends StackPane{
 	
 	private void seleccionar() {
 		seleccion.setVisible(true);
-	} 
-
+	}
 
 	private void crearRepresentacion() {
-		String terreno;
 		int colorTerreno = (int)(Math.random() * 40 + 130);
-		int tipoDecoracion = (int)(Math.random() * 100 + 1);
 		
 		//le da forma a la pieza
 		Rectangle rectangulo = new Rectangle(TAMANIO_CASILLA, TAMANIO_CASILLA);
 		rectangulo.setFill(Color.rgb(150, colorTerreno, 90, .99));
 		getChildren().add(rectangulo);
-		
-
-		// <0  (apagado)   <11 (prendido)
-		//colocar decoracion random
-		if(tipoDecoracion < 0) {
-			terreno = "imagenes\\pasto\\pasto";
-			if(colorTerreno < 140) {
-				terreno = "imagenes\\tierra\\tierra";
-			}
-			
-			terreno = terreno + tipoDecoracion + ".png";
-			//le da forma a la pieza
-	 		Image image = new Image(terreno);
-			ImageView imageView = new ImageView(image);
-			imageView.setFitHeight(TAMANIO_CASILLA);
-			imageView.setFitWidth(TAMANIO_CASILLA);
-			getChildren().add(imageView);
-		}
 		
 		//efecto casilla seleccionada
 		seleccion = new Rectangle(TAMANIO_CASILLA*0.95, TAMANIO_CASILLA*0.95);
@@ -131,7 +104,6 @@ public class CasillaVista extends StackPane{
 		seleccion.setStrokeWidth(TAMANIO_CASILLA * 0.05);
 		seleccion.setVisible(false);
 		getChildren().add(seleccion);
-
 	}
 
 }

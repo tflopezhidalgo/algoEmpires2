@@ -6,16 +6,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import modelo.ArmaDeAsedio;
 import modelo.excepciones.Excepcion;
+import vista.estadoArmaDeAsedioVista.CatapultaVistaDesarmada;
+import vista.estadoArmaDeAsedioVista.EstadoCatapultaVista;
 
 public class ArmaDeAsedioVista extends UnidadVista{
 
 	public static int TAMANIO_CASILLA = CasillaVista.TAMANIO_CASILLA;
 
+	private EstadoCatapultaVista estadoActual;
 	private ImageView viewMover;
 	private ImageView viewAtaque;
 	
 	public ArmaDeAsedioVista(int x, int y, ArmaDeAsedio unModelo, JuegoVista unJuego) throws Excepcion {
 		super(x,y,unModelo, unJuego);
+		estadoActual = new CatapultaVistaDesarmada();
 	}
 
 	@Override
@@ -33,12 +37,12 @@ public class ArmaDeAsedioVista extends UnidadVista{
 
 	@Override
 	protected void crearRepresentacion() {
-		Image imagenMover = new Image("unitsTemp\\armaAsedioMover.png");
+		Image imagenMover = new Image("Imagenes\\Unidades\\ArmaDeAsedio\\modoMovimiento.png");
 		viewMover = new ImageView(imagenMover);
 		viewMover.setFitWidth(30);
 		viewMover.setFitHeight(24);
 		//-----------------------------------------
-		Image imagenAtaque = new Image("unitsTemp\\armaAsedioAtaque.png");
+		Image imagenAtaque = new Image("Imagenes\\Unidades\\ArmaDeAsedio\\modoAtaque.png");
 		viewAtaque = new ImageView(imagenAtaque);
 		viewAtaque.setFitWidth(30);
 		viewAtaque.setFitHeight(29);
@@ -51,17 +55,9 @@ public class ArmaDeAsedioVista extends UnidadVista{
 	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
 	//------------------------------------------------------------------------------------
 	private void accionar() {
+		//TODO lo podemos accionar infinitas veces por turno? (depende del modelo)
 		((ArmaDeAsedio)modelo).accionar();
-		//TODO IF- fue accionado exitosamente{ }
-		//estaOcupado == modo ataque ESTO SE VA A MODIFICAR CON LOS ESTADOS
-		/*if(((ArmaDeAsedio)modelo).estaOcupado()) {
-			viewAtaque.setVisible(true);
-			viewMover.setVisible(false);
-		}
-		else {
-			viewAtaque.setVisible(false);
-			viewMover.setVisible(true);
-		} */
+		estadoActual = estadoActual.cambiarEstado(viewMover,viewAtaque);
 	}
 	//----------------------------------   FIN    ----------------------------------------
 	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------

@@ -1,6 +1,7 @@
 package vista;
 
 import javafx.scene.control.MenuBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -60,7 +61,7 @@ public abstract class PiezaVista extends StackPane {
 				seleccionarPieza();
 			}
 			if(e.getButton() == MouseButton.SECONDARY ) {
-				//realizarAccionSobrePieza();
+				realizarAccionSobrePieza();
 			}
 		});
 	}
@@ -101,7 +102,7 @@ public abstract class PiezaVista extends StackPane {
 	//Esta pieza es atacada, o reparada.
 	//Reparada si: piezaSeleccionada es un Aldeano y esta Pieza es un Edificio
 	//Atacada si: piezaSeleccionada es Espadachin/Arquero/Castillo o ArmaDeAsedio y estaPieza es un Edificio
-	//protected abstract void realizarAccionSobrePieza();
+	protected abstract void realizarAccionSobrePieza();
 	
 
 }
