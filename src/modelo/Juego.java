@@ -35,7 +35,7 @@ public class Juego {
         this.estado = new NoComenzado();
     }
 
-    public void iniciarJuego() {
+    public void iniciarJuego()  throws Exception {
 
         seleccionarJugadorInicial();
 
