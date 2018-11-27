@@ -1,10 +1,13 @@
 package modelo;
 
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
+import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
+
 public class Plaza extends Edificio {
 	
 	public static final int TAMANIO_LADO = 2;
 	
-	public Plaza(Area areaAOcupar) throws Excepcion {
+	public Plaza(Area areaAOcupar) {
 		super(areaAOcupar);
 		vida = 450;
 		vidaMaxima = vida;
@@ -13,7 +16,7 @@ public class Plaza extends Edificio {
 		cantidadDeCuracion = 25;
 	}
 	
-	public Plaza(Area areaAOcupar, boolean yaConstruida) throws Excepcion {
+	public Plaza(Area areaAOcupar, boolean yaConstruida) {
 		super(areaAOcupar);
 		vida = 450;
 		vidaMaxima = vida;
@@ -26,13 +29,17 @@ public class Plaza extends Edificio {
 		
 		cantidadDeCuracion = 25;
 	}
-	
-	public Aldeano crearAldeano(Area unEspacio) throws Excepcion {
+
+	public Aldeano crearAldeano(Area unEspacio) {
 		siYaJugoElTurnoError();
 		
-		if(!unEspacio.estaLibre()) {
-			throw new Excepcion("ERROR: La ubicacion para colocar al aldeano esta ocupada.");
-		}
+        if(distanciaMinimaA(unEspacio) > 1) {
+            throw new NoSePuedeConstruirTanLejosError();
+        }
+        
+        if(enConstruccion() == true) {
+        	throw new NoSePuedeCrearUnidadesDuranteConstruccionError();
+        }
 		
 		turnoJugado = true;
 		Aldeano unAldeano = new Aldeano(unEspacio);

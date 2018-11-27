@@ -1,6 +1,6 @@
-package modelo;
+package modelo.excepciones;
 
-public class Excepcion extends Exception{
+public class Excepcion extends RuntimeException{
 
 	String message;
 

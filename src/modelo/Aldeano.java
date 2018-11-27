@@ -1,74 +1,82 @@
 package modelo;
 
+import modelo.estadoAldeano.AldeanoLibre;
+import modelo.estadoAldeano.EstadoAldeano;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
+
 public class Aldeano extends Unidad {
-	
-	private Edificio edificioObjetivo;
+
+    final int VIDA_ALDEANO = 50;
+    final int COSTO_ALDEANO = 25;
+
 	private EstadoAldeano estadoActual;
 	
-	public Aldeano(Area unEspacio) throws Excepcion  {
+	public Aldeano(Area unEspacio){
 		super(unEspacio);
 		estadoActual = new AldeanoLibre();
-		edificioObjetivo = null;
-		vida = 50;
-		costo = 25;
+		vida = VIDA_ALDEANO;
+		costo = COSTO_ALDEANO;
 	}
 
-	public void reparar(Edificio unEdificio) throws Excepcion {
-		siYaJugoElTurnoError();
+	@Override
+    public void mover(Area nuevaArea) {
+	    estadoActual.mover(); //TODO esto es para cortar con un error nadamas, no hace nada
+        espacioOcupado.liberar();
+        espacioOcupado = nuevaArea;
+        espacioOcupado.ocupar();
+        turnoJugado = true;
+    }
+
+	public void reparar(Edificio unEdificio) {
+	    siYaJugoElTurnoError();
 		
 		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
 			estadoActual = estadoActual.reparar(unEdificio);
-			if(estadoActual instanceof AldeanoReparando ) {
-				edificioObjetivo = unEdificio;
-				ocupado = true;
-				turnoJugado = true;
-			}
+			turnoJugado = true;
 		}
 	}
 	
-	public Plaza crearPlaza(Area areaDeConstruccion) throws Excepcion {
+	public Plaza crearPlaza(Area areaDeConstruccion) {
 		siYaJugoElTurnoError();
 
-		if(!ocupado & areaDeConstruccion.estaLibre() & distanciaMinimaA(areaDeConstruccion) == 1) {
-			edificioObjetivo = estadoActual.crearPlaza(areaDeConstruccion);
-			if(edificioObjetivo != null) {
-				ocupado = true;
-				turnoJugado = true;
-				estadoActual = new AldeanoConstruyendo();
-                return (Plaza)edificioObjetivo;
-			}
-		}
-		return null;
+        if(distanciaMinimaA(areaDeConstruccion) > 1)
+            throw new NoSePuedeConstruirTanLejosError();
+        Plaza nuevaPlaza = null;
+        estadoActual = estadoActual.construir(nuevaPlaza, areaDeConstruccion);
+        turnoJugado = true;
+        //nadamas hace return en caso de ser llamado el metodo en las condiciones apropiadas
+        //en cualquier otro caso corta por error , no devuelve NI null
+        return (Plaza)estadoActual.obtenerEdificioObjetivo();
+
 	}
 	
-	public Cuartel crearCuartel(Area areaDeConstruccion) throws Excepcion {
-		siYaJugoElTurnoError();
-		
-		if(!ocupado & areaDeConstruccion.estaLibre() & distanciaMinimaA(areaDeConstruccion) == 1) {
-			edificioObjetivo = estadoActual.crearCuartel(areaDeConstruccion);
-			if(edificioObjetivo != null) {
-				ocupado = true;
-				turnoJugado = true;
-				estadoActual = new AldeanoConstruyendo();
-				return (Cuartel)edificioObjetivo;
-			}
-		}
-		return null;
+	public Cuartel crearCuartel(Area areaDeConstruccion) {
+        siYaJugoElTurnoError();
+
+        if(distanciaMinimaA(areaDeConstruccion) > 1) {
+            throw new NoSePuedeConstruirTanLejosError();
+        }
+        Cuartel nuevoCuartel = null;
+        estadoActual = estadoActual.construir(nuevoCuartel, areaDeConstruccion);
+        turnoJugado = true;
+        //nadamas hace return en caso de ser llamado el metodo en las condiciones apropiadas
+        //en cualquier otro caso corta por error , no devuelve NI null
+        return (Cuartel)estadoActual.obtenerEdificioObjetivo();
 	}
-	
-	
-	public int realizarTrabajoDeTurno() throws Excepcion {
-		siYaJugoElTurnoError();
-		
-		estadoActual = estadoActual.realizarTrabajoDeTurno(edificioObjetivo);
-		
-		if(estadoActual instanceof AldeanoLibre) {
-			edificioObjetivo = null;
-			ocupado = false;
-			return 20;
-		}
+
+	public void realizarTrabajoDeTurno() {
+		estadoActual = estadoActual.realizarTrabajoDeTurno();
 		turnoJugado = true;
-		return 0;
-	}	
+	}
+
+	public int generarOro(){
+	    return (estadoActual.generarOro());
+    }
+	
+	@Override
+	public void nuevoTurno() {
+		realizarTrabajoDeTurno();
+		super.nuevoTurno();
+	}
 	
 }

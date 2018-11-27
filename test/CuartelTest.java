@@ -1,6 +1,7 @@
 import junit.framework.Assert;
 
 import modelo.*;
+import modelo.excepciones.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -12,7 +13,7 @@ public class CuartelTest {
 	public ExpectedException thrown = ExpectedException.none();
 	
     @Test
-    public void ColocarCuartel() throws Excepcion {
+    public void ColocarCuartel() throws Exception {
 
     	Tablero unTablero = new Tablero(5,5);
 
@@ -23,8 +24,8 @@ public class CuartelTest {
 
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
         Assert.assertEquals(false, zonaDeConstruccion.estaLibre());
-        Assert.assertEquals(false, unCuartel.espacioOcupado().estaLibre());
-        Assert.assertEquals(zonaDeConstruccion, unCuartel.espacioOcupado());
+        Assert.assertEquals(false, unCuartel.obtenerAreaOcupada().estaLibre());
+        Assert.assertEquals(zonaDeConstruccion, unCuartel.obtenerAreaOcupada());
 
         //Las casillas adyacentes deberian estar libres
         Assert.assertEquals(false, unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -34,12 +35,17 @@ public class CuartelTest {
     }
     
     @Test
-    public void cuartelCreaEspadachin() throws Excepcion {
+    public void cuartelCreaEspadachin() throws Exception {
 
     	Tablero unTablero = new Tablero(5,5);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+        
+        //El cuartel debe estar construido para poder crear unidades (3 turnos)
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
 
         Area espacioEspadachin = unTablero.definirArea(1,2,1,2);
         Assert.assertEquals(true,espacioEspadachin.estaLibre());
@@ -55,18 +61,23 @@ public class CuartelTest {
         Assert.assertEquals(true,casillaArriba.estaOcupada());
         
         //tira error
-        //thrown.expect(modelo.Excepcion.class);
+        //thrown.expect(modelo.Exceptiones.Exception.class);
         //modelo.Espadachin otroEspadachin = unCuartel.crearEspadachin(casillaOtroEspadachin);
         //Assert.assertNull(otroEspadachin);
     }
     
     @Test
-    public void cuartelCreaArquero() throws Excepcion {
+    public void cuartelCreaArquero() throws Exception {
 
     	Tablero unTablero = new Tablero(5,5);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+        
+        //El cuartel debe estar construido para poder crear unidades (3 turnos)
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
 
         Area espacioArquero = unTablero.definirArea(1,2,1,2);
         Assert.assertEquals(true,espacioArquero.estaLibre());
@@ -82,7 +93,7 @@ public class CuartelTest {
         Assert.assertEquals(true,casillaOtroArquero.estaOcupada());
         
         //tira error
-    	//thrown.expect(modelo.Excepcion.class);
+    	//thrown.expect(modelo.Exceptiones.Exception.class);
     	//modelo.Arquero otroArquero = unCuartel.crearArquero(casillaOtroArquero);
     	//Assert.assertNull(otroArquero);
         

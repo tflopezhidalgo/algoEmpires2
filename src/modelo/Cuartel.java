@@ -1,10 +1,13 @@
 package modelo;
 
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
+import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
+
 public class Cuartel extends Edificio {
 	
 	public static final int TAMANIO_LADO = 2;
 	
-	public Cuartel(Area areaAOcupar) throws Excepcion {
+	public Cuartel(Area areaAOcupar) {
 		super(areaAOcupar);
 		vida = 250;
 		vidaMaxima = vida;
@@ -13,8 +16,8 @@ public class Cuartel extends Edificio {
 		cantidadDeCuracion = 50;
 	}
 	
-	//TODO ELIMINAR ESTO - es solo para realizar en AldeanoTest "AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion"
-	public Cuartel(Area areaAOcupar, boolean yaConstruida) throws Excepcion {
+	//TODO: ELIMINAR ESTO - es solo para realizar en AldeanoTest "AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion"
+	public Cuartel(Area areaAOcupar, boolean yaConstruida) {
 		super(areaAOcupar);
 		vida = 250;
 		vidaMaxima = vida;
@@ -28,25 +31,34 @@ public class Cuartel extends Edificio {
 		cantidadDeCuracion = 50;
 	}
 
+	//Nota: No hace falta preguntar si unEspacio está libre porque de eso se encarga el constructor de cada Unidad.
 
-	public Espadachin crearEspadachin(Area unEspacio) throws Excepcion {
+	public Espadachin crearEspadachin(Area unEspacio) {
 		siYaJugoElTurnoError();
 		
-		if(!unEspacio.estaLibre()) {
-			throw new Excepcion("ERROR: La ubicacion para colocar al soldado esta ocupada.");
-		}
+        if(distanciaMinimaA(unEspacio) > 1) {
+            throw  new NoSePuedeConstruirTanLejosError();
+        }
+        
+        if(enConstruccion() == true) {
+        	throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
+        }
 		
 		turnoJugado = true;
 		Espadachin unEspadachin = new Espadachin(unEspacio);
 		return unEspadachin;
 	}
 	
-	public Arquero crearArquero(Area unEspacio) throws Excepcion {
+	public Arquero crearArquero(Area unEspacio) {
 		siYaJugoElTurnoError();
-
-		if(!unEspacio.estaLibre()) {
-			throw new Excepcion("ERROR: La ubicacion para colocar al soldado esta ocupada.");
-		}
+		
+        if(distanciaMinimaA(unEspacio) > 1) {
+            throw  new NoSePuedeConstruirTanLejosError();
+        }
+        
+        if(enConstruccion() == true) {
+        	throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
+        }
 		
 		turnoJugado = true;
 		Arquero unArquero = new Arquero(unEspacio);

@@ -1,10 +1,13 @@
 package modelo;
 
+import modelo.excepciones.CastilloDeJugadorFueDestruido;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
+
 public class Castillo extends Edificio {
 	
 	public static final int TAMANIO_LADO = 4;
 	
-	public Castillo(Area areaAOcupar) throws Excepcion {
+	public Castillo(Area areaAOcupar) {
 		super(areaAOcupar);
 		vida = 1000;
 		vidaMaxima = vida;
@@ -13,9 +16,18 @@ public class Castillo extends Edificio {
 		cantidadDeCuracion = 15;
 	}
 
+	@Override
+    public void recibirDanio(int danio){
+        vida = vida - danio;
+        if(vida <= 0) {
+            liberarUbicacion();
+            throw new CastilloDeJugadorFueDestruido();
+        }
+    }
+
 	//ATACA 1 VEZ A CADA OBJETIVO QUE ESTE EN RANGO NO IMPORTA SI YA JUGO EL TURNO
 	//TODO hacer una lista de objetivos en rango y pasarsela asi ataca solo 1 vez a cada uno
-	public void atacar(Pieza piezaEnemiga) throws Excepcion {
+	public void atacar(Pieza piezaEnemiga){
 		if(enRango(piezaEnemiga,3)) {
 			piezaEnemiga.recibirDanio(20);
 		}
@@ -25,12 +37,12 @@ public class Castillo extends Edificio {
 		}
 	}
 	
-	public ArmaDeAsedio crearCatapulta(Area unEspacio)  throws Excepcion {
-		siYaJugoElTurnoError();
-
-		if(!unEspacio.estaLibre()) {
-			throw new Excepcion("ERROR: La ubicacion para colocar al soldado esta ocupada.");
-		}
+	public ArmaDeAsedio crearCatapulta(Area unEspacio) {
+	    siYaJugoElTurnoError();
+	    
+        if(distanciaMinimaA(unEspacio) > 1) {
+            throw  new NoSePuedeConstruirTanLejosError();
+        }
 		
 		turnoJugado = true;
 		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(unEspacio);

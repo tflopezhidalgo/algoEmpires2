@@ -3,12 +3,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.Area;
-import modelo.ArmaDeAsedio;
-import modelo.Casilla;
-import modelo.Excepcion;
-import modelo.Plaza;
-import modelo.Tablero;
+import modelo.*;
+import modelo.excepciones.*;
 
 @SuppressWarnings("deprecation")
 public class ArmaDeAsedioTest {
@@ -20,7 +16,7 @@ public class ArmaDeAsedioTest {
      * Test de movimiento de Arma de Asedio
      */
     @Test
-    public void seCreaArmaDeAsedio() throws Excepcion {
+    public void seCreaArmaDeAsedio() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioArmaDeAsedio = unTablero.definirArea(0, 0, 0, 0);
@@ -28,11 +24,11 @@ public class ArmaDeAsedioTest {
 
         Assert.assertNotNull(unArmaDeAsedio);
         Assert.assertEquals(false,espacioArmaDeAsedio.estaLibre());
-        Assert.assertEquals(1,espacioArmaDeAsedio.obtenerTamanio());
+        Assert.assertEquals(1,espacioArmaDeAsedio.obtenerCantidadDeCasillas());
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionHaciaArriba() throws Excepcion {
+    public void moverArmaDeAsedioUnaPosicionHaciaArriba() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
@@ -48,7 +44,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(modelo.Excepcion.class);
+    	//thrown.expect(modelo.Exceptiones.Exception.class);
         //unTablero.moverArriba(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -56,7 +52,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionHaciaAbajo() throws Excepcion {
+    public void moverArmaDeAsedioUnaPosicionHaciaAbajo() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
@@ -72,7 +68,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(modelo.Excepcion.class);
+    	//thrown.expect(modelo.Exceptiones.Exception.class);
         //unTablero.moverAbajo(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -80,7 +76,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionHaciaDerecha() throws Excepcion {
+    public void moverArmaDeAsedioUnaPosicionHaciaDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
@@ -96,7 +92,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(modelo.Excepcion.class);
+    	//thrown.expect(modelo.Exceptiones.Exception.class);
         //unTablero.moverDerecha(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -104,7 +100,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionHaciaIzquierda() throws Excepcion {
+    public void moverArmaDeAsedioUnaPosicionHaciaIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
@@ -120,7 +116,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(modelo.Excepcion.class);
+    	//thrown.expect(modelo.Exceptiones.Exception.class);
         //unTablero.moverIzquierda(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -128,7 +124,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionArribaDerecha() throws Excepcion {
+    public void moverArmaDeAsedioUnaPosicionArribaDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
@@ -144,7 +140,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(modelo.Excepcion.class);
+    	//thrown.expect(modelo.Exceptiones.Exception.class);
         //unTablero.moverArribaDerecha(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -152,7 +148,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionArribaIzquierda() throws Excepcion {
+    public void moverArmaDeAsedioUnaPosicionArribaIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
@@ -168,7 +164,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(modelo.Excepcion.class);
+    	//thrown.expect(modelo.Exceptiones.Exception.class);
         //unTablero.moverArribaIzquierda(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -176,7 +172,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionAbajoIzquierda() throws Excepcion {
+    public void moverArmaDeAsedioUnaPosicionAbajoIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
@@ -192,7 +188,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(modelo.Excepcion.class);
+    	//thrown.expect(modelo.Exceptiones.Exception.class);
         //unTablero.moverAbajoIzquierda(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -200,7 +196,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void moverArmaDeAsedioUnaPosicionAbajoDerecha() throws Excepcion {
+    public void moverArmaDeAsedioUnaPosicionAbajoDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
@@ -216,7 +212,7 @@ public class ArmaDeAsedioTest {
 
         unArmaDeAsedio.accionar();
         //tira error
-    	//thrown.expect(modelo.Excepcion.class);
+    	//thrown.expect(modelo.Exceptiones.Exception.class);
         //unTablero.moverAbajoDerecha(unArmaDeAsedio);
 
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
@@ -227,7 +223,7 @@ public class ArmaDeAsedioTest {
      * Test de ataques de Arma de Asedio
      */
    @Test
-    public void armaDeAsedioNoAtacaSiNoFueAccionada() throws Excepcion {
+    public void armaDeAsedioNoAtacaSiNoFueAccionada() throws Exception {
 
 	   	Tablero unTablero = new Tablero(7,7);
 	   	
@@ -238,7 +234,9 @@ public class ArmaDeAsedioTest {
         ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
 
         //vida de la plaza == 450
+        try {
         unaArmaDeAsedio.atacar(unaPlaza);
+		} catch (Exception e) {}
         Assert.assertEquals(false, unaPlaza.necesitaReparacion());
         
         unaArmaDeAsedio.accionar();
@@ -249,7 +247,7 @@ public class ArmaDeAsedioTest {
     }
    
    @Test
-    public void armaDeAsedioNoSeMueveSiFueAccionada() throws Excepcion {
+    public void armaDeAsedioNoSeMueveSiFueAccionada() throws Exception {
 
         Tablero unTablero = new Tablero(3,3);
 
@@ -266,7 +264,9 @@ public class ArmaDeAsedioTest {
         
         //no se mueve
         unArmaDeAsedio.nuevoTurno();
-        unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
+		try {
+			unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
+		} catch (Exception e) {}
      	Assert.assertEquals(true, casillaArriba1.estaOcupada());
      	Assert.assertEquals(false, casillaArriba2.estaOcupada());
  
@@ -280,7 +280,7 @@ public class ArmaDeAsedioTest {
     }
     
     @Test
-    public void ataqueArmaDeAsedioAEdificio() throws Excepcion {
+    public void ataqueArmaDeAsedioAEdificio() throws Exception {
     	Tablero unTablero = new Tablero(7, 7);
 
         Area zonaDeConstruccion = unTablero.definirArea(5, 5, Plaza.TAMANIO_LADO+4, Plaza.TAMANIO_LADO+4);
@@ -320,7 +320,7 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void ataqueArmaDeAsedioAEdificioFueraDeRango() throws Excepcion {
+    public void ataqueArmaDeAsedioAEdificioFueraDeRango() throws Exception {
     	Tablero unTablero = new Tablero(10, 10);
 
         Area zonaDeConstruccion = unTablero.definirArea(6, 6, Plaza.TAMANIO_LADO+5, Plaza.TAMANIO_LADO+5);

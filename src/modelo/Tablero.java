@@ -23,11 +23,26 @@ public class Tablero {
         }
     }
 
+    private List<Pieza> generarPiezasInicialesConAreas(List<Area> listaAreas){
+
+        List<Pieza> piezasNuevas = new ArrayList<Pieza>();
+
+        piezasNuevas.add(new Castillo(listaAreas.get(0)));
+        piezasNuevas.add(new Plaza(listaAreas.get(1)));
+        piezasNuevas.add(new Aldeano(listaAreas.get(2)));
+        piezasNuevas.add(new Aldeano(listaAreas.get(3)));
+        piezasNuevas.add(new Aldeano(listaAreas.get(4)));
+
+        return piezasNuevas;
+    }
+
+    //  Tablero por defecto: 16 x 16
+
+    //TODO: Validar
 	public Tablero(int ancho, int alto){
 
-	    //TODO: Validar ancho y alto > 16
-		this.alto = alto;
-		this.ancho = ancho;
+		this.alto = 16 + alto;
+		this.ancho = 16 + ancho;
 
 		crearTableroVacio();
 	}
@@ -40,7 +55,8 @@ public class Tablero {
 		crearTableroVacio();
 	}
 	
-	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws Excepcion {
+	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal) throws Exception{
+
         List<Casilla> casillasParaConstruccion = new ArrayList<Casilla>();
         
         for(int y = yInicial; y <= yFinal; y++) {
@@ -53,56 +69,40 @@ public class Tablero {
         return zonaDeConstruccion;
 	}
 
-	public List<Pieza> generarPiezasInicialesEquipo1() throws Excepcion{
-		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
-		//Castillo 1
+	public List<Pieza> generarPiezasInicialesEquipo1() throws Exception{
+
+	    List<Area> listaAreas = new ArrayList<>();
+
 		Area areaCastillo = definirArea(1,1, 4, 4);
-		Castillo castillo = new Castillo(areaCastillo);
-		//-------------------
-		piezasNuevas.add(castillo);
-		//Plaza 1
+		listaAreas.add(areaCastillo);
 		Area areaPlaza = definirArea(7,1,8,2);
-		Plaza plaza = new Plaza(areaPlaza);
-		//-------------------
-		piezasNuevas.add(plaza);
-		//Aldeanosx3
+		listaAreas.add(areaPlaza);
 		Area espacioAldeano1 = definirArea(6,4,6,4);
-		Aldeano aldeano1 = new Aldeano(espacioAldeano1);
-		piezasNuevas.add(aldeano1);
+		listaAreas.add(espacioAldeano1);
 		Area espacioAldeano2 = definirArea(7,4,7,4);
-		Aldeano aldeano2 = new Aldeano(espacioAldeano2);
-		piezasNuevas.add(aldeano2);
+		listaAreas.add(espacioAldeano2);
 		Area espacioAldeano3 = definirArea(8,4,8,4);
-		Aldeano aldeano3 = new Aldeano(espacioAldeano3);
-		piezasNuevas.add(aldeano3);
-		//-------------------
-		return piezasNuevas;
+		listaAreas.add(espacioAldeano3);
+
+		return generarPiezasInicialesConAreas(listaAreas);
 	}
 
-	public List<Pieza> generarPiezasInicialesEquipo2() throws Excepcion{
-		List<Pieza> piezasNuevas = new ArrayList<Pieza>();
-		//Castillo 1
+	public List<Pieza> generarPiezasInicialesEquipo2() throws Exception{
+
+	    List<Area> listaAreas = new ArrayList<>();
+
 		Area areaCastillo = definirArea(ancho-5, alto-5, alto-2, ancho-2);
-		Castillo castillo = new Castillo(areaCastillo);
-		//-------------------
-		piezasNuevas.add(castillo);
-		//Plaza 1
+		listaAreas.add(areaCastillo);
 		Area areaPlaza = definirArea(ancho-9,alto-3,ancho-8,alto-2);
-		Plaza plaza = new Plaza(areaPlaza);
-		//-------------------
-		piezasNuevas.add(plaza);
-		//Aldeanosx3
+        listaAreas.add(areaPlaza);
 		Area espacioAldeano1 = definirArea(ancho-9,alto-5,ancho-9,alto-5);
-		Aldeano aldeano1 = new Aldeano(espacioAldeano1);
-		piezasNuevas.add(aldeano1);
+		listaAreas.add(espacioAldeano1);
 		Area espacioAldeano2 = definirArea(ancho-8,alto-5,ancho-8,alto-5);
-		Aldeano aldeano2 = new Aldeano(espacioAldeano2);
-		piezasNuevas.add(aldeano2);
+        listaAreas.add(espacioAldeano2);
 		Area espacioAldeano3 = definirArea(ancho-7,alto-5,ancho-7,alto-5);
-		Aldeano aldeano3 = new Aldeano(espacioAldeano3);
-		piezasNuevas.add(aldeano3);
-		//-------------------
-		return piezasNuevas;
+        listaAreas.add(espacioAldeano3);
+
+		return generarPiezasInicialesConAreas(listaAreas);
 	}
 	
 	public void ataqueDesdeHasta(Casilla casillaInicial, Casilla casillaFinal) {
@@ -111,6 +111,7 @@ public class Tablero {
 	}
 	
 	public void liberar(Area unArea) {
+
 		unArea.liberar();
 	}
 	
@@ -118,36 +119,28 @@ public class Tablero {
 		unaCasilla.liberar();
 	}
 
-	public Casilla obtenerCasillaEn(int x, int y) throws Excepcion {
+	public Casilla obtenerCasillaEn(int x, int y) throws Exception {
 		casillaNoExisteError(x, y);
 		String posicion = Casilla.aString(x, y);
 		return casillasDelTablero.get(posicion);
 	}
 	
-	private void casillaNoExisteError(int x, int y) throws Excepcion {
+	//TODO decidir si sacamos esto o no
+	private void casillaNoExisteError(int x, int y) throws Exception {
 		if(x > ancho-1 | x < 0 | y < 0 | y > alto-1) {
-			throw new Excepcion("ERROR: Casilla no existe.");
+			throw new Exception("ERROR: Casilla no existe.");
 		}
 	}
 	
 	//---------------PROTOTIPO  V3---------------
 	
-	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) throws Excepcion {
-		Area espacioAnterior = unaUnidad.espacioOcupado();
-		espacioAnterior.liberar();
+	public void moverEnDireccion(Unidad unaUnidad, int difX, int difY) throws Exception {
+		Area espacioAnterior = unaUnidad.obtenerAreaOcupada();
 		Area nuevoEspacio = this.definirArea(espacioAnterior.x0()+difX, espacioAnterior.y0()+difY, espacioAnterior.x1()+difX, espacioAnterior.y1()+difY);
 
-		if(nuevoEspacio.estaLibre() & !unaUnidad.estaOcupado()) {
+		if(nuevoEspacio.estaLibre()) {
 			unaUnidad.mover(nuevoEspacio);
 		}
-		else {
-			//NO SE PUEDE MOVER PORQUE EL ESPACIO ESTA OCUPADO
-			espacioAnterior.ocupar();
-		}
 	}
-	
-	//--------------------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------------------------------------
 
 }

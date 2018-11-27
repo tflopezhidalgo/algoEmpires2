@@ -2,32 +2,31 @@ package modelo;
 
 public abstract class Unidad extends Pieza {
 
-	protected boolean ocupado;
-	
-	public Unidad(Area unEspacio) throws Excepcion  {
-		super(unEspacio);
-		ocupado = false;
-	}
-	
-	public boolean estaOcupado() {
-		return ocupado;
+	public Unidad(Area unEspacio) {
+
+	    super(unEspacio);
 	}
 
-	public void mover(Area nuevoEspacio) throws Excepcion {
-		siYaJugoElTurnoError();
-		
-        if (!ocupado & nuevoEspacio.estaLibre()) {
+	public void mover(Area nuevoEspacio){
+
+	    this.siYaJugoElTurnoError();
+
+        if (nuevoEspacio.estaLibre()) {
             espacioOcupado.liberar();
             espacioOcupado = nuevoEspacio;
             espacioOcupado.ocupar();
-			turnoJugado = true;
+            turnoJugado = true;
         }
 	}
-	
-	protected void siEstaOcupadoDaError() throws Excepcion {
-		if(ocupado) {
-			throw new Excepcion("ERROR: Pieza ocupada");
-		}
-	}
+
+	public void recibirDanioDe(Arquero unArquero){
+
+        this.recibirDanio(15);
+    }
+
+    public void recibirDanioDe(Espadachin unEspadachin){
+
+        this.recibirDanio(25);
+    }
 
 }

@@ -3,14 +3,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.Aldeano;
-import modelo.Area;
-import modelo.Casilla;
-import modelo.Castillo;
-import modelo.Cuartel;
-import modelo.Excepcion;
-import modelo.Plaza;
-import modelo.Tablero;
+import modelo.*;
+import modelo.excepciones.*;
 
 @SuppressWarnings("deprecation")
 public class AldeanoTest {
@@ -21,7 +15,7 @@ public class AldeanoTest {
      *  Test de movimiento de modelo.Aldeano
      */
     @Test
-    public void seCreaUnAldeano() throws Excepcion {
+    public void seCreaUnAldeano() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
@@ -29,11 +23,11 @@ public class AldeanoTest {
 
         Assert.assertNotNull(unAldeano);
         Assert.assertEquals(false,espacioAldeano.estaLibre());
-        Assert.assertEquals(1,espacioAldeano.obtenerTamanio());
+        Assert.assertEquals(1,espacioAldeano.obtenerCantidadDeCasillas());
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaArriba() throws Excepcion {
+    public void moverAldeanoUnaPosicionHaciaArriba() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -49,7 +43,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaAbajo() throws Excepcion {
+    public void moverAldeanoUnaPosicionHaciaAbajo() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -65,7 +59,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaDerecha() throws Excepcion {
+    public void moverAldeanoUnaPosicionHaciaDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -81,7 +75,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionHaciaIzquierda() throws Excepcion {
+    public void moverAldeanoUnaPosicionHaciaIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -97,7 +91,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaDerecha() throws Excepcion {
+    public void moverAldeanoUnaPosicionArribaDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -113,7 +107,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionArribaIzquierda() throws Excepcion {
+    public void moverAldeanoUnaPosicionArribaIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -129,7 +123,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoIzquierda() throws Excepcion {
+    public void moverAldeanoUnaPosicionAbajoIzquierda() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -145,7 +139,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void moverAldeanoUnaPosicionAbajoDerecha() throws Excepcion {
+    public void moverAldeanoUnaPosicionAbajoDerecha() throws Exception {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
@@ -165,7 +159,7 @@ public class AldeanoTest {
      */
     
     @Test
-    public void ConstruccionPlaza() throws Excepcion {
+    public void ConstruccionPlaza() throws Exception {
         int turno = 0;
         int oroJugador = 0;
 
@@ -176,6 +170,7 @@ public class AldeanoTest {
 
         Area zonaDeConstruccion = unTablero.definirArea(1, 1, Plaza.TAMANIO_LADO, Plaza.TAMANIO_LADO);
         
+        //esa linea es parte del turno 1
         Plaza laNuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion);
         while(turno < 6) {
             turno ++;
@@ -183,61 +178,50 @@ public class AldeanoTest {
             switch (turno) {
 
                 case 1:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
-                    //tira error
-                	//thrown.expect(modelo.Excepcion.class);
-                	//unAldeano.realizarTrabajoDeTurno();
+                    Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
                     
                 case 2:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
+                    
                 case 3:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
 
                 case 4:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, laNuevaPlaza.necesitaReparacion());
                     Assert.assertEquals(false, laNuevaPlaza.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(20, oroJugador);
                 }
-                    break;
+                break;
 
                 case 5:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(40, oroJugador);
                 }
-                    break;
+                break;
 
                 case 6:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(60, oroJugador);
                 }
-                    break;
+                break;
             }
-            unAldeano.nuevoTurno();
+            unAldeano.realizarTrabajoDeTurno();
+            oroJugador += unAldeano.generarOro();
         }
     }
 
     @Test
-    public void ConstruccionCuartel() throws Excepcion {
+    public void ConstruccionCuartel() throws Exception {
         int turno = 0;
         int oroJugador = 0;
 
@@ -253,62 +237,49 @@ public class AldeanoTest {
             switch (turno) {
 
                 case 1:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
-                    //tira error
-                	//thrown.expect(modelo.Excepcion.class);
-                    //unAldeano.realizarTrabajoDeTurno();
                 }
-                    break;
+                break;
                     
                 case 2:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
                     
                 case 3:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oroJugador);
                 }
-                    break;
+                break;
 
                 case 4:{
-                    Assert.assertEquals(true, unAldeano.estaOcupado());
                     Assert.assertEquals(false, elNuevoCuartel.necesitaReparacion());
                     Assert.assertEquals(false, elNuevoCuartel.enConstruccion());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(20, oroJugador);
                 }
-                    break;
+                break;
 
                 case 5:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(40, oroJugador);
                 }
-                    break;
+                break;
 
                 case 6:{
-                    Assert.assertEquals(false, unAldeano.estaOcupado());
-                    oroJugador += unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(60, oroJugador);
                 }
-                    break;
+                break;
             }
-            unAldeano.nuevoTurno();
+            unAldeano.realizarTrabajoDeTurno();
+            oroJugador += unAldeano.generarOro();
         }
     }
     
     @Test
-    public void RepararPlazaCentral() throws Excepcion{
+    public void RepararPlazaCentral() throws Exception{
         int turno=0;
 
         Tablero unTablero = new Tablero(5,5);
@@ -341,7 +312,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void RepararCastillo() throws Excepcion{
+    public void RepararCastillo() throws Exception{
         int turno=0;
 
         Tablero unTablero = new Tablero(5,5);
@@ -374,7 +345,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void RepararCuartel() throws Excepcion{
+    public void RepararCuartel() throws Exception{
         int turno=0;
 
         Tablero unTablero = new Tablero(5,5);
@@ -391,11 +362,13 @@ public class AldeanoTest {
             turno++;
 
             switch (turno) {
+            
                 case 1: {
                     unAldeano.reparar(unCuartel);
                     Assert.assertEquals(true, unCuartel.necesitaReparacion());
                 }
                 break;
+                
                 case 2: {
                     unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(false, unCuartel.necesitaReparacion());
@@ -407,7 +380,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion() throws Excepcion{
+    public void AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion() throws Exception{
         int turno=0;
         int oro=0;
 
@@ -427,27 +400,27 @@ public class AldeanoTest {
             switch (turno) {
                 case 1: {
                     unAldeano.reparar(unCuartel);
-                    Assert.assertEquals(0, oro);
                 }
                 break;
+                
                 case 2: {
-                    oro+=unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(0, oro);
                 }
                 break;
+                
                 case 3: {
-                    oro+=unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(20, oro);
                 }
                 break;
             }
-            unAldeano.nuevoTurno();
+            unAldeano.realizarTrabajoDeTurno();
+            oro += unAldeano.generarOro();
         }
     }  
     
     //TODO falta arreglar esta --- lo comento para que para el build
 /*    @Test
-    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws modelo.Excepcion{
+    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws modelo.Exceptiones.Exception{
         int turno=0;
         int oro=0;
 
@@ -481,10 +454,10 @@ public class AldeanoTest {
             otroAldeano.nuevoTurno();
         }
     }*/ 
-    
+
     @Test
-    public void aldeanoNoPuedaRealizarOtraAccionSiEstaReparando() throws Excepcion{
-        int turno=0;
+    public void aldeanoNoPuedaRealizarOtraAccionSiEstaReparando() throws Exception{
+        int turno = 0;
 
         Tablero unTablero = new Tablero(5,5);
 
@@ -509,20 +482,32 @@ public class AldeanoTest {
                 break;
                 
                 case 2: {
-                	unTablero.moverEnDireccion(unAldeano,0,1);
-                	
+            		try {
+            			unTablero.moverEnDireccion(unAldeano,0,1);
+            		} catch (Exception e) {}
+            		
                 	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
                 	
-                	Cuartel nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
+                	
+                	//TODO: NO le puedo decir crearCuartel porque el Aldeano esta reparando!          	
+                	Cuartel nuevoCuartel = null;
+                	try {
+                		nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
+            		} catch (Exception e) {}
+                	
                 	Assert.assertNull(nuevoCuartel);
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
+                	Assert.assertEquals(true,zonaDeConstruccion2.estaLibre());
                 	
-                	Plaza nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
+                	Plaza nuevaPlaza = null;
+                	try {
+                		nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
+            		} catch (Exception e) {}
+                	
                 	Assert.assertNull(nuevaPlaza);
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
+                	Assert.assertEquals(true,zonaDeConstruccion2.estaLibre());
                 	
                 	unAldeano.realizarTrabajoDeTurno();
-                    Assert.assertEquals(unCuartel.necesitaReparacion(),false);
+                    Assert.assertEquals(false,unCuartel.necesitaReparacion());
                 }
                 break;
 
@@ -532,7 +517,7 @@ public class AldeanoTest {
     }
     
     @Test
-    public void aldeanoNoPuedaRealizarOtraAccionSiEstaConstruyendo() throws Excepcion{
+    public void aldeanoNoPuedaRealizarOtraAccionSiEstaConstruyendo() throws Exception{
         int turno=0;
 
         Tablero unTablero = new Tablero(5,5);
@@ -557,26 +542,36 @@ public class AldeanoTest {
                 break;
                 
                 case 2: {
-                	unTablero.moverEnDireccion(unAldeano,0,1);
+            		try {
+            			unTablero.moverEnDireccion(unAldeano,0,1);
+            		} catch (Exception e) {}
                 	
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
+                	Assert.assertTrue(zonaDeConstruccion2.estaLibre());
                 	
-                	Cuartel nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
+                	Cuartel nuevoCuartel = null;
+            		try {
+            			nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
+	        		} catch (Exception e) {}
+            		
                 	Assert.assertNull(nuevoCuartel);
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
+                	Assert.assertTrue(zonaDeConstruccion2.estaLibre());
                 	
-                	Plaza nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
-                	Assert.assertNull(nuevaPlaza);
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
+                	Plaza nuevaPlaza = null;
+            		try {
+            			nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
+		    		} catch (Exception e) {}
+            		
+	               	Assert.assertNull(nuevaPlaza);
+                	Assert.assertTrue(zonaDeConstruccion2.estaLibre());
                 	
                 	unAldeano.realizarTrabajoDeTurno();
-                    Assert.assertEquals(unCuartel.necesitaReparacion(),false);
+                    Assert.assertFalse(unCuartel.necesitaReparacion());
                 }
                 break;
                 
                 case 3: {
                 	unAldeano.realizarTrabajoDeTurno();
-                    Assert.assertEquals(unCuartel.enConstruccion(),false);
+                    Assert.assertFalse(unCuartel.enConstruccion());
                 }
                 break;
 

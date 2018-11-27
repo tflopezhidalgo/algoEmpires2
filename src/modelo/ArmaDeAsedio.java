@@ -1,6 +1,14 @@
 package modelo;
 
+import modelo.estadoArmaDeAsedio.CatapultaDesarmada;
+import modelo.estadoArmaDeAsedio.EstadoCatapulta;
+
 public class ArmaDeAsedio extends Unidad {
+
+    final int VIDA = 150;
+    final int COSTO = 200;
+
+    private EstadoCatapulta estado;
 
     /*     -Arma de asedio-
      *
@@ -9,30 +17,43 @@ public class ArmaDeAsedio extends Unidad {
      *      Distancia de ataque: 5
      */
 
-	public ArmaDeAsedio(Area unEspacio) throws Excepcion {
+	public ArmaDeAsedio(Area unEspacio) {
+
 		super(unEspacio);
-		vida = 150;
-		costo = 200;
+		vida = VIDA;
+		costo = COSTO;
+		estado = new CatapultaDesarmada();
 	}
 
 	public void accionar() {
-		ocupado = !ocupado;
-	}
-	
-	//distancia de ataque = 5
 
-	public void atacar(Edificio edificioEnemigo) throws Excepcion {
-		siYaJugoElTurnoError();
-		
-		if(ocupado) {
-			if(enRango(edificioEnemigo,5)) {
-				edificioEnemigo.recibirDanio(75);
-				turnoJugado = true;
-			}
-			
-			if(edificioEnemigo.estaDestruida()) {
-				edificioEnemigo = null;
-			}
-		}
+		estado = estado.cambiarEstado();
+	}
+
+	@Override
+    public void mover(Area nuevaArea){
+
+	    estado.mover();
+        if( nuevaArea.estaLibre()) {
+            espacioOcupado.liberar();
+            espacioOcupado = nuevaArea;
+            espacioOcupado.ocupar();
+            turnoJugado = true;
+        }
+
+    }
+
+	public void atacar(Edificio edificioEnemigo) {
+
+        siYaJugoElTurnoError();
+
+        if(enRango(edificioEnemigo,5)) {
+            estado.atacar(edificioEnemigo);
+			turnoJugado = true;
+        }
+
+        if(edificioEnemigo.estaDestruida()) {
+            edificioEnemigo = null;
+        }
 	}	
 }

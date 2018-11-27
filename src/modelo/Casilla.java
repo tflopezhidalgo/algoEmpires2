@@ -1,52 +1,58 @@
 package modelo;
 
+import modelo.estadoCasilla.CasillaLibre;
+import modelo.estadoCasilla.EstadoCasilla;
+
 public class Casilla {
-	
-	private boolean ocupada; //TODO: Futuro patrón state
+
    	private int posicionX;
    	private int posicionY;
+   	private EstadoCasilla estadoActual;
 
 	public Casilla( int x, int y ){
-		posicionX = x;
-		posicionY = y;
-        	ocupada = false;
-    	}
-	public boolean estaOcupada() {
-		return ocupada;
+
+		this.posicionX = x;
+		this.posicionY = y;
+		this.estadoActual = new CasillaLibre();
 	}
 
-	public void ocupar() throws Excepcion {
-		if(!ocupada) {
-			ocupada = true;
-		}
-		else {
-			throw new Excepcion("ERROR: Casilla ocupada.");
-		}
+	public boolean estaOcupada() {
+
+		return estadoActual.estaOcupada();
+	}
+
+	public void ocupar() {
+
+	    estadoActual = estadoActual.ocupar();
 	}
 	
 	public void liberar() {
-	    ocupada = false;
+
+	    estadoActual = estadoActual.liberar();
 	}
 
 	public int ejeX() {
+
 		return posicionX;
 	}
 	
 	public int ejeY() {
+
 		return posicionY;
 	}
-	//-------------------------------------
 
    	public String aString() {
-		return ( Integer.toString(posicionX) + "I" + Integer.toString(posicionY));
-    	}
 
-    	//USO APTO PARA TODOS    
-    	static public String aString(int x , int y) {
+		return ( Integer.toString(posicionX) + "I" + Integer.toString(posicionY));
+	}
+
+	static public String aString(int x , int y) {
+
 		return ( Integer.toString(x) + "I" + Integer.toString(y));
 	}
 
 	public int calcularDistanciaA(Casilla casillaB) {
+
 		int xFinal = this.ejeX();
 		int yFinal = this.ejeY();
 		int xInicial = casillaB.ejeX();
@@ -55,9 +61,9 @@ public class Casilla {
 		int diferenciaX = Math.abs(xFinal - xInicial);
 		int diferenciaY = Math.abs(yFinal - yInicial);
 		
-		if(diferenciaX < diferenciaY) {
+		if(diferenciaX < diferenciaY)
 			return diferenciaY;
-		}
+
 		return diferenciaX;
 	}
 }
