@@ -489,7 +489,7 @@ public class AldeanoTest {
                 	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
                 	
                 	
-                	//TODO: NO le puedo decir crearCuartel porque el Aldeano esta¡ reparando!                	
+                	//TODO: NO le puedo decir crearCuartel porque el Aldeano esta reparando!          	
                 	Cuartel nuevoCuartel = null;
                 	try {
                 		nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
