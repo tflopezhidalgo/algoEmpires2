@@ -234,7 +234,9 @@ public class ArmaDeAsedioTest {
         ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
 
         //vida de la plaza == 450
+        try {
         unaArmaDeAsedio.atacar(unaPlaza);
+		} catch (Exception e) {}
         Assert.assertEquals(false, unaPlaza.necesitaReparacion());
         
         unaArmaDeAsedio.accionar();
@@ -262,7 +264,9 @@ public class ArmaDeAsedioTest {
         
         //no se mueve
         unArmaDeAsedio.nuevoTurno();
-        unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
+		try {
+			unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
+		} catch (Exception e) {}
      	Assert.assertEquals(true, casillaArriba1.estaOcupada());
      	Assert.assertEquals(false, casillaArriba2.estaOcupada());
  

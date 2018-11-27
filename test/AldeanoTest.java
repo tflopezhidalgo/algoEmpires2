@@ -215,7 +215,7 @@ public class AldeanoTest {
                 }
                 break;
             }
-	    unAldeano.realizarTrabajoDeTurno();
+            unAldeano.realizarTrabajoDeTurno();
             oroJugador += unAldeano.generarOro();
         }
     }
@@ -273,7 +273,7 @@ public class AldeanoTest {
                 }
                 break;
             }
-	    unAldeano.realizarTrabajoDeTurno();
+            unAldeano.realizarTrabajoDeTurno();
             oroJugador += unAldeano.generarOro();
         }
     }
@@ -362,11 +362,13 @@ public class AldeanoTest {
             turno++;
 
             switch (turno) {
+            
                 case 1: {
                     unAldeano.reparar(unCuartel);
                     Assert.assertEquals(true, unCuartel.necesitaReparacion());
                 }
                 break;
+                
                 case 2: {
                     unAldeano.realizarTrabajoDeTurno();
                     Assert.assertEquals(false, unCuartel.necesitaReparacion());
@@ -411,6 +413,7 @@ public class AldeanoTest {
                 }
                 break;
             }
+            unAldeano.realizarTrabajoDeTurno();
             oro += unAldeano.generarOro();
         }
     }  
@@ -479,21 +482,32 @@ public class AldeanoTest {
                 break;
                 
                 case 2: {
-                	unTablero.moverEnDireccion(unAldeano,0,1);
-
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
-                	//TODO: NO le puedo decir crearCuartel porque el Aldeano está reparando!
-                    //TODO: catchear la excepción "AldeanoNoPuedeRepararPorqueEstaConstruyendo"
-            //    	Cuartel nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2) ;
-            //    	Assert.assertNull(nuevoCuartel);
+            		try {
+            			unTablero.moverEnDireccion(unAldeano,0,1);
+            		} catch (Exception e) {}
+            		
                 	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
                 	
-            //    	Plaza nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
-            //    	Assert.assertNull(nuevaPlaza);
-                	Assert.assertEquals(zonaDeConstruccion2.estaLibre(),true);
+                	
+                	//TODO: NO le puedo decir crearCuartel porque el Aldeano esta� reparando!                	
+                	Cuartel nuevoCuartel = null;
+                	try {
+                		nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
+            		} catch (Exception e) {}
+                	
+                	Assert.assertNull(nuevoCuartel);
+                	Assert.assertEquals(true,zonaDeConstruccion2.estaLibre());
+                	
+                	Plaza nuevaPlaza = null;
+                	try {
+                		nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
+            		} catch (Exception e) {}
+                	
+                	Assert.assertNull(nuevaPlaza);
+                	Assert.assertEquals(true,zonaDeConstruccion2.estaLibre());
                 	
                 	unAldeano.realizarTrabajoDeTurno();
-                    Assert.assertEquals(unCuartel.necesitaReparacion(),false);
+                    Assert.assertEquals(false,unCuartel.necesitaReparacion());
                 }
                 break;
 
@@ -528,16 +542,26 @@ public class AldeanoTest {
                 break;
                 
                 case 2: {
-                	unTablero.moverEnDireccion(unAldeano,0,1);
+            		try {
+            			unTablero.moverEnDireccion(unAldeano,0,1);
+            		} catch (Exception e) {}
                 	
                 	Assert.assertTrue(zonaDeConstruccion2.estaLibre());
                 	
-//                	Cuartel nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
-//                	Assert.assertNull(nuevoCuartel);
+                	Cuartel nuevoCuartel = null;
+            		try {
+            			nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
+	        		} catch (Exception e) {}
+            		
+                	Assert.assertNull(nuevoCuartel);
                 	Assert.assertTrue(zonaDeConstruccion2.estaLibre());
                 	
- //               	Plaza nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
- //               	Assert.assertNull(nuevaPlaza);
+                	Plaza nuevaPlaza = null;
+            		try {
+            			nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
+		    		} catch (Exception e) {}
+            		
+	               	Assert.assertNull(nuevaPlaza);
                 	Assert.assertTrue(zonaDeConstruccion2.estaLibre());
                 	
                 	unAldeano.realizarTrabajoDeTurno();

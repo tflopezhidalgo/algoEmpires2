@@ -166,6 +166,7 @@ public class EspadachinTest {
         unEspadachin.atacar(unAldeano);
         
         unEspadachin.nuevoTurno();
+
         //vida del aldeano == 0
         unEspadachin.atacar(unAldeano);
 
