@@ -601,10 +601,10 @@ public class AldeanoTest {
     @Test
     public void aldeanoConstruyendoNoPuedeReparar() throws Exception {
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(3,1,3,1));
 
-        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(5,5,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1),true);
-        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(4,0,Cuartel.TAMANIO_LADO+2, Cuartel.TAMANIO_LADO-1),true);
+        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO));
 
         unAldeano.nuevoTurno();
 
@@ -659,9 +659,9 @@ public class AldeanoTest {
     public void aldeanoReparandoNoPuedeConstruir() throws Exception {
 
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0, 0, 0, 0));
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(3, 1, 3, 1));
 
-        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(5, 5, Cuartel.TAMANIO_LADO - 1, Cuartel.TAMANIO_LADO - 1), true);
+        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(4,0,Cuartel.TAMANIO_LADO+2, Cuartel.TAMANIO_LADO-1));
         cuartelAReparar.recibirDanio(100);
         unAldeano.reparar(cuartelAReparar);
 
@@ -669,7 +669,7 @@ public class AldeanoTest {
 
         boolean seLanzoError=false;
         try {
-            Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO - 1, Cuartel.TAMANIO_LADO - 1));
+            Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO ));
         } catch (AldeanoReparandoNoPuedeConstruir e) {
             seLanzoError=true;
         };

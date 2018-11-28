@@ -348,14 +348,13 @@ public class ArmaDeAsedioTest {
        Tablero unTablero = new Tablero();
        Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
-       Area espacioDePlaza = unTablero.definirArea(6, 6, Plaza.TAMANIO_LADO+5, Plaza.TAMANIO_LADO+5);
-       Plaza unaPlaza = new Plaza(espacioDePlaza);
+       Area areaNueva = unTablero.definirArea(1, 0, 1,0);
 
        unArmaDeAsedio.accionar();
 
        boolean seLanzoError=false;
        try {
-           unArmaDeAsedio.atacar(unaPlaza);
+           unArmaDeAsedio.mover(areaNueva);
        } catch (CatapultaArmadaNoPuedeMoverseError e){
            seLanzoError=true;
        };
@@ -368,7 +367,7 @@ public class ArmaDeAsedioTest {
        Tablero unTablero = new Tablero();
        Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
-       Area espacioDePlaza = unTablero.definirArea(6, 6, Plaza.TAMANIO_LADO+5, Plaza.TAMANIO_LADO+5);
+       Area espacioDePlaza = unTablero.definirArea(1, 0, Plaza.TAMANIO_LADO, Plaza.TAMANIO_LADO-1);
        Plaza unaPlaza = new Plaza(espacioDePlaza);
 
        boolean seLanzoError=false;
