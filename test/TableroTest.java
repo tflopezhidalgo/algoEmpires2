@@ -137,4 +137,30 @@ public class TableroTest {
 		unTablero.liberar(unaCasilla);
 		Assert.assertEquals(false, unaCasilla.estaOcupada());
 	}
+
+	@Test
+    public void moverAUnaUnidad() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(1,1,1,1));
+        Casilla unaCasilla = unTablero.obtenerCasillaEn(2,2);
+
+        Assert.assertEquals(false, unaCasilla.estaOcupada());
+
+        unTablero.moverEnDireccion(unAldeano,1,1);
+        Casilla casillaDeAldeano = unaCasilla;
+
+        Assert.assertEquals(true, casillaDeAldeano.estaOcupada());
+    }
+
+    @Test
+    public void casillaNoExiste() throws Exception{
+        Tablero unTablero = new Tablero();
+        Casilla unaCasilla = unTablero.obtenerCasillaEn(1,1);
+        Casilla unaCasilla2 = unTablero.obtenerCasillaEn(5,5);
+        Casilla unaCasilla3 = unTablero.obtenerCasillaEn(15,15);
+
+        thrown.expect(Exception.class);
+        Casilla unaCasilla4 = unTablero.obtenerCasillaEn(18,18);
+    }
+
 }

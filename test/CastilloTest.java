@@ -42,4 +42,30 @@ public class CastilloTest {
         Assert.assertEquals(false, unTablero.obtenerCasillaEn(0,3).estaOcupada());
         Assert.assertEquals(false, unTablero.obtenerCasillaEn(0,4).estaOcupada());
     }
+
+    @Test
+    public void recibirDanio() throws Exception{
+        Tablero unTablero = new Tablero();
+        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+
+        Assert.assertEquals(false, unCastillo.necesitaReparacion());
+
+        unCastillo.recibirDanio(50);
+        Assert.assertEquals(true, unCastillo.necesitaReparacion());
+    }
+
+    @Test
+    public void atacarPiezaEnemiga() throws Exception{
+        Tablero unTablero = new Tablero();
+        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(5,5,5,5));
+
+        Assert.assertEquals(false, unAldeano.estaDestruida());
+        unCastillo.atacar(unAldeano);
+        Assert.assertEquals(false, unAldeano.estaDestruida());
+        unCastillo.atacar(unAldeano);
+        Assert.assertEquals(false, unAldeano.estaDestruida());
+        unCastillo.atacar(unAldeano);
+        Assert.assertEquals(true, unAldeano.estaDestruida());
+    }
 }

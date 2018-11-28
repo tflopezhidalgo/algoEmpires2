@@ -214,4 +214,23 @@ public class ArqueroTest {
         Assert.assertEquals(false, unAldeano.estaDestruida());
     }
 
+    @Test
+    public void atacarAUnaPieza() throws Exception{
+        Tablero unTablero = new Tablero(10,10);
+        Area espacioArquero = unTablero.definirArea(0,4,0,4);
+        Arquero unArquero = new Arquero(espacioArquero);
+
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(5,5,5,5));
+
+        Assert.assertEquals(false, unAldeano.estaDestruida());
+        unAldeano.recibirDanioDe(unArquero);
+        Assert.assertEquals(false, unAldeano.estaDestruida());
+        unAldeano.recibirDanioDe(unArquero);
+        Assert.assertEquals(false, unAldeano.estaDestruida());
+        unAldeano.recibirDanioDe(unArquero);
+        Assert.assertEquals(false, unAldeano.estaDestruida());
+        unAldeano.recibirDanioDe(unArquero);
+        Assert.assertEquals(true, unAldeano.estaDestruida());
+    }
+
 }

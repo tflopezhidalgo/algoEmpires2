@@ -598,4 +598,83 @@ public class AldeanoTest {
         aldeano2.reparar(unCuartel);
     }*/
 
+    @Test
+    public void aldeanoConstruyendoNoPuedeReparar() throws Exception {
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+
+        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(5,5,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1),true);
+        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+
+        unAldeano.nuevoTurno();
+
+        cuartelAReparar.recibirDanio(100);
+        boolean seLanzoError=false;
+        try {
+            unAldeano.reparar(cuartelAReparar);
+        } catch (AldeanoConstruyendoNoPuedeReparar e) {
+            seLanzoError=true;
+        };
+
+        Assert.assertEquals(true, seLanzoError);
+    }
+
+    @Test
+    public void aldeanoOcupadoNoPuedeMoverse() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+
+        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+
+        unAldeano.nuevoTurno();
+        boolean seLanzoError=false;
+        try {
+            unAldeano.mover(unTablero.definirArea(1,1,1,1));
+        } catch (AldeanOcupadoNoPuedeMoverse e) {
+            seLanzoError=true;
+        };
+
+        Assert.assertEquals(true, seLanzoError);
+    }
+
+    @Test
+    public void aldeanoOcupadoConOtroEdificio() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+
+        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+
+        unAldeano.nuevoTurno();
+        boolean seLanzoError=false;
+        try {
+           Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(0,0,1,1));
+        } catch (AldeanoOcupadoConOtroEdificioError e) {
+            seLanzoError=true;
+        };
+
+        Assert.assertEquals(true, seLanzoError);
+    }
+
+    @Test
+    public void aldeanoReparandoNoPuedeConstruir() throws Exception {
+
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0, 0, 0, 0));
+
+        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(5, 5, Cuartel.TAMANIO_LADO - 1, Cuartel.TAMANIO_LADO - 1), true);
+        cuartelAReparar.recibirDanio(100);
+        unAldeano.reparar(cuartelAReparar);
+
+        unAldeano.nuevoTurno();
+
+        boolean seLanzoError=false;
+        try {
+            Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO - 1, Cuartel.TAMANIO_LADO - 1));
+        } catch (AldeanoReparandoNoPuedeConstruir e) {
+            seLanzoError=true;
+        };
+
+        Assert.assertEquals(true, seLanzoError);
+    }
+
 }
