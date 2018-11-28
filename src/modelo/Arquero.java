@@ -1,7 +1,10 @@
 package modelo;
 
-public class Arquero extends Unidad {
+public class Arquero extends Unidad implements Atacante {
 
+    final int VIDA = 75;
+    final int COSTO = 75;
+	
     /*      -Arquero-
      *
      *      Vida: 75
@@ -11,8 +14,9 @@ public class Arquero extends Unidad {
 
 	public Arquero(Area unEspacio) {
 		super(unEspacio);
-		vida = 75;
-		costo = 75;
+		vidaMaxima = VIDA;
+		vida = vidaMaxima;
+		costo = COSTO;
 	}
 
 	public void atacar(Pieza unaPieza){

@@ -1,5 +1,7 @@
 package vista;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -96,6 +98,7 @@ public class CasillaVista extends StackPane{
 		Rectangle rectangulo = new Rectangle(TAMANIO_CASILLA, TAMANIO_CASILLA);
 		rectangulo.setFill(Color.rgb(150, colorTerreno, 90, .99));
 		getChildren().add(rectangulo);
+		//------------------------------------------
 		
 		//efecto casilla seleccionada
 		seleccion = new Rectangle(TAMANIO_CASILLA*0.95, TAMANIO_CASILLA*0.95);

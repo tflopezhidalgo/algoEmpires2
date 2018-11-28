@@ -9,8 +9,8 @@ public class Cuartel extends Edificio {
 	
 	public Cuartel(Area areaAOcupar) {
 		super(areaAOcupar);
-		vida = 250;
-		vidaMaxima = vida;
+		vidaMaxima = 250;
+		vida = vidaMaxima;
 		costo = 50;
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 50;

@@ -3,12 +3,10 @@ package modelo;
 public abstract class Unidad extends Pieza {
 
 	public Unidad(Area unEspacio) {
-
 	    super(unEspacio);
 	}
 
 	public void mover(Area nuevoEspacio){
-
 	    this.siYaJugoElTurnoError();
 
         if (nuevoEspacio.estaLibre()) {
@@ -20,12 +18,10 @@ public abstract class Unidad extends Pieza {
 	}
 
 	public void recibirDanioDe(Arquero unArquero){
-
         this.recibirDanio(15);
     }
 
     public void recibirDanioDe(Espadachin unEspadachin){
-
         this.recibirDanio(25);
     }
 

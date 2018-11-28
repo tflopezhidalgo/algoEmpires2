@@ -1,24 +1,21 @@
 package vista;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
-import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.Aldeano;
 import modelo.Area;
 import modelo.Casilla;
 import modelo.Castillo;
-import modelo.Pieza;
 import modelo.Plaza;
 import modelo.Tablero;
 
@@ -64,24 +61,21 @@ public class JuegoVista extends Application{
     	generarPiezasInicialesEquipo2();
     	
     	Button botonFinTurno = new Button("Finalizar Turno");
-
-    	botonFinTurno.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                for(int i = 0; i<grupoPiezas.getChildren().size(); i++) {
-                    Node nodoActual = grupoPiezas.getChildren().get(i);
-                    //TODO modificar esto despues, tiene que ser para todas las PIEZAS del ultimo jugador
-                    ((PiezaVista)nodoActual).nuevoTurno();
-            } }}
-            );
+    	botonFinTurno.setOnAction(value ->  {
+    		for(int i = 0; i<grupoPiezas.getChildren().size(); i++) {
+    			Node nodoActual = grupoPiezas.getChildren().get(i);
+    			//TODO modificar esto despues, tiene que ser para todas las PIEZAS del ultimo jugador
+				((PiezaVista)nodoActual).nuevoTurno();
+    		}
+         });
     	
     	MenuBar menuAcciones = new MenuBar();
     	botones = new HBox(botonFinTurno, menuAcciones);
-    	//MapaVista mapa = new MapaVista(grupoCasillas,grupoPiezas);
-   // 	VBox paneles = new VBox(mapa,botones);
+    	MapaVista mapa = new MapaVista(grupoCasillas,grupoPiezas);
+    	VBox paneles = new VBox(mapa,botones);
 
     	//mapa.getChildren().addAll(grupoCasillas,grupoPiezas);
-    //	root.getChildren().add(paneles);
+    	root.getChildren().add(paneles);
     	return root;
     }
     
@@ -115,7 +109,6 @@ public class JuegoVista extends Application{
 	}
 
 	public void generarPiezasInicialesEquipo2() throws Exception{
-		
 		//Castillo
 		Area areaCastillo = elTablero.definirArea(ANCHO-5, ALTO-5, ANCHO-2, ALTO-2);
 		Castillo castillo = new Castillo(areaCastillo);
@@ -163,29 +156,11 @@ public class JuegoVista extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        Scene escenaMapa = new Scene(crearContenido());
-        Pane menu = new MenuVista();
-        //Button unBoton  = new Button("Comenzar");
-        //unBoton.setOnAction(event -> primaryStage.setScene(escenaMapa));
-
-        Image botonComenzar = new Image("builingsTemp\\botoncomenzar.png");
-        BotonPersonalizado elBotonComenzar = new BotonPersonalizado(botonComenzar);
-        elBotonComenzar.relocate(menu.getPrefWidth()/2 - elBotonComenzar.getPrefWidth()/2,menu.getPrefHeight()/2 - elBotonComenzar.getPrefHeight()/2 );
-        elBotonComenzar.setOnMousePressed(event -> primaryStage.setScene(escenaMapa));
-
-        Image botonSalir = new Image("builingsTemp\\botonsalir.png");
-        BotonPersonalizado elBotonSalir = new BotonPersonalizado(botonSalir);
-        elBotonSalir.relocate(menu.getPrefWidth()/2 - elBotonSalir.getPrefWidth()/2,menu.getPrefHeight()/2 + elBotonSalir.getPrefHeight() );
-        elBotonSalir.setOnMousePressed(event ->  primaryStage.close());
-
-        //menu.getChildren().add(elBotonComenzar);
-        menu.getChildren().addAll(elBotonComenzar, elBotonSalir);
-
-        Scene pantallaInicial = new Scene(menu);
-        primaryStage.setTitle("Algo Empires 2");
-    	//primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setScene(pantallaInicial);
+    	Scene scene = new Scene(crearContenido());
+    	primaryStage.setTitle("Juegazo");
+    	primaryStage.initStyle(StageStyle.UNDECORATED);
+    	
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
@@ -207,7 +182,6 @@ public class JuegoVista extends Application{
 
 	public void removerPieza(PiezaVista piezaVista) {
 		grupoPiezas.getChildren().remove(piezaVista);
-		
 	}
 
 }

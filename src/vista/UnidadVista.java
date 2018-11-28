@@ -33,6 +33,7 @@ public abstract class UnidadVista extends PiezaVista {
 				elJuego.removerPieza(this);
 			}
 		//}
+		actualizarBarraDeVida();
 	}
 
 }

@@ -21,7 +21,6 @@ public abstract class EdificioVista extends PiezaVista{
 		if(piezaSeleccionada.modelo() instanceof Atacante) {
 			//Edificio esta siendo atacado
 			((Atacante)(piezaSeleccionada).modelo()).atacar(modelo);
-			
 			if(modelo.estaDestruida()) {
 				elJuego.removerPieza(this);
 			}
@@ -31,6 +30,7 @@ public abstract class EdificioVista extends PiezaVista{
 			//Edificio esta siendo reparado
 			((Aldeano)(piezaSeleccionada).modelo()).reparar((Edificio)modelo);
 		}
+		actualizarBarraDeVida();
 	}
 	
 	protected abstract void prepararBotones();

@@ -4,6 +4,7 @@ import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 
 public abstract class Pieza {
 	
+	protected int vidaMaxima;
 	protected int vida;
 	protected int costo;
 	protected Area espacioOcupado;
@@ -48,7 +49,6 @@ public abstract class Pieza {
 	/*          Constructor             */
 
 	public Pieza(){
-
         vida = 0;
         costo = 0;
         espacioOcupado = null;
@@ -83,4 +83,8 @@ public abstract class Pieza {
 
 	public abstract void recibirDanioDe(Arquero unArquero);
 	public abstract void recibirDanioDe(Espadachin unEspadachin);
+	
+	public double porcentajeVidaActual() {
+		return ((double)vida/vidaMaxima);
+	}
 }

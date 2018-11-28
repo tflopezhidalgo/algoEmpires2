@@ -4,7 +4,6 @@ import modelo.estadoEdificio.EstadoEdificio;
 
 public abstract class Edificio extends Pieza {
 
-	protected int vidaMaxima;
 	protected int tiempoDeConstruccion;
 	protected int cantidadDeCuracion;
 
@@ -26,12 +25,10 @@ public abstract class Edificio extends Pieza {
 	}
 	
 	public boolean necesitaReparacion() {
-
 		return(vida < vidaMaxima);
 	}
 	
 	public boolean enConstruccion() {
-
 		return(tiempoDeConstruccion > 0);
 	}
 	
@@ -42,17 +39,14 @@ public abstract class Edificio extends Pieza {
 	}
 	
 	public int tamanioArea() {
-
 		return espacioOcupado.obtenerCantidadDeCasillas();
 	}
 
 	public void recibirDanioDe(Arquero unArquero){
-
 	    this.recibirDanio(10);
     }
 
     public void recibirDanioDe(Espadachin unEspadachin){
-
 	    this.recibirDanio(15);
     }
 }
