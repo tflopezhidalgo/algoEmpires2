@@ -10,7 +10,7 @@ public class Aldeano extends Unidad {
     final int COSTO_ALDEANO = 25;
 
 	private EstadoAldeano estadoActual;
-	
+	//ahora si, anda donde habias hecho la prueba
 	public Aldeano(Area unEspacio){
 		super(unEspacio);
 		estadoActual = new AldeanoLibre();

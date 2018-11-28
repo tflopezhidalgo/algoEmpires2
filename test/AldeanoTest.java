@@ -578,6 +578,24 @@ public class AldeanoTest {
             }
             unAldeano.nuevoTurno();
         }
-    } 
-}
+    }
+ /*   @Test
+    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws Exception{
 
+        Tablero unTablero = new Tablero(5,5);
+        Area espacioAldeano1 = unTablero.definirArea(0,0,0,0);
+        Aldeano aldeano1 = new Aldeano(espacioAldeano1);
+
+        Area espacioAldeano2 = unTablero.definirArea(1,1,1,1);
+        Aldeano aldeano2 = new Aldeano(espacioAldeano2);
+
+        Cuartel unCuartel = new Cuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1),true);
+
+        unCuartel.recibirDanio(100);
+        aldeano1.reparar(unCuartel);
+
+        thrown.expect(EdificioOcupadoPorOtroAldeanoError.class);
+        aldeano2.reparar(unCuartel);
+    }*/
+
+}
