@@ -44,8 +44,8 @@ public class Cuartel extends Edificio {
         	throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
         }
 		
-		turnoJugado = true;
 		Espadachin unEspadachin = new Espadachin(unEspacio);
+		turnoJugado = true;
 		return unEspadachin;
 	}
 	

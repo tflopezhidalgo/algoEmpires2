@@ -41,8 +41,8 @@ public class Plaza extends Edificio {
         	throw new NoSePuedeCrearUnidadesDuranteConstruccionError();
         }
 		
-		turnoJugado = true;
 		Aldeano unAldeano = new Aldeano(unEspacio);
+		turnoJugado = true;
 		return unAldeano;
 	}
 }

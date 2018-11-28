@@ -43,9 +43,9 @@ public class Castillo extends Edificio {
         if(distanciaMinimaA(unEspacio) > 1) {
             throw  new NoSePuedeConstruirTanLejosError();
         }
-		
-		turnoJugado = true;
+        
 		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(unEspacio);
+		turnoJugado = true;
 		return unaArmaDeAsedio;
 	}
 }
