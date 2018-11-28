@@ -8,6 +8,7 @@ import modelo.Area;
 import modelo.Arquero;
 import modelo.Cuartel;
 import modelo.Espadachin;
+import modelo.Plaza;
 
 public class CuartelVista extends EdificioVista{
 	
@@ -20,7 +21,7 @@ public class CuartelVista extends EdificioVista{
 		//-----------------------------------------
  		Image image = new Image("Imagenes\\2x2\\enConstruccion3.png");
  		enConstruccionView = new ImageView(image);
- 		enConstruccionView.setFitHeight(60);
+ 		enConstruccionView.setFitHeight(37);
  		enConstruccionView.setFitWidth(60);
 		getChildren().add(enConstruccionView);
 		//-----------------------------------------
@@ -85,5 +86,10 @@ public class CuartelVista extends EdificioVista{
 	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
 	//----------------------------------   FIN    ----------------------------------------
 
-
+	@Override
+	protected void actualizarVisualizacon(){
+		super.actualizarVisualizacon();
+ 		enConstruccionView.setVisible(((Cuartel)modelo).enConstruccion());
+ 		construidoView.setVisible(!((Cuartel)modelo).enConstruccion());
+	}
 }

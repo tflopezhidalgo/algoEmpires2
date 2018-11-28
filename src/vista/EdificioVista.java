@@ -30,7 +30,7 @@ public abstract class EdificioVista extends PiezaVista{
 			//Edificio esta siendo reparado
 			((Aldeano)(piezaSeleccionada).modelo()).reparar((Edificio)modelo);
 		}
-		actualizarBarraDeVida();
+		actualizarVisualizacon();
 	}
 	
 	protected abstract void prepararBotones();

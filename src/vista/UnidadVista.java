@@ -33,7 +33,7 @@ public abstract class UnidadVista extends PiezaVista {
 				elMapa.removerPieza(this);
 			}
 		//}
-		actualizarBarraDeVida();
+		actualizarVisualizacon();
 	}
 
 }

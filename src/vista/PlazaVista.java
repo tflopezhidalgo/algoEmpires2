@@ -20,7 +20,7 @@ public class PlazaVista extends EdificioVista {
 		//-----------------------------------------
  		Image image = new Image("Imagenes\\2x2\\enConstruccion3.png");
  		enConstruccionView = new ImageView(image);
- 		enConstruccionView.setFitHeight(60);
+ 		enConstruccionView.setFitHeight(37);
  		enConstruccionView.setFitWidth(60);
  		enConstruccionView.setVisible(((Plaza)modelo).enConstruccion());
 		getChildren().add(enConstruccionView);
@@ -69,5 +69,11 @@ public class PlazaVista extends EdificioVista {
 	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
 	//----------------------------------   FIN    ----------------------------------------
 
+	@Override
+	protected void actualizarVisualizacon(){
+		super.actualizarVisualizacon();
+ 		enConstruccionView.setVisible(((Plaza)modelo).enConstruccion());
+ 		construidoView.setVisible(!((Plaza)modelo).enConstruccion());
+	}
 	
 }

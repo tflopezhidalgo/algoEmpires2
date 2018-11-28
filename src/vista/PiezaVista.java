@@ -105,7 +105,7 @@ public abstract class PiezaVista extends StackPane {
 	public void nuevoTurno() {
 		modelo.nuevoTurno();
 		//TODO test, esto esta medio desactulizado por 1 turno
-		actualizarBarraDeVida();
+		actualizarVisualizacon();
 	}
 	
 	protected abstract void prepararBotones();
@@ -117,7 +117,7 @@ public abstract class PiezaVista extends StackPane {
 	//Atacada si: piezaSeleccionada es Espadachin/Arquero/Castillo o ArmaDeAsedio y estaPieza es un Edificio
 	protected abstract void realizarAccionSobrePieza();
 	
-	protected void actualizarBarraDeVida(){
+	protected void actualizarVisualizacon(){
 		double porcentaje = modelo.porcentajeVidaActual();
 		barraVidaActual.setWidth(TAMANIO_CASILLA*ancho*porcentaje);
 	}
