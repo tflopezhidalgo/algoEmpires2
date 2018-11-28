@@ -3,8 +3,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.*;
-import modelo.excepciones.*;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Casilla;
+import modelo.Espadachin;
+import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class EspadachinTest {

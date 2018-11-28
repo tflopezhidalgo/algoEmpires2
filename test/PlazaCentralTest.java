@@ -1,7 +1,10 @@
-import junit.framework.Assert;
-import modelo.*;
-import modelo.excepciones.*;
 import org.junit.Test;
+
+import junit.framework.Assert;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Plaza;
+import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class PlazaCentralTest {

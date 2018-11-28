@@ -1,7 +1,12 @@
-import modelo.*;
-import modelo.excepciones.*;
-import org.junit.Test;
 import org.junit.Assert;
+import org.junit.Test;
+
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Castillo;
+import modelo.Edificio;
+import modelo.Jugador;
+import modelo.Tablero;
 
 public class JugadorTest {
 

@@ -3,8 +3,13 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.*;
-import modelo.excepciones.*;
+import modelo.Area;
+import modelo.ArmaDeAsedio;
+import modelo.Casilla;
+import modelo.Plaza;
+import modelo.Tablero;
+import modelo.excepciones.CatapultaArmadaNoPuedeMoverseError;
+import modelo.excepciones.CatapultaDesarmadaNoPuedeAtacarError;
 
 @SuppressWarnings("deprecation")
 public class ArmaDeAsedioTest {

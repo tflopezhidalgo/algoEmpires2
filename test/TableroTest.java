@@ -1,11 +1,17 @@
-import modelo.*;
-import modelo.excepciones.*;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.*;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Casilla;
+import modelo.Castillo;
+import modelo.Pieza;
+import modelo.Plaza;
+import modelo.Tablero;
 
 public class TableroTest {
 	

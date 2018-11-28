@@ -1,10 +1,14 @@
-import junit.framework.Assert;
-
-import modelo.*;
-import modelo.excepciones.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import junit.framework.Assert;
+import modelo.Area;
+import modelo.Arquero;
+import modelo.Casilla;
+import modelo.Cuartel;
+import modelo.Espadachin;
+import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class CuartelTest {
