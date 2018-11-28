@@ -11,8 +11,8 @@ import modelo.excepciones.Excepcion;
 
 public class AldeanoVista extends UnidadVista{
 
-	public AldeanoVista(int x, int y, Aldeano unModelo, JuegoVista unJuego) throws Excepcion {
-		super(x,y,unModelo, unJuego);
+	public AldeanoVista(int x, int y, Aldeano unModelo, MapaVista unMapa) throws Excepcion {
+		super(x,y,unModelo, unMapa);
 	}
 
 	@Override
@@ -55,29 +55,29 @@ public class AldeanoVista extends UnidadVista{
 		//TODO alguna manera de pasar coordenadas con click de mouse sin tener que llamar a un OnClick de una casilla?
 		//TODO habria que instanciar un controlador creo, y que eso cree los otros 2
 		//TODO ESTO ES SUPER TEMPORAL (TEST)
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 
-		Area areaDeConstruccion = elJuego.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
+		Area areaDeConstruccion = elMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
 		Plaza plaza = ((Aldeano)modelo).crearPlaza(areaDeConstruccion);
 		if(plaza != null) {
-			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elJuego);
+			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elMapa);
 			//TODO algo asi? o que ella misma se agregue al root ya que tiene acceso a elJuego ?
-			elJuego.aniadirPieza(plazaVisu);
+			elMapa.aniadirPieza(plazaVisu);
 		}
 		//TODO los visu deberian tener acceso al visu root?? no puedo agregar la nueva visu de la plaza al root
 	}
 	
 	private void construirCuartel() throws Exception{
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
 		//TODO los mismos comentarios que en construir Plaza
-		Area areaDeConstruccion = elJuego.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
+		Area areaDeConstruccion = elMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
 		Cuartel cuartel = ((Aldeano)modelo).crearCuartel(areaDeConstruccion);
 		if(cuartel != null) {
-			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elJuego);
-			elJuego.aniadirPieza(cuartelVisu);
+			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elMapa);
+			elMapa.aniadirPieza(cuartelVisu);
 		}
 	}
 	

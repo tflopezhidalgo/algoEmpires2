@@ -7,8 +7,8 @@ import modelo.excepciones.Excepcion;
 
 public class ArqueroVista extends UnidadVista{
 	
-	public ArqueroVista(int x, int y, Arquero unModelo, JuegoVista unJuego) throws Excepcion {
-		super(x,y,unModelo, unJuego);
+	public ArqueroVista(int x, int y, Arquero unModelo, MapaVista unMapa) throws Excepcion {
+		super(x,y,unModelo, unMapa);
 	}
 
 	@Override

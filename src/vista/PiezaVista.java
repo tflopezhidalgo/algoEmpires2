@@ -1,7 +1,7 @@
 package vista;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.MenuBar;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -10,9 +10,11 @@ import modelo.Pieza;
 
 public abstract class PiezaVista extends StackPane {
 
-	protected Rectangle seleccion;
 	protected Pieza modelo;
-	protected JuegoVista elJuego;
+	protected MapaVista elMapa;
+	
+	protected Rectangle seleccion;
+	protected Rectangle barraVidaActual;
 	
 	protected MenuBar acciones;
 	
@@ -22,11 +24,12 @@ public abstract class PiezaVista extends StackPane {
 	protected int alto;
 	protected int ancho;
 	
-	public PiezaVista(int x, int y, Pieza unModelo, JuegoVista unJuego) {
+	public PiezaVista(int x, int y, Pieza unModelo, MapaVista unMapa) {
+		modelo = unModelo;
+		elMapa = unMapa;
+		
 		acciones = new MenuBar();
 
-		modelo = unModelo;
-		elJuego = unJuego;
 		//-----------------------------------------
 		
 		ancho = modelo.obtenerAreaOcupada().x1() - modelo.obtenerAreaOcupada().x0() + 1;
@@ -44,16 +47,24 @@ public abstract class PiezaVista extends StackPane {
 		//-----------------------------------------
 		crearRepresentacion();
 		
-		//efecto pieza seleccionada
+		//Cuadro de Seleccion
 		seleccion = new Rectangle(TAMANIO_CASILLA*(ancho-0.05), TAMANIO_CASILLA*(alto-0.05));
 		seleccion.setFill(Color.TRANSPARENT);
 		seleccion.setStroke(Color.rgb(150, 250, 50, .99));
 		seleccion.setStrokeWidth(TAMANIO_CASILLA * 0.05);
 		seleccion.setVisible(false);
-		getChildren().add(seleccion);
-		
-		prepararBotones();
 		//-----------------------------------------
+		//Barra de vida
+		Rectangle backgroundVida = new Rectangle(TAMANIO_CASILLA*ancho,2);
+		backgroundVida.setFill(Color.RED);
+		barraVidaActual = new Rectangle(TAMANIO_CASILLA*ancho,2);
+		barraVidaActual.setFill(Color.LIMEGREEN);
+		StackPane.setAlignment(barraVidaActual, Pos.BOTTOM_LEFT );
+		StackPane.setAlignment(backgroundVida, Pos.BOTTOM_LEFT );
+		
+		getChildren().addAll(backgroundVida,barraVidaActual,seleccion);
+		//-----------------------------------------
+		prepararBotones();
 		//-----------------------------------------
 		
 		setOnMousePressed(e -> {
@@ -68,13 +79,13 @@ public abstract class PiezaVista extends StackPane {
 	
 	protected void seleccionarPieza() {
 		//sacar efecto a casilla anterior
-		PiezaVista piezaAnterior = elJuego.piezaSeleccionada();
+		PiezaVista piezaAnterior = elMapa.piezaSeleccionada();
 		if(piezaAnterior != null) {
-			elJuego.piezaSeleccionada().desSeleccionar();
+			elMapa.piezaSeleccionada().desSeleccionar();
 		}
 		//agregar efecto a casilla actual
 		seleccionar();
-		elJuego.seleccionarPieza(this);
+		elMapa.seleccionarPieza(this);
 	}
 
 	private void desSeleccionar() {
@@ -83,7 +94,7 @@ public abstract class PiezaVista extends StackPane {
 	
 	private void seleccionar() {
 		seleccion.setVisible(true);
-		elJuego.asignarMenuAcciones(acciones);
+		elMapa.asignarMenuAcciones(acciones);
 	}
 	
 	public Pieza modelo() {
@@ -93,6 +104,8 @@ public abstract class PiezaVista extends StackPane {
 	// TODO AL CONTROLADOR? 
 	public void nuevoTurno() {
 		modelo.nuevoTurno();
+		//TODO test, esto esta medio desactulizado por 1 turno
+		actualizarVisualizacon();
 	}
 	
 	protected abstract void prepararBotones();
@@ -103,6 +116,11 @@ public abstract class PiezaVista extends StackPane {
 	//Reparada si: piezaSeleccionada es un Aldeano y esta Pieza es un Edificio
 	//Atacada si: piezaSeleccionada es Espadachin/Arquero/Castillo o ArmaDeAsedio y estaPieza es un Edificio
 	protected abstract void realizarAccionSobrePieza();
+	
+	protected void actualizarVisualizacon(){
+		double porcentaje = modelo.porcentajeVidaActual();
+		barraVidaActual.setWidth(TAMANIO_CASILLA*ancho*porcentaje);
+	}
 	
 
 }

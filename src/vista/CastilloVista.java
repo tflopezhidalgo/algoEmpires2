@@ -10,8 +10,8 @@ import modelo.Castillo;
 
 public class CastilloVista extends EdificioVista{
 	
-	public CastilloVista(int x, int y, Castillo unModelo, JuegoVista unJuego) {
-		super(x,y,unModelo, unJuego);
+	public CastilloVista(int x, int y, Castillo unModelo, MapaVista unMapa) {
+		super(x,y,unModelo, unMapa);
 	}
 
 	@Override
@@ -47,15 +47,15 @@ public class CastilloVista extends EdificioVista{
 	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
 	//------------------------------------------------------------------------------------
 	private void crearArmaDeAsedio() throws Exception {
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
 		//TODO los mismos comentarios que en construir Plaza
-		Area espacioArmaDeAsedio = elJuego.obtenerTablero().definirArea(x0, y0, x0, y0);
+		Area espacioArmaDeAsedio = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
 		ArmaDeAsedio armaDeAsedio = ((Castillo)modelo).crearCatapulta(espacioArmaDeAsedio);
 		if(armaDeAsedio != null) {
-			ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0,y0,armaDeAsedio,elJuego);
-			elJuego.aniadirPieza(armaVisu);
+			ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0,y0,armaDeAsedio,elMapa);
+			elMapa.aniadirPieza(armaVisu);
 		}
 	}
 	//----------------------------------   FIN    ----------------------------------------

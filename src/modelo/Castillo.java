@@ -9,8 +9,8 @@ public class Castillo extends Edificio {
 	
 	public Castillo(Area areaAOcupar) {
 		super(areaAOcupar);
-		vida = 1000;
-		vidaMaxima = vida;
+		vidaMaxima = 1000;
+		vida = vidaMaxima;
 		costo = 0;
 		tiempoDeConstruccion = 0;
 		cantidadDeCuracion = 15;
@@ -43,9 +43,9 @@ public class Castillo extends Edificio {
         if(distanciaMinimaA(unEspacio) > 1) {
             throw  new NoSePuedeConstruirTanLejosError();
         }
-		
-		turnoJugado = true;
+        
 		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(unEspacio);
+		turnoJugado = true;
 		return unaArmaDeAsedio;
 	}
 }
