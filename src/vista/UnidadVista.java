@@ -1,5 +1,9 @@
 package vista;
 
+import java.io.File;
+
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import modelo.Atacante;
 import modelo.Unidad;
 import modelo.excepciones.Excepcion;
@@ -29,6 +33,12 @@ public abstract class UnidadVista extends PiezaVista {
 		//no es instancia de Atacante , porque no se puede castear
 		//if(piezaAtacante.modelo() instanceof Atacante) { 
 			((Atacante)(piezaAtacante.modelo())).atacar(modelo);
+			
+			String musicFile = "src\\Sonido\\Generales\\fight2.wav"; 
+			Media sound = new Media(new File(musicFile).toURI().toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(sound);
+			mediaPlayer.play();
+			
 			if(modelo.estaDestruida()) {
 				elMapa.removerPieza(this);
 			}

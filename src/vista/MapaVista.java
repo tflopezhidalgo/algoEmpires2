@@ -83,6 +83,8 @@ public class MapaVista extends BorderPane {
     }
     
 	private void crearFuncionalidades() {
+		
+		//------------------	ZOOM	---------------------
     	grupoCasillas.setAutoSizeChildren(true);
     	grupoPiezas.setAutoSizeChildren(true);
     	
@@ -102,6 +104,7 @@ public class MapaVista extends BorderPane {
             grupoPiezas.setScaleX(grupoPiezas.getScaleX() * scaleFactor);
             grupoPiezas.setScaleY(grupoPiezas.getScaleY() * scaleFactor);
         });
+		//------------------	FIN ZOOM	---------------------
 
         /*setOnMousePressed(e->{
         	ultimoX = e.getSceneX();

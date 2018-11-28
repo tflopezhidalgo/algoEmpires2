@@ -8,7 +8,6 @@ import modelo.Area;
 import modelo.Arquero;
 import modelo.Cuartel;
 import modelo.Espadachin;
-import modelo.Plaza;
 
 public class CuartelVista extends EdificioVista{
 	

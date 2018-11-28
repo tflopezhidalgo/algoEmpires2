@@ -31,8 +31,6 @@ public class AldeanoVista extends UnidadVista{
 		Menu menuHabilidades = new Menu("Habilidades");
 		//menu.setGraphic(new ImageView("file:imagen.png"));
 
-		MenuItem reparar = new MenuItem("Reparar");
-		reparar.setOnAction(e -> reparar());
 		MenuItem construirCuartel = new MenuItem("Construir Cuartel");
 		construirCuartel.setOnAction(e -> {
 			try {construirCuartel();} 
@@ -44,7 +42,7 @@ public class AldeanoVista extends UnidadVista{
 			catch (Exception e1) {e1.printStackTrace();}
 		});
 
-		menuHabilidades.getItems().addAll(reparar,construirCuartel,construirPlaza);
+		menuHabilidades.getItems().addAll(construirCuartel,construirPlaza);
 		acciones.getMenus().add(menuHabilidades);
 	}
 	
@@ -80,15 +78,7 @@ public class AldeanoVista extends UnidadVista{
 			elMapa.aniadirPieza(cuartelVisu);
 		}
 	}
-	
-	private void reparar() {
-		//TODO ESTO ES CUALQUIER COSA SUPER MAL - REHACER
-		/*
-		Pieza unaPieza = elJuego.piezaSeleccionada().modelo();
-		if(unaPieza instanceof Edificio) {
-			((Aldeano)modelo).reparar((Edificio)elJuego.piezaSeleccionada().modelo());
-		}*/
-	}
+
 	//----------------------------------   FIN    ----------------------------------------
 	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
 	//----------------------------------   FIN    ----------------------------------------
