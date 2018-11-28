@@ -18,14 +18,14 @@ public class PlazaVista extends EdificioVista {
 	protected void crearRepresentacion() {
 		((Plaza)modelo).enConstruccion();
 		//-----------------------------------------
- 		Image image = new Image("Imagenes\\2x2\\enConstruccion3.png");
+ 		Image image = new Image("Imagenes/2x2/enConstruccion3.png");
  		enConstruccionView = new ImageView(image);
  		enConstruccionView.setFitHeight(37);
  		enConstruccionView.setFitWidth(60);
  		enConstruccionView.setVisible(((Plaza)modelo).enConstruccion());
 		getChildren().add(enConstruccionView);
 		//-----------------------------------------
- 		image = new Image("Imagenes\\2x2\\plaza.png");
+ 		image = new Image("Imagenes/2x2/plaza.png");
  		construidoView = new ImageView(image);
  		construidoView.setFitHeight(60);
  		construidoView.setFitWidth(60);

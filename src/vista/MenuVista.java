@@ -10,16 +10,16 @@ public class MenuVista extends Pane {
 
     public MenuVista(Scene escenaSiguiente,Stage stagePrincipal){
     	//--------------- Imagen de fondo -----------------------
-        Image background = new Image("Imagenes\\ElementosMenu\\fiubamenu.JPG");
+        Image background = new Image("Imagenes/ElementosMenu/fiubamenu.JPG");
         ImageView backgroundVista = new ImageView(background);
         setPrefSize(background.getWidth(),background.getHeight());
         //--------------- Setup Botones -------------------------
-        Image botonComenzar = new Image("Imagenes\\ElementosMenu\\botoncomenzar.png");
+        Image botonComenzar = new Image("Imagenes/ElementosMenu/botoncomenzar.png");
         BotonPersonalizado elBotonComenzar = new BotonPersonalizado(botonComenzar);
         elBotonComenzar.relocate(getPrefWidth()/2 - elBotonComenzar.getPrefWidth()/2,getPrefHeight()/2 - elBotonComenzar.getPrefHeight()/2 );
         elBotonComenzar.setOnMousePressed(event -> stagePrincipal.setScene(escenaSiguiente));
 
-        Image botonSalir = new Image("Imagenes\\ElementosMenu\\botonsalir.png");
+        Image botonSalir = new Image("Imagenes/ElementosMenu/botonsalir.png");
         BotonPersonalizado elBotonSalir = new BotonPersonalizado(botonSalir);
         elBotonComenzar.setTranslateY(-(elBotonComenzar.getPrefHeight() + 20));
         elBotonSalir.relocate(getPrefWidth()/2 - elBotonSalir.getPrefWidth()/2,getPrefHeight()/2 + elBotonSalir.getPrefHeight());

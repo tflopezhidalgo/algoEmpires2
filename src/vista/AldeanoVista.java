@@ -17,7 +17,7 @@ public class AldeanoVista extends UnidadVista{
 
 	@Override
 	protected void crearRepresentacion() {
- 		Image image = new Image("Imagenes\\Unidades\\Aldeano\\aldeano.png");
+ 		Image image = new Image("Imagenes/Unidades/Aldeano/aldeano.png");
 		ImageView imageView = new ImageView(image);
 		imageView.setFitHeight(30);
 		imageView.setFitWidth(16);
