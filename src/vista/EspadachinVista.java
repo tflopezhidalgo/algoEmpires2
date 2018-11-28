@@ -7,8 +7,8 @@ import modelo.excepciones.Excepcion;
 
 public class EspadachinVista extends UnidadVista{
 	
-	public EspadachinVista(int x, int y, Espadachin unModelo, JuegoVista unJuego) throws Excepcion {
-		super(x,y,unModelo, unJuego);
+	public EspadachinVista(int x, int y, Espadachin unModelo, MapaVista unMapa) throws Excepcion {
+		super(x,y,unModelo, unMapa);
 	}
 
 	@Override

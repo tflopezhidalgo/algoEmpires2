@@ -2,7 +2,6 @@ package vista;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.MenuBar;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -12,7 +11,7 @@ import modelo.Pieza;
 public abstract class PiezaVista extends StackPane {
 
 	protected Pieza modelo;
-	protected JuegoVista elJuego;
+	protected MapaVista elMapa;
 	
 	protected Rectangle seleccion;
 	protected Rectangle barraVidaActual;
@@ -25,9 +24,9 @@ public abstract class PiezaVista extends StackPane {
 	protected int alto;
 	protected int ancho;
 	
-	public PiezaVista(int x, int y, Pieza unModelo, JuegoVista unJuego) {
+	public PiezaVista(int x, int y, Pieza unModelo, MapaVista unMapa) {
 		modelo = unModelo;
-		elJuego = unJuego;
+		elMapa = unMapa;
 		
 		acciones = new MenuBar();
 
@@ -80,13 +79,13 @@ public abstract class PiezaVista extends StackPane {
 	
 	protected void seleccionarPieza() {
 		//sacar efecto a casilla anterior
-		PiezaVista piezaAnterior = elJuego.piezaSeleccionada();
+		PiezaVista piezaAnterior = elMapa.piezaSeleccionada();
 		if(piezaAnterior != null) {
-			elJuego.piezaSeleccionada().desSeleccionar();
+			elMapa.piezaSeleccionada().desSeleccionar();
 		}
 		//agregar efecto a casilla actual
 		seleccionar();
-		elJuego.seleccionarPieza(this);
+		elMapa.seleccionarPieza(this);
 	}
 
 	private void desSeleccionar() {
@@ -95,7 +94,7 @@ public abstract class PiezaVista extends StackPane {
 	
 	private void seleccionar() {
 		seleccion.setVisible(true);
-		elJuego.asignarMenuAcciones(acciones);
+		elMapa.asignarMenuAcciones(acciones);
 	}
 	
 	public Pieza modelo() {

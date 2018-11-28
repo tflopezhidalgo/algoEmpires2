@@ -11,8 +11,8 @@ import modelo.Espadachin;
 
 public class CuartelVista extends EdificioVista{
 	
-	public CuartelVista(int x, int y, Cuartel unModelo, JuegoVista unJuego) {
-		super(x,y,unModelo, unJuego);
+	public CuartelVista(int x, int y, Cuartel unModelo, MapaVista unMapa) {
+		super(x,y,unModelo, unMapa);
 	}
 	
 	@Override
@@ -57,28 +57,28 @@ public class CuartelVista extends EdificioVista{
 	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
 	//------------------------------------------------------------------------------------
 	private void crearEspadachin() throws Exception {
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
 		//TODO los mismos comentarios que en construir Plaza
-		Area espacioEspadachin = elJuego.obtenerTablero().definirArea(x0, y0, x0, y0);
+		Area espacioEspadachin = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
 		Espadachin espadachin = ((Cuartel)modelo).crearEspadachin(espacioEspadachin);
 		if(espadachin != null) {
-			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elJuego);
-			elJuego.aniadirPieza(espadachinVista);
+			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elMapa);
+			elMapa.aniadirPieza(espadachinVista);
 		}
 	}
 	
 	private void crearArquero() throws Exception {
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
 		//TODO los mismos comentarios que en construir Plaza
-		Area espacioArquero = elJuego.obtenerTablero().definirArea(x0, y0, x0, y0);
+		Area espacioArquero = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
 		Arquero arquero = ((Cuartel)modelo).crearArquero(espacioArquero);
 		if(arquero != null) {
-			ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elJuego);
-			elJuego.aniadirPieza(arqueroVista);
+			ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elMapa);
+			elMapa.aniadirPieza(arqueroVista);
 		}
 	}
 	//----------------------------------   FIN    ----------------------------------------

@@ -10,8 +10,8 @@ import modelo.Plaza;
 
 public class PlazaVista extends EdificioVista {
 	
-	public PlazaVista(int x, int y, Plaza unModelo, JuegoVista unJuego) {
-		super(x,y,unModelo, unJuego);
+	public PlazaVista(int x, int y, Plaza unModelo, MapaVista unMapa) {
+		super(x,y,unModelo, unMapa);
 	}
 
 	@Override
@@ -53,15 +53,15 @@ public class PlazaVista extends EdificioVista {
 	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
 	//------------------------------------------------------------------------------------
 	private void crearAldeano() throws Exception {
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
 		//TODO los mismos comentarios que en construir Plaza
-		Area espacioAldeano = elJuego.obtenerTablero().definirArea(x0, y0, x0, y0);
+		Area espacioAldeano = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
 		Aldeano aldeano = ((Plaza)modelo).crearAldeano(espacioAldeano);
 		if(aldeano != null) {
-			AldeanoVista aldeanoVista = new AldeanoVista(x0,y0,aldeano,elJuego);
-			elJuego.aniadirPieza(aldeanoVista);
+			AldeanoVista aldeanoVista = new AldeanoVista(x0,y0,aldeano,elMapa);
+			elMapa.aniadirPieza(aldeanoVista);
 		}
 	}
 
