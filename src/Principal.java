@@ -1,7 +1,3 @@
-import controlador.Controlador;
-import modelo.Juego;
-import vista.VistaPrincipal;
-
 public class Principal {
 
     public static void main(String args[]){

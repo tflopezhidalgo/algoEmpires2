@@ -1,7 +1,5 @@
 package vista;
 
-import controlador.Controlador;
-
 public class VistaPrincipal {
 
     private Controlador controlador;
