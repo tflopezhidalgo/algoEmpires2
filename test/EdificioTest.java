@@ -1,7 +1,6 @@
 
 import junit.framework.Assert;
 import modelo.*;
-import modelo.excepciones.EdificioNoAdmiteAreaIncorrectaError;
 import org.junit.Test;
 
 
@@ -182,7 +181,7 @@ public class EdificioTest {
 
         Assert.assertEquals(false, unEdificio.enConstruccion());
 
-
     }
+
 
 }
