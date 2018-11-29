@@ -1,6 +1,7 @@
 
 import junit.framework.Assert;
 import modelo.*;
+import modelo.excepciones.EdificioNoAdmiteAreaIncorrectaError;
 import org.junit.Test;
 
 
@@ -14,13 +15,13 @@ public class EdificioTest {
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
 
         Edificio unEdificio = new Castillo(zonaDeConstruccion);
-        Assert.assertEquals(true, unTablero.obtenerCasillaEn(3,3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3,3).estaOcupada());
 
-        Assert.assertEquals(false, unEdificio.necesitaReparacion());
+        Assert.assertFalse(unEdificio.necesitaReparacion());
 
         unEdificio.recibirDanio(15);
 
-        Assert.assertEquals(true, unEdificio.necesitaReparacion());
+        Assert.assertTrue(unEdificio.necesitaReparacion());
 
     }
 
@@ -183,6 +184,5 @@ public class EdificioTest {
 
 
     }
-
 
 }
