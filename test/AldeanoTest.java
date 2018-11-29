@@ -801,8 +801,6 @@ public class AldeanoTest {
         }
 
         Assert.assertEquals(true, lanzaUnError);
-
-
     }
 
 }
