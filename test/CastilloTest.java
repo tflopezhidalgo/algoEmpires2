@@ -2,6 +2,7 @@ import modelo.*;
 import modelo.excepciones.CastilloDeJugadorFueDestruido;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 import modelo.excepciones.PiezaFueraDeAlcanceError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 import org.junit.Test;
 
 import junit.framework.Assert;
@@ -123,5 +124,24 @@ public class CastilloTest {
         }
 
         Assert.assertEquals(true, lanzaUnError);
+    }
+
+    @Test
+    public void castilloYaJugoEnEseTurno() throws Exception{
+        Tablero unTablero = new Tablero();
+        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+
+        ArmaDeAsedio catapulta = unCastillo.crearCatapulta(unTablero.definirArea(4,0,5,1));
+
+        boolean lanzaUnError=false;
+        try {
+            ArmaDeAsedio unaCatapulta = unCastillo.crearCatapulta(unTablero.definirArea(4,2,4,2));
+        } catch (PiezaYaJugoEnTurnoActualError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+
+
     }
 }

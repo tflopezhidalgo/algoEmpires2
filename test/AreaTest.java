@@ -101,4 +101,19 @@ public class AreaTest {
         unArea.ocupar();
         Assert.assertEquals(false, unArea.estaLibre());
     }
+
+    @Test
+    public void nullPointerCasillaError() throws Exception{
+        Tablero unTablero = new Tablero();
+        Area unArea = unTablero.definirArea(0,0,1,1);
+
+        boolean lanzaUnError=false;
+        try{
+            unArea.agregarCasilla(null);
+        } catch(NullPointerCasillaError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+    }
 }

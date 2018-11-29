@@ -656,7 +656,7 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
-        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(0,1,1,2));
 
         unAldeano.nuevoTurno();
         boolean seLanzoError=false;
@@ -674,12 +674,12 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
-        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,0,2,1));
 
         unAldeano.nuevoTurno();
         boolean seLanzoError=false;
         try {
-           Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(0,0,1,1));
+           Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
         } catch (AldeanoOcupadoConOtroEdificioError e) {
             seLanzoError=true;
         };
@@ -760,6 +760,49 @@ public class AldeanoTest {
         }
 
         Assert.assertEquals(true, lanzaUnError);
+    }
+
+    //NO PASA
+    /*@Test
+    public void soloUnAldeanoPuedeRepararEdificioALaVez() throws Exception {
+        Tablero unTablero = new Tablero();
+        Plaza unaPlaza = new Plaza(unTablero.definirArea(0, 0, 1, 1), true);
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0, 2, 0, 2));
+        Aldeano otroAldeano = new Aldeano(unTablero.definirArea(1, 2, 1, 2));
+
+        unaPlaza.recibirDanio(50);
+        unAldeano.reparar(unaPlaza);
+        unAldeano.nuevoTurno();
+
+        boolean lanzaUnError = false;
+        try {
+            otroAldeano.reparar(unaPlaza);
+        } catch (EdificioYaEstaSiendoReparadoError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+    }*/
+
+    @Test
+    public void aldeanoYaJugoEnTurnoActual() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Plaza unaPlaza = new Plaza(unTablero.definirArea(0,1,1,2), true);
+
+        unaPlaza.recibirDanio(50);
+        unAldeano.reparar(unaPlaza);
+
+        boolean lanzaUnError=false;
+        try{
+            Plaza otraPlaza = unAldeano.crearPlaza(unTablero.definirArea(1,0,2,1));
+        } catch (PiezaYaJugoEnTurnoActualError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+
+
     }
 
 }

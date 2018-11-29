@@ -1,6 +1,7 @@
 import modelo.*;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -184,5 +185,23 @@ public class CuartelTest {
         Assert.assertEquals(false, lanzaUnError);
     }
 
+    @Test
+    public void cuartelYaJugoEnEseTurno() throws Exception{
+        Tablero unTablero = new Tablero();
+        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1), true);
+
+        Arquero unArquero = unCuartel.crearArquero(unTablero.definirArea(2,0,2,0));
+
+        boolean lanzaUnError=false;
+        try{
+            Espadachin unEspadachin = unCuartel.crearEspadachin(unTablero.definirArea(3,0,3,0));
+        } catch (PiezaYaJugoEnTurnoActualError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+
+
+    }
 
 }

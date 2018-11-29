@@ -1,6 +1,7 @@
 import javafx.scene.control.Tab;
 import modelo.*;
 import modelo.excepciones.PiezaFueraDeAlcanceError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -185,6 +186,24 @@ public class EspadachinTest {
         try{
             unEspadachin.atacar(unaPlaza);
         }catch (PiezaFueraDeAlcanceError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+    }
+
+    @Test
+    public void espadachinYaJugoEnEseTurno() throws Exception{
+        Tablero unTablero = new Tablero();
+        Espadachin unEspadachin = new Espadachin(unTablero.definirArea(0,0,0,0));
+        Espadachin espadachinAAtacar = new Espadachin(unTablero.definirArea(0,1,0,1));
+
+        unEspadachin.mover(unTablero.definirArea(1,0,1,0));
+
+        boolean lanzaUnError=false;
+        try {
+            unEspadachin.atacar(espadachinAAtacar);
+        } catch (PiezaYaJugoEnTurnoActualError e){
             lanzaUnError=true;
         }
 

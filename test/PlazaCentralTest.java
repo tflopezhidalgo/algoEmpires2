@@ -1,6 +1,7 @@
 import javafx.scene.control.Tab;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 import org.junit.Test;
 
 import junit.framework.Assert;
@@ -114,6 +115,22 @@ public class PlazaCentralTest {
             lanzaUnError=true;
         }
         Assert.assertEquals(false, lanzaUnError);
+    }
+
+    @Test
+    public void plazaYaJugoEnEseTurno() throws Exception{
+        Tablero unTablero = new Tablero();
+        Plaza unaPlaza = new Plaza(unTablero.definirArea(0,0,1,1), true);
+
+        Aldeano unAldeano = unaPlaza.crearAldeano(unTablero.definirArea(2,0,2,0));
+        boolean lanzaUnError=false;
+        try{
+            Aldeano otroAldeano = unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+        } catch (PiezaYaJugoEnTurnoActualError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
     }
 
 }
