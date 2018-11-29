@@ -1,5 +1,6 @@
 package vista;
 
+
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -16,8 +17,8 @@ public class MapaVista extends BorderPane {
 	double ultimoY;
 
 	public static final int TAMANIO_CASILLA = CasillaVista.TAMANIO_CASILLA;
-	public static final int ANCHO = 32;
-	public static final int ALTO = 32;
+	public int ANCHO = 42;
+	public int ALTO = 26;
 	
 	//--------------------------
 	
@@ -30,16 +31,14 @@ public class MapaVista extends BorderPane {
 	private Group grupoCasillas = new Group();
 	private Group grupoPiezas = new Group();
 
-    public MapaVista(Juego juegoNuevo) {
+    public MapaVista(Juego juegoNuevo){
     	piezaSeleccionada = null;
     	casillaSeleccionada = null;
-        try {
-            juegoNuevo.iniciarJuego();
-        }catch (Exception e){
-            //TODO: SOlo para que pase
-        }
-    	System.out.print(juegoNuevo.getJugadorActual().obtenerNombre());
-
+    	
+        try {juegoNuevo.iniciarJuego();}
+        catch (Exception e){}
+    	System.out.print(juegoNuevo.getJugadorActual().obtenerNombre()); //TODO BORRAR
+    	
     	crearMapa();
     	crearPanelBotones();
     	crearFuncionalidades();
@@ -47,10 +46,10 @@ public class MapaVista extends BorderPane {
     
     private void crearMapa(){
     	Pane mapa = new Pane();
-    	mapa.setPrefSize(ANCHO * TAMANIO_CASILLA, ALTO * TAMANIO_CASILLA);
+    	mapa.setPrefSize(1280,770);
     	
     	//Si cambias esto tenes que cambiar el ANCHO y ALTO (+16)
-    	elTablero = new Tablero(16,16);
+    	elTablero = new Tablero(26,10);
     	for(int y = 0; y < ALTO; y++) {
     		for(int x = 0; x < ANCHO; x++) {
     			Casilla casillaActual = elTablero.obtenerCasillaEn(x, y);
@@ -60,9 +59,8 @@ public class MapaVista extends BorderPane {
     		}
     	}
     	
-    	this.generarPiezasInicialesEquipo1();
-    	this.generarPiezasInicialesEquipo2();
-
+    	generarPiezasInicialesEquipo1();
+    	generarPiezasInicialesEquipo2();
     	mapa.getChildren().addAll(grupoCasillas,grupoPiezas);
     	
     	setCenter(mapa);
@@ -72,7 +70,7 @@ public class MapaVista extends BorderPane {
     	MenuBar menuAcciones = new MenuBar();
     	Button botonFinTurno = new Button("Finalizar Turno");
     	botonFinTurno.setOnAction(value ->  {
-    		for(int i = 0; i < grupoPiezas.getChildren().size(); i++) {
+    		for(int i = 0; i<grupoPiezas.getChildren().size(); i++) {
     			Node nodoActual = grupoPiezas.getChildren().get(i);
     			//TODO modificar esto despues, tiene que ser para todas las PIEZAS del ultimo jugador
     			((PiezaVista)nodoActual).nuevoTurno();
