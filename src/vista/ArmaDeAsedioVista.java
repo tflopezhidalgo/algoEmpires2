@@ -37,12 +37,12 @@ public class ArmaDeAsedioVista extends UnidadVista{
 
 	@Override
 	protected void crearRepresentacion() {
-		Image imagenMover = new Image("Imagenes\\Unidades\\ArmaDeAsedio\\modoMovimiento.png");
+		Image imagenMover = new Image("resources/images/Unidades/ArmaDeAsedio/modoMovimiento.png");
 		viewMover = new ImageView(imagenMover);
 		viewMover.setFitWidth(30);
 		viewMover.setFitHeight(24);
 		//-----------------------------------------
-		Image imagenAtaque = new Image("Imagenes\\Unidades\\ArmaDeAsedio\\modoAtaque.png");
+		Image imagenAtaque = new Image("resources/images/Unidades/ArmaDeAsedio/modoAtaque.png");
 		viewAtaque = new ImageView(imagenAtaque);
 		viewAtaque.setFitWidth(30);
 		viewAtaque.setFitHeight(29);
