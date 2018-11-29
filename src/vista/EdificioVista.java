@@ -1,8 +1,7 @@
 package vista;
 
+import controlador.EdificioRealizarAccion;
 import javafx.scene.image.ImageView;
-import modelo.Aldeano;
-import modelo.Atacante;
 import modelo.Edificio;
 
 public abstract class EdificioVista extends PiezaVista{
@@ -16,21 +15,8 @@ public abstract class EdificioVista extends PiezaVista{
 	}
 
 	@Override
-	protected void realizarAccionSobrePieza() {
-		PiezaVista piezaSeleccionada = elMapa.piezaSeleccionada();
-		if(piezaSeleccionada.modelo() instanceof Atacante) {
-			//Edificio esta siendo atacado
-			((Atacante)(piezaSeleccionada).modelo()).atacar(modelo);
-			if(modelo.estaDestruida()) {
-				elMapa.removerPieza(this);
-			}
-		}
-		
-		if(piezaSeleccionada.modelo() instanceof Aldeano) {
-			//Edificio esta siendo reparado
-			((Aldeano)(piezaSeleccionada).modelo()).reparar((Edificio)modelo);
-		}
-		actualizarVisualizacon();
+	public void realizarAccionSobrePieza() {
+		new EdificioRealizarAccion(elMapa,this);
 	}
 	
 	protected abstract void prepararBotones();

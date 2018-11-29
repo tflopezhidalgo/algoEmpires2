@@ -1,8 +1,8 @@
 package vista;
 
+import controlador.ClickPiezaHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.MenuBar;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -67,14 +67,7 @@ public abstract class PiezaVista extends StackPane {
 		prepararBotones();
 		//-----------------------------------------
 		
-		setOnMousePressed(e -> {
-			if(e.getButton() == MouseButton.PRIMARY ) {
-				seleccionarPieza();
-			}
-			if(e.getButton() == MouseButton.SECONDARY ) {
-				realizarAccionSobrePieza();
-			}
-		});
+		setOnMousePressed(new ClickPiezaHandler(elMapa,this));
 	}
 	
 	protected void seleccionarPieza() {
@@ -88,11 +81,11 @@ public abstract class PiezaVista extends StackPane {
 		elMapa.seleccionarPieza(this);
 	}
 
-	private void desSeleccionar() {
+	public void desSeleccionar() {
 		seleccion.setVisible(false);
 	}
 	
-	private void seleccionar() {
+	public void seleccionar() {
 		seleccion.setVisible(true);
 		elMapa.asignarMenuAcciones(acciones);
 	}
@@ -101,10 +94,8 @@ public abstract class PiezaVista extends StackPane {
 		return modelo;
 	}
 	
-	// TODO AL CONTROLADOR? 
 	public void nuevoTurno() {
 		modelo.nuevoTurno();
-		//TODO test, esto esta medio desactulizado por 1 turno
 		actualizarVisualizacon();
 	}
 	
@@ -115,9 +106,9 @@ public abstract class PiezaVista extends StackPane {
 	//Esta pieza es atacada, o reparada.
 	//Reparada si: piezaSeleccionada es un Aldeano y esta Pieza es un Edificio
 	//Atacada si: piezaSeleccionada es Espadachin/Arquero/Castillo o ArmaDeAsedio y estaPieza es un Edificio
-	protected abstract void realizarAccionSobrePieza();
+	public abstract void realizarAccionSobrePieza();
 	
-	protected void actualizarVisualizacon(){
+	public void actualizarVisualizacon(){
 		double porcentaje = modelo.porcentajeVidaActual();
 		barraVidaActual.setWidth(TAMANIO_CASILLA*ancho*porcentaje);
 	}

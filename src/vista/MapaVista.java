@@ -1,6 +1,8 @@
 package vista;
 
 
+import controlador.CrearMapa;
+import controlador.FinalizarTurnoHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -8,7 +10,13 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import modelo.*;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Casilla;
+import modelo.Castillo;
+import modelo.Juego;
+import modelo.Plaza;
+import modelo.Tablero;
 
 public class MapaVista extends BorderPane {
 
@@ -17,8 +25,6 @@ public class MapaVista extends BorderPane {
 	double ultimoY;
 
 	public static final int TAMANIO_CASILLA = CasillaVista.TAMANIO_CASILLA;
-	public int ANCHO = 42;
-	public int ALTO = 26;
 	
 	//--------------------------
 	
@@ -48,19 +54,10 @@ public class MapaVista extends BorderPane {
     	Pane mapa = new Pane();
     	mapa.setPrefSize(1280,770);
     	
-    	//Si cambias esto tenes que cambiar el ANCHO y ALTO (+16)
-    	elTablero = new Tablero(26,10);
-    	for(int y = 0; y < ALTO; y++) {
-    		for(int x = 0; x < ANCHO; x++) {
-    			Casilla casillaActual = elTablero.obtenerCasillaEn(x, y);
-    			CasillaVista vistaCasilla = new CasillaVista(x, y, casillaActual, this);
-    			//CasillaControlador unaCasilla = new CasillaControlador(casillaActual, vistaCasilla);
-    			grupoCasillas.getChildren().add(vistaCasilla);	//agrego la nueva casilla a las casillas del tablero
-    		}
-    	}
+    	//TODO esto del controlador va asi? Euge aiudaa new y no asigno?
+    	//hacer la clase static asi no necesito instanciar?
+    	new CrearMapa(this,grupoCasillas, grupoPiezas);
     	
-    	generarPiezasInicialesEquipo1();
-    	generarPiezasInicialesEquipo2();
     	mapa.getChildren().addAll(grupoCasillas,grupoPiezas);
     	
     	setCenter(mapa);
@@ -69,20 +66,13 @@ public class MapaVista extends BorderPane {
     private void crearPanelBotones() {
     	MenuBar menuAcciones = new MenuBar();
     	Button botonFinTurno = new Button("Finalizar Turno");
-    	botonFinTurno.setOnAction(value ->  {
-    		for(int i = 0; i<grupoPiezas.getChildren().size(); i++) {
-    			Node nodoActual = grupoPiezas.getChildren().get(i);
-    			//TODO modificar esto despues, tiene que ser para todas las PIEZAS del ultimo jugador
-    			((PiezaVista)nodoActual).nuevoTurno();
-    		}
-    	});
+    	botonFinTurno.setOnAction( new FinalizarTurnoHandler(grupoPiezas));
     	botones = new HBox(botonFinTurno, menuAcciones);
     	
     	setBottom(botones);	
     }
     
 	private void crearFuncionalidades() {
-		
 		//------------------	ZOOM	---------------------
     	grupoCasillas.setAutoSizeChildren(true);
     	grupoPiezas.setAutoSizeChildren(true);
@@ -116,64 +106,6 @@ public class MapaVista extends BorderPane {
             setTranslateY(e.getScreenY() - ultimoY);
             e.consume();
         });*/
-	}
-
-	public void generarPiezasInicialesEquipo1(){
-		//Castillo
-		Area areaCastillo = elTablero.definirArea(1,1, 4, 4);
-		Castillo castillo = new Castillo(areaCastillo);
-		CastilloVista castilloVisu = new CastilloVista(1,1,castillo,this);
-		//-------------------
-		grupoPiezas.getChildren().add(castilloVisu);
-		//Plaza
-		Area areaPlaza = elTablero.definirArea(7,1,8,2);
-		Plaza plaza = new Plaza(areaPlaza,true);
-		PlazaVista plazaVisu = new PlazaVista(7,1,plaza,this);
-		//-------------------
-		grupoPiezas.getChildren().add(plazaVisu);
-		//Aldeanosx3
-		Area espacioAldeano1 = elTablero.definirArea(6,4,6,4);
-		Aldeano aldeano1 = new Aldeano(espacioAldeano1);
-		AldeanoVista aldeanoVisu1 = new AldeanoVista(6,4,aldeano1,this);
-		grupoPiezas.getChildren().add(aldeanoVisu1);
-		Area espacioAldeano2 = elTablero.definirArea(7,4,7,4);
-		Aldeano aldeano2 = new Aldeano(espacioAldeano2);
-		AldeanoVista aldeanoVisu2 = new AldeanoVista(7,4,aldeano2,this);
-		grupoPiezas.getChildren().add(aldeanoVisu2);
-		Area espacioAldeano3 = elTablero.definirArea(8,4,8,4);
-		Aldeano aldeano3 = new Aldeano(espacioAldeano3);
-		AldeanoVista aldeanoVisu3 = new AldeanoVista(8,4,aldeano3,this);
-		grupoPiezas.getChildren().add(aldeanoVisu3);
-		//-------------------
-	}
-
-	public void generarPiezasInicialesEquipo2(){
-		//Castillo
-		Area areaCastillo = elTablero.definirArea(ANCHO-5, ALTO-5, ANCHO-2, ALTO-2);
-		Castillo castillo = new Castillo(areaCastillo);
-		CastilloVista castilloVisu = new CastilloVista(ANCHO-5,ALTO-5,castillo,this);
-		//-------------------
-		grupoPiezas.getChildren().add(castilloVisu);
-		//Plaza
-		Area areaPlaza = elTablero.definirArea(ANCHO-9,ALTO-3,ANCHO-8,ALTO-2);
-		Plaza plaza = new Plaza(areaPlaza,true);
-		PlazaVista plazaVisu = new PlazaVista(ANCHO-9,ALTO-3,plaza,this);
-		//-------------------
-		grupoPiezas.getChildren().add(plazaVisu);
-		//Aldeanosx3
-		Area espacioAldeano1 = elTablero.definirArea(ANCHO-9,ALTO-5,ANCHO-9,ALTO-5);
-		Aldeano aldeano1 = new Aldeano(espacioAldeano1);
-		AldeanoVista aldeanoVisu1 = new AldeanoVista(ANCHO-9,ALTO-5,aldeano1,this);
-		grupoPiezas.getChildren().add(aldeanoVisu1);
-		Area espacioAldeano2 = elTablero.definirArea(ANCHO-8,ALTO-5,ANCHO-8,ALTO-5);
-		Aldeano aldeano2 = new Aldeano(espacioAldeano2);
-		AldeanoVista aldeanoVisu2 = new AldeanoVista(ANCHO-8,ALTO-5,aldeano2,this);
-		grupoPiezas.getChildren().add(aldeanoVisu2);
-		Area espacioAldeano3 = elTablero.definirArea(ANCHO-7,ALTO-5,ANCHO-7,ALTO-5);
-		Aldeano aldeano3 = new Aldeano(espacioAldeano3);
-		AldeanoVista aldeanoVisu3 = new AldeanoVista(ANCHO-7,ALTO-5,aldeano3,this);
-		grupoPiezas.getChildren().add(aldeanoVisu3);
-		//-------------------
 	}
 	
 	public Tablero obtenerTablero() {
