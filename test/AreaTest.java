@@ -101,4 +101,11 @@ public class AreaTest {
         unArea.ocupar();
         Assert.assertEquals(false, unArea.estaLibre());
     }
+
+    @Test
+    public void nullPointerCasillaError() throws Exception{
+
+
+
+    }
 }

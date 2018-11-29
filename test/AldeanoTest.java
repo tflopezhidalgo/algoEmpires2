@@ -656,7 +656,7 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
-        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(0,1,1,2));
 
         unAldeano.nuevoTurno();
         boolean seLanzoError=false;
@@ -674,12 +674,12 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
-        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,0,2,1));
 
         unAldeano.nuevoTurno();
         boolean seLanzoError=false;
         try {
-           Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(0,0,1,1));
+           Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
         } catch (AldeanoOcupadoConOtroEdificioError e) {
             seLanzoError=true;
         };
