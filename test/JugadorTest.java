@@ -1,3 +1,4 @@
+import modelo.excepciones.PoblacionLimiteSuperadaError;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -7,6 +8,9 @@ import modelo.Castillo;
 import modelo.Edificio;
 import modelo.Jugador;
 import modelo.Tablero;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JugadorTest {
 
@@ -65,5 +69,37 @@ public class JugadorTest {
          unJugador.finalizarTurno();
          Assert.assertEquals(115, unJugador.obtenerOro());
      }
+
+     @Test
+    public void poblacionLimiteSuperada() throws Exception{
+         Tablero unTablero = new Tablero();
+         Jugador unJugador = new Jugador("Ailen");
+
+         //Le agrego a un jugador 50 aldeanos, siendo 50 el limite de la poblacion
+         for(int i=0; i<16; i++){
+             unJugador.agregarPieza(new Aldeano(unTablero.definirArea(i,0,i,0)));
+         }
+         for(int j=1; j<16; j++){
+             unJugador.agregarPieza(new Aldeano(unTablero.definirArea(0,j,0,j)));
+         }
+         for(int k=1; k<16; k++){
+             unJugador.agregarPieza(new Aldeano(unTablero.definirArea(k,k,k,k)));
+         }
+         for(int l=2; l<6; l++){
+             unJugador.agregarPieza(new Aldeano(unTablero.definirArea(l,1,l,1)));
+         }
+
+
+         boolean lanzaUnError=false;
+         try{
+             unJugador.agregarPieza(new Aldeano(unTablero.definirArea(6,1,6,1)));
+         } catch (PoblacionLimiteSuperadaError e){
+             lanzaUnError=true;
+         }
+
+         Assert.assertEquals(true, lanzaUnError);
+
+     }
+
 
 }
