@@ -814,7 +814,6 @@ public class AldeanoTest {
         unAldeano.reparar(unCuartel);
 
         unAldeano.nuevoTurno();
-        otroAldeano.nuevoTurno();
 
         boolean excepcion = false;
 
@@ -826,7 +825,7 @@ public class AldeanoTest {
             excepcion = true;
         }
 
-        Assert.assertFalse(excepcion);
+        Assert.assertTrue(excepcion);
 
     }
 

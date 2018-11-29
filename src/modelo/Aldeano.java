@@ -24,8 +24,8 @@ public class Aldeano extends Unidad {
     public void mover(Area nuevaArea) {
 	    estadoActual.mover();
         espacioOcupado.liberar();
-        espacioOcupado.ocupar();
         espacioOcupado = nuevaArea;
+        espacioOcupado.ocupar();
         turnoJugado = true;
     }
 

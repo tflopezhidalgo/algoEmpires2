@@ -1,6 +1,8 @@
 package modelo.estadoCasilla;
 
 
+import modelo.excepciones.CasillaYaEstaLibreError;
+
 public class CasillaLibre extends EstadoCasilla {
 
     public EstadoCasilla ocupar(){
@@ -10,7 +12,7 @@ public class CasillaLibre extends EstadoCasilla {
 
     public EstadoCasilla liberar(){
 
-        return this;
+        throw new CasillaYaEstaLibreError();
     }
 
     public boolean estaOcupada(){
