@@ -1,14 +1,11 @@
+import modelo.*;
 import modelo.excepciones.PiezaFueraDeAlcanceError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.Area;
-import modelo.ArmaDeAsedio;
-import modelo.Casilla;
-import modelo.Plaza;
-import modelo.Tablero;
 import modelo.excepciones.CatapultaArmadaNoPuedeMoverseError;
 import modelo.excepciones.CatapultaDesarmadaNoPuedeAtacarError;
 
@@ -378,6 +375,28 @@ public class ArmaDeAsedioTest {
        }
 
        Assert.assertEquals(true, seLanzoError);
+    }
+
+    @Test
+    public void armaDeAsedioYaJugoEnEseTurno() throws Exception{
+
+       Tablero unTablero = new Tablero();
+       ArmaDeAsedio unArma = new ArmaDeAsedio(unTablero.definirArea(0,0,0,0));
+       Plaza unaPlaza = new Plaza(unTablero.definirArea(1,1,2,2), true);
+
+       unArma.accionar();
+       unArma.atacar(unaPlaza);
+
+       boolean lanzaUnError=false;
+       try{
+           unArma.atacar(unaPlaza);
+       } catch (PiezaYaJugoEnTurnoActualError e){
+           lanzaUnError=true;
+       }
+
+       Assert.assertEquals(true, lanzaUnError);
+
+
     }
 
 
