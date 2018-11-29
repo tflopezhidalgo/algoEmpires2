@@ -17,13 +17,13 @@ public class CuartelVista extends EdificioVista{
 	@Override
 	protected void crearRepresentacion() {
 		//-----------------------------------------
- 		Image image = new Image("resources/image/2x2/enConstruccion3.png");
+ 		Image image = new Image("resources/images/2x2/enConstruccion3.png");
  		enConstruccionView = new ImageView(image);
  		enConstruccionView.setFitHeight(37);
  		enConstruccionView.setFitWidth(60);
 		getChildren().add(enConstruccionView);
 		//-----------------------------------------
- 		image = new Image("resources/image/2x2/cuartel.png");
+ 		image = new Image("resources/images/2x2/cuartel.png");
  		construidoView = new ImageView(image);
  		construidoView.setFitHeight(60);
  		construidoView.setFitWidth(60);

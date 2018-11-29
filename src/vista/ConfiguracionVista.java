@@ -18,7 +18,7 @@ public class ConfiguracionVista extends Pane{
 
     public ConfiguracionVista(Stage primaryStage){
 
-        Image imagenFondo = new Image("resources/image/ElementosMenu/fondoPergamino.png");
+        Image imagenFondo = new Image("resources/images/ElementosMenu/fondoPergamino.png");
         ImageView fondoVista = new ImageView(imagenFondo);
         fondoVista.fitWidthProperty().bind(primaryStage.widthProperty());
         fondoVista.fitHeightProperty().bind(primaryStage.heightProperty());

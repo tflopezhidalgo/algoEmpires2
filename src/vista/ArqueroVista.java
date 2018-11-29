@@ -13,7 +13,7 @@ public class ArqueroVista extends UnidadVista{
 
 	@Override
 	protected void crearRepresentacion() {
- 		Image image = new Image("resources/image/Unidades/Arquero/arquero.png");
+ 		Image image = new Image("resources/images/Unidades/Arquero/arquero.png");
 		ImageView imageView = new ImageView(image);
 		imageView.setFitWidth(22);
 		imageView.setFitHeight(30);
