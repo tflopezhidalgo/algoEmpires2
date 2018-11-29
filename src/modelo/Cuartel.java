@@ -14,6 +14,7 @@ public class Cuartel extends Edificio {
 		costo = 50;
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 50;
+
 	}
 	
 	//TODO: ELIMINAR ESTO - es solo para realizar en AldeanoTest "AldeanoVuelveASumarOroLuegoDeFinalizarUnaReparacion"

@@ -13,8 +13,8 @@ public class Aldeano extends Unidad {
 	
 	public Aldeano(Area unEspacio){
 		super(unEspacio);
+
 		estadoActual = new AldeanoLibre();
-		
 		vidaMaxima = VIDA;
 		vida = vidaMaxima;
 		costo = COSTO;
@@ -22,19 +22,19 @@ public class Aldeano extends Unidad {
 
 	@Override
     public void mover(Area nuevaArea) {
-	    estadoActual.mover(); //TODO esto es para cortar con un error nadamas, no hace nada
+	    estadoActual.mover();
         espacioOcupado.liberar();
-        espacioOcupado = nuevaArea;
         espacioOcupado.ocupar();
+        espacioOcupado = nuevaArea;
         turnoJugado = true;
     }
 
 	public void reparar(Edificio unEdificio) {
 	    siYaJugoElTurnoError();
-		
-		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
-			unEdificio.comenzarReparacion();
-			estadoActual = estadoActual.reparar(unEdificio);
+
+		if(enRango(unEdificio,1))  {
+
+			estadoActual = estadoActual.reparar(unEdificio, this);
 			turnoJugado = true;
 		}
 	}
@@ -45,8 +45,7 @@ public class Aldeano extends Unidad {
         if(distanciaMinimaA(areaDeConstruccion) > 1)
             throw new NoSePuedeConstruirTanLejosError();
 
-        Plaza nuevaPlaza = null;
-        estadoActual = estadoActual.construir(nuevaPlaza, areaDeConstruccion);
+        estadoActual = estadoActual.construirPlaza(areaDeConstruccion, this);
         turnoJugado = true;
 
         return (Plaza)estadoActual.obtenerEdificioObjetivo();
@@ -58,24 +57,26 @@ public class Aldeano extends Unidad {
         if(distanciaMinimaA(areaDeConstruccion) > 1)
             throw new NoSePuedeConstruirTanLejosError();
 
-        Cuartel nuevoCuartel = null;
-        estadoActual = estadoActual.construir(nuevoCuartel, areaDeConstruccion);
+        estadoActual = estadoActual.construirCuartel(areaDeConstruccion, this);
         turnoJugado = true;
 
         return (Cuartel)estadoActual.obtenerEdificioObjetivo();
 	}
 
 	public void realizarTrabajoDeTurno() {
+
 		estadoActual = estadoActual.realizarTrabajoDeTurno();
 		turnoJugado = true;
 	}
 
 	public int generarOro(){
+
 	    return (estadoActual.generarOro());
     }
 	
 	@Override
 	public void nuevoTurno() {
+
 		realizarTrabajoDeTurno();
 		super.nuevoTurno();
 	}

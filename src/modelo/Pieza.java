@@ -58,8 +58,8 @@ public abstract class Pieza {
 
 	public Pieza(Area espacioAOcupar) {
 
-		espacioOcupado = espacioAOcupar;
-		espacioOcupado.ocupar();
+        espacioAOcupar.ocupar();
+	    espacioOcupado = espacioAOcupar;
 		turnoJugado = false;
 		vida = 0;
 		costo = 0;

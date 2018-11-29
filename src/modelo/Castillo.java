@@ -1,6 +1,5 @@
 package modelo;
 
-import modelo.excepciones.CastilloDeJugadorFueDestruido;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class Castillo extends Edificio {
@@ -16,25 +15,10 @@ public class Castillo extends Edificio {
 		cantidadDeCuracion = 15;
 	}
 
-	@Override
-    public void recibirDanio(int danio){
-        vida = vida - danio;
-        if(vida <= 0) {
-            liberarUbicacion();
-            throw new CastilloDeJugadorFueDestruido();
-        }
-    }
-
-	//ATACA 1 VEZ A CADA OBJETIVO QUE ESTE EN RANGO NO IMPORTA SI YA JUGO EL TURNO
-	//TODO hacer una lista de objetivos en rango y pasarsela asi ataca solo 1 vez a cada uno
 	public void atacar(Pieza piezaEnemiga){
-		if(enRango(piezaEnemiga,3)) {
+		if(enRango(piezaEnemiga,3))
+
 			piezaEnemiga.recibirDanio(20);
-		}
-		
-		if(piezaEnemiga.estaDestruida()) {
-			piezaEnemiga = null;
-		}
 	}
 	
 	public ArmaDeAsedio crearCatapulta(Area unEspacio) {
