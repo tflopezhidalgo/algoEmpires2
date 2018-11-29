@@ -14,7 +14,7 @@ public class MenuVista extends BorderPane {
 	
 	Scene escenaSiguiente;
 
-    public MenuVista(Stage stagePrincipal) throws Exception{
+    public MenuVista(Stage stagePrincipal) {
     	//-------------------------------------------------------
         this.prepararEscenaSiguiente(stagePrincipal);
     	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -50,7 +50,7 @@ public class MenuVista extends BorderPane {
         botones.setTranslateY(primaryScreenBounds.getHeight()*0.6);
     }
 
-	private void prepararEscenaSiguiente(Stage stagePrincipal) throws Exception {
+	private void prepararEscenaSiguiente(Stage stagePrincipal){
         this.escenaSiguiente = new Scene(new ConfiguracionVista(stagePrincipal));
 	}
 
