@@ -44,26 +44,24 @@ public class Aldeano extends Unidad {
 
         if(distanciaMinimaA(areaDeConstruccion) > 1)
             throw new NoSePuedeConstruirTanLejosError();
+
         Plaza nuevaPlaza = null;
         estadoActual = estadoActual.construir(nuevaPlaza, areaDeConstruccion);
         turnoJugado = true;
-        //nadamas hace return en caso de ser llamado el metodo en las condiciones apropiadas
-        //en cualquier otro caso corta por error , no devuelve NI null
-        return (Plaza)estadoActual.obtenerEdificioObjetivo();
 
+        return (Plaza)estadoActual.obtenerEdificioObjetivo();
 	}
 	
 	public Cuartel crearCuartel(Area areaDeConstruccion) {
         siYaJugoElTurnoError();
 
-        if(distanciaMinimaA(areaDeConstruccion) > 1) {
+        if(distanciaMinimaA(areaDeConstruccion) > 1)
             throw new NoSePuedeConstruirTanLejosError();
-        }
+
         Cuartel nuevoCuartel = null;
         estadoActual = estadoActual.construir(nuevoCuartel, areaDeConstruccion);
         turnoJugado = true;
-        //nadamas hace return en caso de ser llamado el metodo en las condiciones apropiadas
-        //en cualquier otro caso corta por error , no devuelve NI null
+
         return (Cuartel)estadoActual.obtenerEdificioObjetivo();
 	}
 
