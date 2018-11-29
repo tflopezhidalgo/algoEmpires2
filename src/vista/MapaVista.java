@@ -1,6 +1,5 @@
 package vista;
 
-
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -8,12 +7,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import modelo.Aldeano;
-import modelo.Area;
-import modelo.Casilla;
-import modelo.Castillo;
-import modelo.Plaza;
-import modelo.Tablero;
+import modelo.*;
 
 public class MapaVista extends BorderPane {
 
@@ -36,18 +30,24 @@ public class MapaVista extends BorderPane {
 	private Group grupoCasillas = new Group();
 	private Group grupoPiezas = new Group();
 
-    public MapaVista() throws Exception {
+    public MapaVista(Juego juegoNuevo) {
     	piezaSeleccionada = null;
     	casillaSeleccionada = null;
-    	
+        try {
+            juegoNuevo.iniciarJuego();
+        }catch (Exception e){
+            //TODO: SOlo para que pase
+        }
+    	System.out.print(juegoNuevo.getJugadorActual().obtenerNombre());
+
     	crearMapa();
     	crearPanelBotones();
     	crearFuncionalidades();
     }
     
-    private void crearMapa() throws Exception {
+    private void crearMapa(){
     	Pane mapa = new Pane();
-    	mapa.setPrefSize(ANCHO*TAMANIO_CASILLA, ALTO*TAMANIO_CASILLA);
+    	mapa.setPrefSize(ANCHO * TAMANIO_CASILLA, ALTO * TAMANIO_CASILLA);
     	
     	//Si cambias esto tenes que cambiar el ANCHO y ALTO (+16)
     	elTablero = new Tablero(16,16);
@@ -60,8 +60,9 @@ public class MapaVista extends BorderPane {
     		}
     	}
     	
-    	generarPiezasInicialesEquipo1();
-    	generarPiezasInicialesEquipo2();
+    	this.generarPiezasInicialesEquipo1();
+    	this.generarPiezasInicialesEquipo2();
+
     	mapa.getChildren().addAll(grupoCasillas,grupoPiezas);
     	
     	setCenter(mapa);
@@ -71,7 +72,7 @@ public class MapaVista extends BorderPane {
     	MenuBar menuAcciones = new MenuBar();
     	Button botonFinTurno = new Button("Finalizar Turno");
     	botonFinTurno.setOnAction(value ->  {
-    		for(int i = 0; i<grupoPiezas.getChildren().size(); i++) {
+    		for(int i = 0; i < grupoPiezas.getChildren().size(); i++) {
     			Node nodoActual = grupoPiezas.getChildren().get(i);
     			//TODO modificar esto despues, tiene que ser para todas las PIEZAS del ultimo jugador
     			((PiezaVista)nodoActual).nuevoTurno();
@@ -119,7 +120,7 @@ public class MapaVista extends BorderPane {
         });*/
 	}
 
-	public void generarPiezasInicialesEquipo1() throws Exception{
+	public void generarPiezasInicialesEquipo1(){
 		//Castillo
 		Area areaCastillo = elTablero.definirArea(1,1, 4, 4);
 		Castillo castillo = new Castillo(areaCastillo);
@@ -148,7 +149,7 @@ public class MapaVista extends BorderPane {
 		//-------------------
 	}
 
-	public void generarPiezasInicialesEquipo2() throws Exception{
+	public void generarPiezasInicialesEquipo2(){
 		//Castillo
 		Area areaCastillo = elTablero.definirArea(ANCHO-5, ALTO-5, ANCHO-2, ALTO-2);
 		Castillo castillo = new Castillo(areaCastillo);

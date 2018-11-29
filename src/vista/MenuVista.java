@@ -4,11 +4,17 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MenuVista extends Pane {
 
-    public MenuVista(Scene escenaSiguiente,Stage stagePrincipal){
+    private Scene escenaSiguiente;
+
+    public MenuVista(Stage stagePrincipal){
+
+        this.prepararEscenaSiguiente(stagePrincipal);
+
     	//--------------- Imagen de fondo -----------------------
         Image background = new Image("Imagenes\\ElementosMenu\\fiubamenu.JPG");
         ImageView backgroundVista = new ImageView(background);
@@ -24,8 +30,13 @@ public class MenuVista extends Pane {
         elBotonComenzar.setTranslateY(-(elBotonComenzar.getPrefHeight() + 20));
         elBotonSalir.relocate(getPrefWidth()/2 - elBotonSalir.getPrefWidth()/2,getPrefHeight()/2 + elBotonSalir.getPrefHeight());
         elBotonSalir.setOnMousePressed(event ->  stagePrincipal.close());
-    	
+
         getChildren().addAll(backgroundVista, elBotonComenzar, elBotonSalir);
+    }
+
+    public void prepararEscenaSiguiente(Stage stagePrincipal){
+
+        this.escenaSiguiente = new Scene(new ConfiguracionVista(stagePrincipal));
     }
 
 }
