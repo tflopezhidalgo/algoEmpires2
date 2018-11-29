@@ -1,6 +1,9 @@
 package modelo;
 
-public class Espadachin extends Unidad {
+public class Espadachin extends Unidad  implements Atacante{
+	
+    final int VIDA = 100;
+    final int COSTO = 50;
 
     /*     -Espadachin-
      *
@@ -11,8 +14,9 @@ public class Espadachin extends Unidad {
 
 	public Espadachin(Area unEspacio) {
 		super(unEspacio);
-		vida = 100;
-		costo = 50;
+		vidaMaxima = VIDA;
+		vida = vidaMaxima;
+		costo = COSTO;
 	}
 
 	public void atacar(Pieza unaPieza){

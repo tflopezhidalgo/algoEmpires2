@@ -9,8 +9,8 @@ public class Plaza extends Edificio {
 	
 	public Plaza(Area areaAOcupar) {
 		super(areaAOcupar);
-		vida = 450;
-		vidaMaxima = vida;
+		vidaMaxima = 450;
+		vida = vidaMaxima;
 		costo = 100;
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 25;
@@ -41,8 +41,8 @@ public class Plaza extends Edificio {
         	throw new NoSePuedeCrearUnidadesDuranteConstruccionError();
         }
 		
-		turnoJugado = true;
 		Aldeano unAldeano = new Aldeano(unEspacio);
+		turnoJugado = true;
 		return unAldeano;
 	}
 }

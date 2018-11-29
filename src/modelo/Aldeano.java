@@ -6,16 +6,18 @@ import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class Aldeano extends Unidad {
 
-    final int VIDA_ALDEANO = 50;
-    final int COSTO_ALDEANO = 25;
+    final int VIDA = 50;
+    final int COSTO = 25;
 
 	private EstadoAldeano estadoActual;
 	
 	public Aldeano(Area unEspacio){
 		super(unEspacio);
 		estadoActual = new AldeanoLibre();
-		vida = VIDA_ALDEANO;
-		costo = COSTO_ALDEANO;
+		
+		vidaMaxima = VIDA;
+		vida = vidaMaxima;
+		costo = COSTO;
 	}
 
 	@Override
@@ -31,6 +33,7 @@ public class Aldeano extends Unidad {
 	    siYaJugoElTurnoError();
 		
 		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
+			unEdificio.comenzarReparacion();
 			estadoActual = estadoActual.reparar(unEdificio);
 			turnoJugado = true;
 		}

@@ -1,7 +1,13 @@
-import junit.framework.Assert;
-import modelo.*;
-import modelo.excepciones.*;
+import javafx.scene.control.Tab;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
+import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
 import org.junit.Test;
+
+import junit.framework.Assert;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Plaza;
+import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class PlazaCentralTest {
@@ -47,4 +53,67 @@ public class PlazaCentralTest {
         Assert.assertEquals(false, espacioAldeano.estaLibre());
         Assert.assertNotNull(nuevoAldeano);
     }
+
+    @Test
+    public void noSePuedeCrearAldeanoTanLejos() throws Exception{
+        Tablero unTablero = new Tablero();
+        Plaza unaPlaza = new Plaza(unTablero.definirArea(0,0,1,1), true);
+
+        Aldeano unAldeano = unaPlaza.crearAldeano(unTablero.definirArea(0,2,0,2));
+
+        unaPlaza.nuevoTurno();
+        boolean lanzaUnError=false;
+        try {
+            Aldeano otroAldeano = unaPlaza.crearAldeano(unTablero.definirArea(3,3,3,3));
+        } catch (NoSePuedeConstruirTanLejosError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+    }
+
+    @Test
+    public void noSePuedeCrearUnidadDuranteConstruccion() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+
+        Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
+
+        //tarda 3 turnos en construirse una plaza
+        boolean lanzaUnError=false;
+        try {
+            unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+        } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
+            lanzaUnError=true;
+        }
+        Assert.assertEquals(true, lanzaUnError);
+
+        unAldeano.nuevoTurno();
+        lanzaUnError=false;
+        try {
+            unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+        } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
+            lanzaUnError=true;
+        }
+        Assert.assertEquals(true, lanzaUnError);
+
+        unAldeano.nuevoTurno();
+        lanzaUnError=false;
+        try {
+            unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+        } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
+            lanzaUnError=true;
+        }
+        Assert.assertEquals(true, lanzaUnError);
+
+        unAldeano.nuevoTurno();
+        lanzaUnError=false;
+        try {
+            unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+        } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
+            lanzaUnError=true;
+        }
+        Assert.assertEquals(false, lanzaUnError);
+    }
+
 }

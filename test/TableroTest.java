@@ -1,11 +1,17 @@
-import modelo.*;
-import modelo.excepciones.*;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.util.*;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Casilla;
+import modelo.Castillo;
+import modelo.Pieza;
+import modelo.Plaza;
+import modelo.Tablero;
 
 public class TableroTest {
 	
@@ -137,4 +143,30 @@ public class TableroTest {
 		unTablero.liberar(unaCasilla);
 		Assert.assertEquals(false, unaCasilla.estaOcupada());
 	}
+
+	@Test
+    public void moverAUnaUnidad() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(1,1,1,1));
+        Casilla unaCasilla = unTablero.obtenerCasillaEn(2,2);
+
+        Assert.assertEquals(false, unaCasilla.estaOcupada());
+
+        unTablero.moverEnDireccion(unAldeano,1,1);
+        Casilla casillaDeAldeano = unaCasilla;
+
+        Assert.assertEquals(true, casillaDeAldeano.estaOcupada());
+    }
+
+    @Test
+    public void casillaNoExiste() throws Exception{
+        Tablero unTablero = new Tablero();
+        Casilla unaCasilla = unTablero.obtenerCasillaEn(1,1);
+        Casilla unaCasilla2 = unTablero.obtenerCasillaEn(5,5);
+        Casilla unaCasilla3 = unTablero.obtenerCasillaEn(15,15);
+
+        thrown.expect(Exception.class);
+        Casilla unaCasilla4 = unTablero.obtenerCasillaEn(18,18);
+    }
+
 }

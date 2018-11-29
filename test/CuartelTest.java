@@ -1,10 +1,11 @@
-import junit.framework.Assert;
-
 import modelo.*;
-import modelo.excepciones.*;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
+import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import junit.framework.Assert;
 
 @SuppressWarnings("deprecation")
 public class CuartelTest {
@@ -98,4 +99,90 @@ public class CuartelTest {
     	//Assert.assertNull(otroArquero);
         
     }
+
+    @Test
+    public void noSePuedeCrearArqueroTanLejos() throws Exception{
+        Tablero unTablero = new Tablero();
+        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1),true);
+
+        Arquero unArquero = unCuartel.crearArquero(unTablero.definirArea(0,2,0,2));
+
+        unCuartel.nuevoTurno();
+        boolean lanzaUnError=false;
+        try
+        {
+            Arquero otroArquero = unCuartel.crearArquero(unTablero.definirArea(3,3,3,3));
+        } catch (NoSePuedeConstruirTanLejosError e)
+        {
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+    }
+
+    @Test
+    public void noSePuedeCrearEspadachinTanLejos() throws Exception{
+        Tablero unTablero = new Tablero();
+        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1),true);
+
+        Espadachin unEspadachin = unCuartel.crearEspadachin(unTablero.definirArea(0,2,0,2));
+
+        unCuartel.nuevoTurno();
+        boolean lanzaUnError=false;
+        try
+        {
+            Espadachin otroEspadachin = unCuartel.crearEspadachin(unTablero.definirArea(3,3,3,3));
+        } catch (NoSePuedeConstruirTanLejosError e)
+        {
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+    }
+
+    @Test
+    public void noSePuedeCrearUnidadDuranteConstruccion() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+
+        Cuartel unCuartel = unAldeano.crearCuartel(unTablero.definirArea(0,1,1,2));
+
+        //tarda 3 turnos en construirse una plaza
+        boolean lanzaUnError=false;
+        try {
+            unCuartel.crearArquero(unTablero.definirArea(2,1,2,1));
+        } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
+            lanzaUnError=true;
+        }
+        Assert.assertEquals(true, lanzaUnError);
+
+        unAldeano.nuevoTurno();
+        lanzaUnError=false;
+        try {
+            unCuartel.crearArquero(unTablero.definirArea(2,1,2,1));
+        } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
+            lanzaUnError=true;
+        }
+        Assert.assertEquals(true, lanzaUnError);
+
+        unAldeano.nuevoTurno();
+        lanzaUnError=false;
+        try {
+            unCuartel.crearArquero(unTablero.definirArea(2,1,2,1));
+        } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
+            lanzaUnError=true;
+        }
+        Assert.assertEquals(true, lanzaUnError);
+
+        unAldeano.nuevoTurno();
+        lanzaUnError=false;
+        try {
+            unCuartel.crearArquero(unTablero.definirArea(2,1,2,1));
+        } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
+            lanzaUnError=true;
+        }
+        Assert.assertEquals(false, lanzaUnError);
+    }
+
+
 }

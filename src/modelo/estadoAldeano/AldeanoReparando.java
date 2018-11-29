@@ -27,12 +27,10 @@ public class AldeanoReparando extends EstadoAldeano {
 
     public EstadoAldeano realizarTrabajoDeTurno() {
         edificioObjetivo.reparar();
-        if(edificioObjetivo.necesitaReparacion()){
+        if(edificioObjetivo.vidaBaja()){
             return this;
         }
         return (new AldeanoLibre());
     }
-
-
 
 }

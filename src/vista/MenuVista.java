@@ -1,57 +1,42 @@
 package vista;
 
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-
-import java.util.EventListener;
-
-import static javafx.scene.layout.StackPane.setAlignment;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class MenuVista extends Pane {
 
+    private Scene escenaSiguiente;
 
-    public MenuVista(){
+    public MenuVista(Stage stagePrincipal){
 
+        this.prepararEscenaSiguiente(stagePrincipal);
 
-        Image unaImagen = new Image("builingsTemp\\fiubamenu.JPG");
-        ImageView unaVista = new ImageView(unaImagen);
+    	//--------------- Imagen de fondo -----------------------
+        Image background = new Image("Imagenes\\ElementosMenu\\fiubamenu.JPG");
+        ImageView backgroundVista = new ImageView(background);
+        setPrefSize(background.getWidth(),background.getHeight());
+        //--------------- Setup Botones -------------------------
+        Image botonComenzar = new Image("Imagenes\\ElementosMenu\\botoncomenzar.png");
+        BotonPersonalizado elBotonComenzar = new BotonPersonalizado(botonComenzar);
+        elBotonComenzar.relocate(getPrefWidth()/2 - elBotonComenzar.getPrefWidth()/2,getPrefHeight()/2 - elBotonComenzar.getPrefHeight()/2 );
+        elBotonComenzar.setOnMousePressed(event -> stagePrincipal.setScene(escenaSiguiente));
 
-        setPrefSize(unaImagen.getWidth(),unaImagen.getHeight());
+        Image botonSalir = new Image("Imagenes\\ElementosMenu\\botonsalir.png");
+        BotonPersonalizado elBotonSalir = new BotonPersonalizado(botonSalir);
+        elBotonComenzar.setTranslateY(-(elBotonComenzar.getPrefHeight() + 20));
+        elBotonSalir.relocate(getPrefWidth()/2 - elBotonSalir.getPrefWidth()/2,getPrefHeight()/2 + elBotonSalir.getPrefHeight());
+        elBotonSalir.setOnMousePressed(event ->  stagePrincipal.close());
 
-        getChildren().addAll(unaVista);
+        getChildren().addAll(backgroundVista, elBotonComenzar, elBotonSalir);
+    }
 
-        /*
-        StackPane panel = new StackPane();
-        panel.setPrefSize(200,30);
-        Image botonComenzar = new Image("builingsTemp\\botoncomenzar.png");
-        ImageView botonVista = new ImageView(botonComenzar);
-        panel.getChildren().add(botonVista);
-        panel.relocate(unaImagen.getWidth()/2 - botonComenzar.getWidth()/2,unaImagen.getHeight()/2 - botonComenzar.getHeight()/2 );
+    public void prepararEscenaSiguiente(Stage stagePrincipal){
 
-
-        Label labelIniciar = new Label("Comenzar");
-        Rectangle seleccion = new Rectangle(200, 30);
-        seleccion.setFill(Color.TRANSPARENT);
-        seleccion.setStroke(Color.rgb(250, 150, 150, .30));
-        seleccion.setStrokeWidth(200 * 0.025);
-        seleccion.setVisible(true);
-        panel.getChildren().addAll(seleccion,labelIniciar);
-
-        getChildren().add(panel);
-        */
-
-
-
+        this.escenaSiguiente = new Scene(new ConfiguracionVista(stagePrincipal));
     }
 
 }

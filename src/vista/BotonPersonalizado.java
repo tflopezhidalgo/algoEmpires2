@@ -12,8 +12,6 @@ public class BotonPersonalizado extends StackPane {
 
         setPrefSize(unaImagen.getWidth(),unaImagen.getHeight());
 
-        //System.out.println("Boton width" + unaImagen.getWidth() + "height" + unaImagen.getHeight());
-
         getChildren().add(botonVista);
 
     }

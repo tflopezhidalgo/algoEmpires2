@@ -11,19 +11,18 @@ public abstract class EdificioVista extends PiezaVista{
 	protected ImageView construidoView;
 
 	
-	public EdificioVista(int x, int y, Edificio unModelo, JuegoVista unJuego) {
-		super(x, y, unModelo, unJuego);
+	public EdificioVista(int x, int y, Edificio unModelo, MapaVista unMapa) {
+		super(x, y, unModelo, unMapa);
 	}
 
 	@Override
 	protected void realizarAccionSobrePieza() {
-		PiezaVista piezaSeleccionada = elJuego.piezaSeleccionada();
+		PiezaVista piezaSeleccionada = elMapa.piezaSeleccionada();
 		if(piezaSeleccionada.modelo() instanceof Atacante) {
 			//Edificio esta siendo atacado
 			((Atacante)(piezaSeleccionada).modelo()).atacar(modelo);
-			
 			if(modelo.estaDestruida()) {
-				elJuego.removerPieza(this);
+				elMapa.removerPieza(this);
 			}
 		}
 		
@@ -31,6 +30,7 @@ public abstract class EdificioVista extends PiezaVista{
 			//Edificio esta siendo reparado
 			((Aldeano)(piezaSeleccionada).modelo()).reparar((Edificio)modelo);
 		}
+		actualizarVisualizacon();
 	}
 	
 	protected abstract void prepararBotones();

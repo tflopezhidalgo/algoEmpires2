@@ -12,10 +12,10 @@ public class CasillaVista extends StackPane{
 	
 	private Rectangle seleccion;
 	private Casilla modelo;
-	private JuegoVista elJuego;
+	private MapaVista elMapa;
 	
-	public CasillaVista(int x, int y, Casilla unModelo, JuegoVista unJuego) {
-		elJuego = unJuego;
+	public CasillaVista(int x, int y, Casilla unModelo, MapaVista unMapa) {
+		elMapa = unMapa;
 		modelo = unModelo;
 		
 		setWidth(TAMANIO_CASILLA);
@@ -43,7 +43,7 @@ public class CasillaVista extends StackPane{
 	}
 	
 	private void moverPiezSeleccionada() throws Exception {
-		PiezaVista piezaSeleccionada = elJuego.piezaSeleccionada();
+		PiezaVista piezaSeleccionada = elMapa.piezaSeleccionada();
 		if(piezaSeleccionada instanceof UnidadVista) {
 			int x0 = piezaSeleccionada.modelo().obtenerAreaOcupada().x0();
 			int y0 = piezaSeleccionada.modelo().obtenerAreaOcupada().y0();
@@ -55,7 +55,7 @@ public class CasillaVista extends StackPane{
 			if( Math.abs(difX) <=1 & Math.abs(difY) <=1 ) {
 				UnidadVista unidadVista = (UnidadVista)(piezaSeleccionada);
 				Unidad laUnidad = (Unidad)unidadVista.modelo();
-				elJuego.obtenerTablero().moverEnDireccion(laUnidad, difX, difY);
+				elMapa.obtenerTablero().moverEnDireccion(laUnidad, difX, difY);
 				
 				int xActual = laUnidad.obtenerAreaOcupada().x0();
 				int yActual = laUnidad.obtenerAreaOcupada().y0();
@@ -72,13 +72,13 @@ public class CasillaVista extends StackPane{
 	
 	private void seleccionarCasilla() {
 		//sacar efecto a casilla anterior
-		CasillaVista casillaAnterior = elJuego.casillaSeleccionada();
+		CasillaVista casillaAnterior = elMapa.casillaSeleccionada();
 		if(casillaAnterior != null) {
-			elJuego.casillaSeleccionada().desSeleccionar();
+			elMapa.casillaSeleccionada().desSeleccionar();
 		}
 		//agregar efecto a casilla actual
 		seleccionar();
-		elJuego.seleccionarCasilla(this);
+		elMapa.seleccionarCasilla(this);
 	}
 
 	private void desSeleccionar() {
@@ -96,6 +96,7 @@ public class CasillaVista extends StackPane{
 		Rectangle rectangulo = new Rectangle(TAMANIO_CASILLA, TAMANIO_CASILLA);
 		rectangulo.setFill(Color.rgb(150, colorTerreno, 90, .99));
 		getChildren().add(rectangulo);
+		//------------------------------------------
 		
 		//efecto casilla seleccionada
 		seleccion = new Rectangle(TAMANIO_CASILLA*0.95, TAMANIO_CASILLA*0.95);
