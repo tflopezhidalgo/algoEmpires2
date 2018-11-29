@@ -122,6 +122,67 @@ public class EdificioTest {
 
     }
 
+    @Test
+    public void edificioConstruirCastillo() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Castillo(zonaDeConstruccion);
+        Assert.assertEquals(true, unTablero.obtenerCasillaEn(3,3).estaOcupada());
+
+        Assert.assertEquals(false, unEdificio.enConstruccion());
+
+
+    }
+
+    @Test
+    public void edificioConstruirPlaza() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Plaza(zonaDeConstruccion);
+        Assert.assertEquals(true, unTablero.obtenerCasillaEn(3,3).estaOcupada());
+
+        unEdificio.construir();
+
+        Assert.assertEquals(true, unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertEquals(true, unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertEquals(false, unEdificio.enConstruccion());
+
+
+    }
+
+    @Test
+    public void edificioConstruirCuartel() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
+        Assert.assertEquals(true, unTablero.obtenerCasillaEn(3,3).estaOcupada());
+
+        unEdificio.construir();
+
+        Assert.assertEquals(true, unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertEquals(true, unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertEquals(false, unEdificio.enConstruccion());
+
+
+    }
 
 
 }
