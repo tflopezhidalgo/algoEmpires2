@@ -98,8 +98,6 @@ public class JugadorTest {
          }
 
          Assert.assertEquals(true, lanzaUnError);
-
      }
-
 
 }
