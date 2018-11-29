@@ -3,7 +3,6 @@ package vista;
 import controlador.IniciarJuegoHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,13 +13,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import modelo.Juego;
 
 public class ConfiguracionVista extends Pane{
 
     public ConfiguracionVista(Stage primaryStage){
 
-        Image imagenFondo = new Image("resources/imagenes/ElementosMenu/fondoPergamino.png");
+        Image imagenFondo = new Image("resources/image/ElementosMenu/fondoPergamino.png");
         ImageView fondoVista = new ImageView(imagenFondo);
         fondoVista.fitWidthProperty().bind(primaryStage.widthProperty());
         fondoVista.fitHeightProperty().bind(primaryStage.heightProperty());

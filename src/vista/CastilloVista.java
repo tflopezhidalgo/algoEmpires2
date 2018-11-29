@@ -28,13 +28,13 @@ public class CastilloVista extends EdificioVista{
 	@Override
 	protected void crearRepresentacion() {
 		//-----------------------------------------
- 		Image image = new Image("resources/imagenes/4x4/castillo.png");
+ 		Image image = new Image("resources/image/4x4/castillo.png");
  		construidoView = new ImageView(image);
  		construidoView.setFitHeight(120);
  		construidoView.setFitWidth(110);
 		getChildren().add(construidoView);
 		//-----------------------------------------
- 		image = new Image("resources/imagenes/4x4/enConstruccion3.png");
+ 		image = new Image("resources/image/4x4/enConstruccion3.png");
  		enConstruccionView = new ImageView(image);
  		enConstruccionView.setVisible(false);
 	}

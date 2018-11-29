@@ -4,18 +4,12 @@ package vista;
 import controlador.CrearMapa;
 import controlador.FinalizarTurnoHandler;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import modelo.Aldeano;
-import modelo.Area;
-import modelo.Casilla;
-import modelo.Castillo;
 import modelo.Juego;
-import modelo.Plaza;
 import modelo.Tablero;
 
 public class MapaVista extends BorderPane {
