@@ -9,7 +9,7 @@ public class EdificioTest {
 
     @Test
     public void edificioNecesitaReparacionCastillo() throws Exception {
-    	Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero(6,6);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
 
@@ -22,7 +22,7 @@ public class EdificioTest {
 
         Assert.assertEquals(true, unEdificio.necesitaReparacion());
 
-        }
+    }
 
     @Test
     public void edificioNecesitaReparacionPlaza() throws Exception {
