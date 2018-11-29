@@ -1,3 +1,4 @@
+import modelo.excepciones.*;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -10,10 +11,6 @@ import modelo.Castillo;
 import modelo.Cuartel;
 import modelo.Plaza;
 import modelo.Tablero;
-import modelo.excepciones.AldeanOcupadoNoPuedeMoverse;
-import modelo.excepciones.AldeanoConstruyendoNoPuedeReparar;
-import modelo.excepciones.AldeanoOcupadoConOtroEdificioError;
-import modelo.excepciones.AldeanoReparandoNoPuedeConstruir;
 
 @SuppressWarnings("deprecation")
 public class AldeanoTest {
@@ -710,6 +707,59 @@ public class AldeanoTest {
         };
 
         Assert.assertEquals(true, seLanzoError);
+    }
+
+    @Test
+    public void noPuedeConstruirCuartelTanLejos() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+
+        Cuartel unCuartel = unAldeano.crearCuartel(unTablero.definirArea(0,1,1,2));
+        unAldeano.nuevoTurno();
+
+        boolean seLanzoError=false;
+        try {
+            Cuartel otroCuartel = unAldeano.crearCuartel(unTablero.definirArea(2, 1, 3,1));
+        } catch (NoSePuedeConstruirTanLejosError e) {
+            seLanzoError=true;
+        };
+
+        Assert.assertEquals(true, seLanzoError);
+    }
+
+    @Test
+    public void noPuedeConstruirPlazaTanLejos() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+
+        Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
+        unAldeano.nuevoTurno();
+
+        boolean seLanzoError=false;
+        try {
+            Plaza otraPlaza = unAldeano.crearPlaza(unTablero.definirArea(2, 1, 3,1));
+        } catch (NoSePuedeConstruirTanLejosError e) {
+            seLanzoError=true;
+        };
+
+        Assert.assertEquals(true, seLanzoError);
+    }
+
+    @Test
+    public void piezaFueraDeAlcanceParaSerReparada() throws Exception{
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Plaza unaPlaza = new Plaza(unTablero.definirArea(6,6,7,7), true);
+
+        unaPlaza.recibirDanio(20);
+        boolean lanzaUnError=false;
+        try {
+            unAldeano.reparar(unaPlaza);
+        } catch (PiezaFueraDeAlcanceError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
     }
 
 }

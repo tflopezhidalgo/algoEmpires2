@@ -1,11 +1,10 @@
+import modelo.*;
+import modelo.excepciones.CastilloDeJugadorFueDestruido;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
+import modelo.excepciones.PiezaFueraDeAlcanceError;
 import org.junit.Test;
 
 import junit.framework.Assert;
-import modelo.Aldeano;
-import modelo.Area;
-import modelo.ArmaDeAsedio;
-import modelo.Castillo;
-import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class CastilloTest {
@@ -71,5 +70,58 @@ public class CastilloTest {
         Assert.assertEquals(false, unAldeano.estaDestruida());
         unCastillo.atacar(unAldeano);
         Assert.assertEquals(true, unAldeano.estaDestruida());
+    }
+
+    @Test
+    public void castilloDestruido() throws Exception{
+        Tablero unTablero = new Tablero();
+        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+
+        unCastillo.recibirDanio(500);
+        unCastillo.recibirDanio(499); //El castillo se destruye cuando llega a 0 de vida
+
+        boolean lanzoUnError=false;
+        try {
+            unCastillo.recibirDanio(10);
+        } catch (CastilloDeJugadorFueDestruido e)
+        {
+            lanzoUnError=true;
+        };
+
+        Assert.assertEquals(true, lanzoUnError);
+    }
+
+    @Test
+    public void noSePuedeConstruirArmaDeAsedioTanLejos() throws Exception{
+        Tablero unTablero = new Tablero();
+        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+
+        ArmaDeAsedio unaCatapulta = unCastillo.crearCatapulta(unTablero.definirArea(4,0,4,0));
+        unCastillo.nuevoTurno();
+
+        boolean lanzaUnError=false;
+        try {
+            ArmaDeAsedio otraCatapulta = unCastillo.crearCatapulta(unTablero.definirArea(7,0,7,0));
+        } catch(NoSePuedeConstruirTanLejosError e) {
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+    }
+
+    @Test
+    public void piezaFueraDeAlcanceParaAtacar() throws Exception{
+        Tablero unTablero = new Tablero();
+        Arquero unArquero = new Arquero(unTablero.definirArea(7,7,7,7));
+        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3, 3));
+
+        boolean lanzaUnError=false;
+        try{
+            unCastillo.atacar(unArquero);
+        } catch (PiezaFueraDeAlcanceError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
     }
 }

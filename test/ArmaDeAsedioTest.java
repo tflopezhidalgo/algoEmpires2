@@ -1,3 +1,4 @@
+import modelo.excepciones.PiezaFueraDeAlcanceError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -325,30 +326,6 @@ public class ArmaDeAsedioTest {
     }
 
     @Test
-    public void ataqueArmaDeAsedioAEdificioFueraDeRango() throws Exception {
-    	Tablero unTablero = new Tablero(10, 10);
-
-        Area zonaDeConstruccion = unTablero.definirArea(6, 6, Plaza.TAMANIO_LADO+5, Plaza.TAMANIO_LADO+5);
-        Plaza unaPlaza = new Plaza(zonaDeConstruccion);
-
-    	Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
-
-        //vida de la plaza == 450
-        unArmaDeAsedio.atacar(unaPlaza);
-        unArmaDeAsedio.atacar(unaPlaza);
-        unArmaDeAsedio.atacar(unaPlaza);
-        unArmaDeAsedio.atacar(unaPlaza);
-        unArmaDeAsedio.atacar(unaPlaza);
-        unArmaDeAsedio.atacar(unaPlaza);
-        unArmaDeAsedio.atacar(unaPlaza);
-
-        Assert.assertEquals(false,unaPlaza.necesitaReparacion());
-        Assert.assertEquals(false,unaPlaza.estaDestruida());
-
-    }
-
-    @Test
     public void catapultaArmadaNoPuedeMoverse() throws Exception{
        Tablero unTablero = new Tablero();
        Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
@@ -384,5 +361,24 @@ public class ArmaDeAsedioTest {
 
        Assert.assertEquals(true,seLanzoError);
     }
+
+    @Test
+    public void fueraDeAlcanceParaPoderAtacar() throws Exception{
+       Tablero unTablero = new Tablero();
+       ArmaDeAsedio unArma = new ArmaDeAsedio(unTablero.definirArea(0,0,0,0));
+       Plaza unaPlaza = new Plaza(unTablero.definirArea(6,6,7,7), true);
+
+       unArma.accionar();
+
+       boolean seLanzoError=false;
+       try {
+           unArma.atacar(unaPlaza);
+       } catch (PiezaFueraDeAlcanceError e){
+           seLanzoError=true;
+       }
+
+       Assert.assertEquals(true, seLanzoError);
+    }
+
 
 }

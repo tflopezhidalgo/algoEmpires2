@@ -1,13 +1,11 @@
+import javafx.scene.control.Tab;
+import modelo.*;
+import modelo.excepciones.PiezaFueraDeAlcanceError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.Aldeano;
-import modelo.Area;
-import modelo.Casilla;
-import modelo.Espadachin;
-import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class EspadachinTest {
@@ -178,21 +176,18 @@ public class EspadachinTest {
     }
 
     @Test
-    public void ataqueEspadachinFueraDeRango() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    public void ataqueAUnaPiezaFueraDeRangoError() throws Exception{
+        Tablero unTablero = new Tablero();
+        Espadachin unEspadachin = new Espadachin(unTablero.definirArea(0,0,0,0));
+        Plaza unaPlaza = new Plaza(unTablero.definirArea(2,2,3,3),true);
 
-        Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        boolean lanzaUnError=false;
+        try{
+            unEspadachin.atacar(unaPlaza);
+        }catch (PiezaFueraDeAlcanceError e){
+            lanzaUnError=true;
+        }
 
-        Area espacioEspadachin = unTablero.definirArea(0,2,0,2);
-        Espadachin unEspadachin = new Espadachin(espacioEspadachin);
-
-        //vida del aldeano == 50
-        unEspadachin.atacar(unAldeano);
-        unEspadachin.atacar(unAldeano);
-        unEspadachin.atacar(unAldeano);
-
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
-        Assert.assertEquals(false,unAldeano.estaDestruida());
+        Assert.assertEquals(true, lanzaUnError);
     }
 }

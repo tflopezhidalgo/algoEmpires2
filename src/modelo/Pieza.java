@@ -1,5 +1,6 @@
 package modelo;
 
+import modelo.excepciones.PiezaFueraDeAlcanceError;
 import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 
 public abstract class Pieza {
@@ -25,7 +26,7 @@ public abstract class Pieza {
         int distanciaAPieza = distanciaMinimaA(piezaEnemiga.obtenerAreaOcupada());
 
         if(distanciaAPieza > distanciaMaxima) {
-            return false;
+            throw new PiezaFueraDeAlcanceError();
         }
         return true;
     }

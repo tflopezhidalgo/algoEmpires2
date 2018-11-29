@@ -1,13 +1,11 @@
+import javafx.scene.control.Tab;
+import modelo.*;
+import modelo.excepciones.PiezaFueraDeAlcanceError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.Aldeano;
-import modelo.Area;
-import modelo.Arquero;
-import modelo.Casilla;
-import modelo.Tablero;
 
 @SuppressWarnings("deprecation")
 public class ArqueroTest {
@@ -197,27 +195,6 @@ public class ArqueroTest {
     }
 
     @Test
-    public void ataqueArqueroFueraDeRango() throws Exception {
-
-    	Tablero unTablero = new Tablero(5,5);
-
-    	Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
-
-        Area espacioArquero = unTablero.definirArea(0,4,0,4);
-        Arquero unArquero = new Arquero(espacioArquero);
-
-        //vida del aldeano == 50
-        unArquero.atacar(unAldeano);
-        unArquero.atacar(unAldeano);
-        unArquero.atacar(unAldeano);
-        unArquero.atacar(unAldeano);
-
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
-        Assert.assertEquals(false, unAldeano.estaDestruida());
-    }
-
-    @Test
     public void atacarAUnaPieza() throws Exception{
         Tablero unTablero = new Tablero(10,10);
         Area espacioArquero = unTablero.definirArea(0,4,0,4);
@@ -234,6 +211,22 @@ public class ArqueroTest {
         Assert.assertEquals(false, unAldeano.estaDestruida());
         unAldeano.recibirDanioDe(unArquero);
         Assert.assertEquals(true, unAldeano.estaDestruida());
+    }
+
+    @Test
+    public void piezaAAtacarFueraDeRango() throws Exception{
+        Tablero unTablero = new Tablero();
+        Arquero unArquero = new Arquero(unTablero.definirArea(0,0,0,0));
+        Plaza unaPlaza = new Plaza(unTablero.definirArea(4,4,5,5), true);
+
+        boolean lanzaUnError=false;
+        try{
+            unArquero.atacar(unaPlaza);
+        } catch (PiezaFueraDeAlcanceError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
     }
 
 }
