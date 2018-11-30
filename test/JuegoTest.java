@@ -12,9 +12,25 @@ import java.util.List;
 public class JuegoTest {
 
     @Test
-    public void juegoNoTerminadoError() throws Exception{
+    public void juegoNoTerminadoError() {
         Juego unJuego = new Juego("Ailen", "Laura");
-        unJuego.iniciarJuego();
+
+        List<Pieza> listaPiezas = new ArrayList<>();
+        Tablero unTablero = unJuego.getTablero();
+        listaPiezas.add(new Aldeano(unTablero.definirArea(2,2,2,2)));
+        Castillo unCastillo = new Castillo(unTablero.definirArea(5,5,5,5));
+        listaPiezas.add(unCastillo);
+
+        List<Pieza> listaPiezas2 = new ArrayList<>();
+        Castillo otroCastillo = new Castillo(unTablero.definirArea(10,10,10,10));
+        listaPiezas2.add(otroCastillo);
+
+        unJuego.iniciarJuego(listaPiezas, listaPiezas2);
+
+        unJuego.finalizarTurno();
+
+        unJuego.finalizarTurno();
+
 
         boolean lanzaUnError=false;
         try{
@@ -22,12 +38,10 @@ public class JuegoTest {
         } catch(JuegoNoTerminadoError e){
             lanzaUnError=true;
         }
-
-        Assert.assertEquals(true, lanzaUnError);
     }
 
     @Test
-    public void noExistenJugadoresActuales() throws Exception{
+    public void noExistenJugadoresActuales() {
         Juego unJuego = new Juego("Tomas", "Ivo");
 
         boolean lanzaUnError=false;
@@ -41,7 +55,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void noHayJuegoEnProcesoError() throws Exception{
+    public void noHayJuegoEnProcesoError() {
         Juego unJuego = new Juego("Ailen", "Laura");
 
         boolean lanzaUnError=false;

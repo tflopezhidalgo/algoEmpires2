@@ -35,9 +35,9 @@ public class MapaVista extends BorderPane {
     	piezaSeleccionada = null;
     	casillaSeleccionada = null;
     	
-        try {juegoNuevo.iniciarJuego();}
+       /* try {juegoNuevo.iniciarJuego();}
         catch (Exception e){}
-    	System.out.print(juegoNuevo.getJugadorActual().obtenerNombre()); //TODO BORRAR
+    	System.out.print(juegoNuevo.getJugadorActual().obtenerNombre()); //TODO BORRAR */
     	
     	crearMapa();
     	crearPanelBotones();
