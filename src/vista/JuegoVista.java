@@ -15,7 +15,7 @@ public class JuegoVista extends Application{
     public void start(Stage primaryStage){
     	Scene escenaInicial = new Scene(new MenuVista(primaryStage));
     	primaryStage.setTitle("Algo of Empires");
-    	primaryStage.initStyle(StageStyle.UNDECORATED);
+    	//primaryStage.initStyle(StageStyle.UNDECORATED);
 
         primaryStage.setScene(escenaInicial);
         primaryStage.show();

@@ -6,7 +6,7 @@ import modelo.excepciones.Excepcion;
 
 public abstract class UnidadVista extends PiezaVista {
 	
-	public UnidadVista(int x, int y, Unidad unModelo, MapaVista unMapa) throws Excepcion {
+	public UnidadVista(int x, int y, Unidad unModelo, MapaVista unMapa){
 		super(x,y,unModelo,unMapa);
 	}
 	

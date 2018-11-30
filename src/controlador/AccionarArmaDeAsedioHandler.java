@@ -18,7 +18,6 @@ public class AccionarArmaDeAsedioHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		//TODO lo podemos accionar infinitas veces por turno? (depende del modelo)
-		System.out.println("ES NULL? " + ((arma.modelo()) == null));
 		((ArmaDeAsedio)(arma.modelo())).accionar();
 	}
 	

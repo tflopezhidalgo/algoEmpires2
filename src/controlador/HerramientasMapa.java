@@ -15,8 +15,8 @@ import vista.PlazaVista;
 
 public class HerramientasMapa {
 	
-	private static int ANCHO = 42;
-	private static int ALTO = 26;
+	private static int ANCHO = 32;
+	private static int ALTO = 20;
 	private static Tablero elTablero;
 	private static Group grupoPiezas;
 	private static MapaVista elMapa;
@@ -26,7 +26,7 @@ public class HerramientasMapa {
 		elMapa = mapa;
 		
     	//Si cambias esto tenes que cambiar el ANCHO y ALTO (+16)
-    	elTablero = new Tablero(26,10);
+    	elTablero = new Tablero(16,4);
     	for(int y = 0; y < ALTO; y++) {
     		for(int x = 0; x < ANCHO; x++) {
     			Casilla casillaActual = elTablero.obtenerCasillaEn(x, y);

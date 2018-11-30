@@ -3,6 +3,10 @@ package vista.estadoArmaDeAsedioVista;
 import javafx.scene.image.ImageView;
 
 public class CatapultaVistaDesarmada extends EstadoCatapultaVista {
+	
+	public CatapultaVistaDesarmada() {
+		System.out.println("construyendo...");
+	}
 
 	public void atacar() {
 		

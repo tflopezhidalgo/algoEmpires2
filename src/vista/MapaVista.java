@@ -1,7 +1,7 @@
 package vista;
 
 
-import controlador.CrearMapa;
+import controlador.HerramientasMapa;
 import controlador.FinalizarTurnoHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -26,18 +26,17 @@ public class MapaVista extends BorderPane {
 	
 	private Tablero elTablero;
 	
+	
 	private PiezaVista piezaSeleccionada;
 	private CasillaVista casillaSeleccionada;
-	private Group grupoCasillas = new Group();
+	private Group grupoCasillas = new Group(); 
 	private Group grupoPiezas = new Group();
 
     public MapaVista(Juego juegoNuevo){
     	piezaSeleccionada = null;
     	casillaSeleccionada = null;
-
-      /*  try {juegoNuevo.iniciarJuego();}
-        catch (Exception e){}
-    	System.out.print(juegoNuevo.getJugadorActual().obtenerNombre()); //TODO BORRAR*/
+    	
+        //juegoNuevo.iniciarJuego();
     	
     	crearMapa();
     	crearPanelBotones();
@@ -46,11 +45,11 @@ public class MapaVista extends BorderPane {
     
     private void crearMapa(){
     	Pane mapa = new Pane();
-    	mapa.setPrefSize(1280,770);
+    	mapa.setPrefSize(960,600);
     	
     	//TODO esto del controlador va asi? Euge aiudaa new y no asigno?
     	//hacer la clase static asi no necesito instanciar?
-    	new CrearMapa(this,grupoCasillas, grupoPiezas);
+    	elTablero = HerramientasMapa.crearMapa(this,grupoCasillas, grupoPiezas);
     	
     	mapa.getChildren().addAll(grupoCasillas,grupoPiezas);
     	

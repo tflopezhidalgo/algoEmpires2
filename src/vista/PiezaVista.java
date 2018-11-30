@@ -68,6 +68,7 @@ public abstract class PiezaVista extends StackPane {
 		//-----------------------------------------
 		
 		setOnMousePressed(new ClickPiezaHandler(elMapa,this));
+
 	}
 	
 	protected void seleccionarPieza() {
