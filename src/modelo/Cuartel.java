@@ -25,7 +25,9 @@ public class Cuartel extends Edificio {
         if(enConstruccion() == true)
             throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
 
+        turnoJugado = true;
         return FactoryGuerrero.crearGuerrero(unEspacio, tipoDeseado);
+        
     }
 
 	
