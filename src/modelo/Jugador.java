@@ -15,9 +15,6 @@ public class Jugador {
     private int cantidadDeOro;
     private int poblacion;
 
-    private List<Unidad> listaUnidades;
-    private List<Edificio> listaEdificios;
-
     private void recolectarOro(){
 
     	for(int i=0; i < piezas.size(); i++) {

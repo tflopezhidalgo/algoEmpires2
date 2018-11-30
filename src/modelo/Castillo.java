@@ -18,6 +18,7 @@ public class Castillo extends Edificio {
 		cantidadDeCuracion = 15;
 	}
 
+	@Override
 	public void atacar(Pieza piezaEnemiga){
 
 	    chequearRango(piezaEnemiga, DISTANCIA_ATK);
@@ -32,7 +33,7 @@ public class Castillo extends Edificio {
         }
         
 		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(unEspacio);
-        
+
 		turnoJugado = true;
 		return unaArmaDeAsedio;
 	}
@@ -51,4 +52,5 @@ public class Castillo extends Edificio {
             this.liberarUbicacion();
         }
     }
+
 }

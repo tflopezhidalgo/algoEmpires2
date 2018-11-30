@@ -1,8 +1,6 @@
 package modelo;
 
-public class Espadachin extends Unidad  implements Atacante{
-
-    final int DISTANCIA_ATK = 1;
+public class Espadachin extends Unidad{
 
     /*     -Espadachin-
      *
@@ -13,19 +11,9 @@ public class Espadachin extends Unidad  implements Atacante{
 
 	public Espadachin(Area unEspacio) {
 
-		super(unEspacio, 100, 50);
+		super(unEspacio, 100, 50, 25, 15, 1);
 
 		vida = VIDA_MAX;
 	}
-
-	public void atacar(Pieza unaPieza){
-
-        siYaJugoElTurnoError();
-
-        chequearRango(unaPieza, DISTANCIA_ATK);
-
-        unaPieza.recibirDanioDe(this);
-        turnoJugado = true;
-    }
 
 }

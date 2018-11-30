@@ -2,7 +2,7 @@ package modelo;
 
 import modelo.estadoArmaDeAsedio.*;
 
-public class ArmaDeAsedio extends Unidad implements Atacante{
+public class ArmaDeAsedio extends Unidad{
 
     final public int DISTANCIA_ATK = 5;
 
@@ -17,7 +17,7 @@ public class ArmaDeAsedio extends Unidad implements Atacante{
 
 	public ArmaDeAsedio(Area unEspacio) {
 
-		super(unEspacio, 150, 200);
+		super(unEspacio, 150, 200, 0,75, 5);
 
 		vida = VIDA_MAX;
 
@@ -39,14 +39,4 @@ public class ArmaDeAsedio extends Unidad implements Atacante{
 
         super.mover(nuevaArea);
     }
-
-	public void atacar(Pieza piezaEnemiga){
-
-        siYaJugoElTurnoError();
-
-        chequearRango(piezaEnemiga, DISTANCIA_ATK);
-
-        piezaEnemiga.recibirDanioDe(this);
-        turnoJugado = true;
-	}
 }

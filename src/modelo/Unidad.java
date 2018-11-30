@@ -2,9 +2,17 @@ package modelo;
 
 public abstract class Unidad extends Pieza {
 
-	public Unidad(Area unEspacio, int vidaMax, int costo) {
+    public final int DANIO_UNIDADES;
+    public final int DANIO_EDIFICIOS;
+    public final int DISTANCIA_ATK;
+
+	public Unidad(Area unEspacio, int vidaMax, int costo, int danioUnidades, int danioEdificios, int distancia) {
 
 	    super(unEspacio, vidaMax, costo);
+
+	    DANIO_EDIFICIOS = danioEdificios;
+	    DANIO_UNIDADES = danioUnidades;
+	    DISTANCIA_ATK = distancia;
 	}
 
 	public void mover(Area nuevoEspacio){
@@ -19,22 +27,13 @@ public abstract class Unidad extends Pieza {
 
 	public void atacar(Pieza unaPieza){
 
-	    unaPieza.recibirDanioDe(this);
-    }
+	    this.siYaJugoElTurnoError();
 
-	public void recibirDanioDe(Arquero unArquero){
+	    chequearRango(unaPieza, DISTANCIA_ATK);
 
-        this.recibirDanio(15);
-    }
+        unaPieza.recibirDanioDe(this);
 
-    public void recibirDanioDe(Espadachin unEspadachin){
-
-	    this.recibirDanio(25);
-    }
-
-    public void recibirDanioDe(ArmaDeAsedio unArmaDeAsedio){
-
-
+	    turnoJugado = true;
     }
 
     public void recibirDanioDe(Edificio edificio){
@@ -43,6 +42,6 @@ public abstract class Unidad extends Pieza {
 
     public void recibirDanioDe(Unidad unaUnidad){
 
-
+        this.recibirDanio(unaUnidad.DANIO_UNIDADES);
     }
 }

@@ -6,16 +6,20 @@ import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class Aldeano extends Unidad {
 
-    public final int DISTANCIA_ACCION = 1;
-
 	private EstadoAldeano estadoActual;
 	
 	public Aldeano(Area unEspacio){
-		super(unEspacio, 50, 25);
+		super(unEspacio, 50, 25,0,0,1);
 
 		estadoActual = new AldeanoLibre();
 		vida = VIDA_MAX;
 	}
+
+	@Override
+    public void atacar(Pieza unaPieza){
+
+
+    }
 
 	@Override
     public void mover(Area nuevaArea) {
@@ -26,7 +30,7 @@ public class Aldeano extends Unidad {
 	public void reparar(Edificio unEdificio) {
 	    siYaJugoElTurnoError();
 
-		chequearRango(unEdificio, DISTANCIA_ACCION);
+		chequearRango(unEdificio, DISTANCIA_ATK);
 		estadoActual = estadoActual.reparar(unEdificio, this);
 		turnoJugado = true;
 	}
@@ -36,7 +40,7 @@ public class Aldeano extends Unidad {
 	public Edificio crearPlaza(Area areaDeConstruccion) {
 		siYaJugoElTurnoError();
 
-        if(distanciaMinimaA(areaDeConstruccion) > DISTANCIA_ACCION)
+        if(distanciaMinimaA(areaDeConstruccion) > DISTANCIA_ATK)
             throw new NoSePuedeConstruirTanLejosError();
 
         estadoActual = estadoActual.construirPlaza(areaDeConstruccion, this);
@@ -48,7 +52,7 @@ public class Aldeano extends Unidad {
 	public Edificio crearCuartel(Area areaDeConstruccion) {
         siYaJugoElTurnoError();
 
-        if(distanciaMinimaA(areaDeConstruccion) > DISTANCIA_ACCION)
+        if(distanciaMinimaA(areaDeConstruccion) > DISTANCIA_ATK)
             throw new NoSePuedeConstruirTanLejosError();
 
         estadoActual = estadoActual.construirCuartel(areaDeConstruccion, this);

@@ -1,7 +1,6 @@
 package controlador;
 
 import modelo.Aldeano;
-import modelo.Atacante;
 import modelo.Edificio;
 import vista.MapaVista;
 import vista.PiezaVista;

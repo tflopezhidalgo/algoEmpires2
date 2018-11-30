@@ -71,21 +71,7 @@ public abstract class Edificio extends Pieza {
 
     public void recibirDanioDe(Unidad unaUnidad){
 
-    }
-
-	public void recibirDanioDe(Arquero unArquero){
-
-	    this.recibirDanio(10);
-    }
-
-    public void recibirDanioDe(Espadachin unEspadachin){
-
-	    this.recibirDanio(15);
-    }
-
-    public void recibirDanioDe(ArmaDeAsedio unArmaDeAsedio){
-
-	    this.recibirDanio(75);
+	    unaUnidad.recibirDanio(unaUnidad.DANIO_EDIFICIOS);
     }
 
 }
