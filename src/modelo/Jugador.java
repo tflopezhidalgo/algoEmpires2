@@ -42,6 +42,7 @@ public class Jugador {
     }
 
     public void asignarPiezas(List<Pieza> piezas){
+
         this.piezas = piezas;
         actualizarPoblacion();
     }
@@ -98,4 +99,5 @@ public class Jugador {
         }
         return true;
     }
+
 }

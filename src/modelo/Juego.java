@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import modelo.estadoJuego.EstadoJuego;
-import modelo.estadoJuego.JuegaJugador1;
-import modelo.estadoJuego.JuegaJugador2;
-import modelo.estadoJuego.NoComenzado;
-import modelo.estadoJuego.Terminado;
+import modelo.estadoJuego.*;
 
-public class Juego {
+public class Juego implements CastilloListener{
 
     private List<Jugador> jugadores;
     private Tablero tablero;
@@ -25,23 +21,23 @@ public class Juego {
             this.estado = new JuegaJugador2();
     }
 
-    //TODO: Agregar posibilidad de definir un tamaño inicial de tablero.
     public Juego(String nombreJugador1, String nombreJugador2){
 
         jugadores = new ArrayList<>();
         jugadores.add(new Jugador(nombreJugador1));
         jugadores.add(new Jugador(nombreJugador2));
-        this.tablero = new Tablero();
         this.estado = new NoComenzado();
     }
 
-    public void iniciarJuego() throws Exception {
+    public void iniciarJuego(List<Pieza> piezasJugador1, List<Pieza> piezasJugador2){
 
         seleccionarJugadorInicial();
 
-        jugadores.get(0).asignarPiezas(tablero.generarPiezasInicialesEquipo1());
-        jugadores.get(1).asignarPiezas(tablero.generarPiezasInicialesEquipo2());
+        ((Castillo)piezasJugador1.get(piezasJugador1.indexOf(Castillo.class))).setCastilloListener(this);
+        ((Castillo)piezasJugador2.get(piezasJugador1.indexOf(Castillo.class))).setCastilloListener(this);
 
+        jugadores.get(0).asignarPiezas(piezasJugador1);
+        jugadores.get(1).asignarPiezas(piezasJugador2);
     }
 
     public Tablero getTablero(){
@@ -57,15 +53,17 @@ public class Juego {
 
         this.estado.getJugadorActual(jugadores).finalizarTurno();
         this.estado = estado.finalizarTurno();
-
-        if(this.estado.getJugadorActual(jugadores).castilloFueDestruido())
-            this.estado = new Terminado();
     }
 
     public Jugador seleccionarGanador(){
 
         return (estado.seleccionarGanador(this.jugadores));
 
+    }
+
+    public void castilloFueDestruido(){
+
+        estado = new Terminado();
     }
 
 }
