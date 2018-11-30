@@ -25,7 +25,7 @@ public class PiezaTest {
         Tablero unTablero = new Tablero(3,3);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
-        Edificio unaPieza = new Cuartel(zonaDeConstruccion);
+        Pieza unaPieza = new Cuartel(zonaDeConstruccion);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Assert.assertNotNull(unaPieza);
@@ -34,6 +34,20 @@ public class PiezaTest {
 
         unaPieza.recibirDanio(250); //Aldeano.VIDA_MAX = 250
         Assert.assertTrue(zonaDeConstruccion.estaLibre());
+    }
+
+
+    @Test
+    public void distanciaMinimaAUnArea() {
+        Tablero unTablero = new Tablero(3,3);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+        Area espacioAldeano = unTablero.definirArea(3, 0, 3, 0);
+        Pieza unaPieza = new Aldeano(espacioAldeano);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertEquals(2, unaPieza.distancia);
+
     }
 
 

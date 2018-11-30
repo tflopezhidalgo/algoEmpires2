@@ -7,6 +7,7 @@ import org.junit.Test;
 @SuppressWarnings("deprecation")
 public class EdificioTest {
 
+    /*
     @Test
     public void edificioNecesitaReparacionCastillo() throws Exception {
         Tablero unTablero = new Tablero(6,6);
@@ -25,41 +26,6 @@ public class EdificioTest {
     }
 
     @Test
-    public void edificioNecesitaReparacionPlaza() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
-
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Plaza(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
-
-        Assert.assertFalse(unEdificio.necesitaReparacion());
-
-        unEdificio.recibirDanio(15);
-
-        Assert.assertTrue(unEdificio.necesitaReparacion());
-
-    }
-
-    @Test
-    public void edificioNecesitaReparacionCuartel() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
-
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
-
-        Assert.assertFalse(unEdificio.necesitaReparacion());
-
-        unEdificio.recibirDanio(15);
-
-        Assert.assertTrue(unEdificio.necesitaReparacion());
-
-    }
-
-
-    @Test
     public void edificioRepararCastillo() throws Exception {
         Tablero unTablero = new Tablero(6,6);
 
@@ -67,48 +33,6 @@ public class EdificioTest {
 
         Edificio unEdificio = new Castillo(zonaDeConstruccion);
         Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
-
-        Assert.assertFalse(unEdificio.necesitaReparacion());
-
-        unEdificio.recibirDanio(15);
-
-        Assert.assertTrue(unEdificio.necesitaReparacion());
-
-        unEdificio.reparar();
-
-        Assert.assertFalse(unEdificio.necesitaReparacion());
-
-    }
-
-    @Test
-    public void edificioRepararPlaza() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
-
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Plaza(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
-
-        Assert.assertFalse(unEdificio.necesitaReparacion());
-
-        unEdificio.recibirDanio(15);
-
-        Assert.assertTrue(unEdificio.necesitaReparacion());
-
-        unEdificio.reparar();
-
-        Assert.assertFalse(unEdificio.necesitaReparacion());
-
-    }
-
-    @Test
-    public void edificioRepararCuartel() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
-
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
 
@@ -133,53 +57,6 @@ public class EdificioTest {
 
         Assert.assertFalse(unEdificio.enConstruccion());
 
-
-    }
-
-    @Test
-    public void edificioConstruirPlaza() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
-
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Plaza(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
-
-        unEdificio.construir();
-
-        Assert.assertTrue(unEdificio.enConstruccion());
-
-        unEdificio.construir();
-
-        Assert.assertTrue(unEdificio.enConstruccion());
-
-        unEdificio.construir();
-
-        Assert.assertFalse(unEdificio.enConstruccion());
-
-
-    }
-
-    @Test
-    public void edificioConstruirCuartel() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
-
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
-
-        unEdificio.construir();
-
-        Assert.assertTrue(unEdificio.enConstruccion());
-
-        unEdificio.construir();
-
-        Assert.assertTrue(unEdificio.enConstruccion());
-
-        unEdificio.construir();
-
-        Assert.assertFalse(unEdificio.enConstruccion());
 
     }
 
@@ -218,6 +95,71 @@ public class EdificioTest {
         unEdificio.recibirDanioDe(unEspadachin);
 
         Assert.assertTrue(unEdificio.necesitaReparacion());
+
+    }
+
+
+    //////////////////////////////////////////////////////
+
+
+    @Test
+    public void edificioNecesitaReparacionPlaza() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Plaza(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+        unEdificio.recibirDanio(15);
+
+        Assert.assertTrue(unEdificio.necesitaReparacion());
+
+    }
+
+    @Test
+    public void edificioRepararPlaza() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Plaza(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+        unEdificio.recibirDanio(15);
+
+        Assert.assertTrue(unEdificio.necesitaReparacion());
+
+        unEdificio.reparar();
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+    }
+
+    @Test
+    public void edificioConstruirPlaza() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Plaza(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        unEdificio.construir();
+
+        Assert.assertTrue(unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertTrue(unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertFalse(unEdificio.enConstruccion());
 
     }
 
@@ -267,6 +209,72 @@ public class EdificioTest {
 
     }
 
+
+
+    //////////////////////////////
+
+
+    @Test
+    public void edificioNecesitaReparacionCuartel() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+        unEdificio.recibirDanio(15);
+
+        Assert.assertTrue(unEdificio.necesitaReparacion());
+
+    }
+
+    @Test
+    public void edificioRepararCuartel() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+        unEdificio.recibirDanio(15);
+
+        Assert.assertTrue(unEdificio.necesitaReparacion());
+
+        unEdificio.reparar();
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+    }
+
+    @Test
+    public void edificioConstruirCuartel() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        unEdificio.construir();
+
+        Assert.assertTrue(unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertTrue(unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertFalse(unEdificio.enConstruccion());
+
+    }
+
     @Test
     public void edificioRecibirDanioDeArqueroCuartel() throws Exception {
         Tablero unTablero = new Tablero(6,6);
@@ -312,8 +320,6 @@ public class EdificioTest {
         Assert.assertTrue(unEdificio.necesitaReparacion());
 
     }
-
-
-
+    */
 
 }
