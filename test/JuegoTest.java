@@ -1,4 +1,5 @@
 import modelo.*;
+import modelo.estadoJuego.Terminado;
 import modelo.excepciones.JuegoNoTerminadoError;
 import modelo.excepciones.NoExistenJugadoresActualesError;
 import modelo.excepciones.NoHayJuegoEnProcesoError;
@@ -30,6 +31,16 @@ public class JuegoTest {
         unJuego.finalizarTurno();
 
         unJuego.finalizarTurno();
+
+/*        Tablero unTablero = unJuego.getTablero();
+
+        List<Pieza> piezasJugador1 = new ArrayList<Pieza>();
+        List<Pieza> piezasJugador2 = new ArrayList<Pieza>();
+
+        piezasJugador1.add(new Castillo(unTablero.definirArea(0,0,3,3)));
+        piezasJugador2.add(new Castillo(unTablero.definirArea(4,4,8,8)));
+
+        unJuego.iniciarJuego(piezasJugador1, piezasJugador2);           */
 
 
         boolean lanzaUnError=false;
@@ -67,4 +78,32 @@ public class JuegoTest {
 
         Assert.assertEquals(true, lanzaUnError);
     }
+
+    /*@Test
+    public void partidaCompleta() throws Exception{
+        Juego unJuego = new Juego("Ailen", "Tomas");
+        Tablero unTablero = unJuego.getTablero();
+
+        List<Pieza> piezasJugador1 = new ArrayList<Pieza>();
+        List<Pieza> piezasJugador2 = new ArrayList<Pieza>();
+
+        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+
+        piezasJugador1.add(unCastillo);
+        piezasJugador2.add(new Castillo(unTablero.definirArea(4,4,8,8)));
+
+        unJuego.iniciarJuego(piezasJugador1, piezasJugador2);
+
+        Jugador jugador1 = unJuego.getJugadorActual();
+        jugador1.finalizarTurno();
+
+        Jugador jugador2 = unJuego.getJugadorActual();
+        jugador2.finalizarTurno();
+
+        Castillo castilloJugador1 = (Castillo) piezasJugador1.get(piezasJugador1.lastIndexOf(unCastillo));
+
+        castilloJugador1.recibirDanio(1000);
+
+        Assert.assertEquals(jugador2, unJuego.seleccionarGanador());
+    }*/
 }
