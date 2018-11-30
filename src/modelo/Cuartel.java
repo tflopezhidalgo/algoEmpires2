@@ -28,15 +28,5 @@ public class Cuartel extends Edificio {
         return FactoryGuerrero.crearGuerrero(unEspacio, tipoDeseado);
     }
 
-
-	public Espadachin crearEspadachin(Area unEspacio) {
-
-	    return null;
-	}
-	
-	public Arquero crearArquero(Area unEspacio) {
-
-	    return null;
-	}
 	
 }
