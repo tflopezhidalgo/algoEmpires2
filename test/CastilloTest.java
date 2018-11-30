@@ -235,4 +235,20 @@ public class CastilloTest {
 
     }
 
+    @Test
+    public void liberarUbicacionCastillo() {
+        Tablero unTablero = new Tablero(5,5);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
+        Pieza unaPieza = new Castillo(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3,3).estaOcupada());
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(16,zonaDeConstruccion.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(1000); //Castillo.VIDA_MAX = 1000
+        Assert.assertTrue(zonaDeConstruccion.estaLibre());
+    }
+
 }

@@ -5,6 +5,7 @@ import org.junit.Test;
 @SuppressWarnings("deprecation")
 public class PiezaTest {
 
+    /*
     @Test
     public void liberarUbicacionAldeano() {
         Tablero unTablero = new Tablero(3,3);
@@ -36,9 +37,9 @@ public class PiezaTest {
         Assert.assertTrue(zonaDeConstruccion.estaLibre());
     }
 
-
     @Test
     public void distanciaMinimaAUnArea() {
+
         Tablero unTablero = new Tablero(3,3);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
@@ -50,5 +51,5 @@ public class PiezaTest {
 
     }
 
-
+    */
 }

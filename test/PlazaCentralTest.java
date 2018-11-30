@@ -237,4 +237,20 @@ public class PlazaCentralTest {
 
     }
 
+    @Test
+    public void liberarUbicacionPlaza() {
+        Tablero unTablero = new Tablero(3,3);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
+        Pieza unaPieza = new Plaza(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(4,zonaDeConstruccion.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(450); //Plaza.VIDA_MAX = 450
+        Assert.assertTrue(zonaDeConstruccion.estaLibre());
+    }
+
 }

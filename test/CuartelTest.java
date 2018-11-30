@@ -310,4 +310,20 @@ public class CuartelTest {
 
     }
 
+    @Test
+    public void liberarUbicacionCuartel() {
+        Tablero unTablero = new Tablero(3,3);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+        Pieza unaPieza = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(4,zonaDeConstruccion.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(250); //Cuartel.VIDA_MAX = 250
+        Assert.assertTrue(zonaDeConstruccion.estaLibre());
+    }
+
 }

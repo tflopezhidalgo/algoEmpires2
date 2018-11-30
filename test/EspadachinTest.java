@@ -209,4 +209,20 @@ public class EspadachinTest {
 
         Assert.assertEquals(true, lanzaUnError);
     }
+
+    @Test
+    public void liberarUbicacionEspadachin() {
+        Tablero unTablero = new Tablero(3,3);
+
+        Area espacioEspadachin = unTablero.definirArea(0, 0, 0, 0);
+        Pieza unaPieza = new Espadachin(espacioEspadachin);
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(espacioEspadachin.estaLibre());
+        Assert.assertEquals(1,espacioEspadachin.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(100); //Espadachin.VIDA_MAX = 100
+        Assert.assertTrue(espacioEspadachin.estaLibre());
+    }
+
 }

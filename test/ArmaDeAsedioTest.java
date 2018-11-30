@@ -399,5 +399,19 @@ public class ArmaDeAsedioTest {
 
     }
 
+    @Test
+    public void liberarUbicacionArmaDeAsedio() {
+        Tablero unTablero = new Tablero(3,3);
+
+        Area espacioArmaDeAsedio = unTablero.definirArea(0, 0, 0, 0);
+        Pieza unaPieza = new ArmaDeAsedio(espacioArmaDeAsedio);
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(1,espacioArmaDeAsedio.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(150); //ArmaDeAsedio.VIDA_MAX = 150
+        Assert.assertTrue(espacioArmaDeAsedio.estaLibre());
+    }
 
 }

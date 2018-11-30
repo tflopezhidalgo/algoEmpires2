@@ -249,4 +249,19 @@ public class ArqueroTest {
 
     }
 
+    @Test
+    public void liberarUbicacionArquero() {
+        Tablero unTablero = new Tablero(3,3);
+
+        Area espacioArquero = unTablero.definirArea(0, 0, 0, 0);
+        Pieza unaPieza = new Arquero(espacioArquero);
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(espacioArquero.estaLibre());
+        Assert.assertEquals(1,espacioArquero.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(75); //Arquero.VIDA_MAX = 75
+        Assert.assertTrue(espacioArquero.estaLibre());
+    }
+
 }
