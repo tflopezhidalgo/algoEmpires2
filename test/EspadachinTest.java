@@ -225,7 +225,8 @@ public class EspadachinTest {
         Assert.assertTrue(espacioEspadachin.estaLibre());
     }
 
-    @Test
+    //ES PRIVADO EL METODO
+/*    @Test
     public void distanciaMinimaAUnArea() {
 
         Tablero unTablero = new Tablero(6,6);
@@ -237,6 +238,6 @@ public class EspadachinTest {
 
         Assert.assertEquals(2, unEspadachin.distanciaMinimaA(unArea));
 
-    }
+    }*/
 
 }

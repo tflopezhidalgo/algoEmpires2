@@ -264,7 +264,8 @@ public class ArqueroTest {
         Assert.assertTrue(espacioArquero.estaLibre());
     }
 
-    @Test
+    //ES PRIVADO EL METODO
+/*    @Test
     public void distanciaMinimaAUnArea() {
 
         Tablero unTablero = new Tablero(6,6);
@@ -276,6 +277,6 @@ public class ArqueroTest {
 
         Assert.assertEquals(2, unArquero.distanciaMinimaA(unArea));
 
-    }
+    }*/
 
 }

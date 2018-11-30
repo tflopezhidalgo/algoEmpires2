@@ -190,7 +190,7 @@ public class JugadorTest {
         Arquero otroArquero2 = new Arquero(espacioUnidad);
         unJugador.agregarPieza(otroArquero2);
         unJugador.finalizarTurno();
-        Assert.assertEquals(4, unJugador.getPoblacion());
+        Assert.assertEquals(5, unJugador.getPoblacion());
 
     }
 

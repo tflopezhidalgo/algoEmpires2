@@ -70,7 +70,7 @@ public abstract class Pieza {
 	public Area obtenerAreaOcupada() { return espacioOcupado; }
 
 	public void recibirDanio(int danio) {
-		vida = vida - danio;
+		vida = (vida - danio);
 		if(vida <= 0) {
 			vida = 0;
 			this.liberarUbicacion();

@@ -75,7 +75,7 @@ public class PlazaCentralTest {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
-        Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
+        Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
 
         //tarda 3 turnos en construirse una plaza
         boolean lanzaUnError=false;
@@ -216,13 +216,13 @@ public class PlazaCentralTest {
 
     @Test
     public void edificioRecibirDanioDeEspadachinPlaza() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
+        Area zonaDeConstruccion = unTablero.definirArea(0,0,1,1);
         Edificio unEdificio = new Plaza(zonaDeConstruccion);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
-        Area espacioEspadachin = unTablero.definirArea(0, 0, 0, 0);
+        Area espacioEspadachin = unTablero.definirArea(2,0,2,0);
         Espadachin unEspadachin = new Espadachin(espacioEspadachin);
 
         unEdificio.construir();

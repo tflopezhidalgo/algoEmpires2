@@ -171,7 +171,7 @@ public class AldeanoTest {
         Area zonaDeConstruccion = unTablero.definirArea(1, 1, Plaza.TAMANIO_LADO, Plaza.TAMANIO_LADO);
         
         //esa linea es parte del turno 1
-        Plaza laNuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion);
+        Plaza laNuevaPlaza = (Plaza)unAldeano.crearPlaza(zonaDeConstruccion);
         while(turno < 6) {
             turno ++;
 
@@ -231,7 +231,7 @@ public class AldeanoTest {
         Aldeano unAldeano = new Aldeano(espacioAldeano);
 
         Area zonaDeConstruccion = unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO);
-        Cuartel elNuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion);
+        Cuartel elNuevoCuartel = (Cuartel)unAldeano.crearCuartel(zonaDeConstruccion);
         while(turno < 6) {
             turno ++;
             switch (turno) {
@@ -399,7 +399,10 @@ public class AldeanoTest {
         Aldeano unAldeano = new Aldeano(espacioAldeano);
 
         Area zonaDeConstruccion = unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO);
-        Cuartel unCuartel = new Cuartel(zonaDeConstruccion,true);
+        Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+        unCuartel.nuevoTurno();
+        unCuartel.nuevoTurno();
+        unCuartel.nuevoTurno();
 
         unCuartel.recibirDanio(100);
 
@@ -487,7 +490,10 @@ public class AldeanoTest {
         
         Area zonaDeConstruccion = unTablero.definirArea(5, 5, 9,9);
 
-        Cuartel unCuartel = new Cuartel(zonaDeConstruccion,true);
+        Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+        unCuartel.nuevoTurno();
+        unCuartel.nuevoTurno();
+        unCuartel.nuevoTurno();
         
         Area zonaDeConstruccion2 = unTablero.definirArea(11, 15, 11, 15);
 
@@ -521,7 +527,7 @@ public class AldeanoTest {
                 	Cuartel nuevoCuartel = null;
 
                 	try {
-                		nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
+                		nuevoCuartel = (Cuartel)unAldeano.crearCuartel(zonaDeConstruccion2);
 
             		} catch (Exception e) {}
                 	
@@ -530,7 +536,7 @@ public class AldeanoTest {
                 	
                 	Plaza nuevaPlaza = null;
                 	try {
-                		nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
+                		nuevaPlaza = (Plaza)unAldeano.crearPlaza(zonaDeConstruccion2);
             		} catch (Exception e) {}
                 	
                 	Assert.assertNull(nuevaPlaza);
@@ -562,7 +568,7 @@ public class AldeanoTest {
         Aldeano unAldeano = new Aldeano(espacioAldeano);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, 4, 4);
-        Cuartel unCuartel = unAldeano.crearCuartel(zonaDeConstruccion);
+        Cuartel unCuartel = (Cuartel)unAldeano.crearCuartel(zonaDeConstruccion);
         
         Area zonaDeConstruccion2 = unTablero.definirArea(6,6,10,10);
         
@@ -585,7 +591,7 @@ public class AldeanoTest {
                 	
                 	Cuartel nuevoCuartel = null;
             		try {
-            			nuevoCuartel = unAldeano.crearCuartel(zonaDeConstruccion2);
+            			nuevoCuartel = (Cuartel)unAldeano.crearCuartel(zonaDeConstruccion2);
 	        		} catch (RuntimeException e) {}
             		
                 	Assert.assertNull(nuevoCuartel);
@@ -593,7 +599,7 @@ public class AldeanoTest {
                 	
                 	Plaza nuevaPlaza = null;
             		try {
-            			nuevaPlaza = unAldeano.crearPlaza(zonaDeConstruccion2);
+            			nuevaPlaza = (Plaza)unAldeano.crearPlaza(zonaDeConstruccion2);
 		    		} catch (RuntimeException e) {}
             		
 	               	Assert.assertNull(nuevaPlaza);
@@ -628,7 +634,10 @@ public class AldeanoTest {
         Area espacioAldeano2 = unTablero.definirArea(1,0,1,0);
         Aldeano aldeano2 = new Aldeano(espacioAldeano2);
 
-        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,1,1,2),true);
+        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,1,1,2));
+        unCuartel.nuevoTurno();
+        unCuartel.nuevoTurno();
+        unCuartel.nuevoTurno();
 
         unCuartel.recibirDanio(100);
         aldeano1.reparar(unCuartel);
@@ -648,8 +657,13 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(3,1,3,1));
 
-        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(4,0,Cuartel.TAMANIO_LADO+2, Cuartel.TAMANIO_LADO-1),true);
-        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO));
+        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(4,0,Cuartel.TAMANIO_LADO+2, Cuartel.TAMANIO_LADO-1));
+
+        cuartelAReparar.nuevoTurno();
+        cuartelAReparar.nuevoTurno();
+        cuartelAReparar.nuevoTurno();
+
+        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO));
 
         unAldeano.nuevoTurno();
 
@@ -669,7 +683,7 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
-        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
 
         unAldeano.nuevoTurno();
         boolean seLanzoError=false;
@@ -689,7 +703,7 @@ public class AldeanoTest {
 
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(5,5,5,5));
 
-        Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1,1,
+        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(1,1,
                 4, 4));
 
         unAldeano.nuevoTurno();
@@ -698,7 +712,7 @@ public class AldeanoTest {
 
         try {
 
-           Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(6,1,10,5));
+           Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(unTablero.definirArea(6,1,10,5));
 
         } catch (AldeanoOcupadoConOtroEdificioError e) {
 
@@ -722,7 +736,7 @@ public class AldeanoTest {
 
         boolean seLanzoError=false;
         try {
-            Cuartel cuartelEnConstruccion = unAldeano.crearCuartel(unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO ));
+            Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO ));
         } catch (AldeanoReparandoNoPuedeConstruir e) {
             seLanzoError=true;
         }
@@ -735,12 +749,12 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
-        Cuartel unCuartel = unAldeano.crearCuartel(unTablero.definirArea(0,1,1,2));
+        Cuartel unCuartel = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(0,1,1,2));
         unAldeano.nuevoTurno();
 
         boolean seLanzoError=false;
         try {
-            Cuartel otroCuartel = unAldeano.crearCuartel(unTablero.definirArea(2, 1, 3,1));
+            Cuartel otroCuartel = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(2, 1, 3,1));
         } catch (NoSePuedeConstruirTanLejosError e) {
             seLanzoError=true;
         }
@@ -755,7 +769,7 @@ public class AldeanoTest {
 
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
-        Plaza unaPlaza = unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
+        Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
 
         unAldeano.nuevoTurno();
 
@@ -845,7 +859,9 @@ public class AldeanoTest {
         Assert.assertTrue(espacioAldeano.estaLibre());
     }
 
-    @Test
+
+    //ES PRIVADO EL METODO
+   /* @Test
     public void distanciaMinimaAUnArea() {
 
         Tablero unTablero = new Tablero(6,6);
@@ -857,6 +873,6 @@ public class AldeanoTest {
 
         Assert.assertEquals(2, unAldeano.distanciaMinimaA(unArea));
 
-    }
+    }*/
 
 }
