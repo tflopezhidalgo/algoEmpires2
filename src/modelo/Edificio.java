@@ -52,7 +52,7 @@ public abstract class Edificio extends Pieza {
 
 	public boolean vidaBaja() {
 
-	    return (vida < VIDA_MAX);
+	    return this.necesitaReparacion();
 	}
 
 	public boolean necesitaReparacion(){
