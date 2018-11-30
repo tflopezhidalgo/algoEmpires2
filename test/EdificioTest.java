@@ -31,7 +31,7 @@ public class EdificioTest {
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
 
         Edificio unEdificio = new Plaza(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3,3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
 
@@ -48,7 +48,7 @@ public class EdificioTest {
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
 
         Edificio unEdificio = new Cuartel(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
 
@@ -87,7 +87,7 @@ public class EdificioTest {
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
 
         Edificio unEdificio = new Plaza(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
 
@@ -108,7 +108,7 @@ public class EdificioTest {
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
 
         Edificio unEdificio = new Cuartel(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
 
@@ -143,7 +143,7 @@ public class EdificioTest {
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
 
         Edificio unEdificio = new Plaza(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         unEdificio.construir();
 
@@ -167,7 +167,7 @@ public class EdificioTest {
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
 
         Edificio unEdificio = new Cuartel(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         unEdificio.construir();
 
@@ -227,7 +227,7 @@ public class EdificioTest {
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
         Edificio unEdificio = new Plaza(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Area espacioArquero = unTablero.definirArea(4,4,4,4);
         Arquero unArquero = new Arquero(espacioArquero);
@@ -250,7 +250,7 @@ public class EdificioTest {
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
         Edificio unEdificio = new Plaza(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Area espacioEspadachin = unTablero.definirArea(0, 0, 0, 0);
         Espadachin unEspadachin = new Espadachin(espacioEspadachin);
@@ -273,7 +273,7 @@ public class EdificioTest {
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Edificio unEdificio = new Cuartel(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Area espacioArquero = unTablero.definirArea(4,4,4,4);
         Arquero unArquero = new Arquero(espacioArquero);
@@ -296,7 +296,7 @@ public class EdificioTest {
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Edificio unEdificio = new Cuartel(zonaDeConstruccion);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Area espacioEspadachin = unTablero.definirArea(0, 0, 0, 0);
         Espadachin unEspadachin = new Espadachin(espacioEspadachin);
