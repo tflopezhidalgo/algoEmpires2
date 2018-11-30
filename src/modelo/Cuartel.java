@@ -1,10 +1,9 @@
 package modelo;
 
 import modelo.excepciones.*;
+import modelo.factoryCuartel.*;
 
 public class Cuartel extends Edificio {
-
-    public enum tipoGuerrero {ARQUERO, ESPADACHIN}
 
     public static final int TAMANIO_LADO = 2;
 	public static final int COSTO = 50;
@@ -19,7 +18,7 @@ public class Cuartel extends Edificio {
 		cantidadDeCuracion = 50;
 	}
 
-	public Unidad crearGuerrero(Area unEspacio, tipoGuerrero tipoDeseado){
+	public Unidad crearGuerrero(Area unEspacio, TipoGuerrero tipoDeseado){
         siYaJugoElTurnoError();
 
         if(distanciaMinimaA(unEspacio) > 1)
@@ -28,15 +27,7 @@ public class Cuartel extends Edificio {
         if(enConstruccion() == true)
             throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
 
-        if(tipoDeseado == tipoGuerrero.ESPADACHIN)
-            return new Espadachin(unEspacio);
-
-        else if(tipoDeseado == tipoGuerrero.ARQUERO)
-            return new Arquero(unEspacio);
-
-        else
-            throw  new TipoDeGuerreroInvalidoError();
-
+        return FactoryGuerrero.crearGuerrero(unEspacio, tipoDeseado);
     }
 
 
