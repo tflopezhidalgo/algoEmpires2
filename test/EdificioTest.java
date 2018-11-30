@@ -191,12 +191,12 @@ public class EdificioTest {
         Edificio unEdificio = new Castillo(zonaDeConstruccion);
         Assert.assertEquals(true, unTablero.obtenerCasillaEn(3,3).estaOcupada());
 
-        Area espacioArquero = unTablero.definirArea(10,10,10,10);
+        Area espacioArquero = unTablero.definirArea(4,4,4,4);
         Arquero unArquero = new Arquero(espacioArquero);
 
-        unEdificio.construir();
-        unEdificio.construir();
-        unEdificio.construir();
+        //unEdificio.construir();
+        //unEdificio.construir();
+        //unEdificio.construir();
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
 
