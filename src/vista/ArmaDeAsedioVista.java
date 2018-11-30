@@ -1,6 +1,8 @@
 package vista;
 
 import controlador.AccionarArmaDeAsedioHandler;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -18,9 +20,12 @@ public class ArmaDeAsedioVista extends UnidadVista{
 	private ImageView viewMover;
 	private ImageView viewAtaque;
 	
-	public ArmaDeAsedioVista(int x, int y, ArmaDeAsedio unModelo, MapaVista unMapa) throws Excepcion {
+	public ArmaDeAsedioVista(int x, int y, ArmaDeAsedio unModelo, MapaVista unMapa){
 		super(x,y,unModelo, unMapa);
+
+		System.out.println("ArmaDeAsedioVista -  " ); //TODO BORRAR
 		estadoActual = new CatapultaVistaDesarmada();
+		System.out.println("ArmaDeAsedioVista2 - "); //TODO BORRAR
 	}
 
 	@Override
@@ -28,13 +33,19 @@ public class ArmaDeAsedioVista extends UnidadVista{
 		Menu menuHabilidades = new Menu("Habilidades");
 
 		MenuItem accionar = new MenuItem("Accionar");
-		accionar.setOnAction(e -> {
-			estadoActual = estadoActual.cambiarEstado(viewMover,viewAtaque);
-			new AccionarArmaDeAsedioHandler(modelo);
-		});
+		accionar.setOnAction( accionar());
 
 		menuHabilidades.getItems().addAll(accionar);
 		acciones.getMenus().add(menuHabilidades);
+	} 
+	
+	private EventHandler<ActionEvent> accionar() {
+		System.out.println("es null 1 " + (viewMover == null));
+		System.out.println("es null 2 " + (viewAtaque == null));
+		System.out.println("es null 3 " + (estadoActual == null));
+		estadoActual = estadoActual.cambiarEstado(viewMover,viewAtaque);
+		System.out.print("Pasa por aca ahre");
+		return (new AccionarArmaDeAsedioHandler(this));
 	}
 
 	@Override
