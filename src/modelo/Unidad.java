@@ -41,7 +41,6 @@ public abstract class Unidad extends Pieza {
     }
 
     public void recibirDanioDe(Unidad unaUnidad){
-
         this.recibirDanio(unaUnidad.DANIO_UNIDADES);
     }
 }

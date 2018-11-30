@@ -70,8 +70,7 @@ public abstract class Edificio extends Pieza {
     }
 
     public void recibirDanioDe(Unidad unaUnidad){
-
-	    unaUnidad.recibirDanio(unaUnidad.DANIO_EDIFICIOS);
+    	this.recibirDanio(unaUnidad.DANIO_EDIFICIOS);
     }
 
 }

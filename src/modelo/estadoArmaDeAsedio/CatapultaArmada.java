@@ -1,6 +1,8 @@
 package modelo.estadoArmaDeAsedio;
 
+import modelo.ArmaDeAsedio;
 import modelo.Edificio;
+import modelo.Pieza;
 import modelo.excepciones.CatapultaArmadaNoPuedeMoverseError;
 
 public class CatapultaArmada extends EstadoCatapulta {
@@ -10,9 +12,9 @@ public class CatapultaArmada extends EstadoCatapulta {
         return (new CatapultaDesarmada());
     }
 
-    public void atacar(Edificio edificioEnemigo){
+    public void atacar(Pieza edificioEnemigo, ArmaDeAsedio catapulta){
 
-        edificioEnemigo.recibirDanio(75);
+    	edificioEnemigo.recibirDanioDe(catapulta);
     }
 
     public void mover(){

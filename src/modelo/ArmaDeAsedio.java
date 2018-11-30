@@ -39,4 +39,15 @@ public class ArmaDeAsedio extends Unidad{
 
         super.mover(nuevaArea);
     }
+    
+    @Override
+	public void atacar(Pieza unaPieza) {
+	    this.siYaJugoElTurnoError();
+
+	    chequearRango(unaPieza, DISTANCIA_ATK);
+	    
+        estado.atacar(unaPieza,this);
+
+	    turnoJugado = true;
+	}
 }
