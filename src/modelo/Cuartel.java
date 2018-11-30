@@ -6,14 +6,12 @@ import modelo.factoryCuartel.*;
 public class Cuartel extends Edificio {
 
     public static final int TAMANIO_LADO = 2;
-	public static final int COSTO = 50;
 	
 	public Cuartel(Area areaAOcupar) {
 
-		super(areaAOcupar);
-		vidaMaxima = 250;
-		vida = vidaMaxima;
-		costo = COSTO;
+		super(areaAOcupar, 250, 50);
+
+		vida = super.VIDA_MAX;
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 50;
 	}

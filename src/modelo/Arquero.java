@@ -2,10 +2,8 @@ package modelo;
 
 public class Arquero extends Unidad implements Atacante {
 
-    final int VIDA = 75;
-    final int COSTO = 75;
-    final int DISTANCIA_ATK = 3;
-	
+    final public int DISTANCIA_ATK = 3;
+
     /*      -Arquero-
      *
      *      Vida: 75
@@ -15,22 +13,19 @@ public class Arquero extends Unidad implements Atacante {
 
 	public Arquero(Area unEspacio) {
 
-		super(unEspacio);
-		vidaMaxima = VIDA;
-		vida = vidaMaxima;
-		costo = COSTO;
+		super(unEspacio, 75, 75);
+
+		vida = VIDA_MAX;
 	}
 
 	public void atacar(Pieza unaPieza){
 
         siYaJugoElTurnoError();
 
-        if(enRango(unaPieza, this.DISTANCIA_ATK)) {
+       chequearRango(unaPieza, DISTANCIA_ATK);
 
-            unaPieza.recibirDanioDe(this);
-            turnoJugado = true;
-        }
-
+       unaPieza.recibirDanioDe(this);
+       turnoJugado = true;
     }
 	
 }

@@ -6,63 +6,55 @@ import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class Aldeano extends Unidad {
 
-    final int VIDA = 50;
-    final int COSTO = 25;
+    public final int DISTANCIA_ACCION = 1;
 
 	private EstadoAldeano estadoActual;
 	
 	public Aldeano(Area unEspacio){
-		super(unEspacio);
+		super(unEspacio, 50, 25);
 
 		estadoActual = new AldeanoLibre();
-		vidaMaxima = VIDA;
-		vida = vidaMaxima;
-		costo = COSTO;
+		vida = VIDA_MAX;
 	}
 
 	@Override
     public void mover(Area nuevaArea) {
 	    estadoActual.mover();
-        espacioOcupado.liberar();
-        espacioOcupado = nuevaArea;
-        espacioOcupado.ocupar();
-        turnoJugado = true;
+        super.mover(nuevaArea);
     }
 
 	public void reparar(Edificio unEdificio) {
 	    siYaJugoElTurnoError();
 
-		if(enRango(unEdificio,1))  {
-
-			estadoActual = estadoActual.reparar(unEdificio, this);
-			turnoJugado = true;
-		}
+		chequearRango(unEdificio, DISTANCIA_ACCION);
+		estadoActual = estadoActual.reparar(unEdificio, this);
+		turnoJugado = true;
 	}
 
 	//TODO: Retornar clases madres (Edificio)
 
-	public Plaza crearPlaza(Area areaDeConstruccion) {
+	public Edificio crearPlaza(Area areaDeConstruccion) {
 		siYaJugoElTurnoError();
 
-        if(distanciaMinimaA(areaDeConstruccion) > 1)
+        if(distanciaMinimaA(areaDeConstruccion) > DISTANCIA_ACCION)
             throw new NoSePuedeConstruirTanLejosError();
 
         estadoActual = estadoActual.construirPlaza(areaDeConstruccion, this);
         turnoJugado = true;
 
-        return (Plaza)estadoActual.obtenerEdificioObjetivo();
+        return estadoActual.obtenerEdificioObjetivo();
 	}
 	
-	public Cuartel crearCuartel(Area areaDeConstruccion) {
+	public Edificio crearCuartel(Area areaDeConstruccion) {
         siYaJugoElTurnoError();
 
-        if(distanciaMinimaA(areaDeConstruccion) > 1)
+        if(distanciaMinimaA(areaDeConstruccion) > DISTANCIA_ACCION)
             throw new NoSePuedeConstruirTanLejosError();
 
         estadoActual = estadoActual.construirCuartel(areaDeConstruccion, this);
         turnoJugado = true;
 
-        return (Cuartel)estadoActual.obtenerEdificioObjetivo();
+        return estadoActual.obtenerEdificioObjetivo();
 	}
 
 	public void realizarTrabajoDeTurno() {

@@ -5,23 +5,23 @@ import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 public class Castillo extends Edificio {
 	
 	public static final int TAMANIO_LADO = 4;
+    public static final int DISTANCIA_ATK = 3;
 
 	private CastilloListener castilloListener;
 
 	public Castillo(Area areaAOcupar) {
 
-		super(areaAOcupar);
-		vidaMaxima = 1000;
-		vida = vidaMaxima;
-		costo = 0;
+		super(areaAOcupar, 1000, 0);
+
+		vida = VIDA_MAX;
 		tiempoDeConstruccion = 0;
 		cantidadDeCuracion = 15;
 	}
 
 	public void atacar(Pieza piezaEnemiga){
-		if(enRango(piezaEnemiga,3))
 
-			piezaEnemiga.recibirDanio(20);
+	    chequearRango(piezaEnemiga, DISTANCIA_ATK);
+	    piezaEnemiga.recibirDanio(20);
 	}
 	
 	public ArmaDeAsedio crearCatapulta(Area unEspacio) {

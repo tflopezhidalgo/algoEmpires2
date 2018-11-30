@@ -9,10 +9,11 @@ public abstract class Edificio extends Pieza {
 
 	protected Aldeano aldeanoAsignado;
 	
-	public Edificio(Area areaAOcupar) {
-	    super(areaAOcupar);
 
-	    this.vidaMaxima = 0;
+	public Edificio(Area areaAOcupar, int vidaMax, int costo) {
+
+	    super(areaAOcupar, vidaMax, costo);
+
 	    this.tiempoDeConstruccion = 0;
 	    this.cantidadDeCuracion = 0;
 	    this.aldeanoAsignado = null;
@@ -29,9 +30,9 @@ public abstract class Edificio extends Pieza {
 	public void reparar() {
 
 	    vida = vida + cantidadDeCuracion;
-        if (vida >= vidaMaxima) {
+        if (vida >= VIDA_MAX) {
             this.aldeanoAsignado = null;
-            vida = vidaMaxima;
+            vida = VIDA_MAX;
         }
 	}
 
@@ -51,12 +52,12 @@ public abstract class Edificio extends Pieza {
 
 	public boolean vidaBaja() {
 
-	    return (vida < vidaMaxima);
+	    return (vida < VIDA_MAX);
 	}
 
 	public boolean necesitaReparacion(){
 
-	    return (vida < vidaMaxima);
+	    return (vida < VIDA_MAX);
     }
 
 	public void recibirDanioDe(Arquero unArquero){

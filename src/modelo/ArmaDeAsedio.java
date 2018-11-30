@@ -4,9 +4,7 @@ import modelo.estadoArmaDeAsedio.*;
 
 public class ArmaDeAsedio extends Unidad implements Atacante{
 
-    final int VIDA = 150;
-    final int COSTO = 200;
-    final int DISTANCIA_ATK = 5;
+    final public int DISTANCIA_ATK = 5;
 
     private EstadoCatapulta estado;
 
@@ -19,10 +17,10 @@ public class ArmaDeAsedio extends Unidad implements Atacante{
 
 	public ArmaDeAsedio(Area unEspacio) {
 
-		super(unEspacio);
-		vidaMaxima = VIDA;
-		vida = vidaMaxima;
-		costo = COSTO;
+		super(unEspacio, 150, 200);
+
+		vida = VIDA_MAX;
+
 		estado = new CatapultaDesarmada();
 	}
 
@@ -46,10 +44,9 @@ public class ArmaDeAsedio extends Unidad implements Atacante{
 
         siYaJugoElTurnoError();
 
-        if(enRango(piezaEnemiga, 5)) {
+        chequearRango(piezaEnemiga, DISTANCIA_ATK);
 
-            piezaEnemiga.recibirDanioDe(this);
-            turnoJugado = true;
-        }
+        piezaEnemiga.recibirDanioDe(this);
+        turnoJugado = true;
 	}
 }

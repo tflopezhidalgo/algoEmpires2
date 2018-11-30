@@ -53,7 +53,7 @@ public class Jugador {
 
             throw new PoblacionLimiteSuperadaError();
 
-        this.cantidadDeOro = this.cantidadDeOro - nuevaPieza.costo;
+        this.cantidadDeOro = this.cantidadDeOro - nuevaPieza.COSTO;
         this.piezas.add(nuevaPieza);
         this.actualizarPoblacion();
     }

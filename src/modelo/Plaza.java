@@ -8,19 +8,17 @@ public class Plaza extends Edificio {
 	public static final int TAMANIO_LADO = 2;
 	
 	public Plaza(Area areaAOcupar) {
-		super(areaAOcupar);
-		vidaMaxima = 450;
-		vida = vidaMaxima;
-		costo = 100;
+		super(areaAOcupar, 450, 100);
+
+		vida = VIDA_MAX;
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 25;
 	}
 	
 	public Plaza(Area areaAOcupar, boolean yaConstruida) {
-		super(areaAOcupar);
-		vida = 450;
-		vidaMaxima = vida;
-		costo = 100;
+		super(areaAOcupar, 450, 100);
+
+		vida = VIDA_MAX;
 		
 		tiempoDeConstruccion = 3;
 		if(yaConstruida) {
