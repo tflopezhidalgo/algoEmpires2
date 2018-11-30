@@ -22,7 +22,6 @@ public class Jugador {
     		if(piezaActual instanceof Aldeano) {
     			cantidadDeOro = cantidadDeOro + ((Aldeano) piezaActual).generarOro();
     		}
-
     	}
     }
 

@@ -24,7 +24,7 @@ public class Castillo extends Edificio {
 	    piezaEnemiga.recibirDanio(20);
 	}
 	
-	public ArmaDeAsedio crearCatapulta(Area unEspacio) {
+	public Unidad crearCatapulta(Area unEspacio) {
 	    siYaJugoElTurnoError();
 	    
         if(distanciaMinimaA(unEspacio) > 1) {
@@ -32,6 +32,7 @@ public class Castillo extends Edificio {
         }
         
 		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(unEspacio);
+        
 		turnoJugado = true;
 		return unaArmaDeAsedio;
 	}

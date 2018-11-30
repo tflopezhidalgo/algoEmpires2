@@ -17,6 +17,11 @@ public abstract class Unidad extends Pieza {
         turnoJugado = true;
 	}
 
+	public void atacar(Pieza unaPieza){
+
+	    unaPieza.recibirDanioDe(this);
+    }
+
 	public void recibirDanioDe(Arquero unArquero){
 
         this.recibirDanio(15);
@@ -28,6 +33,15 @@ public abstract class Unidad extends Pieza {
     }
 
     public void recibirDanioDe(ArmaDeAsedio unArmaDeAsedio){
+
+
+    }
+
+    public void recibirDanioDe(Edificio edificio){
+
+    }
+
+    public void recibirDanioDe(Unidad unaUnidad){
 
 
     }

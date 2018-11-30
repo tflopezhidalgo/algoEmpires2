@@ -60,6 +60,19 @@ public abstract class Edificio extends Pieza {
 	    return (vida < VIDA_MAX);
     }
 
+    public void atacar(Pieza unaPieza){
+
+	    unaPieza.recibirDanioDe(this);
+    }
+
+    public void recibirDanioDe(Edificio unEdificio){
+
+    }
+
+    public void recibirDanioDe(Unidad unaUnidad){
+
+    }
+
 	public void recibirDanioDe(Arquero unArquero){
 
 	    this.recibirDanio(10);
@@ -74,4 +87,5 @@ public abstract class Edificio extends Pieza {
 
 	    this.recibirDanio(75);
     }
+
 }
