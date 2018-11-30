@@ -82,10 +82,14 @@ public abstract class Pieza {
 	
 	public boolean estaDestruida() { return (vida == 0); }
 
+    public double porcentajeVidaActual() {
+        return ((double)vida/vidaMaxima);
+    }
+
 	public abstract void recibirDanioDe(Arquero unArquero);
+
 	public abstract void recibirDanioDe(Espadachin unEspadachin);
-	
-	public double porcentajeVidaActual() {
-		return ((double)vida/vidaMaxima);
-	}
+
+	public abstract void recibirDanioDe(ArmaDeAsedio unArmaDeAsedio);
+
 }

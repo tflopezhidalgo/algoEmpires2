@@ -15,7 +15,7 @@ public class CuartelTest {
 	public ExpectedException thrown = ExpectedException.none();
 	
     @Test
-    public void ColocarCuartel() throws Exception {
+    public void ColocarCuartel() {
 
     	Tablero unTablero = new Tablero(5,5);
 
@@ -37,7 +37,7 @@ public class CuartelTest {
     }
     
     @Test
-    public void cuartelCreaEspadachin() throws Exception {
+    public void cuartelCreaEspadachin() {
 
     	Tablero unTablero = new Tablero(5,5);
 
@@ -52,7 +52,7 @@ public class CuartelTest {
         Area espacioEspadachin = unTablero.definirArea(1,2,1,2);
         Assert.assertEquals(true,espacioEspadachin.estaLibre());
         
-        Espadachin nuevoEspadachin = unCuartel.crearEspadachin(espacioEspadachin);
+        Unidad nuevoEspadachin = unCuartel.crearGuerrero(espacioEspadachin, Cuartel.tipoGuerrero.ESPADACHIN);
         Assert.assertEquals(false,espacioEspadachin.estaLibre());
         
         //mover espadachin para arriba
@@ -69,7 +69,7 @@ public class CuartelTest {
     }
     
     @Test
-    public void cuartelCreaArquero() throws Exception {
+    public void cuartelCreaArquero() {
 
     	Tablero unTablero = new Tablero(5,5);
 
@@ -102,7 +102,7 @@ public class CuartelTest {
     }
 
     @Test
-    public void noSePuedeCrearArqueroTanLejos() throws Exception{
+    public void noSePuedeCrearArqueroTanLejos() {
         Tablero unTablero = new Tablero();
         Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1),true);
 
@@ -122,7 +122,7 @@ public class CuartelTest {
     }
 
     @Test
-    public void noSePuedeCrearEspadachinTanLejos() throws Exception{
+    public void noSePuedeCrearEspadachinTanLejos() {
         Tablero unTablero = new Tablero();
         Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1),true);
 
@@ -142,7 +142,7 @@ public class CuartelTest {
     }
 
     @Test
-    public void noSePuedeCrearUnidadDuranteConstruccion() throws Exception{
+    public void noSePuedeCrearUnidadDuranteConstruccion() {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
@@ -186,7 +186,7 @@ public class CuartelTest {
     }
 
     @Test
-    public void cuartelYaJugoEnEseTurno() throws Exception{
+    public void cuartelYaJugoEnEseTurno() {
         Tablero unTablero = new Tablero();
         Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1), true);
 

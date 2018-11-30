@@ -38,7 +38,9 @@ public class Aldeano extends Unidad {
 			turnoJugado = true;
 		}
 	}
-	
+
+	//TODO: Retornar clases madres (Edificio)
+
 	public Plaza crearPlaza(Area areaDeConstruccion) {
 		siYaJugoElTurnoError();
 

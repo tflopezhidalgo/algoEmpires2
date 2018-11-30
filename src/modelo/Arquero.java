@@ -4,6 +4,7 @@ public class Arquero extends Unidad implements Atacante {
 
     final int VIDA = 75;
     final int COSTO = 75;
+    final int DISTANCIA_ATK = 3;
 	
     /*      -Arquero-
      *
@@ -13,6 +14,7 @@ public class Arquero extends Unidad implements Atacante {
      */
 
 	public Arquero(Area unEspacio) {
+
 		super(unEspacio);
 		vidaMaxima = VIDA;
 		vida = vidaMaxima;
@@ -23,14 +25,12 @@ public class Arquero extends Unidad implements Atacante {
 
         siYaJugoElTurnoError();
 
-        if(enRango(unaPieza,3)) {
+        if(enRango(unaPieza, this.DISTANCIA_ATK)) {
+
             unaPieza.recibirDanioDe(this);
             turnoJugado = true;
         }
 
-        if(unaPieza.estaDestruida()) {
-            unaPieza = null;
-        }
     }
 	
 }

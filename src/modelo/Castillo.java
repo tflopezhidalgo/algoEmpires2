@@ -9,13 +9,13 @@ public class Castillo extends Edificio {
 	private CastilloListener castilloListener;
 
 	public Castillo(Area areaAOcupar) {
+
 		super(areaAOcupar);
 		vidaMaxima = 1000;
 		vida = vidaMaxima;
 		costo = 0;
 		tiempoDeConstruccion = 0;
 		cantidadDeCuracion = 15;
-
 	}
 
 	public void atacar(Pieza piezaEnemiga){

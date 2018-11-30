@@ -68,4 +68,9 @@ public abstract class Edificio extends Pieza {
 
 	    this.recibirDanio(15);
     }
+
+    public void recibirDanioDe(ArmaDeAsedio unArmaDeAsedio){
+
+	    this.recibirDanio(75);
+    }
 }

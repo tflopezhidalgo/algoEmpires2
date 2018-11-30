@@ -25,4 +25,5 @@ public abstract class Unidad extends Pieza {
         this.recibirDanio(25);
     }
 
+    public void recibirDanioDe(ArmaDeAsedio unArmaDeAsedio){ }
 }

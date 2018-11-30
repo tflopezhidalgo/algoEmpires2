@@ -113,6 +113,5 @@ public abstract class PiezaVista extends StackPane {
 		double porcentaje = modelo.porcentajeVidaActual();
 		barraVidaActual.setWidth(TAMANIO_CASILLA*ancho*porcentaje);
 	}
-	
 
 }

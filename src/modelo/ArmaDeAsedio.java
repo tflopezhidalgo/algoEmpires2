@@ -1,12 +1,12 @@
 package modelo;
 
-import modelo.estadoArmaDeAsedio.CatapultaDesarmada;
-import modelo.estadoArmaDeAsedio.EstadoCatapulta;
+import modelo.estadoArmaDeAsedio.*;
 
 public class ArmaDeAsedio extends Unidad implements Atacante{
 
     final int VIDA = 150;
     final int COSTO = 200;
+    final int DISTANCIA_ATK = 5;
 
     private EstadoCatapulta estado;
 
@@ -18,6 +18,7 @@ public class ArmaDeAsedio extends Unidad implements Atacante{
      */
 
 	public ArmaDeAsedio(Area unEspacio) {
+
 		super(unEspacio);
 		vidaMaxima = VIDA;
 		vida = vidaMaxima;
@@ -26,39 +27,29 @@ public class ArmaDeAsedio extends Unidad implements Atacante{
 	}
 
 	public void accionar() {
-		//TODO lo podemos accionar infinitas veces por turno?
+
+        siYaJugoElTurnoError();
+
 		estado = estado.cambiarEstado();
+
+		turnoJugado = true;
 	}
 
-	@Override
     public void mover(Area nuevaArea){
 
 	    estado.mover();
-        if( nuevaArea.estaLibre()) {
-            espacioOcupado.liberar();
-            espacioOcupado = nuevaArea;
-            espacioOcupado.ocupar();
-            turnoJugado = true;
-        }
 
+        super.mover(nuevaArea);
     }
 
-	private void atacar(Edificio edificioEnemigo) {
+	public void atacar(Pieza piezaEnemiga){
+
         siYaJugoElTurnoError();
 
-        if(enRango(edificioEnemigo,5)) {
-            estado.atacar(edificioEnemigo);
-			turnoJugado = true;
-        }
+        if(enRango(piezaEnemiga, 5)) {
 
-        if(edificioEnemigo.estaDestruida()) {
-            edificioEnemigo = null;
+            piezaEnemiga.recibirDanioDe(this);
+            turnoJugado = true;
         }
 	}
-
-	//Implementa a Atacante
-	public void atacar(Pieza piezaEnemiga){
-		//Si es una Unidad tira Error y no ataca
-		atacar((Edificio)piezaEnemiga);
-	}	
 }
