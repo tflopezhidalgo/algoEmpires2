@@ -15,9 +15,9 @@ public class JuegoTest {
     @Test
     public void juegoNoTerminadoError() {
         Juego unJuego = new Juego("Ailen", "Laura");
+        Tablero unTablero = unJuego.getTablero();
 
         List<Pieza> listaPiezas = new ArrayList<>();
-        Tablero unTablero = unJuego.getTablero();
         listaPiezas.add(new Aldeano(unTablero.definirArea(2,2,2,2)));
         Castillo unCastillo = new Castillo(unTablero.definirArea(5,5,5,5));
         listaPiezas.add(unCastillo);
@@ -27,21 +27,6 @@ public class JuegoTest {
         listaPiezas2.add(otroCastillo);
 
         unJuego.iniciarJuego(listaPiezas, listaPiezas2);
-
-        unJuego.finalizarTurno();
-
-        unJuego.finalizarTurno();
-
-/*        Tablero unTablero = unJuego.getTablero();
-
-        List<Pieza> piezasJugador1 = new ArrayList<Pieza>();
-        List<Pieza> piezasJugador2 = new ArrayList<Pieza>();
-
-        piezasJugador1.add(new Castillo(unTablero.definirArea(0,0,3,3)));
-        piezasJugador2.add(new Castillo(unTablero.definirArea(4,4,8,8)));
-
-        unJuego.iniciarJuego(piezasJugador1, piezasJugador2);           */
-
 
         boolean lanzaUnError=false;
         try{
@@ -79,8 +64,8 @@ public class JuegoTest {
         Assert.assertEquals(true, lanzaUnError);
     }
 
-    /*@Test
-    public void partidaCompleta() throws Exception{
+    @Test
+    public void ganadorDePartida() throws Exception{
         Juego unJuego = new Juego("Ailen", "Tomas");
         Tablero unTablero = unJuego.getTablero();
 
@@ -94,16 +79,14 @@ public class JuegoTest {
 
         unJuego.iniciarJuego(piezasJugador1, piezasJugador2);
 
-        Jugador jugador1 = unJuego.getJugadorActual();
-        jugador1.finalizarTurno();
+        unJuego.finalizarTurno();
 
-        Jugador jugador2 = unJuego.getJugadorActual();
-        jugador2.finalizarTurno();
+        unJuego.finalizarTurno(); //El juego ya cambia de jugador cuando le pasa finalizarTurno()
 
-        Castillo castilloJugador1 = (Castillo) piezasJugador1.get(piezasJugador1.lastIndexOf(unCastillo));
+        Castillo castilloJugador1 = unCastillo;
 
         castilloJugador1.recibirDanio(1000);
 
-        Assert.assertEquals(jugador2, unJuego.seleccionarGanador());
-    }*/
+        Assert.assertEquals("Tomas", unJuego.seleccionarGanador().obtenerNombre());
+    }
 }
