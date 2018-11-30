@@ -26,7 +26,7 @@ public class ClickCasillaHandler implements EventHandler<MouseEvent> {
 		}
 		if(event.getButton() == MouseButton.SECONDARY ) {
 			//la casilla esta desocupada asique implica moviemiento
-			moverPiezSeleccionada();
+			moverPiezaSeleccionada();
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class ClickCasillaHandler implements EventHandler<MouseEvent> {
 	}
 
 	
-	private void moverPiezSeleccionada(){
+	private void moverPiezaSeleccionada(){
 		PiezaVista piezaSeleccionada = elMapa.piezaSeleccionada();
 		if(piezaSeleccionada instanceof UnidadVista) {
 			int x0 = piezaSeleccionada.modelo().obtenerAreaOcupada().x0();
@@ -54,7 +54,7 @@ public class ClickCasillaHandler implements EventHandler<MouseEvent> {
 			int difY = y1 - y0;
 			if( Math.abs(difX) <=1 & Math.abs(difY) <=1 ) {
 				UnidadVista unidadVista = (UnidadVista)(piezaSeleccionada);
-				Unidad laUnidad = (Unidad)unidadVista.modelo();
+				Unidad laUnidad = (Unidad)(unidadVista.modelo());
 				elMapa.obtenerTablero().moverEnDireccion(laUnidad, difX, difY);
 				
 				int xActual = laUnidad.obtenerAreaOcupada().x0();

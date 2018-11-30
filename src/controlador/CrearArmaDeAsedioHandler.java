@@ -24,13 +24,23 @@ public class CrearArmaDeAsedioHandler implements EventHandler<ActionEvent> {
 		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
 		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
-		//TODO los mismos comentarios que en construir Plaza
+		//TODO los mismos comentarios que en construir Plaza 
 		Area espacioArmaDeAsedio = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
 		ArmaDeAsedio armaDeAsedio = ((Castillo)modelo).crearCatapulta(espacioArmaDeAsedio);
+		System.out.println("C - " + (armaDeAsedio == null));
+		System.out.println("C2 - " + (armaDeAsedio != null));
 		if(armaDeAsedio != null) {
-			ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0,y0,armaDeAsedio,elMapa);
-			elMapa.aniadirPieza(armaVisu);
+			try {
+				System.out.println("IF1 - " + (armaDeAsedio == null));
+				System.out.println("IF2 - " + (elMapa == null));
+				ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0,y0,armaDeAsedio,elMapa);
+				System.out.println("IF3 - " + (armaVisu == null));
+				//elMapa.aniadirPieza(armaVisu);
+			}catch(Exception e) {
+				System.out.print("Pasa por aca");
+			}
 		}
+		System.out.println("C2 - " + (armaDeAsedio != null));
 	}
 
 }
