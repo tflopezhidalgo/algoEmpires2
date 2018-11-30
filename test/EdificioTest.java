@@ -183,5 +183,28 @@ public class EdificioTest {
 
     }
 
+    @Test
+    public void edificioRecibirDanioDeArqueroCastillo() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
+        Edificio unEdificio = new Castillo(zonaDeConstruccion);
+        Assert.assertEquals(true, unTablero.obtenerCasillaEn(3,3).estaOcupada());
+
+        Area espacioArquero = unTablero.definirArea(10,10,10,10);
+        Arquero unArquero = new Arquero(espacioArquero);
+
+        unEdificio.construir();
+        unEdificio.construir();
+        unEdificio.construir();
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+        unEdificio.recibirDanioDe(unArquero);
+
+        Assert.assertTrue(unEdificio.necesitaReparacion());
+
+    }
+
 
 }
