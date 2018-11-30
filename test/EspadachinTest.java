@@ -209,4 +209,34 @@ public class EspadachinTest {
 
         Assert.assertEquals(true, lanzaUnError);
     }
+
+    @Test
+    public void liberarUbicacionEspadachin() {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area espacioEspadachin = unTablero.definirArea(0, 0, 0, 0);
+        Pieza unaPieza = new Espadachin(espacioEspadachin);
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(espacioEspadachin.estaLibre());
+        Assert.assertEquals(1,espacioEspadachin.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(100); //Espadachin.VIDA_MAX = 100
+        Assert.assertTrue(espacioEspadachin.estaLibre());
+    }
+
+    @Test
+    public void distanciaMinimaAUnArea() {
+
+        Tablero unTablero = new Tablero(6,6);
+
+        Area unArea = unTablero.definirArea(0, 0, 1,1);
+        Area espacioEspadachin = unTablero.definirArea(3, 0, 3, 0);
+        Espadachin unEspadachin = new Espadachin(espacioEspadachin);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3 ,0).estaOcupada());
+
+        Assert.assertEquals(2, unEspadachin.distanciaMinimaA(unArea));
+
+    }
+
 }

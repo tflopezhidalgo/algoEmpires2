@@ -111,7 +111,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void finalizarTurno() throws Exception{
+    public void finalizarTurnoJugador() throws Exception{
         Tablero unTablero = new Tablero();
         Jugador unJugador = new Jugador("Tomas");
         Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
@@ -187,8 +187,8 @@ public class JugadorTest {
         Assert.assertEquals(4, unJugador.getPoblacion());
 
         espacioUnidad = unTablero.definirArea(2, 2, 2, 2);
-        Arquero otroArquero = new Arquero(espacioUnidad);
-        unJugador.agregarPieza(otroArquero);
+        Arquero otroArquero2 = new Arquero(espacioUnidad);
+        unJugador.agregarPieza(otroArquero2);
         unJugador.finalizarTurno();
         Assert.assertEquals(4, unJugador.getPoblacion());
 
