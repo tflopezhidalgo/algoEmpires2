@@ -401,7 +401,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void liberarUbicacionArmaDeAsedio() {
-        Tablero unTablero = new Tablero(3,3);
+        Tablero unTablero = new Tablero(6,6);
 
         Area espacioArmaDeAsedio = unTablero.definirArea(0, 0, 0, 0);
         Pieza unaPieza = new ArmaDeAsedio(espacioArmaDeAsedio);
@@ -412,6 +412,20 @@ public class ArmaDeAsedioTest {
 
         unaPieza.recibirDanio(150); //ArmaDeAsedio.VIDA_MAX = 150
         Assert.assertTrue(espacioArmaDeAsedio.estaLibre());
+    }
+
+    @Test
+    public void distanciaMinimaAUnArea() {
+
+        Tablero unTablero = new Tablero(6,6);
+
+        Area unArea = unTablero.definirArea(0, 0, 1,1);
+        Area espacioArmaDeAsedio = unTablero.definirArea(3, 0, 3, 0);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3 ,0).estaOcupada());
+
+        Assert.assertEquals(2, unArmaDeAsedio.distanciaMinimaA(unArea));
+
     }
 
 }

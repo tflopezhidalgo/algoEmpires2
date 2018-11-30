@@ -312,7 +312,7 @@ public class CuartelTest {
 
     @Test
     public void liberarUbicacionCuartel() {
-        Tablero unTablero = new Tablero(3,3);
+        Tablero unTablero = new Tablero(6,6);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Pieza unaPieza = new Cuartel(zonaDeConstruccion);

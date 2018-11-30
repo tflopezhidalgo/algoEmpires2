@@ -239,7 +239,7 @@ public class PlazaCentralTest {
 
     @Test
     public void liberarUbicacionPlaza() {
-        Tablero unTablero = new Tablero(3,3);
+        Tablero unTablero = new Tablero(6,6);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
         Pieza unaPieza = new Plaza(zonaDeConstruccion);

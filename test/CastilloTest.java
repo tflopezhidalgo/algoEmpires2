@@ -237,7 +237,7 @@ public class CastilloTest {
 
     @Test
     public void liberarUbicacionCastillo() {
-        Tablero unTablero = new Tablero(5,5);
+        Tablero unTablero = new Tablero(6,6);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
         Pieza unaPieza = new Castillo(zonaDeConstruccion);

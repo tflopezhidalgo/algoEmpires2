@@ -832,7 +832,7 @@ public class AldeanoTest {
 
     @Test
     public void liberarUbicacionAldeano() {
-        Tablero unTablero = new Tablero(3,3);
+        Tablero unTablero = new Tablero(6,6);
 
         Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
         Pieza unaPieza = new Aldeano(espacioAldeano);
@@ -848,12 +848,12 @@ public class AldeanoTest {
     @Test
     public void distanciaMinimaAUnArea() {
 
-        Tablero unTablero = new Tablero(3,3);
+        Tablero unTablero = new Tablero(6,6);
 
-        Area unArea = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+        Area unArea = unTablero.definirArea(0, 0, 1,1);
         Area espacioAldeano = unTablero.definirArea(3, 0, 3, 0);
         Aldeano unAldeano = new Aldeano(espacioAldeano);
-        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3 ,0).estaOcupada());
 
         Assert.assertEquals(2, unAldeano.distanciaMinimaA(unArea));
 
