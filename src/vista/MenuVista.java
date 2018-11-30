@@ -14,7 +14,7 @@ public class MenuVista extends BorderPane {
 	
 	Scene escenaSiguiente;
 
-    public MenuVista(Stage stagePrincipal) {
+    public MenuVista(Stage stagePrincipal){
     	//-------------------------------------------------------
         this.prepararEscenaSiguiente(stagePrincipal);
     	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -34,7 +34,7 @@ public class MenuVista extends BorderPane {
         comenzar.setFitWidth(300);
         comenzar.setFitHeight(37);
         
-        BotonPersonalizado elBotonComenzar = new BotonPersonalizado(comenzar);
+        BotonVistaPersonalizado elBotonComenzar = new BotonVistaPersonalizado(comenzar);
         elBotonComenzar.setOnMousePressed(event -> stagePrincipal.setScene(escenaSiguiente));
 
         Image imagenSalir = new Image("resources/images/ElementosMenu/Botones/salir3.png");
@@ -42,7 +42,7 @@ public class MenuVista extends BorderPane {
         salir.setFitWidth(300);
         salir.setFitHeight(37);
         
-        BotonPersonalizado elBotonSalir = new BotonPersonalizado(salir);
+        BotonVistaPersonalizado elBotonSalir = new BotonVistaPersonalizado(salir);
         elBotonSalir.setOnMousePressed(event ->  stagePrincipal.close());
     	
         botones.getChildren().addAll(elBotonComenzar, elBotonSalir);

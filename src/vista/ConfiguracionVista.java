@@ -1,29 +1,20 @@
 package vista;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import controlador.IniciarJuegoHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.text.Font;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.image.*;
-import javafx.scene.control.Button;
-import modelo.Juego;
-import modelo.Tablero;
 
 public class ConfiguracionVista extends Pane{
-
-    private String nombreJugador1;
-    private String nombreJugador2;
-    private Juego unJuego;
-
-    private Scene escenaSiguiente;
 
     public ConfiguracionVista(Stage primaryStage){
 
@@ -57,22 +48,10 @@ public class ConfiguracionVista extends Pane{
         Button botonIniciarJuego = new Button("Iniciar Juego!");
         botonIniciarJuego.relocate(1000, 600);
 
-        botonIniciarJuego.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event){
-
-                nombreJugador1 = jugador1.getText();
-                nombreJugador2 = jugador2.getText();
-                prepararEscenaSiguiente(new Juego(nombreJugador1, nombreJugador2));
-                primaryStage.setScene(escenaSiguiente);
-            }
-        });
+        botonIniciarJuego.setOnAction(new IniciarJuegoHandler(jugador1.getText(), jugador2.getText(), primaryStage));
 
         this.getChildren().addAll(fondoVista, campoInformacion, titulo, botonIniciarJuego);
     }
 
-    public void prepararEscenaSiguiente(Juego unJuego){
 
-        this.escenaSiguiente = new Scene(new MapaVista(unJuego));
-    }
 }

@@ -1,5 +1,6 @@
 package vista;
 
+import controlador.AccionarArmaDeAsedioHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
@@ -25,11 +26,12 @@ public class ArmaDeAsedioVista extends UnidadVista{
 	@Override
 	protected void prepararBotones() {
 		Menu menuHabilidades = new Menu("Habilidades");
-		//menu.setGraphic(new ImageView("file:imagen.png"));
 
 		MenuItem accionar = new MenuItem("Accionar");
-		//TODO cambiar imagen que lo representa
-		accionar.setOnAction(e -> accionar());
+		accionar.setOnAction(e -> {
+			estadoActual = estadoActual.cambiarEstado(viewMover,viewAtaque);
+			new AccionarArmaDeAsedioHandler(modelo);
+		});
 
 		menuHabilidades.getItems().addAll(accionar);
 		acciones.getMenus().add(menuHabilidades);
@@ -51,16 +53,4 @@ public class ArmaDeAsedioVista extends UnidadVista{
 		getChildren().addAll(viewMover,viewAtaque);
 	}
 	
-	//------------------------------------------------------------------------------------
-	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
-	//------------------------------------------------------------------------------------
-	private void accionar() {
-		//TODO lo podemos accionar infinitas veces por turno? (depende del modelo)
-		((ArmaDeAsedio)modelo).accionar();
-		estadoActual = estadoActual.cambiarEstado(viewMover,viewAtaque);
-	}
-	//----------------------------------   FIN    ----------------------------------------
-	//--------------------- FUNCIONALIDAD DE LOS BOTONES DEL MENU ------------------------
-	//----------------------------------   FIN    ----------------------------------------
-
 }
