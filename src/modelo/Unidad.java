@@ -38,9 +38,11 @@ public abstract class Unidad extends Pieza {
 
     public void recibirDanioDe(Edificio edificio){
 
+        //Edificios no atacan a las unidades.
     }
 
     public void recibirDanioDe(Unidad unaUnidad){
+
         this.recibirDanio(unaUnidad.DANIO_UNIDADES);
     }
 }

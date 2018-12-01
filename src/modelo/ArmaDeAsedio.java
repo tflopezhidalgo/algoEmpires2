@@ -4,8 +4,6 @@ import modelo.estadoArmaDeAsedio.*;
 
 public class ArmaDeAsedio extends Unidad{
 
-    final public int DISTANCIA_ATK = 5;
-
     private EstadoCatapulta estado;
 
     /*     -Arma de asedio-
@@ -39,15 +37,11 @@ public class ArmaDeAsedio extends Unidad{
 
         super.mover(nuevaArea);
     }
-    
-    @Override
+
 	public void atacar(Pieza unaPieza) {
-	    this.siYaJugoElTurnoError();
 
-	    chequearRango(unaPieza, DISTANCIA_ATK);
-	    
-        estado.atacar(unaPieza,this);
+	    estado.atacar();
 
-	    turnoJugado = true;
+	    super.atacar(unaPieza);
 	}
 }

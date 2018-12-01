@@ -88,10 +88,10 @@ public abstract class Pieza {
         return ((double)vida/VIDA_MAX);
     }
 
-    public abstract void atacar(Pieza unaPiza);
-
-    public abstract void recibirDanioDe(Edificio unEdificio);
+    public abstract void atacar(Pieza piezaEnemiga);
 
 	public abstract void recibirDanioDe(Unidad unaUnidad);
+
+	public abstract void recibirDanioDe(Edificio unEdificio);
 
 }

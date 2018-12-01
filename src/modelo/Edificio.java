@@ -62,14 +62,16 @@ public abstract class Edificio extends Pieza {
 
     public void atacar(Pieza unaPieza){
 
-	    unaPieza.recibirDanioDe(this);
+
     }
 
     public void recibirDanioDe(Edificio unEdificio){
 
+	    //Los edificios no se atacan entre si
     }
 
     public void recibirDanioDe(Unidad unaUnidad){
+
     	this.recibirDanio(unaUnidad.DANIO_EDIFICIOS);
     }
 
