@@ -50,7 +50,7 @@ public class Aldeano extends Unidad {
 		siYaJugoElTurnoError();
 
 		//TODO TEMPORAL hay que modificarlo (si no se entiende preguntale a ivo)
-        if(enDistanciaDeConstruccion(x0, y0))
+        if(!enDistanciaDeConstruccion(x0, y0))
             throw new NoSePuedeConstruirTanLejosError();
 
         estadoActual = estadoActual.construirPlaza(x0, y0, this);
