@@ -23,11 +23,9 @@ public class ConstruirPlazaHandler implements EventHandler<ActionEvent>{
 	public void handle(ActionEvent event) {
 		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
 		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
-
-		Area areaDeConstruccion = elMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
 		
 		//TODO chk: almaceno en Plaza y casteo o almaceno en Edificio?
-		Edificio plaza = unAldeano.crearPlaza(areaDeConstruccion);
+		Edificio plaza = unAldeano.crearPlaza(x0,y0);
 		if(plaza != null) {
 			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elMapa);
 			elMapa.aniadirPieza(plazaVisu);

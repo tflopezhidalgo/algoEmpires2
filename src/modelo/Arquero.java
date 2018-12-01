@@ -2,8 +2,6 @@ package modelo;
 
 public class Arquero extends Unidad {
 
-    final public int DISTANCIA_ATK = 3;
-
     /*      -Arquero-
      *
      *      Vida: 75
@@ -11,15 +9,18 @@ public class Arquero extends Unidad {
      *      Distancia de ataque: 3
      */
 
-	public Arquero(int xInicial, int yInicial) {
-
-		super(75, 75, 15, 10, 3);
-
-		Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
-		espacioAOcupar.ocupar();
-		espacioOcupado = espacioAOcupar;
-
+	public Arquero(int x0, int y0) {
+		super();
+		
+		this.COSTO = 75;
+		this.VIDA_MAX = 75;
 		vida = VIDA_MAX;
+		this.DANIO_EDIFICIOS = 10;
+		this.DANIO_UNIDADES = 15;
+		this.DISTANCIA_ATK = 3;
+
+		espacioOcupado = Tablero.INSTANCIA.definirArea(x0, y0, x0, y0);
+		espacioOcupado.ocupar();
 	}
 
 

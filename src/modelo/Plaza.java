@@ -7,36 +7,43 @@ public class Plaza extends Edificio {
 	
 	public static final int TAMANIO_LADO = 2;
 	
-	public Plaza(int xInicial, int yInicial) {
+	public Plaza(int x0, int y0) {
+		super();
 
-		super( 450, 100);
-
-		Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
-		espacioAOcupar.ocupar();
-		espacioOcupado = espacioAOcupar;
-
+		this.COSTO = 100;
+		this.VIDA_MAX = 450;
 		vida = VIDA_MAX;
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 25;
+		
+		espacioOcupado = Tablero.INSTANCIA.definirArea(x0, y0, TAMANIO_LADO-1+x0, TAMANIO_LADO-1+y0);
+		espacioOcupado.ocupar();
 	}
 	
-	public Plaza(Area areaAOcupar, boolean yaConstruida) {
-		super(areaAOcupar, 450, 100);
+	//TODO borrar el otro constructor y dejar este ?
+	public Plaza(int x0, int y0, boolean yaConstruida) {
+		super();
 
+		this.COSTO = 100;
+		this.VIDA_MAX = 450;
 		vida = VIDA_MAX;
+		cantidadDeCuracion = 25;
 		
 		tiempoDeConstruccion = 3;
 		if(yaConstruida) {
 			tiempoDeConstruccion = 0;
 		}
 		
-		cantidadDeCuracion = 25;
+		espacioOcupado = Tablero.INSTANCIA.definirArea(x0, y0, TAMANIO_LADO-1+x0, TAMANIO_LADO-1+y0);
+		espacioOcupado.ocupar();
 	}
 
-	public Aldeano crearAldeano(Area unEspacio) {
+	public Aldeano crearAldeano(int x0, int y0) {
 		siYaJugoElTurnoError();
 		
-        if(distanciaMinimaA(unEspacio) > 1) {
+		
+		Casilla supuestaUbicacion = new Casilla(x0, y0); 
+        if(distanciaMinimaA(supuestaUbicacion) > 1) {
             throw new NoSePuedeConstruirTanLejosError();
         }
         
@@ -44,7 +51,7 @@ public class Plaza extends Edificio {
         	throw new NoSePuedeCrearUnidadesDuranteConstruccionError();
         }
 		
-		Aldeano unAldeano = new Aldeano(unEspacio);
+		Aldeano unAldeano = new Aldeano(x0, y0);
 		turnoJugado = true;
 		return unAldeano;
 	}

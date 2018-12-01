@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import modelo.estadoJuego.*;
+import modelo.estadoJuego.EstadoJuego;
+import modelo.estadoJuego.JuegaJugador1;
+import modelo.estadoJuego.JuegaJugador2;
+import modelo.estadoJuego.NoComenzado;
+import modelo.estadoJuego.Terminado;
 
 public class Juego implements CastilloListener{
 

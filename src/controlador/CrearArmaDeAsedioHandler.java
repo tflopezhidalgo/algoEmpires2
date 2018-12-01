@@ -24,12 +24,9 @@ public class CrearArmaDeAsedioHandler implements EventHandler<ActionEvent> {
 		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
 		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
-		//TODO los mismos comentarios que en construir Plaza 
-		Area espacioArmaDeAsedio = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
-		
 		//TODO chk: almaceno en Arma de asedio y casteo o almaceno en Unidad?
 		//ArmaDeAsedio armaDeAsedio = (ArmaDeAsedio)((Castillo)modelo).crearCatapulta(espacioArmaDeAsedio);
-		Unidad armaDeAsedio = ((Castillo)modelo).crearCatapulta(espacioArmaDeAsedio);
+		Unidad armaDeAsedio = ((Castillo)modelo).crearCatapulta(x0,y0);
 		if(armaDeAsedio != null) {
 			ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0,y0,armaDeAsedio,elMapa);
 			elMapa.aniadirPieza(armaVisu);

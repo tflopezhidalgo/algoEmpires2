@@ -1,7 +1,5 @@
 package modelo;
 
-import modelo.excepciones.CasillaInvalidaError;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +12,28 @@ public class Tablero {
 	private Map<String, Casilla> casillasDelTablero;
 	private int alto;
 	private int ancho;
+	public static Tablero INSTANCIA;
 
-	static final Tablero INSTANCIA;
+	//TODO: Validar
+	public Tablero(int ancho, int alto){
+		
+		this.alto = 16 + alto;
+		this.ancho = 16 + ancho;
+		
+		crearTableroVacio();
+		INSTANCIA = this;
+	}
+	
+    //  Tablero por defecto: 16 x 16
+	public Tablero(){
 
+	    this.alto = 16;
+		this.ancho = 16;
+
+		crearTableroVacio();
+		INSTANCIA = this;
+	}
+	
 	private void crearTableroVacio(){
 
         casillasDelTablero = new HashMap<String, Casilla>();
@@ -28,40 +45,6 @@ public class Tablero {
             }
         }
     }
-
-    private List<Pieza> generarPiezasInicialesConAreas(List<Area> listaAreas){
-
-        List<Pieza> piezasNuevas = new ArrayList<Pieza>();
-
-        piezasNuevas.add(new Castillo(listaAreas.get(0)));
-        piezasNuevas.add(new Plaza(listaAreas.get(1)));
-        piezasNuevas.add(new Aldeano(listaAreas.get(2)));
-        piezasNuevas.add(new Aldeano(listaAreas.get(3)));
-        piezasNuevas.add(new Aldeano(listaAreas.get(4)));
-
-        return piezasNuevas;
-    }
-
-    //  Tablero por defecto: 16 x 16
-
-    //TODO: Validar
-	public Tablero(int ancho, int alto){
-
-		this.alto = 16 + alto;
-		this.ancho = 16 + ancho;
-
-		crearTableroVacio();
-	}
-
-	public Tablero(){
-
-	    this.alto = 16;
-		this.ancho = 16;
-
-		crearTableroVacio();
-
-		INSTANCIA = this;
-	}
 	
 	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal){
 
@@ -79,47 +62,31 @@ public class Tablero {
 
 	public List<Pieza> generarPiezasInicialesEquipo1(){
 
-	    List<Area> listaAreas = new ArrayList<>();
+        List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 
-		Area areaCastillo = definirArea(1,1, 4, 4);
-		listaAreas.add(areaCastillo);
-		Area areaPlaza = definirArea(7,1,8,2);
-		listaAreas.add(areaPlaza);
-		Area espacioAldeano1 = definirArea(6,4,6,4);
-		listaAreas.add(espacioAldeano1);
-		Area espacioAldeano2 = definirArea(7,4,7,4);
-		listaAreas.add(espacioAldeano2);
-		Area espacioAldeano3 = definirArea(8,4,8,4);
-		listaAreas.add(espacioAldeano3);
+        piezasNuevas.add(new Castillo(1,1));
+        piezasNuevas.add(new Plaza(7,1));
+        piezasNuevas.add(new Aldeano(6,4));
+        piezasNuevas.add(new Aldeano(7,4));
+        piezasNuevas.add(new Aldeano(8,4));
 
-		return generarPiezasInicialesConAreas(listaAreas);
+		return piezasNuevas;
 	}
 
 	public List<Pieza> generarPiezasInicialesEquipo2(){
+		
+        List<Pieza> piezasNuevas = new ArrayList<Pieza>();
 
-	    List<Area> listaAreas = new ArrayList<>();
+        piezasNuevas.add(new Castillo(ancho-5, alto-5));
+        piezasNuevas.add(new Plaza(ancho-9,alto-3));
+        piezasNuevas.add(new Aldeano(ancho-9,alto-5));
+        piezasNuevas.add(new Aldeano(ancho-8,alto-5));
+        piezasNuevas.add(new Aldeano(ancho-7,alto-5));
 
-		Area areaCastillo = definirArea(ancho-5, alto-5, alto-2, ancho-2);
-		listaAreas.add(areaCastillo);
-		Area areaPlaza = definirArea(ancho-9,alto-3,ancho-8,alto-2);
-        listaAreas.add(areaPlaza);
-		Area espacioAldeano1 = definirArea(ancho-9,alto-5,ancho-9,alto-5);
-		listaAreas.add(espacioAldeano1);
-		Area espacioAldeano2 = definirArea(ancho-8,alto-5,ancho-8,alto-5);
-        listaAreas.add(espacioAldeano2);
-		Area espacioAldeano3 = definirArea(ancho-7,alto-5,ancho-7,alto-5);
-        listaAreas.add(espacioAldeano3);
-
-		return generarPiezasInicialesConAreas(listaAreas);
-	}
-	
-	public void ataqueDesdeHasta(Casilla casillaInicial, Casilla casillaFinal) {
-		//TODO casilla inicial es un edificio o unidad?
-		//TODO casilla final es un edificio o unidad?
+		return piezasNuevas;
 	}
 	
 	public void liberar(Area unArea) {
-
 		unArea.liberar();
 	}
 	

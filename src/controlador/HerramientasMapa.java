@@ -25,6 +25,7 @@ public class HerramientasMapa {
 		grupoPiezas = piezas;
 		elMapa = mapa;
 		
+		System.out.println("Herramientas: mapa: "+ (mapa ==null));
     	//Si cambias esto tenes que cambiar el ANCHO y ALTO (+16)
     	elTablero = new Tablero(16,4);
     	for(int y = 0; y < ALTO; y++) {
@@ -42,32 +43,25 @@ public class HerramientasMapa {
     	return elTablero;
 	}
 	
-	
-	
 	public static void generarPiezasInicialesEquipo1(){
 		//Castillo
-		Area areaCastillo = elTablero.definirArea(1,1, 4, 4);
-		Castillo castillo = new Castillo(areaCastillo);
+		Castillo castillo = new Castillo(1,1);
 		CastilloVista castilloVisu = new CastilloVista(1,1,castillo,elMapa);
 		//-------------------
 		grupoPiezas.getChildren().add(castilloVisu);
 		//Plaza
-		Area areaPlaza = elTablero.definirArea(7,1,8,2);
-		Plaza plaza = new Plaza(areaPlaza,true);
+		Plaza plaza = new Plaza(7,1,true);
 		PlazaVista plazaVisu = new PlazaVista(7,1,plaza,elMapa);
 		//-------------------
 		grupoPiezas.getChildren().add(plazaVisu);
 		//Aldeanosx3
-		Area espacioAldeano1 = elTablero.definirArea(6,4,6,4);
-		Aldeano aldeano1 = new Aldeano(espacioAldeano1);
+		Aldeano aldeano1 = new Aldeano(6,4);
 		AldeanoVista aldeanoVisu1 = new AldeanoVista(6,4,aldeano1,elMapa);
 		grupoPiezas.getChildren().add(aldeanoVisu1);
-		Area espacioAldeano2 = elTablero.definirArea(7,4,7,4);
-		Aldeano aldeano2 = new Aldeano(espacioAldeano2);
+		Aldeano aldeano2 = new Aldeano(7,4);
 		AldeanoVista aldeanoVisu2 = new AldeanoVista(7,4,aldeano2,elMapa);
 		grupoPiezas.getChildren().add(aldeanoVisu2);
-		Area espacioAldeano3 = elTablero.definirArea(8,4,8,4);
-		Aldeano aldeano3 = new Aldeano(espacioAldeano3);
+		Aldeano aldeano3 = new Aldeano(8,4);
 		AldeanoVista aldeanoVisu3 = new AldeanoVista(8,4,aldeano3,elMapa);
 		grupoPiezas.getChildren().add(aldeanoVisu3);
 		//-------------------
@@ -75,28 +69,23 @@ public class HerramientasMapa {
 
 	public static void generarPiezasInicialesEquipo2(){
 		//Castillo
-		Area areaCastillo = elTablero.definirArea(ANCHO-5, ALTO-5, ANCHO-2, ALTO-2);
-		Castillo castillo = new Castillo(areaCastillo);
+		Castillo castillo = new Castillo(ANCHO-5, ALTO-5);
 		CastilloVista castilloVisu = new CastilloVista(ANCHO-5,ALTO-5,castillo,elMapa);
 		//-------------------
 		grupoPiezas.getChildren().add(castilloVisu);
 		//Plaza
-		Area areaPlaza = elTablero.definirArea(ANCHO-9,ALTO-3,ANCHO-8,ALTO-2);
-		Plaza plaza = new Plaza(areaPlaza,true);
+		Plaza plaza = new Plaza(ANCHO-9,ALTO-3,true);
 		PlazaVista plazaVisu = new PlazaVista(ANCHO-9,ALTO-3,plaza,elMapa);
 		//-------------------
 		grupoPiezas.getChildren().add(plazaVisu);
 		//Aldeanosx3
-		Area espacioAldeano1 = elTablero.definirArea(ANCHO-9,ALTO-5,ANCHO-9,ALTO-5);
-		Aldeano aldeano1 = new Aldeano(espacioAldeano1);
+		Aldeano aldeano1 = new Aldeano(ANCHO-9,ALTO-5);
 		AldeanoVista aldeanoVisu1 = new AldeanoVista(ANCHO-9,ALTO-5,aldeano1,elMapa);
 		grupoPiezas.getChildren().add(aldeanoVisu1);
-		Area espacioAldeano2 = elTablero.definirArea(ANCHO-8,ALTO-5,ANCHO-8,ALTO-5);
-		Aldeano aldeano2 = new Aldeano(espacioAldeano2);
+		Aldeano aldeano2 = new Aldeano(ANCHO-8,ALTO-5);
 		AldeanoVista aldeanoVisu2 = new AldeanoVista(ANCHO-8,ALTO-5,aldeano2,elMapa);
 		grupoPiezas.getChildren().add(aldeanoVisu2);
-		Area espacioAldeano3 = elTablero.definirArea(ANCHO-7,ALTO-5,ANCHO-7,ALTO-5);
-		Aldeano aldeano3 = new Aldeano(espacioAldeano3);
+		Aldeano aldeano3 = new Aldeano(ANCHO-7,ALTO-5);
 		AldeanoVista aldeanoVisu3 = new AldeanoVista(ANCHO-7,ALTO-5,aldeano3,elMapa);
 		grupoPiezas.getChildren().add(aldeanoVisu3);
 		//-------------------

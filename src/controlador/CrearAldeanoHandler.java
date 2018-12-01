@@ -25,9 +25,7 @@ public class CrearAldeanoHandler implements EventHandler<ActionEvent> {
 		int x0 = elMapa.casillaSeleccionada().modelo().ejeX(); 
 		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
-		//TODO los mismos comentarios que en construir Plaza
-		Area espacioAldeano = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
-		Aldeano aldeano = ((Plaza)this.modelo).crearAldeano(espacioAldeano); 
+		Aldeano aldeano = ((Plaza)this.modelo).crearAldeano(x0,y0); 
 		if(aldeano != null) {
 			AldeanoVista aldeanoVista = new AldeanoVista(x0,y0,aldeano,elMapa);
 			elMapa.aniadirPieza(aldeanoVista);

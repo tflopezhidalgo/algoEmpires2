@@ -1,10 +1,10 @@
 package modelo.estadoAldeano;
 
-import modelo.*;
+import modelo.Aldeano;
+import modelo.Area;
+import modelo.Edificio;
 import modelo.excepciones.AldeanoConstruyendoNoPuedeReparar;
 import modelo.excepciones.AldeanoOcupadoConOtroEdificioError;
-
-import javax.swing.plaf.synth.SynthScrollBarUI;
 
 public class AldeanoConstruyendo extends EstadoAldeano {
 
@@ -18,12 +18,12 @@ public class AldeanoConstruyendo extends EstadoAldeano {
     	throw new AldeanoConstruyendoNoPuedeReparar();
     }
 
-	public EstadoAldeano construirCuartel(Area unArea, Aldeano unAldeano) {
+	public EstadoAldeano construirCuartel(int x0, int y0, Aldeano unAldeano) {
 
     	throw new AldeanoOcupadoConOtroEdificioError();
 	}
 
-	public EstadoAldeano construirPlaza(Area unArea, Aldeano unAldeano){
+	public EstadoAldeano construirPlaza(int x0, int y0, Aldeano unAldeano){
 
         throw new AldeanoOcupadoConOtroEdificioError();
     }

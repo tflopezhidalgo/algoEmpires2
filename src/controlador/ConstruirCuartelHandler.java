@@ -27,7 +27,7 @@ public class ConstruirCuartelHandler implements EventHandler<ActionEvent>{
 		Area areaDeConstruccion = elMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
 		
 		//TODO chk: almaceno en Cuartel y casteo o almaceno en Edificio?
-		Edificio cuartel = unAldeano.crearCuartel(areaDeConstruccion);
+		Edificio cuartel = unAldeano.crearCuartel(x0,y0);
 		if(cuartel != null) {
 			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elMapa);
 			elMapa.aniadirPieza(cuartelVisu);

@@ -1,6 +1,7 @@
 package modelo;
 
-import modelo.estadoArmaDeAsedio.*;
+import modelo.estadoArmaDeAsedio.CatapultaDesarmada;
+import modelo.estadoArmaDeAsedio.EstadoCatapulta;
 
 public class ArmaDeAsedio extends Unidad{
 
@@ -13,17 +14,21 @@ public class ArmaDeAsedio extends Unidad{
      *      Distancia de ataque: 5
      */
 
-	public ArmaDeAsedio(int xInicial, int yInicial) {
+	public ArmaDeAsedio(int x0, int y0) {
 
-		super( 150, 200, 0,75, 5);
-
-		Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
-		espacioAOcupar.ocupar();
-		espacioOcupado = espacioAOcupar;
-
+		super();
+		
+		this.COSTO = 200;
+		this.VIDA_MAX = 150;
 		vida = VIDA_MAX;
-
+		this.DANIO_EDIFICIOS = 75;
+		this.DANIO_UNIDADES = 0;
+		this.DISTANCIA_ATK = 5;
+		
 		estado = new CatapultaDesarmada();
+
+		espacioOcupado = Tablero.INSTANCIA.definirArea(x0, y0, x0, y0);
+		espacioOcupado.ocupar();
 	}
 
 	public void accionar() {

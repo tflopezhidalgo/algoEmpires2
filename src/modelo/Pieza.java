@@ -5,14 +5,20 @@ import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 
 public abstract class Pieza {
 
-    final public int COSTO;
-    final public int VIDA_MAX;
+    protected int COSTO;
+    protected int VIDA_MAX;
 
     protected Area espacioOcupado;
 
 	protected int vida;
 	protected boolean turnoJugado;
 
+	
+	/*          Constructor             */
+	public Pieza() {
+		turnoJugado = false;
+	}
+	
     protected void siYaJugoElTurnoError(){
 
         if(turnoJugado){
@@ -44,28 +50,12 @@ public abstract class Pieza {
         }
         return minimaDistancia;
     }
+    
+    protected int distanciaMinimaA(Casilla casilla) {
 
-	/*          Constructor             */
-
-	public Pieza(){
-
-        turnoJugado = false;
-
-        VIDA_MAX = 0;
-        COSTO = 0;
-
-        espacioOcupado = null;
+    	int minimaDistancia = obtenerAreaOcupada().distanciaMinimaA(casilla);
+        return minimaDistancia;
     }
-
-	public Pieza(int vidaMaxima, int costo) {
-
-		turnoJugado = false;
-
-		VIDA_MAX = vidaMaxima;
-		COSTO = costo;
-
-        espacioOcupado = null;
-	}
 
 	public void recibirDanio(int danio) {
 		vida = (vida - danio);

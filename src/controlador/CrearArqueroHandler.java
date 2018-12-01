@@ -25,8 +25,7 @@ public class CrearArqueroHandler implements EventHandler<ActionEvent> {
 		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
 		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
-		Area espacioArquero = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
-		Unidad arquero = modelo.crearGuerrero(espacioArquero, TipoGuerrero.ARQUERO);
+		Unidad arquero = modelo.crearGuerrero(x0,y0, TipoGuerrero.ARQUERO);
 		if(arquero != null) {
 			ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elMapa);
 			elMapa.aniadirPieza(arqueroVista);
