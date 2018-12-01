@@ -873,6 +873,7 @@ public class AldeanoTest {
 
         Assert.assertEquals(2, unAldeano.distanciaMinimaA(unArea));
 
+
     }*/
 
 }
