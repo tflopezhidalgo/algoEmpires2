@@ -9,7 +9,9 @@ public class Espadachin extends Unidad{
      *      Costo: 50
      */
 
-	public Espadachin(Area unEspacio) {
+	public Espadachin(int xInicial, int yInicial) {
+
+		Area unEspacio = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
 
 		super(unEspacio, 100, 50, 25, 15, 1);
 

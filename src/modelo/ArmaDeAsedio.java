@@ -13,7 +13,9 @@ public class ArmaDeAsedio extends Unidad{
      *      Distancia de ataque: 5
      */
 
-	public ArmaDeAsedio(Area unEspacio) {
+	public ArmaDeAsedio(int xInicial, int yInicial) {
+
+		Area unEspacio = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
 
 		super(unEspacio, 150, 200, 0,75, 5);
 

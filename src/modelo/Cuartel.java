@@ -7,7 +7,9 @@ public class Cuartel extends Edificio {
 
     public static final int TAMANIO_LADO = 2;
 	
-	public Cuartel(Area areaAOcupar) {
+	public Cuartel(int xInicial, int yInicial) {
+
+	    Area areaAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
 
 		super(areaAOcupar, 250, 50);
 

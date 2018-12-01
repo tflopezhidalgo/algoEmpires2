@@ -9,7 +9,9 @@ public class Castillo extends Edificio {
 
 	private CastilloListener castilloListener;
 
-	public Castillo(Area areaAOcupar) {
+	public Castillo(int xInicial, int yInicial) {
+
+		Area areaAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
 
 		super(areaAOcupar, 1000, 0);
 

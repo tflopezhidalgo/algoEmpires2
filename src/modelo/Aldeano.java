@@ -8,7 +8,10 @@ public class Aldeano extends Unidad {
 
 	private EstadoAldeano estadoActual;
 	
-	public Aldeano(Area unEspacio){
+	public Aldeano(int xInicial, int yInicial){
+
+		Area unEspacio = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
+
 		super(unEspacio, 50, 25,0,0,1);
 
 		estadoActual = new AldeanoLibre();

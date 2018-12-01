@@ -15,6 +15,8 @@ public class Tablero {
 	private int alto;
 	private int ancho;
 
+	static final Tablero INSTANCIA;
+
 	private void crearTableroVacio(){
 
         casillasDelTablero = new HashMap<String, Casilla>();
@@ -57,6 +59,8 @@ public class Tablero {
 		this.ancho = 16;
 
 		crearTableroVacio();
+
+		INSTANCIA = this;
 	}
 	
 	public Area definirArea(int xInicial, int yInicial, int xFinal, int yFinal){

@@ -7,7 +7,10 @@ public class Plaza extends Edificio {
 	
 	public static final int TAMANIO_LADO = 2;
 	
-	public Plaza(Area areaAOcupar) {
+	public Plaza(int xInicial, int yInicial) {
+
+		Area areaAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
+
 		super(areaAOcupar, 450, 100);
 
 		vida = VIDA_MAX;

@@ -11,7 +11,9 @@ public class Arquero extends Unidad {
      *      Distancia de ataque: 3
      */
 
-	public Arquero(Area unEspacio) {
+	public Arquero(int xInicial, int yInicial) {
+
+		Area unEspacio = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
 
 		super(unEspacio, 75, 75, 15, 10, 3);
 
