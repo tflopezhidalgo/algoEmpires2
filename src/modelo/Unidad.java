@@ -2,27 +2,47 @@ package modelo;
 
 public abstract class Unidad extends Pieza {
 
-	public Unidad(Area unEspacio) {
-	    super(unEspacio);
+    public final int DANIO_UNIDADES;
+    public final int DANIO_EDIFICIOS;
+    public final int DISTANCIA_ATK;
+
+	public Unidad(Area unEspacio, int vidaMax, int costo, int danioUnidades, int danioEdificios, int distancia) {
+
+	    super(unEspacio, vidaMax, costo);
+
+	    DANIO_EDIFICIOS = danioEdificios;
+	    DANIO_UNIDADES = danioUnidades;
+	    DISTANCIA_ATK = distancia;
 	}
 
 	public void mover(Area nuevoEspacio){
+
 	    this.siYaJugoElTurnoError();
 
-        if (nuevoEspacio.estaLibre()) {
-            espacioOcupado.liberar();
-            espacioOcupado = nuevoEspacio;
-            espacioOcupado.ocupar();
-            turnoJugado = true;
-        }
+	    nuevoEspacio.ocupar();  //Si está ocupado se lanza excepción CasillaOcupadaError.
+        espacioOcupado.liberar();
+        espacioOcupado = nuevoEspacio;
+        turnoJugado = true;
 	}
 
-	public void recibirDanioDe(Arquero unArquero){
-        this.recibirDanio(15);
+	public void atacar(Pieza unaPieza){
+
+	    this.siYaJugoElTurnoError();
+
+	    chequearRango(unaPieza, DISTANCIA_ATK);
+
+        unaPieza.recibirDanioDe(this);
+
+	    turnoJugado = true;
     }
 
-    public void recibirDanioDe(Espadachin unEspadachin){
-        this.recibirDanio(25);
+    public void recibirDanioDe(Edificio edificio){
+
+        //Edificios no atacan a las unidades.
     }
 
+    public void recibirDanioDe(Unidad unaUnidad){
+
+        this.recibirDanio(unaUnidad.DANIO_UNIDADES);
+    }
 }

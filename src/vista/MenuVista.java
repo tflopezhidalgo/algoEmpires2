@@ -1,42 +1,57 @@
 package vista;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class MenuVista extends Pane {
-
-    private Scene escenaSiguiente;
+public class MenuVista extends BorderPane {
+	
+	Scene escenaSiguiente;
 
     public MenuVista(Stage stagePrincipal){
-
+    	//-------------------------------------------------------
         this.prepararEscenaSiguiente(stagePrincipal);
-
+    	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     	//--------------- Imagen de fondo -----------------------
-        Image background = new Image("Imagenes\\ElementosMenu\\fiubamenu.JPG");
+        Image background = new Image("resources/images/ElementosMenu/menuBackground3.png");
         ImageView backgroundVista = new ImageView(background);
-        setPrefSize(background.getWidth(),background.getHeight());
+        backgroundVista.setFitWidth(1280);
+        backgroundVista.setFitHeight(800);
+        
+    	StackPane panel = new StackPane(backgroundVista);
+        setCenter(panel);
         //--------------- Setup Botones -------------------------
-        Image botonComenzar = new Image("Imagenes\\ElementosMenu\\botoncomenzar.png");
-        BotonPersonalizado elBotonComenzar = new BotonPersonalizado(botonComenzar);
-        elBotonComenzar.relocate(getPrefWidth()/2 - elBotonComenzar.getPrefWidth()/2,getPrefHeight()/2 - elBotonComenzar.getPrefHeight()/2 );
+        VBox botones = new VBox(40);
+        
+        Image imagenComenzar = new Image("resources/images/ElementosMenu/Botones/comenzar3.png");
+        ImageView comenzar = new ImageView(imagenComenzar);
+        comenzar.setFitWidth(300);
+        comenzar.setFitHeight(37);
+        
+        BotonVistaPersonalizado elBotonComenzar = new BotonVistaPersonalizado(comenzar);
         elBotonComenzar.setOnMousePressed(event -> stagePrincipal.setScene(escenaSiguiente));
 
-        Image botonSalir = new Image("Imagenes\\ElementosMenu\\botonsalir.png");
-        BotonPersonalizado elBotonSalir = new BotonPersonalizado(botonSalir);
-        elBotonComenzar.setTranslateY(-(elBotonComenzar.getPrefHeight() + 20));
-        elBotonSalir.relocate(getPrefWidth()/2 - elBotonSalir.getPrefWidth()/2,getPrefHeight()/2 + elBotonSalir.getPrefHeight());
+        Image imagenSalir = new Image("resources/images/ElementosMenu/Botones/salir3.png");
+        ImageView salir = new ImageView(imagenSalir);
+        salir.setFitWidth(300);
+        salir.setFitHeight(37);
+        
+        BotonVistaPersonalizado elBotonSalir = new BotonVistaPersonalizado(salir);
         elBotonSalir.setOnMousePressed(event ->  stagePrincipal.close());
-
-        getChildren().addAll(backgroundVista, elBotonComenzar, elBotonSalir);
+    	
+        botones.getChildren().addAll(elBotonComenzar, elBotonSalir);
+        panel.getChildren().add(botones);
+        botones.setTranslateY(primaryScreenBounds.getHeight()*0.6);
     }
 
-    public void prepararEscenaSiguiente(Stage stagePrincipal){
-
+	private void prepararEscenaSiguiente(Stage stagePrincipal){
         this.escenaSiguiente = new Scene(new ConfiguracionVista(stagePrincipal));
-    }
+	}
 
 }

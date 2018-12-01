@@ -4,10 +4,11 @@ import modelo.excepciones.PiezaFueraDeAlcanceError;
 import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 
 public abstract class Pieza {
-	
-	protected int vidaMaxima;
+
+    final public int COSTO;
+    final public int VIDA_MAX;
+
 	protected int vida;
-	protected int costo;
 	protected Area espacioOcupado;
 	protected boolean turnoJugado;
 
@@ -21,14 +22,12 @@ public abstract class Pieza {
         }
     }
 
-    protected boolean enRango(Pieza piezaEnemiga, int distanciaMaxima){
+    protected void chequearRango(Pieza piezaEnemiga, int distanciaMaxima){
 
         int distanciaAPieza = distanciaMinimaA(piezaEnemiga.obtenerAreaOcupada());
 
-        if(distanciaAPieza > distanciaMaxima) {
+        if(distanciaAPieza > distanciaMaxima)
             throw new PiezaFueraDeAlcanceError();
-        }
-        return true;
     }
 
     protected int distanciaMinimaA(Area area) {
@@ -50,25 +49,28 @@ public abstract class Pieza {
 	/*          Constructor             */
 
 	public Pieza(){
-        vida = 0;
-        costo = 0;
+
         espacioOcupado = null;
         turnoJugado = false;
+
+        VIDA_MAX = 0;
+        COSTO = 0;
     }
 
-	public Pieza(Area espacioAOcupar) {
+	public Pieza(Area espacioAOcupar, int vidaMaxima, int costo) {
 
-		espacioOcupado = espacioAOcupar;
-		espacioOcupado.ocupar();
+        espacioAOcupar.ocupar();
+	    espacioOcupado = espacioAOcupar;
 		turnoJugado = false;
-		vida = 0;
-		costo = 0;
+
+		VIDA_MAX = vidaMaxima;
+		COSTO = costo;
 	}
 
 	public Area obtenerAreaOcupada() { return espacioOcupado; }
 
 	public void recibirDanio(int danio) {
-		vida = vida - danio;
+		vida = (vida - danio);
 		if(vida <= 0) {
 			vida = 0;
 			this.liberarUbicacion();
@@ -82,10 +84,14 @@ public abstract class Pieza {
 	
 	public boolean estaDestruida() { return (vida == 0); }
 
-	public abstract void recibirDanioDe(Arquero unArquero);
-	public abstract void recibirDanioDe(Espadachin unEspadachin);
-	
-	public double porcentajeVidaActual() {
-		return ((double)vida/vidaMaxima);
-	}
+    public double porcentajeVidaActual() {
+        return ((double)vida/VIDA_MAX);
+    }
+
+    public abstract void atacar(Pieza piezaEnemiga);
+
+	public abstract void recibirDanioDe(Unidad unaUnidad);
+
+	public abstract void recibirDanioDe(Edificio unEdificio);
+
 }

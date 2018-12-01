@@ -22,7 +22,6 @@ public class Jugador {
     		if(piezaActual instanceof Aldeano) {
     			cantidadDeOro = cantidadDeOro + ((Aldeano) piezaActual).generarOro();
     		}
-
     	}
     }
 
@@ -42,6 +41,7 @@ public class Jugador {
     }
 
     public void asignarPiezas(List<Pieza> piezas){
+
         this.piezas = piezas;
         actualizarPoblacion();
     }
@@ -52,7 +52,7 @@ public class Jugador {
 
             throw new PoblacionLimiteSuperadaError();
 
-        this.cantidadDeOro = this.cantidadDeOro - nuevaPieza.costo;
+        this.cantidadDeOro = this.cantidadDeOro - nuevaPieza.COSTO;
         this.piezas.add(nuevaPieza);
         this.actualizarPoblacion();
     }
@@ -98,4 +98,5 @@ public class Jugador {
         }
         return true;
     }
+
 }

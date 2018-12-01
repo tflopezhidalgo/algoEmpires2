@@ -1,8 +1,8 @@
 package vista;
 
+import controlador.ClickPiezaHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.MenuBar;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -10,7 +10,7 @@ import modelo.Pieza;
 
 public abstract class PiezaVista extends StackPane {
 
-	protected Pieza modelo;
+	private Pieza modelo;
 	protected MapaVista elMapa;
 	
 	protected Rectangle seleccion;
@@ -45,7 +45,7 @@ public abstract class PiezaVista extends StackPane {
 		
 		//-----------------------------------------
 		//-----------------------------------------
-		crearRepresentacion();
+		//crearRepresentacion();
 		
 		//Cuadro de Seleccion
 		seleccion = new Rectangle(TAMANIO_CASILLA*(ancho-0.05), TAMANIO_CASILLA*(alto-0.05));
@@ -67,16 +67,11 @@ public abstract class PiezaVista extends StackPane {
 		prepararBotones();
 		//-----------------------------------------
 		
-		setOnMousePressed(e -> {
-			if(e.getButton() == MouseButton.PRIMARY ) {
-				seleccionarPieza();
-			}
-			if(e.getButton() == MouseButton.SECONDARY ) {
-				realizarAccionSobrePieza();
-			}
-		});
+		setOnMousePressed(new ClickPiezaHandler(elMapa,this));
+
 	}
 	
+	/*
 	protected void seleccionarPieza() {
 		//sacar efecto a casilla anterior
 		PiezaVista piezaAnterior = elMapa.piezaSeleccionada();
@@ -86,25 +81,26 @@ public abstract class PiezaVista extends StackPane {
 		//agregar efecto a casilla actual
 		seleccionar();
 		elMapa.seleccionarPieza(this);
-	}
+	}*/
 
-	private void desSeleccionar() {
+	public void desSeleccionar() {
 		seleccion.setVisible(false);
 	}
 	
-	private void seleccionar() {
+	public void seleccionar() {
 		seleccion.setVisible(true);
 		elMapa.asignarMenuAcciones(acciones);
 	}
 	
-	public Pieza modelo() {
+	public abstract Pieza modelo();
+	/*{
+		System.out.println("Pieza getModelo : " + (modelo == null)); //TODO BORRAR
+
 		return modelo;
-	}
+	}*/
 	
-	// TODO AL CONTROLADOR? 
 	public void nuevoTurno() {
 		modelo.nuevoTurno();
-		//TODO test, esto esta medio desactulizado por 1 turno
 		actualizarVisualizacon();
 	}
 	
@@ -115,9 +111,9 @@ public abstract class PiezaVista extends StackPane {
 	//Esta pieza es atacada, o reparada.
 	//Reparada si: piezaSeleccionada es un Aldeano y esta Pieza es un Edificio
 	//Atacada si: piezaSeleccionada es Espadachin/Arquero/Castillo o ArmaDeAsedio y estaPieza es un Edificio
-	protected abstract void realizarAccionSobrePieza();
+	public abstract void realizarAccionSobrePieza();
 	
-	protected void actualizarVisualizacon(){
+	public void actualizarVisualizacon(){
 		double porcentaje = modelo.porcentajeVidaActual();
 		barraVidaActual.setWidth(TAMANIO_CASILLA*ancho*porcentaje);
 	}

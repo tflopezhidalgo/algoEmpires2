@@ -1,6 +1,7 @@
 import javafx.scene.control.Tab;
 import modelo.*;
 import modelo.excepciones.PiezaFueraDeAlcanceError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -228,5 +229,54 @@ public class ArqueroTest {
 
         Assert.assertEquals(true, lanzaUnError);
     }
+
+    @Test
+    public void arqueroYaJugoEnEseTurno() throws Exception{
+        Tablero unTablero = new Tablero();
+        Arquero unArquero = new Arquero(unTablero.definirArea(0,0,0,0));
+
+        unArquero.mover(unTablero.definirArea(1,0,1,0));
+
+        boolean lanzaUnError=false;
+        try {
+            unArquero.mover(unTablero.definirArea(1,1,1,1));
+        } catch (PiezaYaJugoEnTurnoActualError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+
+
+    }
+
+    @Test
+    public void liberarUbicacionArquero() {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area espacioArquero = unTablero.definirArea(0, 0, 0, 0);
+        Pieza unaPieza = new Arquero(espacioArquero);
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(espacioArquero.estaLibre());
+        Assert.assertEquals(1,espacioArquero.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(75); //Arquero.VIDA_MAX = 75
+        Assert.assertTrue(espacioArquero.estaLibre());
+    }
+
+    //ES PRIVADO EL METODO
+/*    @Test
+    public void distanciaMinimaAUnArea() {
+
+        Tablero unTablero = new Tablero(6,6);
+
+        Area unArea = unTablero.definirArea(0, 0, 1,1);
+        Area espacioArquero = unTablero.definirArea(3, 0, 3, 0);
+        Arquero unArquero = new Arquero(espacioArquero);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3 ,0).estaOcupada());
+
+        Assert.assertEquals(2, unArquero.distanciaMinimaA(unArea));
+
+    }*/
 
 }

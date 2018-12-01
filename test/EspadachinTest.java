@@ -1,6 +1,7 @@
 import javafx.scene.control.Tab;
 import modelo.*;
 import modelo.excepciones.PiezaFueraDeAlcanceError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -190,4 +191,53 @@ public class EspadachinTest {
 
         Assert.assertEquals(true, lanzaUnError);
     }
+
+    @Test
+    public void espadachinYaJugoEnEseTurno() throws Exception{
+        Tablero unTablero = new Tablero();
+        Espadachin unEspadachin = new Espadachin(unTablero.definirArea(0,0,0,0));
+        Espadachin espadachinAAtacar = new Espadachin(unTablero.definirArea(0,1,0,1));
+
+        unEspadachin.mover(unTablero.definirArea(1,0,1,0));
+
+        boolean lanzaUnError=false;
+        try {
+            unEspadachin.atacar(espadachinAAtacar);
+        } catch (PiezaYaJugoEnTurnoActualError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+    }
+
+    @Test
+    public void liberarUbicacionEspadachin() {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area espacioEspadachin = unTablero.definirArea(0, 0, 0, 0);
+        Pieza unaPieza = new Espadachin(espacioEspadachin);
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(espacioEspadachin.estaLibre());
+        Assert.assertEquals(1,espacioEspadachin.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(100); //Espadachin.VIDA_MAX = 100
+        Assert.assertTrue(espacioEspadachin.estaLibre());
+    }
+
+    //ES PRIVADO EL METODO
+/*    @Test
+    public void distanciaMinimaAUnArea() {
+
+        Tablero unTablero = new Tablero(6,6);
+
+        Area unArea = unTablero.definirArea(0, 0, 1,1);
+        Area espacioEspadachin = unTablero.definirArea(3, 0, 3, 0);
+        Espadachin unEspadachin = new Espadachin(espacioEspadachin);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3 ,0).estaOcupada());
+
+        Assert.assertEquals(2, unEspadachin.distanciaMinimaA(unArea));
+
+    }*/
+
 }

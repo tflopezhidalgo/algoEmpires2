@@ -1,43 +1,31 @@
 package modelo;
 
-import modelo.excepciones.CastilloDeJugadorFueDestruido;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class Castillo extends Edificio {
 	
 	public static final int TAMANIO_LADO = 4;
-	
+    public static final int DISTANCIA_ATK = 3;
+
+	private CastilloListener castilloListener;
+
 	public Castillo(Area areaAOcupar) {
-		super(areaAOcupar);
-		vidaMaxima = 1000;
-		vida = vidaMaxima;
-		costo = 0;
+
+		super(areaAOcupar, 1000, 0);
+
+		vida = VIDA_MAX;
 		tiempoDeConstruccion = 0;
 		cantidadDeCuracion = 15;
 	}
 
 	@Override
-    public void recibirDanio(int danio){
-        vida = vida - danio;
-        if(vida <= 0) {
-            liberarUbicacion();
-            throw new CastilloDeJugadorFueDestruido();
-        }
-    }
-
-	//ATACA 1 VEZ A CADA OBJETIVO QUE ESTE EN RANGO NO IMPORTA SI YA JUGO EL TURNO
-	//TODO hacer una lista de objetivos en rango y pasarsela asi ataca solo 1 vez a cada uno
 	public void atacar(Pieza piezaEnemiga){
-		if(enRango(piezaEnemiga,3)) {
-			piezaEnemiga.recibirDanio(20);
-		}
-		
-		if(piezaEnemiga.estaDestruida()) {
-			piezaEnemiga = null;
-		}
+
+	    chequearRango(piezaEnemiga, DISTANCIA_ATK);
+	    piezaEnemiga.recibirDanio(20);
 	}
 	
-	public ArmaDeAsedio crearCatapulta(Area unEspacio) {
+	public Unidad crearCatapulta(Area unEspacio) {
 	    siYaJugoElTurnoError();
 	    
         if(distanciaMinimaA(unEspacio) > 1) {
@@ -45,7 +33,24 @@ public class Castillo extends Edificio {
         }
         
 		ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(unEspacio);
+
 		turnoJugado = true;
 		return unaArmaDeAsedio;
 	}
+
+	public void setCastilloListener(Juego unJuego){
+
+	    this.castilloListener = unJuego;
+    }
+
+
+	@Override
+    public void recibirDanio(int danio) {
+        vida = vida - danio;
+        if(vida <= 0) {
+            this.castilloListener.castilloFueDestruido();
+            this.liberarUbicacion();
+        }
+    }
+
 }

@@ -1,64 +1,78 @@
 package modelo;
 
-import modelo.estadoEdificio.EdificioSiendoReparado;
-import modelo.estadoEdificio.EdificioSinSerReparado;
-import modelo.estadoEdificio.EstadoEdificio;
+import modelo.excepciones.EdificioTieneOtroAldeanoAsignado;
 
 public abstract class Edificio extends Pieza {
 
 	protected int tiempoDeConstruccion;
 	protected int cantidadDeCuracion;
+
+	protected Aldeano aldeanoAsignado;
 	
-	protected EstadoEdificio estado;
-	
-	public Edificio(Area areaAOcupar) {
-	    super(areaAOcupar);
-	    this.vidaMaxima = 0;
+
+	public Edificio(Area areaAOcupar, int vidaMax, int costo) {
+
+	    super(areaAOcupar, vidaMax, costo);
+
 	    this.tiempoDeConstruccion = 0;
 	    this.cantidadDeCuracion = 0;
-	    estado = new EdificioSinSerReparado();
+	    this.aldeanoAsignado = null;
 	}
+
+	public void setAldeanoAsignado(Aldeano unAldeano){
+        if(this.aldeanoAsignado == null)
+	        this.aldeanoAsignado = unAldeano;
+
+        else if(this.aldeanoAsignado != unAldeano)
+            throw new EdificioTieneOtroAldeanoAsignado();
+    }
 
 	public void reparar() {
-		vida = vida + cantidadDeCuracion;
-		if(!vidaBaja()) {
-			estado = new EdificioSinSerReparado();
-			vida = vidaMaxima;
-			// liberar al aldeano de su labor
-		}
+
+	    vida = vida + cantidadDeCuracion;
+        if (vida >= VIDA_MAX) {
+            this.aldeanoAsignado = null;
+            vida = VIDA_MAX;
+        }
 	}
-	
-	public boolean necesitaReparacion() {
-		return (estado.necesitaReparacion(vida, vidaMaxima));
-	}
-	
+
+    public void construir() {
+
+        tiempoDeConstruccion--;
+        if(tiempoDeConstruccion <= 0){
+            this.aldeanoAsignado = null;
+            tiempoDeConstruccion = 0;
+        }
+    }
+
+	public boolean enConstruccion(){
+
+	    return (tiempoDeConstruccion > 0);
+    }
+
 	public boolean vidaBaja() {
-		return vida<vidaMaxima;
-	}
-	
-	public boolean enConstruccion() {
-		return(tiempoDeConstruccion > 0);
-	}
-	
-	public void construir() {
-		if(enConstruccion()) {
-			tiempoDeConstruccion--;
-		}
-	}
-	
-	public int tamanioArea() {
-		return espacioOcupado.obtenerCantidadDeCasillas();
+
+	    return this.necesitaReparacion();
 	}
 
-	public void recibirDanioDe(Arquero unArquero){
-	    this.recibirDanio(10);
+	public boolean necesitaReparacion(){
+
+	    return (vida < VIDA_MAX);
     }
 
-    public void recibirDanioDe(Espadachin unEspadachin){
-	    this.recibirDanio(15);
+    public void atacar(Pieza unaPieza){
+
+
     }
 
-	public void comenzarReparacion() {
-		estado = new EdificioSiendoReparado();
-	}
+    public void recibirDanioDe(Edificio unEdificio){
+
+	    //Los edificios no se atacan entre si
+    }
+
+    public void recibirDanioDe(Unidad unaUnidad){
+
+    	this.recibirDanio(unaUnidad.DANIO_EDIFICIOS);
+    }
+
 }

@@ -2,6 +2,7 @@ package modelo;
 
 import java.util.List;
 
+import modelo.excepciones.CasillaOcupadaError;
 import modelo.excepciones.NullPointerCasillaError;
 
 public class Area {
@@ -41,17 +42,23 @@ public class Area {
 	
 	public void ocupar() {
 
-		for (int i = 0; i < casillasDelArea.size(); i++)
-			casillasDelArea.get(i).ocupar();
+        if(this.estaLibre()) {
+            for (int i = 0; i < casillasDelArea.size(); i++)
+                casillasDelArea.get(i).ocupar();
+        }else{
+            throw new CasillaOcupadaError();
+
+        }
 	}
 
-	//TODO: Esto tiene que sacarse
 	public boolean estaLibre() {
 
-		for (int i = 0; i < casillasDelArea.size(); i++)
-			if (casillasDelArea.get(i).estaOcupada())
-				return false;
-		return true;
+		for (int i = 0; i < casillasDelArea.size(); i++) {
+            if (casillasDelArea.get(i).estaOcupada()) {
+                return false;
+            }
+        }
+        return true;
 	}
 	
 	public void agregarCasilla(Casilla unaCasilla) {

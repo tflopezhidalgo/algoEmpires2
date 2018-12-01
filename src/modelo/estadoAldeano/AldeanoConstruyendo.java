@@ -1,35 +1,41 @@
 package modelo.estadoAldeano;
 
-import modelo.Area;
-import modelo.Cuartel;
-import modelo.Edificio;
-import modelo.Plaza;
+import modelo.*;
 import modelo.excepciones.AldeanoConstruyendoNoPuedeReparar;
 import modelo.excepciones.AldeanoOcupadoConOtroEdificioError;
+
+import javax.swing.plaf.synth.SynthScrollBarUI;
 
 public class AldeanoConstruyendo extends EstadoAldeano {
 
     public AldeanoConstruyendo(Edificio unEdificio){
+
         this.edificioObjetivo = unEdificio;
     }
 
-    public EstadoAldeano reparar(Edificio unEdificio) {
+    public EstadoAldeano reparar(Edificio unEdificio, Aldeano unAldeano) {
+
     	throw new AldeanoConstruyendoNoPuedeReparar();
     }
 
-	public EstadoAldeano construir(Cuartel nuevoCuartel, Area areaDeConstruccion) {
+	public EstadoAldeano construirCuartel(Area unArea, Aldeano unAldeano) {
+
     	throw new AldeanoOcupadoConOtroEdificioError();
 	}
 
-	public EstadoAldeano construir(Plaza nuevaPlaza, Area areaDeConstruccion) {
-    	throw new AldeanoOcupadoConOtroEdificioError();
-	}
+	public EstadoAldeano construirPlaza(Area unArea, Aldeano unAldeano){
+
+        throw new AldeanoOcupadoConOtroEdificioError();
+    }
+
 
     public EstadoAldeano realizarTrabajoDeTurno() {
+
         edificioObjetivo.construir();
-        if(this.edificioObjetivo.enConstruccion()) {
+
+        if(this.edificioObjetivo.enConstruccion())
             return this;
-        }
+
         return (new AldeanoLibre());
     }
 

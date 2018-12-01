@@ -1,5 +1,6 @@
 package modelo.estadoCasilla;
 
+
 import modelo.excepciones.CasillaYaEstaLibreError;
 
 public class CasillaLibre extends EstadoCasilla {

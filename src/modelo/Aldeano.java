@@ -6,78 +6,75 @@ import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class Aldeano extends Unidad {
 
-    final int VIDA = 50;
-    final int COSTO = 25;
-
 	private EstadoAldeano estadoActual;
 	
 	public Aldeano(Area unEspacio){
-		super(unEspacio);
+		super(unEspacio, 50, 25,0,0,1);
+
 		estadoActual = new AldeanoLibre();
-		
-		vidaMaxima = VIDA;
-		vida = vidaMaxima;
-		costo = COSTO;
+		vida = VIDA_MAX;
 	}
 
 	@Override
+    public void atacar(Pieza unaPieza){
+
+
+    }
+
+	@Override
     public void mover(Area nuevaArea) {
-	    estadoActual.mover(); //TODO esto es para cortar con un error nadamas, no hace nada
-        espacioOcupado.liberar();
-        espacioOcupado = nuevaArea;
-        espacioOcupado.ocupar();
-        turnoJugado = true;
+	    estadoActual.mover();
+        super.mover(nuevaArea);
     }
 
 	public void reparar(Edificio unEdificio) {
 	    siYaJugoElTurnoError();
-		
-		if(enRango(unEdificio,1) & unEdificio.necesitaReparacion()) {
-			unEdificio.comenzarReparacion();
-			estadoActual = estadoActual.reparar(unEdificio);
-			turnoJugado = true;
-		}
+
+		chequearRango(unEdificio, DISTANCIA_ATK);
+		estadoActual = estadoActual.reparar(unEdificio, this);
+		turnoJugado = true;
 	}
-	
-	public Plaza crearPlaza(Area areaDeConstruccion) {
+
+	//TODO: Retornar clases madres (Edificio)
+
+	public Edificio crearPlaza(Area areaDeConstruccion) {
 		siYaJugoElTurnoError();
 
-        if(distanciaMinimaA(areaDeConstruccion) > 1)
+        if(distanciaMinimaA(areaDeConstruccion) > DISTANCIA_ATK)
             throw new NoSePuedeConstruirTanLejosError();
-        Plaza nuevaPlaza = null;
-        estadoActual = estadoActual.construir(nuevaPlaza, areaDeConstruccion);
-        turnoJugado = true;
-        //nadamas hace return en caso de ser llamado el metodo en las condiciones apropiadas
-        //en cualquier otro caso corta por error , no devuelve NI null
-        return (Plaza)estadoActual.obtenerEdificioObjetivo();
 
+        estadoActual = estadoActual.construirPlaza(areaDeConstruccion, this);
+        turnoJugado = true;
+
+        return estadoActual.obtenerEdificioObjetivo();
 	}
 	
-	public Cuartel crearCuartel(Area areaDeConstruccion) {
+	public Edificio crearCuartel(Area areaDeConstruccion) {
         siYaJugoElTurnoError();
 
-        if(distanciaMinimaA(areaDeConstruccion) > 1) {
+        if(distanciaMinimaA(areaDeConstruccion) > DISTANCIA_ATK)
             throw new NoSePuedeConstruirTanLejosError();
-        }
-        Cuartel nuevoCuartel = null;
-        estadoActual = estadoActual.construir(nuevoCuartel, areaDeConstruccion);
+
+        estadoActual = estadoActual.construirCuartel(areaDeConstruccion, this);
         turnoJugado = true;
-        //nadamas hace return en caso de ser llamado el metodo en las condiciones apropiadas
-        //en cualquier otro caso corta por error , no devuelve NI null
-        return (Cuartel)estadoActual.obtenerEdificioObjetivo();
+
+        return estadoActual.obtenerEdificioObjetivo();
 	}
 
 	public void realizarTrabajoDeTurno() {
+
 		estadoActual = estadoActual.realizarTrabajoDeTurno();
 		turnoJugado = true;
 	}
 
 	public int generarOro(){
+
 	    return (estadoActual.generarOro());
     }
 	
 	@Override
 	public void nuevoTurno() {
+
 		realizarTrabajoDeTurno();
 		super.nuevoTurno();
 	}

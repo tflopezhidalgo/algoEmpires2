@@ -1,14 +1,11 @@
+import modelo.*;
 import modelo.excepciones.PiezaFueraDeAlcanceError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
-import modelo.Area;
-import modelo.ArmaDeAsedio;
-import modelo.Casilla;
-import modelo.Plaza;
-import modelo.Tablero;
 import modelo.excepciones.CatapultaArmadaNoPuedeMoverseError;
 import modelo.excepciones.CatapultaDesarmadaNoPuedeAtacarError;
 
@@ -48,6 +45,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
 
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.accionar();
         //tira error
     	//thrown.expect(modelo.Exceptiones.Exception.class);
@@ -72,6 +70,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
 
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.accionar();
         //tira error
     	//thrown.expect(modelo.Exceptiones.Exception.class);
@@ -96,6 +95,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
 
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.accionar();
         //tira error
     	//thrown.expect(modelo.Exceptiones.Exception.class);
@@ -120,6 +120,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
 
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.accionar();
         //tira error
     	//thrown.expect(modelo.Exceptiones.Exception.class);
@@ -144,6 +145,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
 
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.accionar();
         //tira error
     	//thrown.expect(modelo.Exceptiones.Exception.class);
@@ -168,6 +170,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
 
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.accionar();
         //tira error
     	//thrown.expect(modelo.Exceptiones.Exception.class);
@@ -192,6 +195,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
 
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.accionar();
         //tira error
     	//thrown.expect(modelo.Exceptiones.Exception.class);
@@ -216,6 +220,7 @@ public class ArmaDeAsedioTest {
         Assert.assertEquals(true, espacioArmaDeAsedio.estaLibre());
         Assert.assertEquals(true, casillaFinal.estaOcupada());
 
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.accionar();
         //tira error
     	//thrown.expect(modelo.Exceptiones.Exception.class);
@@ -230,59 +235,37 @@ public class ArmaDeAsedioTest {
      */
    @Test
     public void armaDeAsedioNoAtacaSiNoFueAccionada() throws Exception {
+       Tablero unTablero = new Tablero();
+       ArmaDeAsedio unArma = new ArmaDeAsedio(unTablero.definirArea(2,0,2,0));
+       Plaza unaPlaza = new Plaza(unTablero.definirArea(0,0,1,1), true);
 
-	   	Tablero unTablero = new Tablero(7,7);
-	   	
-        Area zonaDeConstruccion = unTablero.definirArea(5, 5, Plaza.TAMANIO_LADO+4, Plaza.TAMANIO_LADO+4);
-        Plaza unaPlaza = new Plaza(zonaDeConstruccion);
+       boolean seLanzaError=false;
+       try{
+           unArma.atacar(unaPlaza);
+       } catch (CatapultaDesarmadaNoPuedeAtacarError e){
+           seLanzaError=true;
+       }
 
-    	Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
-        ArmaDeAsedio unaArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
-
-        //vida de la plaza == 450
-        try {
-        unaArmaDeAsedio.atacar(unaPlaza);
-		} catch (Exception e) {}
-        Assert.assertEquals(false, unaPlaza.necesitaReparacion());
-        
-        unaArmaDeAsedio.accionar();
-        
-        //vida de la plaza == 375
-        unaArmaDeAsedio.atacar(unaPlaza);
-        Assert.assertEquals(true, unaPlaza.necesitaReparacion());
-    }
+       Assert.assertEquals(true, seLanzaError);
+   }
    
    @Test
     public void armaDeAsedioNoSeMueveSiFueAccionada() throws Exception {
+        Tablero unTablero = new Tablero();
+        ArmaDeAsedio unArma = new ArmaDeAsedio(unTablero.definirArea(0,0,0,0));
 
-        Tablero unTablero = new Tablero(3,3);
+        unArma.accionar();
+        unArma.nuevoTurno();
+        boolean seLanzaError=false;
+        try{
+            unArma.mover(unTablero.definirArea(1,0,1,0));
+        } catch (CatapultaArmadaNoPuedeMoverseError e){
+            seLanzaError=true;
+        }
 
-    	Area espacioArmaDeAsedio = unTablero.definirArea(0,0,0,0);
-        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
+        Assert.assertEquals(true, seLanzaError);
 
-        Casilla casillaArriba1 = unTablero.obtenerCasillaEn(0, 1);
-        Casilla casillaArriba2 = unTablero.obtenerCasillaEn(0, 2);
-        
-        //no deberia tirar error
-        unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
-        
-        unArmaDeAsedio.accionar();
-        
-        //no se mueve
-        unArmaDeAsedio.nuevoTurno();
-		try {
-			unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
-		} catch (Exception e) {}
-     	Assert.assertEquals(true, casillaArriba1.estaOcupada());
-     	Assert.assertEquals(false, casillaArriba2.estaOcupada());
- 
-        unArmaDeAsedio.accionar();
-        
-        //no hace falta iniciar un nuevo turno
-        //no deberia tirar error
-        unTablero.moverEnDireccion(unArmaDeAsedio,0,1);
-     	Assert.assertEquals(false, casillaArriba1.estaOcupada());
-     	Assert.assertEquals(true, casillaArriba2.estaOcupada());
+
     }
     
     @Test
@@ -298,8 +281,9 @@ public class ArmaDeAsedioTest {
         unArmaDeAsedio.accionar();
         
         //vida de la plaza == 375
-        //Aunque la palza no esta 100% en rango, una de sus casillas lo esta
+        //Aunque la plaza no esta 100% en rango, una de sus casillas lo esta
         //ya que, por ej tambien ocupa la casilla (5,5) que si esta en rango
+        unArmaDeAsedio.nuevoTurno();
         unArmaDeAsedio.atacar(unaPlaza);
 
         Assert.assertEquals(true,unaPlaza.necesitaReparacion());
@@ -369,6 +353,7 @@ public class ArmaDeAsedioTest {
        Plaza unaPlaza = new Plaza(unTablero.definirArea(6,6,7,7), true);
 
        unArma.accionar();
+       unArma.nuevoTurno();
 
        boolean seLanzoError=false;
        try {
@@ -380,5 +365,57 @@ public class ArmaDeAsedioTest {
        Assert.assertEquals(true, seLanzoError);
     }
 
+    @Test
+    public void armaDeAsedioYaJugoEnEseTurno() throws Exception{
+
+       Tablero unTablero = new Tablero();
+       ArmaDeAsedio unArma = new ArmaDeAsedio(unTablero.definirArea(0,0,0,0));
+       Plaza unaPlaza = new Plaza(unTablero.definirArea(1,1,2,2), true);
+
+       unArma.accionar();
+       unArma.nuevoTurno();
+       unArma.atacar(unaPlaza);
+
+       boolean lanzaUnError=false;
+       try{
+           unArma.atacar(unaPlaza);
+       } catch (PiezaYaJugoEnTurnoActualError e){
+           lanzaUnError=true;
+       }
+
+       Assert.assertEquals(true, lanzaUnError);
+
+
+    }
+
+    @Test
+    public void liberarUbicacionArmaDeAsedio() {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area espacioArmaDeAsedio = unTablero.definirArea(0, 0, 0, 0);
+        Pieza unaPieza = new ArmaDeAsedio(espacioArmaDeAsedio);
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(espacioArmaDeAsedio.estaLibre());
+        Assert.assertEquals(1,espacioArmaDeAsedio.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(150); //ArmaDeAsedio.VIDA_MAX = 150
+        Assert.assertTrue(espacioArmaDeAsedio.estaLibre());
+    }
+
+    //ES PRIVADO EL METODO
+   /* @Test
+    public void distanciaMinimaAUnArea() {
+
+        Tablero unTablero = new Tablero(6,6);
+
+        Area unArea = unTablero.definirArea(0, 0, 1,1);
+        Area espacioArmaDeAsedio = unTablero.definirArea(3, 0, 3, 0);
+        ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(espacioArmaDeAsedio);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3 ,0).estaOcupada());
+
+        Assert.assertEquals(2, unArmaDeAsedio.distanciaMinimaA(unArea));
+
+    }*/
 
 }

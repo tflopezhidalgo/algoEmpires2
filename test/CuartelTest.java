@@ -1,11 +1,15 @@
 import modelo.*;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
+import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
+import modelo.factoryCuartel.TipoGuerrero;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import junit.framework.Assert;
+
+import static modelo.factoryCuartel.FactoryGuerrero.crearGuerrero;
 
 @SuppressWarnings("deprecation")
 public class CuartelTest {
@@ -14,7 +18,7 @@ public class CuartelTest {
 	public ExpectedException thrown = ExpectedException.none();
 	
     @Test
-    public void ColocarCuartel() throws Exception {
+    public void ColocarCuartel() {
 
     	Tablero unTablero = new Tablero(5,5);
 
@@ -36,7 +40,7 @@ public class CuartelTest {
     }
     
     @Test
-    public void cuartelCreaEspadachin() throws Exception {
+    public void cuartelCreaEspadachin() {
 
     	Tablero unTablero = new Tablero(5,5);
 
@@ -51,7 +55,7 @@ public class CuartelTest {
         Area espacioEspadachin = unTablero.definirArea(1,2,1,2);
         Assert.assertEquals(true,espacioEspadachin.estaLibre());
         
-        Espadachin nuevoEspadachin = unCuartel.crearEspadachin(espacioEspadachin);
+        Unidad nuevoEspadachin = unCuartel.crearGuerrero(espacioEspadachin, TipoGuerrero.ESPADACHIN);
         Assert.assertEquals(false,espacioEspadachin.estaLibre());
         
         //mover espadachin para arriba
@@ -68,11 +72,11 @@ public class CuartelTest {
     }
     
     @Test
-    public void cuartelCreaArquero() throws Exception {
+    public void cuartelCreaArquero() {
 
-    	Tablero unTablero = new Tablero(5,5);
+    	Tablero unTablero = new Tablero();
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+        Area zonaDeConstruccion = unTablero.definirArea(0,0,1,1);
         Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
         
         //El cuartel debe estar construido para poder crear unidades (3 turnos)
@@ -80,16 +84,16 @@ public class CuartelTest {
         unCuartel.construir();
         unCuartel.construir();
 
-        Area espacioArquero = unTablero.definirArea(1,2,1,2);
+        Area espacioArquero = unTablero.definirArea(2,0,2,0);
         Assert.assertEquals(true,espacioArquero.estaLibre());
         
-        Arquero nuevoArquero = unCuartel.crearArquero(espacioArquero);
+        Unidad nuevoArquero = unCuartel.crearGuerrero(espacioArquero, TipoGuerrero.ARQUERO);
         Assert.assertEquals(false,espacioArquero.estaLibre());
-        
+
         //mover arquero para arriba
         unTablero.moverEnDireccion(nuevoArquero,0,1);
         
-        Casilla casillaOtroArquero = unTablero.obtenerCasillaEn(1,3);
+        Casilla casillaOtroArquero = unTablero.obtenerCasillaEn(2,1);
         Assert.assertEquals(true,espacioArquero.estaLibre());
         Assert.assertEquals(true,casillaOtroArquero.estaOcupada());
         
@@ -97,21 +101,23 @@ public class CuartelTest {
     	//thrown.expect(modelo.Exceptiones.Exception.class);
     	//modelo.Arquero otroArquero = unCuartel.crearArquero(casillaOtroArquero);
     	//Assert.assertNull(otroArquero);
-        
     }
 
     @Test
-    public void noSePuedeCrearArqueroTanLejos() throws Exception{
+    public void noSePuedeCrearArqueroTanLejos() {
         Tablero unTablero = new Tablero();
-        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1),true);
+        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1));
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
 
-        Arquero unArquero = unCuartel.crearArquero(unTablero.definirArea(0,2,0,2));
+        Unidad unArquero = unCuartel.crearGuerrero(unTablero.definirArea(0,2,0,2), TipoGuerrero.ARQUERO);
 
         unCuartel.nuevoTurno();
         boolean lanzaUnError=false;
         try
         {
-            Arquero otroArquero = unCuartel.crearArquero(unTablero.definirArea(3,3,3,3));
+            Unidad otroArquero = unCuartel.crearGuerrero(unTablero.definirArea(3,3,3,3), TipoGuerrero.ARQUERO);
         } catch (NoSePuedeConstruirTanLejosError e)
         {
             lanzaUnError=true;
@@ -121,17 +127,21 @@ public class CuartelTest {
     }
 
     @Test
-    public void noSePuedeCrearEspadachinTanLejos() throws Exception{
+    public void noSePuedeCrearEspadachinTanLejos() {
         Tablero unTablero = new Tablero();
-        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1),true);
+        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1));
 
-        Espadachin unEspadachin = unCuartel.crearEspadachin(unTablero.definirArea(0,2,0,2));
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
+
+        Unidad unEspadachin = unCuartel.crearGuerrero(unTablero.definirArea(0,2,0,2), TipoGuerrero.ESPADACHIN);
 
         unCuartel.nuevoTurno();
         boolean lanzaUnError=false;
         try
         {
-            Espadachin otroEspadachin = unCuartel.crearEspadachin(unTablero.definirArea(3,3,3,3));
+            Unidad otroEspadachin = unCuartel.crearGuerrero(unTablero.definirArea(3,3,3,3), TipoGuerrero.ESPADACHIN);
         } catch (NoSePuedeConstruirTanLejosError e)
         {
             lanzaUnError=true;
@@ -141,16 +151,16 @@ public class CuartelTest {
     }
 
     @Test
-    public void noSePuedeCrearUnidadDuranteConstruccion() throws Exception{
+    public void noSePuedeCrearUnidadDuranteConstruccion() {
         Tablero unTablero = new Tablero();
         Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
 
-        Cuartel unCuartel = unAldeano.crearCuartel(unTablero.definirArea(0,1,1,2));
+        Cuartel unCuartel = (Cuartel) unAldeano.crearCuartel(unTablero.definirArea(0,1,1,2));
 
         //tarda 3 turnos en construirse una plaza
         boolean lanzaUnError=false;
         try {
-            unCuartel.crearArquero(unTablero.definirArea(2,1,2,1));
+            unCuartel.crearGuerrero(unTablero.definirArea(2,1,2,1), TipoGuerrero.ARQUERO);
         } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
             lanzaUnError=true;
         }
@@ -159,7 +169,7 @@ public class CuartelTest {
         unAldeano.nuevoTurno();
         lanzaUnError=false;
         try {
-            unCuartel.crearArquero(unTablero.definirArea(2,1,2,1));
+            unCuartel.crearGuerrero(unTablero.definirArea(2,1,2,1), TipoGuerrero.ARQUERO);
         } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
             lanzaUnError=true;
         }
@@ -168,7 +178,7 @@ public class CuartelTest {
         unAldeano.nuevoTurno();
         lanzaUnError=false;
         try {
-            unCuartel.crearArquero(unTablero.definirArea(2,1,2,1));
+            unCuartel.crearGuerrero(unTablero.definirArea(2,1,2,1), TipoGuerrero.ARQUERO);
         } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
             lanzaUnError=true;
         }
@@ -177,12 +187,156 @@ public class CuartelTest {
         unAldeano.nuevoTurno();
         lanzaUnError=false;
         try {
-            unCuartel.crearArquero(unTablero.definirArea(2,1,2,1));
+            unCuartel.crearGuerrero(unTablero.definirArea(2,1,2,1), TipoGuerrero.ARQUERO);
         } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
             lanzaUnError=true;
         }
         Assert.assertEquals(false, lanzaUnError);
     }
 
+    @Test
+    public void cuartelYaJugoEnEseTurno() {
+        Tablero unTablero = new Tablero();
+        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,0,1,1));
+
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
+
+        Unidad unArquero = unCuartel.crearGuerrero(unTablero.definirArea(2,0,2,0), TipoGuerrero.ARQUERO);
+
+        boolean lanzaUnError=false;
+        try{
+            Unidad unEspadachin = unCuartel.crearGuerrero(unTablero.definirArea(0,2,0,2), TipoGuerrero.ESPADACHIN);
+        } catch (PiezaYaJugoEnTurnoActualError e){
+            lanzaUnError=true;
+        }
+
+        Assert.assertEquals(true, lanzaUnError);
+
+    }
+
+    @Test
+    public void edificioNecesitaReparacionCuartel() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+        unEdificio.recibirDanio(15);
+
+        Assert.assertTrue(unEdificio.necesitaReparacion());
+
+    }
+
+    @Test
+    public void edificioRepararCuartel() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+        unEdificio.recibirDanio(15);
+
+        Assert.assertTrue(unEdificio.necesitaReparacion());
+
+        unEdificio.reparar();
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+    }
+
+    @Test
+    public void edificioConstruirCuartel() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+
+        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        unEdificio.construir();
+
+        Assert.assertTrue(unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertTrue(unEdificio.enConstruccion());
+
+        unEdificio.construir();
+
+        Assert.assertFalse(unEdificio.enConstruccion());
+
+    }
+
+    @Test
+    public void edificioRecibirDanioDeArqueroCuartel() throws Exception {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Area espacioArquero = unTablero.definirArea(4,4,4,4);
+        Arquero unArquero = new Arquero(espacioArquero);
+
+        unEdificio.construir();
+        unEdificio.construir();
+        unEdificio.construir();
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+        unEdificio.recibirDanioDe(unArquero);
+
+        Assert.assertTrue(unEdificio.necesitaReparacion());
+
+    }
+
+    @Test
+    public void edificioRecibirDanioDeEspadachinCuartel() throws Exception {
+        Tablero unTablero = new Tablero();
+
+        Area zonaDeConstruccion = unTablero.definirArea(0,0,1,1);
+        Edificio unEdificio = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Area espacioEspadachin = unTablero.definirArea(2,0,2,0);
+        Espadachin unEspadachin = new Espadachin(espacioEspadachin);
+
+        unEdificio.construir();
+        unEdificio.construir();
+        unEdificio.construir();
+
+        Assert.assertFalse(unEdificio.necesitaReparacion());
+
+        unEdificio.recibirDanioDe(unEspadachin);
+
+        Assert.assertTrue(unEdificio.necesitaReparacion());
+
+    }
+
+    @Test
+    public void liberarUbicacionCuartel() {
+        Tablero unTablero = new Tablero(6,6);
+
+        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
+        Pieza unaPieza = new Cuartel(zonaDeConstruccion);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
+
+        Assert.assertNotNull(unaPieza);
+        Assert.assertFalse(zonaDeConstruccion.estaLibre());
+        Assert.assertEquals(4,zonaDeConstruccion.obtenerCantidadDeCasillas());
+
+        unaPieza.recibirDanio(250); //Cuartel.VIDA_MAX = 250
+        Assert.assertTrue(zonaDeConstruccion.estaLibre());
+    }
 
 }
