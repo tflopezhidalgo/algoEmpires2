@@ -44,11 +44,9 @@ public class AldeanoVista extends UnidadVista{
 	private void ConstruirCuartel() {
 		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
 		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
-
-		Area areaDeConstruccion = elMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
 		
 		//TODO chk: almaceno en Cuartel y casteo o almaceno en Edificio?
-		Edificio cuartel = ((Aldeano)modelo).crearCuartel(areaDeConstruccion);
+		Edificio cuartel = ((Aldeano)modelo).crearCuartel(x0, y0);
 		if(cuartel != null) {
 			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elMapa);
 			elMapa.aniadirPieza(cuartelVisu);
@@ -58,11 +56,9 @@ public class AldeanoVista extends UnidadVista{
 	private void ConstruirPlaza() {
 		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
 		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
-
-		Area areaDeConstruccion = elMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
 		
 		//TODO chk: almaceno en Plaza y casteo o almaceno en Edificio?
-		Edificio plaza = ((Aldeano)modelo).crearPlaza(areaDeConstruccion);
+		Edificio plaza = ((Aldeano)modelo).crearPlaza(x0, y0);
 		if(plaza != null) {
 			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elMapa);
 			elMapa.aniadirPieza(plazaVisu);

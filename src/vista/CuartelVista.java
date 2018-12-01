@@ -51,8 +51,7 @@ public class CuartelVista extends EdificioVista{
 		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
 		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
-		Area espacioArquero = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
-		Unidad arquero = ((Cuartel)modelo).crearGuerrero(espacioArquero, TipoGuerrero.ARQUERO);
+		Unidad arquero = ((Cuartel)modelo).crearGuerrero(x0, y0, TipoGuerrero.ARQUERO);
 		if(arquero != null) {
 			ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elMapa);
 			elMapa.aniadirPieza(arqueroVista);
@@ -63,10 +62,8 @@ public class CuartelVista extends EdificioVista{
 		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
 		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
-		Area espacioEspadachin = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
-		
 		//TODO chk: almaceno en Espadachin y casteo o almaceno en Unidad?
-		Unidad espadachin = ((Cuartel)modelo).crearGuerrero(espacioEspadachin, TipoGuerrero.ESPADACHIN);
+		Unidad espadachin = ((Cuartel)modelo).crearGuerrero(x0, y0, TipoGuerrero.ESPADACHIN);
 		if(espadachin != null) {
 			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elMapa);
 			elMapa.aniadirPieza(espadachinVista);
