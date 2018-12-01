@@ -1,10 +1,11 @@
 package vista;
 
-import controlador.CrearAldeanoHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import modelo.Aldeano;
+import modelo.Area;
 import modelo.Edificio;
 import modelo.Plaza;
 
@@ -12,7 +13,6 @@ public class PlazaVista extends EdificioVista {
 	
 	public PlazaVista(int x, int y, Edificio unModelo, MapaVista unMapa) {
 		super(x,y,unModelo, unMapa);
-		System.out.println("PlazaView: modelo: " + (modelo == null) + " modelo2: " + (unModelo == null) ); //TODO BORRAR
 	}
 
 	protected void crearRepresentacion() {
@@ -38,11 +38,25 @@ public class PlazaVista extends EdificioVista {
 		//menu.setGraphic(new ImageView("file:imagen.png"));
 
 		MenuItem crearAldeano = new MenuItem("Crear Aldeano");
-		System.out.println("PlazaView: modelo: " + (modelo == null) +  " mapa: " + (elMapa == null) ); //TODO BORRAR
-		crearAldeano.setOnAction( new CrearAldeanoHandler(elMapa,modelo));
+		
+		crearAldeano.setOnAction( //new CrearAldeanoHandler(this.elMapa, this.modelo));
+				e->CrearAldeano());
 
 		menuHabilidades.getItems().addAll(crearAldeano);
 		acciones.getMenus().add(menuHabilidades);
+	}
+	
+	private void CrearAldeano() {
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX(); 
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
+		
+		//TODO los mismos comentarios que en construir Plaza
+		Area espacioAldeano = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
+		Aldeano aldeano = ((Plaza)modelo).crearAldeano(espacioAldeano); 
+		if(aldeano != null) {
+			AldeanoVista aldeanoVista = new AldeanoVista(x0,y0,aldeano,elMapa);
+			elMapa.aniadirPieza(aldeanoVista);
+		}
 	}
 
 	@Override

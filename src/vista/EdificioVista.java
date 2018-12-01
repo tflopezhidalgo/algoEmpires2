@@ -3,7 +3,6 @@ package vista;
 import controlador.EdificioRealizarAccion;
 import javafx.scene.image.ImageView;
 import modelo.Edificio;
-import modelo.Pieza;
 
 public abstract class EdificioVista extends PiezaVista{
 	
@@ -23,8 +22,6 @@ public abstract class EdificioVista extends PiezaVista{
 	}
 	
 	public Edificio modelo() {
-		System.out.println("Edificio getModelo : " + (modelo == null)); //TODO BORRAR
-
 		return modelo;
 	}
 	

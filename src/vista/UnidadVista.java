@@ -1,7 +1,6 @@
 package vista;
 
 import controlador.UnidadRealizarAccion;
-import modelo.Pieza;
 import modelo.Unidad;
 
 public abstract class UnidadVista extends PiezaVista {
@@ -15,8 +14,6 @@ public abstract class UnidadVista extends PiezaVista {
 	}
 	
 	public Unidad modelo() {
-		System.out.println("Unidad getModelo : " + (modelo == null)); //TODO BORRAR
-
 		return modelo;
 	}
 	

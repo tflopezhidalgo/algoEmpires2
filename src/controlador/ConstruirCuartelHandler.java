@@ -11,26 +11,26 @@ import vista.MapaVista;
 
 public class ConstruirCuartelHandler implements EventHandler<ActionEvent>{
 	
-	private MapaVista unMapa;
+	private MapaVista elMapa;
 	private Aldeano unAldeano;
 
 	public ConstruirCuartelHandler(MapaVista unMapa, Pieza unAldeano){
-		this.unMapa = unMapa;
+		this.elMapa = unMapa;
 		this.unAldeano = (Aldeano)unAldeano;
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
-		int x0 = unMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = unMapa.casillaSeleccionada().modelo().ejeY();
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 
-		Area areaDeConstruccion = unMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
+		Area areaDeConstruccion = elMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
 		
 		//TODO chk: almaceno en Cuartel y casteo o almaceno en Edificio?
 		Edificio cuartel = unAldeano.crearCuartel(areaDeConstruccion);
 		if(cuartel != null) {
-			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,unMapa);
-			unMapa.aniadirPieza(cuartelVisu);
+			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elMapa);
+			elMapa.aniadirPieza(cuartelVisu);
 		}
 	}
 	

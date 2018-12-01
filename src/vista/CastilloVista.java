@@ -1,11 +1,12 @@
 package vista;
 
-import controlador.CrearArmaDeAsedioHandler;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import modelo.Area;
 import modelo.Castillo;
+import modelo.Unidad;
 
 public class CastilloVista extends EdificioVista{
 	
@@ -19,10 +20,27 @@ public class CastilloVista extends EdificioVista{
 		//menu.setGraphic(new ImageView("file:imagen.png"));
 
 		MenuItem crearArmaDeAsedio = new MenuItem("Crear Arma De Asedio");
-		crearArmaDeAsedio.setOnAction( new CrearArmaDeAsedioHandler(elMapa, modelo));
+		crearArmaDeAsedio.setOnAction( //new CrearArmaDeAsedioHandler(elMapa, modelo));
+				e->CrearArmaDeAsedio());
 
 		menuHabilidades.getItems().addAll(crearArmaDeAsedio);
 		acciones.getMenus().add(menuHabilidades);
+	}
+	
+	private void CrearArmaDeAsedio() {
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
+		
+		//TODO los mismos comentarios que en construir Plaza 
+		Area espacioArmaDeAsedio = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
+		
+		//TODO chk: almaceno en Arma de asedio y casteo o almaceno en Unidad?
+		//ArmaDeAsedio armaDeAsedio = (ArmaDeAsedio)((Castillo)modelo).crearCatapulta(espacioArmaDeAsedio);
+		Unidad armaDeAsedio = ((Castillo)modelo).crearCatapulta(espacioArmaDeAsedio);
+		if(armaDeAsedio != null) {
+			ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0,y0,armaDeAsedio,elMapa);
+			elMapa.aniadirPieza(armaVisu);
+		}
 	}
 	
 	@Override

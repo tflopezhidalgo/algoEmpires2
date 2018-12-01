@@ -2,7 +2,6 @@ package vista;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import modelo.Arquero;
 import modelo.Unidad;
 import modelo.excepciones.Excepcion;
 

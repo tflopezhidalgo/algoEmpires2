@@ -11,26 +11,26 @@ import vista.PlazaVista;
 
 public class ConstruirPlazaHandler implements EventHandler<ActionEvent>{
 
-	private MapaVista unMapa;
+	private MapaVista elMapa;
 	private Aldeano unAldeano;
 
 	public ConstruirPlazaHandler(MapaVista unMapa, Pieza unAldeano){
-		this.unMapa = unMapa;
+		this.elMapa = unMapa;
 		this.unAldeano = (Aldeano)unAldeano;
 	}
 	
 	@Override
 	public void handle(ActionEvent event) {
-		int x0 = unMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = unMapa.casillaSeleccionada().modelo().ejeY();
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 
-		Area areaDeConstruccion = unMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
+		Area areaDeConstruccion = elMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
 		
 		//TODO chk: almaceno en Plaza y casteo o almaceno en Edificio?
 		Edificio plaza = unAldeano.crearPlaza(areaDeConstruccion);
 		if(plaza != null) {
-			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,unMapa);
-			unMapa.aniadirPieza(plazaVisu);
+			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elMapa);
+			elMapa.aniadirPieza(plazaVisu);
 		}
 	}
 	

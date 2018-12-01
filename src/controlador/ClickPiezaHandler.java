@@ -35,8 +35,6 @@ public class ClickPiezaHandler implements EventHandler<MouseEvent> {
 		//agregar efecto a casilla actual
 		laPieza.seleccionar();
 		elMapa.seleccionarPieza(laPieza);
-		
-		System.out.println("C-CPH modeloV : " + (laPieza.modelo() == null)); //TODO BORRAR
-	}
+		}
 	
 }

@@ -12,26 +12,26 @@ import vista.MapaVista;
 
 public class CrearEspadachinHandler implements EventHandler<ActionEvent> {
 
-	private MapaVista unMapa;
+	private MapaVista elMapa;
 	private Cuartel modelo;
 
 	public CrearEspadachinHandler(MapaVista unMapa, Pieza modelo){
-		this.unMapa = unMapa;
+		this.elMapa = unMapa;
 		this.modelo = (Cuartel)modelo;
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
-		int x0 = unMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = unMapa.casillaSeleccionada().modelo().ejeY();
+		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
+		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
 		
-		Area espacioEspadachin = unMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
+		Area espacioEspadachin = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
 		
 		//TODO chk: almaceno en Espadachin y casteo o almaceno en Unidad?
 		Unidad espadachin = ((Cuartel)modelo).crearGuerrero(espacioEspadachin, TipoGuerrero.ESPADACHIN);
 		if(espadachin != null) {
-			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,unMapa);
-			unMapa.aniadirPieza(espadachinVista);
+			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elMapa);
+			elMapa.aniadirPieza(espadachinVista);
 		}
 	};
 } 
