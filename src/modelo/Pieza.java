@@ -8,11 +8,10 @@ public abstract class Pieza {
     final public int COSTO;
     final public int VIDA_MAX;
 
-	protected int vida;
-	protected Area espacioOcupado;
-	protected boolean turnoJugado;
+    protected Area espacioOcupado;
 
-    protected void liberarUbicacion() {espacioOcupado.liberar(); }
+	protected int vida;
+	protected boolean turnoJugado;
 
     protected void siYaJugoElTurnoError(){
 
@@ -50,24 +49,23 @@ public abstract class Pieza {
 
 	public Pieza(){
 
-        espacioOcupado = null;
         turnoJugado = false;
 
         VIDA_MAX = 0;
         COSTO = 0;
+
+        espacioOcupado = null;
     }
 
-	public Pieza(Area espacioAOcupar, int vidaMaxima, int costo) {
+	public Pieza(int vidaMaxima, int costo) {
 
-        espacioAOcupar.ocupar();
-	    espacioOcupado = espacioAOcupar;
 		turnoJugado = false;
 
 		VIDA_MAX = vidaMaxima;
 		COSTO = costo;
-	}
 
-	public Area obtenerAreaOcupada() { return espacioOcupado; }
+        espacioOcupado = null;
+	}
 
 	public void recibirDanio(int danio) {
 		vida = (vida - danio);
@@ -93,5 +91,10 @@ public abstract class Pieza {
 	public abstract void recibirDanioDe(Unidad unaUnidad);
 
 	public abstract void recibirDanioDe(Edificio unEdificio);
+
+    protected void liberarUbicacion() {espacioOcupado.liberar(); }
+
+    public Area obtenerAreaOcupada() { return espacioOcupado; }
+
 
 }

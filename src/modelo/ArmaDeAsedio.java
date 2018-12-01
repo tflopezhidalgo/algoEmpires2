@@ -15,9 +15,11 @@ public class ArmaDeAsedio extends Unidad{
 
 	public ArmaDeAsedio(int xInicial, int yInicial) {
 
-		Area unEspacio = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
+		super( 150, 200, 0,75, 5);
 
-		super(unEspacio, 150, 200, 0,75, 5);
+		Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
+		espacioAOcupar.ocupar();
+		espacioOcupado = espacioAOcupar;
 
 		vida = VIDA_MAX;
 
@@ -46,4 +48,6 @@ public class ArmaDeAsedio extends Unidad{
 
 	    super.atacar(unaPieza);
 	}
+
+
 }

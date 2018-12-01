@@ -9,9 +9,11 @@ public class Cuartel extends Edificio {
 	
 	public Cuartel(int xInicial, int yInicial) {
 
-	    Area areaAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
+	    super( 250, 50);
 
-		super(areaAOcupar, 250, 50);
+        Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
+        espacioAOcupar.ocupar();
+        espacioOcupado = espacioAOcupar;
 
 		vida = super.VIDA_MAX;
 		tiempoDeConstruccion = 3;
@@ -32,5 +34,4 @@ public class Cuartel extends Edificio {
         
     }
 
-	
 }

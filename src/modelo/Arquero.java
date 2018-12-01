@@ -13,11 +13,14 @@ public class Arquero extends Unidad {
 
 	public Arquero(int xInicial, int yInicial) {
 
-		Area unEspacio = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
+		super(75, 75, 15, 10, 3);
 
-		super(unEspacio, 75, 75, 15, 10, 3);
+		Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
+		espacioAOcupar.ocupar();
+		espacioOcupado = espacioAOcupar;
 
 		vida = VIDA_MAX;
 	}
+
 
 }

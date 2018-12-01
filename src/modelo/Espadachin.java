@@ -11,9 +11,11 @@ public class Espadachin extends Unidad{
 
 	public Espadachin(int xInicial, int yInicial) {
 
-		Area unEspacio = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
+		super(100, 50, 25, 15, 1);
 
-		super(unEspacio, 100, 50, 25, 15, 1);
+		Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
+		espacioAOcupar.ocupar();
+		espacioOcupado = espacioAOcupar;
 
 		vida = VIDA_MAX;
 	}

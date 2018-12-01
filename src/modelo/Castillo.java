@@ -11,9 +11,11 @@ public class Castillo extends Edificio {
 
 	public Castillo(int xInicial, int yInicial) {
 
-		Area areaAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
+		super( 1000, 0);
 
-		super(areaAOcupar, 1000, 0);
+		Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
+		espacioAOcupar.ocupar();
+		espacioOcupado = espacioAOcupar;
 
 		vida = VIDA_MAX;
 		tiempoDeConstruccion = 0;
@@ -54,5 +56,6 @@ public class Castillo extends Edificio {
             this.liberarUbicacion();
         }
     }
+
 
 }

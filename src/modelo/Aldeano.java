@@ -10,9 +10,11 @@ public class Aldeano extends Unidad {
 	
 	public Aldeano(int xInicial, int yInicial){
 
-		Area unEspacio = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
+		super(50, 25,0,0,1);
 
-		super(unEspacio, 50, 25,0,0,1);
+		Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, xInicial, yInicial);
+		espacioAOcupar.ocupar();
+		espacioOcupado = espacioAOcupar;
 
 		estadoActual = new AldeanoLibre();
 		vida = VIDA_MAX;
@@ -81,5 +83,5 @@ public class Aldeano extends Unidad {
 		realizarTrabajoDeTurno();
 		super.nuevoTurno();
 	}
-	
+
 }

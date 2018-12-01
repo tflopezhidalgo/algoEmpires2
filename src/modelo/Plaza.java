@@ -9,9 +9,11 @@ public class Plaza extends Edificio {
 	
 	public Plaza(int xInicial, int yInicial) {
 
-		Area areaAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
+		super( 450, 100);
 
-		super(areaAOcupar, 450, 100);
+		Area espacioAOcupar = Tablero.INSTANCIA.definirArea(xInicial, yInicial, TAMANIO_LADO-1, TAMANIO_LADO-1);
+		espacioAOcupar.ocupar();
+		espacioOcupado = espacioAOcupar;
 
 		vida = VIDA_MAX;
 		tiempoDeConstruccion = 3;
@@ -46,4 +48,5 @@ public class Plaza extends Edificio {
 		turnoJugado = true;
 		return unAldeano;
 	}
+
 }

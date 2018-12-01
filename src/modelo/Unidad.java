@@ -6,9 +6,9 @@ public abstract class Unidad extends Pieza {
     public final int DANIO_EDIFICIOS;
     public final int DISTANCIA_ATK;
 
-	public Unidad(Area unEspacio, int vidaMax, int costo, int danioUnidades, int danioEdificios, int distancia) {
+	public Unidad(int vidaMax, int costo, int danioUnidades, int danioEdificios, int distancia) {
 
-	    super(unEspacio, vidaMax, costo);
+	    super(vidaMax, costo);
 
 	    DANIO_EDIFICIOS = danioEdificios;
 	    DANIO_UNIDADES = danioUnidades;
@@ -45,4 +45,5 @@ public abstract class Unidad extends Pieza {
 
         this.recibirDanio(unaUnidad.DANIO_UNIDADES);
     }
+
 }
