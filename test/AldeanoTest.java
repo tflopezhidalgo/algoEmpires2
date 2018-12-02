@@ -18,60 +18,55 @@ public class AldeanoTest {
     public void seCreaUnAldeano() {
     	Tablero unTablero = new Tablero(3,3);
 
-    	Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+    	Aldeano unAldeano = new Aldeano(0,0);
 
         Assert.assertNotNull(unAldeano);
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
-        Assert.assertEquals(1,espacioAldeano.obtenerCantidadDeCasillas());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(0, 0).estaOcupada());
     }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaArriba() {
     	Tablero unTablero = new Tablero(3,3);
 
-    	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(1,1);
 
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 2);
         unTablero.moverEnDireccion(unAldeano,0,1);
 
-        Assert.assertEquals(true, espacioAldeano.estaLibre());
-        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
+        Assert.assertTrue(casillaFinal.estaOcupada());
     }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaAbajo() {
     	Tablero unTablero = new Tablero(3,3);
 
-    	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(1,1);
 
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(1, 0);
         unTablero.moverEnDireccion(unAldeano,0,-1);
 
-        Assert.assertEquals(true, espacioAldeano.estaLibre());
-        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
+        Assert.assertTrue(casillaFinal.estaOcupada());
     }
 
     @Test
     public void moverAldeanoUnaPosicionHaciaDerecha() {
     	Tablero unTablero = new Tablero(3,3);
 
-    	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(1,1);
 
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 1);
         unTablero.moverEnDireccion(unAldeano,1,0);
 
-        Assert.assertEquals(true, espacioAldeano.estaLibre());
-        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
+        Assert.assertTrue(casillaFinal.estaOcupada());
     }
 
     @Test
@@ -79,15 +74,15 @@ public class AldeanoTest {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(1,1);
 
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
+        Assert.assertFalse(espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 1);
         unTablero.moverEnDireccion(unAldeano,-1,0);
 
-        Assert.assertEquals(true, espacioAldeano.estaLibre());
-        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertTrue(espacioAldeano.estaLibre());
+        Assert.assertTrue(casillaFinal.estaOcupada());
     }
 
     @Test
@@ -95,15 +90,15 @@ public class AldeanoTest {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(1,1);
 
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
+        Assert.assertFalse(espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 2);
         unTablero.moverEnDireccion(unAldeano,1,1);
 
-        Assert.assertEquals(true, espacioAldeano.estaLibre());
-        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertTrue(espacioAldeano.estaLibre());
+        Assert.assertTrue(casillaFinal.estaOcupada());
     }
 
     @Test
@@ -111,15 +106,15 @@ public class AldeanoTest {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(1,1);
 
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
+        Assert.assertFalse(espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 2);
         unTablero.moverEnDireccion(unAldeano,-1,1);
 
-        Assert.assertEquals(true, espacioAldeano.estaLibre());
-        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertTrue(espacioAldeano.estaLibre());
+        Assert.assertTrue(casillaFinal.estaOcupada());
     }
 
     @Test
@@ -127,15 +122,15 @@ public class AldeanoTest {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(1,1);
 
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
+        Assert.assertFalse(espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(0, 0);
         unTablero.moverEnDireccion(unAldeano,-1,-1);
 
-        Assert.assertEquals(true, espacioAldeano.estaLibre());
-        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertTrue(espacioAldeano.estaLibre());
+        Assert.assertTrue(casillaFinal.estaOcupada());
     }
 
     @Test
@@ -143,15 +138,15 @@ public class AldeanoTest {
     	Tablero unTablero = new Tablero(3,3);
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(1,1);
 
-        Assert.assertEquals(false,espacioAldeano.estaLibre());
+        Assert.assertFalse(espacioAldeano.estaLibre());
         
         Casilla casillaFinal = unTablero.obtenerCasillaEn(2, 0);
         unTablero.moverEnDireccion(unAldeano,1,-1);
 
-        Assert.assertEquals(true, espacioAldeano.estaLibre());
-        Assert.assertEquals(true, casillaFinal.estaOcupada());
+        Assert.assertTrue(espacioAldeano.estaLibre());
+        Assert.assertTrue(casillaFinal.estaOcupada());
     }
 
     /*
@@ -166,41 +161,41 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero(5, 5);
 
     	Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(0,0);
 
         Area zonaDeConstruccion = unTablero.definirArea(1, 1, Plaza.TAMANIO_LADO, Plaza.TAMANIO_LADO);
         
         //esa linea es parte del turno 1
-        Plaza laNuevaPlaza = (Plaza)unAldeano.crearPlaza(zonaDeConstruccion);
+        Plaza laNuevaPlaza = (Plaza)unAldeano.crearPlaza(1,1);
         while(turno < 6) {
             turno ++;
 
             switch (turno) {
 
                 case 1:{
-                    Assert.assertEquals(false, laNuevaPlaza.vidaBaja());
-                    Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
+                    Assert.assertFalse(laNuevaPlaza.vidaBaja());
+                    Assert.assertTrue(laNuevaPlaza.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
                 }
                 break;
                     
                 case 2:{
-                    Assert.assertEquals(false, laNuevaPlaza.vidaBaja());
-                    Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
+                    Assert.assertFalse(laNuevaPlaza.vidaBaja());
+                    Assert.assertTrue(laNuevaPlaza.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
                 }
                 break;
                     
                 case 3:{
-                    Assert.assertEquals(false, laNuevaPlaza.vidaBaja());
-                    Assert.assertEquals(true, laNuevaPlaza.enConstruccion());
+                    Assert.assertFalse(laNuevaPlaza.vidaBaja());
+                    Assert.assertTrue(laNuevaPlaza.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
                 }
                 break;
 
                 case 4:{
-                    Assert.assertEquals(false, laNuevaPlaza.vidaBaja());
-                    Assert.assertEquals(false, laNuevaPlaza.enConstruccion());
+                    Assert.assertFalse(laNuevaPlaza.vidaBaja());
+                    Assert.assertFalse(laNuevaPlaza.enConstruccion());
                     Assert.assertEquals(20, oroJugador);
                 }
                 break;
@@ -227,38 +222,36 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero(5,5);
 
-    	Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+    	Aldeano unAldeano = new Aldeano(0,0);
 
-        Area zonaDeConstruccion = unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO);
-        Cuartel elNuevoCuartel = (Cuartel)unAldeano.crearCuartel(zonaDeConstruccion);
+        Cuartel elNuevoCuartel = (Cuartel)unAldeano.crearCuartel(1,1);
         while(turno < 6) {
             turno ++;
             switch (turno) {
 
                 case 1:{
-                    Assert.assertEquals(false, elNuevoCuartel.vidaBaja());
-                    Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
+                    Assert.assertFalse(elNuevoCuartel.vidaBaja());
+                    Assert.assertTrue(elNuevoCuartel.enConstruccion());
                 }
                 break;
                     
                 case 2:{
-                    Assert.assertEquals(false, elNuevoCuartel.vidaBaja());
-                    Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
+                    Assert.assertFalse(elNuevoCuartel.vidaBaja());
+                    Assert.assertTrue(elNuevoCuartel.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
                 }
                 break;
                     
                 case 3:{
-                    Assert.assertEquals(false, elNuevoCuartel.vidaBaja());
-                    Assert.assertEquals(true, elNuevoCuartel.enConstruccion());
+                    Assert.assertFalse(elNuevoCuartel.vidaBaja());
+                    Assert.assertTrue(elNuevoCuartel.enConstruccion());
                     Assert.assertEquals(0, oroJugador);
                 }
                 break;
 
                 case 4:{
-                    Assert.assertEquals(false, elNuevoCuartel.vidaBaja());
-                    Assert.assertEquals(false, elNuevoCuartel.enConstruccion());
+                    Assert.assertFalse(elNuevoCuartel.vidaBaja());
+                    Assert.assertFalse(elNuevoCuartel.enConstruccion());
                     Assert.assertEquals(20, oroJugador);
                 }
                 break;
@@ -284,11 +277,15 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero(5,5);
 
-    	Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+    	Aldeano unAldeano = new Aldeano(0,0);
 
-        Area zonaDeConstruccion = unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO);
-        Plaza unaPlaza = new Plaza(zonaDeConstruccion, true);
+        Plaza unaPlaza = new Plaza(1,1);
+
+        unaPlaza.construir();
+        unaPlaza.construir();
+        unaPlaza.construir();
+
+        unaPlaza.nuevoTurno();
 
         unaPlaza.recibirDanio(25);
 
@@ -298,12 +295,12 @@ public class AldeanoTest {
             switch (turno) {
                 case 1: {
                     unAldeano.reparar(unaPlaza);
-                    Assert.assertEquals(true, unaPlaza.vidaBaja());
+                    Assert.assertTrue(unaPlaza.vidaBaja());
                 }
                 break;
                 
                 case 2: {
-                    Assert.assertEquals(false, unaPlaza.vidaBaja());
+                    Assert.assertFalse(unaPlaza.vidaBaja());
                 }
                 break;
             }
@@ -317,11 +314,9 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero(5,5);
 
-    	Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(0,0);
 
-        Area zonaDeConstruccion = unTablero.definirArea(1, 1, Castillo.TAMANIO_LADO, Castillo.TAMANIO_LADO);
-        Castillo unCastillo = new Castillo(zonaDeConstruccion);
+        Castillo unCastillo = new Castillo(1,1);
 
         unCastillo.recibirDanio(30);
 
@@ -331,17 +326,17 @@ public class AldeanoTest {
             switch (turno) {
                 case 1: {
                     unAldeano.reparar(unCastillo);
-                    Assert.assertEquals(true, unCastillo.vidaBaja());
+                    Assert.assertTrue(unCastillo.vidaBaja());
                 }
                 break;
                 
                 case 2: {
-                    Assert.assertEquals(true, unCastillo.vidaBaja());
+                    Assert.assertTrue(unCastillo.vidaBaja());
                 }
                 break;
                 
                 case 3: {
-                    Assert.assertEquals(false, unCastillo.vidaBaja());
+                    Assert.assertFalse(unCastillo.vidaBaja());
                 }
                 break;
             }
@@ -355,11 +350,15 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero(5,5);
 
-    	Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(0,0);
 
-        Area zonaDeConstruccion = unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO);
-        Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
+        Cuartel unCuartel = new Cuartel(1,1);
+
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
+
+        unCuartel.nuevoTurno();
 
         unCuartel.recibirDanio(100);
 
@@ -370,17 +369,17 @@ public class AldeanoTest {
             
                 case 1: {
                     unAldeano.reparar(unCuartel);
-                    Assert.assertEquals(true, unCuartel.vidaBaja());
+                    Assert.assertTrue(unCuartel.vidaBaja());
                 }
                 break;
                 
                 case 2: {
-                    Assert.assertEquals(true, unCuartel.vidaBaja());
+                    Assert.assertTrue(unCuartel.vidaBaja());
                 }
                 break;
                 
                 case 3: {
-                    Assert.assertEquals(false, unCuartel.vidaBaja());
+                    Assert.assertFalse(unCuartel.vidaBaja());
                 }
                 break;
             }
@@ -395,14 +394,13 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero(5,5);
 
-    	Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(0,0);
 
-        Area zonaDeConstruccion = unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO);
-        Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
-        unCuartel.nuevoTurno();
-        unCuartel.nuevoTurno();
-        unCuartel.nuevoTurno();
+        Cuartel unCuartel = new Cuartel(1,1);
+
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
 
         unCuartel.recibirDanio(100);
 
@@ -485,15 +483,14 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero(20,20);
 
-    	Area espacioAldeano = unTablero.definirArea(10,10,10,10);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
-        
-        Area zonaDeConstruccion = unTablero.definirArea(5, 5, 9,9);
+        Aldeano unAldeano = new Aldeano(10,10);
 
-        Cuartel unCuartel = new Cuartel(zonaDeConstruccion);
-        unCuartel.nuevoTurno();
-        unCuartel.nuevoTurno();
-        unCuartel.nuevoTurno();
+
+        Cuartel unCuartel = new Cuartel(5,5);
+
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
         
         Area zonaDeConstruccion2 = unTablero.definirArea(11, 15, 11, 15);
 
@@ -527,7 +524,7 @@ public class AldeanoTest {
                 	Cuartel nuevoCuartel = null;
 
                 	try {
-                		nuevoCuartel = (Cuartel)unAldeano.crearCuartel(zonaDeConstruccion2);
+                		nuevoCuartel = (Cuartel)unAldeano.crearCuartel(11,15);
 
             		} catch (Exception e) {}
                 	
@@ -536,7 +533,7 @@ public class AldeanoTest {
                 	
                 	Plaza nuevaPlaza = null;
                 	try {
-                		nuevaPlaza = (Plaza)unAldeano.crearPlaza(zonaDeConstruccion2);
+                		nuevaPlaza = (Plaza)unAldeano.crearPlaza(11,15);
             		} catch (Exception e) {}
                 	
                 	Assert.assertNull(nuevaPlaza);
@@ -565,10 +562,10 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero(20,20);
 
     	Area espacioAldeano = unTablero.definirArea(5,5,5,5);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(5,5);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, 4, 4);
-        Cuartel unCuartel = (Cuartel)unAldeano.crearCuartel(zonaDeConstruccion);
+        Cuartel unCuartel = (Cuartel)unAldeano.crearCuartel(0,0);
         
         Area zonaDeConstruccion2 = unTablero.definirArea(6,6,10,10);
         
@@ -591,7 +588,7 @@ public class AldeanoTest {
                 	
                 	Cuartel nuevoCuartel = null;
             		try {
-            			nuevoCuartel = (Cuartel)unAldeano.crearCuartel(zonaDeConstruccion2);
+            			nuevoCuartel = (Cuartel)unAldeano.crearCuartel(6,6);
 	        		} catch (RuntimeException e) {}
             		
                 	Assert.assertNull(nuevoCuartel);
@@ -599,7 +596,7 @@ public class AldeanoTest {
                 	
                 	Plaza nuevaPlaza = null;
             		try {
-            			nuevaPlaza = (Plaza)unAldeano.crearPlaza(zonaDeConstruccion2);
+            			nuevaPlaza = (Plaza)unAldeano.crearPlaza(6,6);
 		    		} catch (RuntimeException e) {}
             		
 	               	Assert.assertNull(nuevaPlaza);
@@ -629,15 +626,16 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero(5,5);
         Area espacioAldeano1 = unTablero.definirArea(0,0,0,0);
-        Aldeano aldeano1 = new Aldeano(espacioAldeano1);
+        Aldeano aldeano1 = new Aldeano(0,0);
 
         Area espacioAldeano2 = unTablero.definirArea(1,0,1,0);
-        Aldeano aldeano2 = new Aldeano(espacioAldeano2);
+        Aldeano aldeano2 = new Aldeano(1,0);
 
-        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,1,1,2));
-        unCuartel.nuevoTurno();
-        unCuartel.nuevoTurno();
-        unCuartel.nuevoTurno();
+        Cuartel unCuartel = new Cuartel(0,1);
+
+        unCuartel.construir();
+        unCuartel.construir();
+        unCuartel.construir();
 
         unCuartel.recibirDanio(100);
         aldeano1.reparar(unCuartel);
@@ -655,15 +653,15 @@ public class AldeanoTest {
     @Test
     public void aldeanoConstruyendoNoPuedeReparar() {
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(3,1,3,1));
+        Aldeano unAldeano = new Aldeano(3,1);
 
-        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(4,0,Cuartel.TAMANIO_LADO+2, Cuartel.TAMANIO_LADO-1));
+        Cuartel cuartelAReparar = new Cuartel(4,0);
 
-        cuartelAReparar.nuevoTurno();
-        cuartelAReparar.nuevoTurno();
-        cuartelAReparar.nuevoTurno();
+        cuartelAReparar.construir();
+        cuartelAReparar.construir();
+        cuartelAReparar.construir();
 
-        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO));
+        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(1,1);
 
         unAldeano.nuevoTurno();
 
@@ -681,9 +679,9 @@ public class AldeanoTest {
     @Test
     public void aldeanoOcupadoNoPuedeMoverse() {
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Aldeano unAldeano = new Aldeano(0,0);
 
-        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(1,1,Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1));
+        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(1,1);
 
         unAldeano.nuevoTurno();
         boolean seLanzoError=false;
@@ -701,10 +699,9 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero();
 
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(5,5,5,5));
+        Aldeano unAldeano = new Aldeano(5,5);
 
-        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(1,1,
-                4, 4));
+        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(1,1);
 
         unAldeano.nuevoTurno();
 
@@ -712,7 +709,7 @@ public class AldeanoTest {
 
         try {
 
-           Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(unTablero.definirArea(6,1,10,5));
+           Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(6,1);
 
         } catch (AldeanoOcupadoConOtroEdificioError e) {
 
@@ -726,9 +723,8 @@ public class AldeanoTest {
     public void aldeanoReparandoNoPuedeConstruir() {
 
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(3, 1, 3, 1));
-
-        Cuartel cuartelAReparar = new Cuartel(unTablero.definirArea(4,0,Cuartel.TAMANIO_LADO+2, Cuartel.TAMANIO_LADO-1));
+        Aldeano unAldeano = new Aldeano(3,1);
+        Cuartel cuartelAReparar = new Cuartel(4,0);
         cuartelAReparar.recibirDanio(100);
         unAldeano.reparar(cuartelAReparar);
 
@@ -736,7 +732,7 @@ public class AldeanoTest {
 
         boolean seLanzoError=false;
         try {
-            Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(1, 1, Cuartel.TAMANIO_LADO, Cuartel.TAMANIO_LADO ));
+            Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(1,1);
         } catch (AldeanoReparandoNoPuedeConstruir e) {
             seLanzoError=true;
         }
@@ -747,14 +743,14 @@ public class AldeanoTest {
     @Test
     public void noPuedeConstruirCuartelTanLejos() {
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Aldeano unAldeano = new Aldeano(0,0);
 
-        Cuartel unCuartel = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(0,1,1,2));
+        Cuartel unCuartel = (Cuartel)unAldeano.crearCuartel(0,1);
         unAldeano.nuevoTurno();
 
         boolean seLanzoError=false;
         try {
-            Cuartel otroCuartel = (Cuartel)unAldeano.crearCuartel(unTablero.definirArea(2, 1, 3,1));
+            Cuartel otroCuartel = (Cuartel)unAldeano.crearCuartel(2, 1);
         } catch (NoSePuedeConstruirTanLejosError e) {
             seLanzoError=true;
         }
@@ -767,9 +763,9 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero();
 
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Aldeano unAldeano = new Aldeano(0,0);
 
-        Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
+        Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(0,1);
 
         unAldeano.nuevoTurno();
 
@@ -777,7 +773,7 @@ public class AldeanoTest {
 
         try {
 
-            unAldeano.crearPlaza(unTablero.definirArea(2, 1, 3,1));
+            unAldeano.crearPlaza(2, 1);
 
         } catch (NoSePuedeConstruirTanLejosError e) {
 
@@ -791,9 +787,14 @@ public class AldeanoTest {
     public void piezaFueraDeAlcanceParaSerReparada() {
         Tablero unTablero = new Tablero();
 
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Aldeano unAldeano = new Aldeano(0,0);
 
-        Plaza unaPlaza = new Plaza(unTablero.definirArea(6,6,7,7), true);
+        Plaza unaPlaza = new Plaza(6,6);
+
+        unaPlaza.construir();
+        unaPlaza.construir();
+        unaPlaza.construir();
+
 
         unaPlaza.recibirDanio(20);
 
@@ -818,11 +819,11 @@ public class AldeanoTest {
 
         Tablero unTablero = new Tablero();
 
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Aldeano unAldeano = new Aldeano(0,0);
 
-        Aldeano otroAldeano = new Aldeano(unTablero.definirArea(1,0,1,0));
+        Aldeano otroAldeano = new Aldeano(1,0);
 
-        Cuartel unCuartel = new Cuartel(unTablero.definirArea(0,1,3,4));
+        Cuartel unCuartel = new Cuartel(0,1);
 
         unCuartel.recibirDanio(100);
 
@@ -849,7 +850,7 @@ public class AldeanoTest {
         Tablero unTablero = new Tablero(6,6);
 
         Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
-        Pieza unaPieza = new Aldeano(espacioAldeano);
+        Pieza unaPieza = new Aldeano(0,0);
 
         Assert.assertNotNull(unaPieza);
         Assert.assertFalse(espacioAldeano.estaLibre());
