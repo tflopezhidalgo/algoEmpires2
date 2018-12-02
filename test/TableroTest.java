@@ -54,7 +54,7 @@ public class TableroTest {
 		Tablero unTablero = new Tablero();
 		Area espacioBorde = unTablero.definirArea(15,15,15,15);
 		
-		Aldeano unAldeano = new Aldeano(espacioBorde);
+		Aldeano unAldeano = new Aldeano(15,15);
 		Assert.assertNotNull(espacioBorde);
 		Assert.assertNotNull(unAldeano);
 		
@@ -147,15 +147,15 @@ public class TableroTest {
 	@Test
     public void moverAUnaUnidad() throws Exception{
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(1,1,1,1));
+        Aldeano unAldeano = new Aldeano(1,1);
         Casilla unaCasilla = unTablero.obtenerCasillaEn(2,2);
 
-        Assert.assertEquals(false, unaCasilla.estaOcupada());
+        Assert.assertFalse(unaCasilla.estaOcupada());
 
         unTablero.moverEnDireccion(unAldeano,1,1);
         Casilla casillaDeAldeano = unaCasilla;
 
-        Assert.assertEquals(true, casillaDeAldeano.estaOcupada());
+        Assert.assertTrue(casillaDeAldeano.estaOcupada());
     }
 
     @Test
