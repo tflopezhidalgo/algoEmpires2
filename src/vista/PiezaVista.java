@@ -11,7 +11,7 @@ import modelo.Pieza;
 public abstract class PiezaVista extends StackPane {
 
 	private Pieza modelo;
-	protected MapaVista elMapa;
+	protected JuegoVista elMapa;
 	
 	protected Rectangle seleccion;
 	protected Rectangle barraVidaActual;
@@ -24,7 +24,7 @@ public abstract class PiezaVista extends StackPane {
 	protected int alto;
 	protected int ancho;
 	
-	public PiezaVista(int x, int y, Pieza unModelo, MapaVista unMapa) {
+	public PiezaVista(int x, int y, Pieza unModelo, JuegoVista unMapa) {
 		modelo = unModelo;
 		elMapa = unMapa;
 		
@@ -67,7 +67,7 @@ public abstract class PiezaVista extends StackPane {
 		prepararBotones();
 		//-----------------------------------------
 		
-		setOnMousePressed(new ClickPiezaHandler(elMapa,this));
+		setOnMousePressed(new ClickPiezaHandler(elMapa, this));
 
 	}
 	

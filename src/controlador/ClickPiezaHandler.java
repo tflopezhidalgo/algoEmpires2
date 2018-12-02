@@ -3,15 +3,15 @@ package controlador;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import vista.MapaVista;
+import vista.JuegoVista;
 import vista.PiezaVista;
 
 public class ClickPiezaHandler implements EventHandler<MouseEvent> {
 	
 	private PiezaVista laPieza;
-	private MapaVista elMapa;
+	private JuegoVista elMapa;
 	
-	public ClickPiezaHandler(MapaVista elMapa, PiezaVista laPieza) {
+	public ClickPiezaHandler(JuegoVista elMapa, PiezaVista laPieza) {
 		this.elMapa = elMapa;
 		this.laPieza = laPieza;
 	}

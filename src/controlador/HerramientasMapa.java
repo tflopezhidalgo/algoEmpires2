@@ -10,24 +10,23 @@ import modelo.Tablero;
 import vista.AldeanoVista;
 import vista.CasillaVista;
 import vista.CastilloVista;
-import vista.MapaVista;
+import vista.JuegoVista;
 import vista.PlazaVista;
 
 public class HerramientasMapa {
 	
-	private static int ANCHO = 32;
-	private static int ALTO = 20;
+	private static int ANCHO = 66;
+	private static int ALTO = 41;
 	private static Tablero elTablero;
 	private static Group grupoPiezas;
-	private static MapaVista elMapa;
+	private static JuegoVista elMapa;
 	
-	public static Tablero crearMapa(MapaVista mapa,Group casillas, Group piezas) {
+	public static Tablero crearMapa(JuegoVista mapa,Group casillas, Group piezas) {
 		grupoPiezas = piezas;
 		elMapa = mapa;
-		
-		System.out.println("Herramientas: mapa: "+ (mapa ==null));
+
     	//Si cambias esto tenes que cambiar el ANCHO y ALTO (+16)
-    	elTablero = new Tablero(16,4);
+    	elTablero = new Tablero(50,25);
     	for(int y = 0; y < ALTO; y++) {
     		for(int x = 0; x < ANCHO; x++) {
     			Casilla casillaActual = elTablero.obtenerCasillaEn(x, y);

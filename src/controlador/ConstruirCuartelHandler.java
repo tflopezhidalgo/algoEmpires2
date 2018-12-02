@@ -7,14 +7,14 @@ import modelo.Area;
 import modelo.Edificio;
 import modelo.Pieza;
 import vista.CuartelVista;
-import vista.MapaVista;
+import vista.JuegoVista;
 
 public class ConstruirCuartelHandler implements EventHandler<ActionEvent>{
 	
-	private MapaVista elMapa;
+	private JuegoVista elMapa;
 	private Aldeano unAldeano;
 
-	public ConstruirCuartelHandler(MapaVista unMapa, Pieza unAldeano){
+	public ConstruirCuartelHandler(JuegoVista unMapa, Pieza unAldeano){
 		this.elMapa = unMapa;
 		this.unAldeano = (Aldeano)unAldeano;
 	}

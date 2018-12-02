@@ -10,7 +10,7 @@ import modelo.excepciones.Excepcion;
 
 public class AldeanoVista extends UnidadVista{
 
-	public AldeanoVista(int x, int y, Aldeano unModelo, MapaVista unMapa) throws Excepcion {
+	public AldeanoVista(int x, int y, Aldeano unModelo, JuegoVista unMapa) throws Excepcion {
 		super(x,y,unModelo, unMapa);
 	}
 

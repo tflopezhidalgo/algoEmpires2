@@ -12,7 +12,7 @@ import modelo.factoryCuartel.TipoGuerrero;
 
 public class CuartelVista extends EdificioVista{
 	
-	public CuartelVista(int x, int y, Edificio unModelo, MapaVista unMapa) {
+	public CuartelVista(int x, int y, Edificio unModelo, JuegoVista unMapa) {
 		super(x,y,unModelo, unMapa);
 	}
 

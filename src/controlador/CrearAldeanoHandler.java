@@ -7,14 +7,14 @@ import modelo.Area;
 import modelo.Edificio;
 import modelo.Plaza;
 import vista.AldeanoVista;
-import vista.MapaVista;
+import vista.JuegoVista;
 
 public class CrearAldeanoHandler implements EventHandler<ActionEvent> {
 
-	private MapaVista elMapa;
+	private JuegoVista elMapa;
 	private Edificio modelo;
 
-	public CrearAldeanoHandler(MapaVista unMapa, Edificio modelo){
+	public CrearAldeanoHandler(JuegoVista unMapa, Edificio modelo){
 		this.elMapa = unMapa;
 		this.modelo = modelo;
 		System.out.println("C-CAH : modelo: " + (this.modelo == null));

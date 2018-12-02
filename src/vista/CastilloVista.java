@@ -10,7 +10,7 @@ import modelo.Unidad;
 
 public class CastilloVista extends EdificioVista{
 	
-	public CastilloVista(int x, int y, Castillo unModelo, MapaVista unMapa) {
+	public CastilloVista(int x, int y, Castillo unModelo, JuegoVista unMapa) {
 		super(x,y,unModelo, unMapa);
 	}
 

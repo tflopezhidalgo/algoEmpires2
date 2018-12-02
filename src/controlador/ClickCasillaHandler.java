@@ -5,16 +5,16 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import modelo.Unidad;
 import vista.CasillaVista;
-import vista.MapaVista;
+import vista.JuegoVista;
 import vista.PiezaVista;
 import vista.UnidadVista;
 
 public class ClickCasillaHandler implements EventHandler<MouseEvent> {
 
 	private CasillaVista laCasilla;
-	private MapaVista elMapa;
+	private JuegoVista elMapa;
 	
-	public ClickCasillaHandler(MapaVista elMapa, CasillaVista laCasilla) {
+	public ClickCasillaHandler(JuegoVista elMapa, CasillaVista laCasilla) {
 		this.elMapa = elMapa;
 		this.laCasilla = laCasilla;
 	}

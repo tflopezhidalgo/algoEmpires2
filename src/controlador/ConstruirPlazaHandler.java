@@ -6,15 +6,15 @@ import modelo.Aldeano;
 import modelo.Area;
 import modelo.Edificio;
 import modelo.Pieza;
-import vista.MapaVista;
+import vista.JuegoVista;
 import vista.PlazaVista;
 
 public class ConstruirPlazaHandler implements EventHandler<ActionEvent>{
 
-	private MapaVista elMapa;
+	private JuegoVista elMapa;
 	private Aldeano unAldeano;
 
-	public ConstruirPlazaHandler(MapaVista unMapa, Pieza unAldeano){
+	public ConstruirPlazaHandler(JuegoVista unMapa, Pieza unAldeano){
 		this.elMapa = unMapa;
 		this.unAldeano = (Aldeano)unAldeano;
 	}

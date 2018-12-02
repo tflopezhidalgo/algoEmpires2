@@ -2,12 +2,12 @@ package controlador;
 
 import modelo.Aldeano;
 import modelo.Edificio;
-import vista.MapaVista;
+import vista.JuegoVista;
 import vista.PiezaVista;
 
 public class EdificioRealizarAccion {
 
-	public EdificioRealizarAccion(MapaVista unMapa, PiezaVista edificio) {
+	public EdificioRealizarAccion(JuegoVista unMapa, PiezaVista edificio) {
 		PiezaVista piezaSeleccionada = unMapa.piezaSeleccionada();
 		
 		if(piezaSeleccionada.modelo() instanceof Aldeano) {

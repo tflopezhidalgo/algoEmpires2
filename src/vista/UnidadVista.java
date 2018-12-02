@@ -7,7 +7,7 @@ public abstract class UnidadVista extends PiezaVista {
 	
 	protected Unidad modelo;
 	
-	public UnidadVista(int x, int y, Unidad unModelo, MapaVista unMapa){
+	public UnidadVista(int x, int y, Unidad unModelo, JuegoVista unMapa){
 		super(x,y,unModelo,unMapa);
 		modelo = unModelo;
 		crearRepresentacion();

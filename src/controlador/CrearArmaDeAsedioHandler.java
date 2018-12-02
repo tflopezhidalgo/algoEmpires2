@@ -7,14 +7,14 @@ import modelo.Castillo;
 import modelo.Pieza;
 import modelo.Unidad;
 import vista.ArmaDeAsedioVista;
-import vista.MapaVista;
+import vista.JuegoVista;
 
 public class CrearArmaDeAsedioHandler implements EventHandler<ActionEvent> {
 
-	private MapaVista elMapa;
+	private JuegoVista elMapa;
 	private Castillo modelo;
 	
-	public CrearArmaDeAsedioHandler(MapaVista elMapa, Pieza modelo) {
+	public CrearArmaDeAsedioHandler(JuegoVista elMapa, Pieza modelo) {
 		this.elMapa = elMapa;
 		this.modelo = (Castillo)modelo;
 	}

@@ -17,7 +17,7 @@ public class ArmaDeAsedioVista extends UnidadVista{
 	private ImageView viewMover;
 	private ImageView viewAtaque;
 	
-	public ArmaDeAsedioVista(int x, int y, Unidad unModelo, MapaVista unMapa){
+	public ArmaDeAsedioVista(int x, int y, Unidad unModelo, JuegoVista unMapa){
 		super(x,y,unModelo, unMapa);
 		estadoActual = new CatapultaVistaDesarmada();
 	}

@@ -10,7 +10,7 @@ public abstract class EdificioVista extends PiezaVista{
 	protected ImageView construidoView;
 	protected Edificio modelo;
 
-	public EdificioVista(int x, int y, Edificio unModelo, MapaVista unMapa) {
+	public EdificioVista(int x, int y, Edificio unModelo, JuegoVista unMapa) {
 		super(x, y, unModelo, unMapa);
 		modelo = unModelo;
 		crearRepresentacion();

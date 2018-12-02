@@ -4,12 +4,12 @@ import java.io.File;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import vista.MapaVista;
+import vista.JuegoVista;
 import vista.PiezaVista;
 
 public class UnidadRealizarAccion {
 
-	public UnidadRealizarAccion(MapaVista unMapa, PiezaVista unidad) {
+	public UnidadRealizarAccion(JuegoVista unMapa, PiezaVista unidad) {
 		//Unidad esta siendo atacada
 		PiezaVista piezaAtacante = unMapa.piezaSeleccionada();
 		

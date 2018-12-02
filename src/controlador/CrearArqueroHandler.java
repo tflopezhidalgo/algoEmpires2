@@ -8,14 +8,14 @@ import modelo.Pieza;
 import modelo.Unidad;
 import modelo.factoryCuartel.TipoGuerrero;
 import vista.ArqueroVista;
-import vista.MapaVista;
+import vista.JuegoVista;
 
 public class CrearArqueroHandler implements EventHandler<ActionEvent> {
 
-	private MapaVista elMapa;
+	private JuegoVista elMapa;
 	private Cuartel modelo;
 
-	public CrearArqueroHandler(MapaVista unMapa, Pieza modelo){
+	public CrearArqueroHandler(JuegoVista unMapa, Pieza modelo){
 		this.elMapa = unMapa;
 		this.modelo = (Cuartel)modelo;
 	}

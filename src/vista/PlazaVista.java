@@ -11,7 +11,7 @@ import modelo.Plaza;
 
 public class PlazaVista extends EdificioVista {
 	
-	public PlazaVista(int x, int y, Edificio unModelo, MapaVista unMapa) {
+	public PlazaVista(int x, int y, Edificio unModelo, JuegoVista unMapa) {
 		super(x,y,unModelo, unMapa);
 	}
 

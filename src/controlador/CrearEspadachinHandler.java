@@ -8,14 +8,14 @@ import modelo.Pieza;
 import modelo.Unidad;
 import modelo.factoryCuartel.TipoGuerrero;
 import vista.EspadachinVista;
-import vista.MapaVista;
+import vista.JuegoVista;
 
 public class CrearEspadachinHandler implements EventHandler<ActionEvent> {
 
-	private MapaVista elMapa;
+	private JuegoVista elMapa;
 	private Cuartel modelo;
 
-	public CrearEspadachinHandler(MapaVista unMapa, Pieza modelo){
+	public CrearEspadachinHandler(JuegoVista unMapa, Pieza modelo){
 		this.elMapa = unMapa;
 		this.modelo = (Cuartel)modelo;
 	}
