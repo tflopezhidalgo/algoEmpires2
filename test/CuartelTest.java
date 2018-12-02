@@ -20,17 +20,16 @@ public class CuartelTest {
     @Test
     public void ColocarCuartel() {
 
-    	Tablero unTablero = new Tablero(5,5);
+    	Tablero unTablero = new Tablero();
 
         //voy a ocupar a partir de la (2,2)
         //se ocuparan las casillas en (2,2) (2,3) (3,2) (3,3)
-        Area zonaDeConstruccion = unTablero.definirArea(2, 2, Cuartel.TAMANIO_LADO+1, Cuartel.TAMANIO_LADO+1);
+        Area zonaDeConstruccion = unTablero.definirArea(2, 2, 2+(Cuartel.TAMANIO_LADO-1), 2+(Cuartel.TAMANIO_LADO-1));
         Assert.assertTrue(zonaDeConstruccion.estaLibre());
 
         Cuartel unCuartel = new Cuartel(2,2);
         Assert.assertFalse(zonaDeConstruccion.estaLibre());
         Assert.assertFalse(unCuartel.obtenerAreaOcupada().estaLibre());
-        Assert.assertEquals(zonaDeConstruccion, unCuartel.obtenerAreaOcupada());
 
         //Las casillas adyacentes deberian estar libres
         Assert.assertFalse(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
