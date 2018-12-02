@@ -559,12 +559,10 @@ public class AldeanoTest {
 
         int turno = 0;
 
-        Tablero unTablero = new Tablero(20,20);
+        Tablero unTablero = new Tablero();
 
-    	Area espacioAldeano = unTablero.definirArea(5,5,5,5);
         Aldeano unAldeano = new Aldeano(5,5);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, 4, 4);
         Cuartel unCuartel = (Cuartel)unAldeano.crearCuartel(0,0);
         
         Area zonaDeConstruccion2 = unTablero.definirArea(6,6,10,10);
@@ -701,7 +699,7 @@ public class AldeanoTest {
 
         Aldeano unAldeano = new Aldeano(5,5);
 
-        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(1,1);
+        Cuartel cuartelEnConstruccion = (Cuartel)unAldeano.crearCuartel(3,4);
 
         unAldeano.nuevoTurno();
 
@@ -709,7 +707,7 @@ public class AldeanoTest {
 
         try {
 
-           Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(6,1);
+           Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(6,6);
 
         } catch (AldeanoOcupadoConOtroEdificioError e) {
 
