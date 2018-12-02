@@ -17,27 +17,25 @@ public class PlazaCentralTest {
         //voy a ocupar a partir de la (2,2)
         //se ocuparan las casillas en (2,2) (2,3) (3,2) (3,3)
         Area zonaDeConstruccion = unTablero.definirArea(2, 2, Plaza.TAMANIO_LADO+1, Plaza.TAMANIO_LADO+1);
-        Assert.assertEquals(true, zonaDeConstruccion.estaLibre());
+        Assert.assertTrue(zonaDeConstruccion.estaLibre());
 
-        Plaza unaPlaza = new Plaza(zonaDeConstruccion);
-        Assert.assertEquals(false, zonaDeConstruccion.estaLibre());
-        Assert.assertEquals(false, unaPlaza.obtenerAreaOcupada().estaLibre());
+        Plaza unaPlaza = new Plaza(2,2);
+        Assert.assertFalse(zonaDeConstruccion.estaLibre());
+        Assert.assertFalse(unaPlaza.obtenerAreaOcupada().estaLibre());
 
         //Las casillas adyacentes deberian estar libres
-        Assert.assertEquals(false, unTablero.obtenerCasillaEn(1,1).estaOcupada());
-        Assert.assertEquals(false, unTablero.obtenerCasillaEn(4,4).estaOcupada());
-        Assert.assertEquals(false, unTablero.obtenerCasillaEn(2,1).estaOcupada());
-        Assert.assertEquals(false, unTablero.obtenerCasillaEn(3,4).estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(4, 4).estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(2, 1).estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(3, 4).estaOcupada());
     }
 
     @Test
     public void PlazaCentralCreaAldeano() throws Exception {
         Tablero unTablero = new Tablero(5,5);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
-
-        Plaza unaPlaza = new Plaza(zonaDeConstruccion);
-        Assert.assertEquals(true, unTablero.obtenerCasillaEn(1,1).estaOcupada());
+        Plaza unaPlaza = new Plaza(0,0);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
         
         //La Plaza debe estar construida para poder crear unidades (3 turnos)
         unaPlaza.construir();
@@ -45,98 +43,104 @@ public class PlazaCentralTest {
         unaPlaza.construir();
         
         Area espacioAldeano = unTablero.definirArea(0,2,0,2);
-        Assert.assertEquals(true, espacioAldeano.estaLibre());
+        Assert.assertTrue(espacioAldeano.estaLibre());
         
-        Aldeano nuevoAldeano = unaPlaza.crearAldeano(espacioAldeano);
-        Assert.assertEquals(false, espacioAldeano.estaLibre());
+        Aldeano nuevoAldeano = unaPlaza.crearAldeano(0,2);
+        Assert.assertFalse(espacioAldeano.estaLibre());
         Assert.assertNotNull(nuevoAldeano);
     }
 
     @Test
     public void noSePuedeCrearAldeanoTanLejos() throws Exception{
         Tablero unTablero = new Tablero();
-        Plaza unaPlaza = new Plaza(unTablero.definirArea(0,0,1,1), true);
+        Plaza unaPlaza = new Plaza(0,0);
 
-        Aldeano unAldeano = unaPlaza.crearAldeano(unTablero.definirArea(0,2,0,2));
+        unaPlaza.construir();
+        unaPlaza.construir();
+        unaPlaza.construir();
+
+        Aldeano unAldeano = unaPlaza.crearAldeano(0,2);
 
         unaPlaza.nuevoTurno();
         boolean lanzaUnError=false;
         try {
-            Aldeano otroAldeano = unaPlaza.crearAldeano(unTablero.definirArea(3,3,3,3));
+            Aldeano otroAldeano = unaPlaza.crearAldeano(3,3);
         } catch (NoSePuedeConstruirTanLejosError e){
             lanzaUnError=true;
         }
 
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
     }
 
     @Test
     public void noSePuedeCrearUnidadDuranteConstruccion() throws Exception{
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Aldeano unAldeano = new Aldeano(0,0);
 
-        Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(unTablero.definirArea(0,1,1,2));
+        Plaza unaPlaza = (Plaza)unAldeano.crearPlaza(0,1);
 
         //tarda 3 turnos en construirse una plaza
         boolean lanzaUnError=false;
         try {
-            unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+            unaPlaza.crearAldeano(2,1);
         } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
             lanzaUnError=true;
         }
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
 
         unAldeano.nuevoTurno();
         lanzaUnError=false;
         try {
-            unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+            unaPlaza.crearAldeano(2,1);
         } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
             lanzaUnError=true;
         }
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
 
         unAldeano.nuevoTurno();
         lanzaUnError=false;
         try {
-            unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+            unaPlaza.crearAldeano(2,1);
         } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
             lanzaUnError=true;
         }
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
 
         unAldeano.nuevoTurno();
         lanzaUnError=false;
         try {
-            unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+            unaPlaza.crearAldeano(2,1);
         } catch (NoSePuedeCrearUnidadesDuranteConstruccionError e){
             lanzaUnError=true;
         }
-        Assert.assertEquals(false, lanzaUnError);
+        Assert.assertFalse(lanzaUnError);
     }
 
     @Test
     public void plazaYaJugoEnEseTurno() throws Exception{
         Tablero unTablero = new Tablero();
-        Plaza unaPlaza = new Plaza(unTablero.definirArea(0,0,1,1), true);
+        Plaza unaPlaza = new Plaza(0,0);
 
-        Aldeano unAldeano = unaPlaza.crearAldeano(unTablero.definirArea(2,0,2,0));
+        unaPlaza.construir();
+        unaPlaza.construir();
+        unaPlaza.construir();
+
+        Aldeano unAldeano = unaPlaza.crearAldeano(2,0);
         boolean lanzaUnError=false;
         try{
-            Aldeano otroAldeano = unaPlaza.crearAldeano(unTablero.definirArea(2,1,2,1));
+            Aldeano otroAldeano = unaPlaza.crearAldeano(2,1);
         } catch (PiezaYaJugoEnTurnoActualError e){
             lanzaUnError=true;
         }
 
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
     }
 
     @Test
     public void edificioNecesitaReparacionPlaza() throws Exception {
         Tablero unTablero = new Tablero(6,6);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Plaza(zonaDeConstruccion);
+        Edificio unEdificio = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
@@ -151,9 +155,7 @@ public class PlazaCentralTest {
     public void edificioRepararPlaza() throws Exception {
         Tablero unTablero = new Tablero(6,6);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Plaza(zonaDeConstruccion);
+        Edificio unEdificio = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
@@ -172,9 +174,7 @@ public class PlazaCentralTest {
     public void edificioConstruirPlaza() throws Exception {
         Tablero unTablero = new Tablero(6,6);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Plaza(zonaDeConstruccion);
+        Edificio unEdificio = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         unEdificio.construir();
@@ -195,12 +195,10 @@ public class PlazaCentralTest {
     public void edificioRecibirDanioDeArqueroPlaza() throws Exception {
         Tablero unTablero = new Tablero(6,6);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
-        Edificio unEdificio = new Plaza(zonaDeConstruccion);
+        Edificio unEdificio = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
-        Area espacioArquero = unTablero.definirArea(4,4,4,4);
-        Arquero unArquero = new Arquero(espacioArquero);
+        Arquero unArquero = new Arquero(4,4);
 
         unEdificio.construir();
         unEdificio.construir();
@@ -218,12 +216,10 @@ public class PlazaCentralTest {
     public void edificioRecibirDanioDeEspadachinPlaza() throws Exception {
         Tablero unTablero = new Tablero();
 
-        Area zonaDeConstruccion = unTablero.definirArea(0,0,1,1);
-        Edificio unEdificio = new Plaza(zonaDeConstruccion);
+        Edificio unEdificio = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
-        Area espacioEspadachin = unTablero.definirArea(2,0,2,0);
-        Espadachin unEspadachin = new Espadachin(espacioEspadachin);
+        Espadachin unEspadachin = new Espadachin(2,0);
 
         unEdificio.construir();
         unEdificio.construir();
@@ -242,7 +238,7 @@ public class PlazaCentralTest {
         Tablero unTablero = new Tablero(6,6);
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
-        Pieza unaPieza = new Plaza(zonaDeConstruccion);
+        Pieza unaPieza = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
 
         Assert.assertNotNull(unaPieza);
