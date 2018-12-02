@@ -168,10 +168,10 @@ public class ArqueroTest {
     	Tablero unTablero = new Tablero(4,4);
 
         Area espacioAldeano = unTablero.definirArea(0,0,0,0);
-        Aldeano unAldeano = new Aldeano(espacioAldeano);
+        Aldeano unAldeano = new Aldeano(0,0);
 
         Area espacioArquero = unTablero.definirArea(0,3,0,3);
-        Arquero unArquero = new Arquero(espacioArquero);
+        Arquero unArquero = new Arquero(0,3);
 
         //vida del aldeano == 35
         unArquero.atacar(unAldeano);
@@ -217,7 +217,11 @@ public class ArqueroTest {
     public void piezaAAtacarFueraDeRango() throws Exception{
         Tablero unTablero = new Tablero();
         Arquero unArquero = new Arquero(0,0);
-        Plaza unaPlaza = new Plaza(unTablero.definirArea(4,4);
+        Plaza unaPlaza = new Plaza(4,4);
+
+        unaPlaza.construir();
+        unaPlaza.construir();
+        unaPlaza.construir();
 
         boolean lanzaUnError=false;
         try{
@@ -226,13 +230,13 @@ public class ArqueroTest {
             lanzaUnError=true;
         }
 
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
     }
 
     @Test
     public void arqueroYaJugoEnEseTurno() throws Exception{
         Tablero unTablero = new Tablero();
-        Arquero unArquero = new Arquero(unTablero.definirArea(0,0,0,0));
+        Arquero unArquero = new Arquero(0,0);
 
         unArquero.mover(unTablero.definirArea(1,0,1,0));
 
@@ -253,7 +257,7 @@ public class ArqueroTest {
         Tablero unTablero = new Tablero(6,6);
 
         Area espacioArquero = unTablero.definirArea(0, 0, 0, 0);
-        Pieza unaPieza = new Arquero(espacioArquero);
+        Pieza unaPieza = new Arquero(0,0);
 
         Assert.assertNotNull(unaPieza);
         Assert.assertFalse(espacioArquero.estaLibre());
