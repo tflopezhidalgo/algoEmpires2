@@ -14,16 +14,14 @@ public class CastilloTest {
     public void castilloCreaCatapulta() {
     	Tablero unTablero = new Tablero(6,6);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
-
-        Castillo unCastillo = new Castillo(zonaDeConstruccion);
-        Assert.assertEquals(true, unTablero.obtenerCasillaEn(3,3).estaOcupada());
+        Castillo unCastillo = new Castillo(0,0);
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
 
         Area espacioParaCatapulta = unTablero.definirArea(4,4,4,4);
-        Assert.assertEquals(true, espacioParaCatapulta.estaLibre());
+        Assert.assertTrue(espacioParaCatapulta.estaLibre());
 
-        ArmaDeAsedio nuevaArmaDeAsedio = (ArmaDeAsedio) unCastillo.crearCatapulta(espacioParaCatapulta);
-        Assert.assertEquals(false, espacioParaCatapulta.estaLibre());
+        ArmaDeAsedio nuevaArmaDeAsedio = (ArmaDeAsedio) unCastillo.crearCatapulta(4,4);
+        Assert.assertFalse(espacioParaCatapulta.estaLibre());
         Assert.assertNotNull(nuevaArmaDeAsedio);
     }
 
@@ -32,45 +30,45 @@ public class CastilloTest {
     	Tablero unTablero = new Tablero(5,5);
 
         Area zonaDeConstruccion = unTablero.definirArea(1, 1, Castillo.TAMANIO_LADO, Castillo.TAMANIO_LADO);
-        Assert.assertEquals(true, zonaDeConstruccion.estaLibre());
+        Assert.assertTrue(zonaDeConstruccion.estaLibre());
 
-        Castillo unCastillo = new Castillo(zonaDeConstruccion);
-        Assert.assertEquals(false, zonaDeConstruccion.estaLibre());
-        Assert.assertEquals(false, unCastillo.obtenerAreaOcupada().estaLibre());
+        Castillo unCastillo = new Castillo(1,1);
+        Assert.assertFalse(zonaDeConstruccion.estaLibre());
+        Assert.assertFalse(unCastillo.obtenerAreaOcupada().estaLibre());
 
-        Assert.assertEquals(true, unTablero.obtenerCasillaEn(3,4).estaOcupada());
-        Assert.assertEquals(true, unTablero.obtenerCasillaEn(4,4).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(3, 4).estaOcupada());
+        Assert.assertTrue(unTablero.obtenerCasillaEn(4, 4).estaOcupada());
         //Las casillas adyacentes deberian estar libres
-        Assert.assertEquals(false, unTablero.obtenerCasillaEn(0,0).estaOcupada());
-        Assert.assertEquals(false, unTablero.obtenerCasillaEn(0,2).estaOcupada());
-        Assert.assertEquals(false, unTablero.obtenerCasillaEn(0,3).estaOcupada());
-        Assert.assertEquals(false, unTablero.obtenerCasillaEn(0,4).estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(0, 0).estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(0, 2).estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(0, 3).estaOcupada());
+        Assert.assertFalse(unTablero.obtenerCasillaEn(0, 4).estaOcupada());
     }
 
     @Test
     public void recibirDanio() {
         Tablero unTablero = new Tablero();
-        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+        Castillo unCastillo = new Castillo(0,0);
 
-        Assert.assertEquals(false, unCastillo.necesitaReparacion());
+        Assert.assertFalse(unCastillo.necesitaReparacion());
 
         unCastillo.recibirDanio(50);
-        Assert.assertEquals(true, unCastillo.necesitaReparacion());
+        Assert.assertTrue(unCastillo.necesitaReparacion());
     }
 
     @Test
     public void atacarPiezaEnemiga() {
         Tablero unTablero = new Tablero();
-        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(5,5,5,5));
+        Castillo unCastillo = new Castillo(0,0);
+        Aldeano unAldeano = new Aldeano(5,5);
 
-        Assert.assertEquals(false, unAldeano.estaDestruida());
+        Assert.assertFalse(unAldeano.estaDestruida());
         unCastillo.atacar(unAldeano);
-        Assert.assertEquals(false, unAldeano.estaDestruida());
+        Assert.assertFalse(unAldeano.estaDestruida());
         unCastillo.atacar(unAldeano);
-        Assert.assertEquals(false, unAldeano.estaDestruida());
+        Assert.assertFalse(unAldeano.estaDestruida());
         unCastillo.atacar(unAldeano);
-        Assert.assertEquals(true, unAldeano.estaDestruida());
+        Assert.assertTrue(unAldeano.estaDestruida());
     }
 /*
     @Test //TODO: TE la debo...
@@ -95,26 +93,26 @@ public class CastilloTest {
     @Test
     public void noSePuedeConstruirArmaDeAsedioTanLejos() {
         Tablero unTablero = new Tablero();
-        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+        Castillo unCastillo = new Castillo(0,0);
 
-        ArmaDeAsedio unaCatapulta = (ArmaDeAsedio)unCastillo.crearCatapulta(unTablero.definirArea(4,0,4,0));
+        ArmaDeAsedio unaCatapulta = (ArmaDeAsedio)unCastillo.crearCatapulta(4,0);
         unCastillo.nuevoTurno();
 
         boolean lanzaUnError=false;
         try {
-            ArmaDeAsedio otraCatapulta = (ArmaDeAsedio)unCastillo.crearCatapulta(unTablero.definirArea(7,0,7,0));
+            ArmaDeAsedio otraCatapulta = (ArmaDeAsedio)unCastillo.crearCatapulta(7,0);
         } catch(NoSePuedeConstruirTanLejosError e) {
             lanzaUnError=true;
         }
 
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
     }
 
     @Test
     public void piezaFueraDeAlcanceParaAtacar() {
         Tablero unTablero = new Tablero();
-        Arquero unArquero = new Arquero(unTablero.definirArea(7,7,7,7));
-        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3, 3));
+        Arquero unArquero = new Arquero(7,7);
+        Castillo unCastillo = new Castillo(0,0);
 
         boolean lanzaUnError=false;
         try{
@@ -123,24 +121,24 @@ public class CastilloTest {
             lanzaUnError=true;
         }
 
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
     }
 
     @Test
     public void castilloYaJugoEnEseTurno() {
         Tablero unTablero = new Tablero();
-        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+        Castillo unCastillo = new Castillo(0,0);
 
-        ArmaDeAsedio catapulta = (ArmaDeAsedio)unCastillo.crearCatapulta(unTablero.definirArea(4,0,5,1));
+        ArmaDeAsedio catapulta = (ArmaDeAsedio)unCastillo.crearCatapulta(4,0);
 
         boolean lanzaUnError=false;
         try {
-            ArmaDeAsedio unaCatapulta = (ArmaDeAsedio)unCastillo.crearCatapulta(unTablero.definirArea(4,2,4,2));
+            ArmaDeAsedio unaCatapulta = (ArmaDeAsedio)unCastillo.crearCatapulta(4,2);
         } catch (PiezaYaJugoEnTurnoActualError e){
             lanzaUnError=true;
         }
 
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
 
 
     }
@@ -149,9 +147,7 @@ public class CastilloTest {
     public void edificioNecesitaReparacionCastillo() throws Exception {
         Tablero unTablero = new Tablero(6,6);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Castillo(zonaDeConstruccion);
+        Edificio unEdificio = new Castillo(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(3,3).estaOcupada());
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
@@ -166,9 +162,7 @@ public class CastilloTest {
     public void edificioRepararCastillo() throws Exception {
         Tablero unTablero = new Tablero(6,6);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Castillo(zonaDeConstruccion);
+        Edificio unEdificio = new Castillo(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
@@ -187,9 +181,7 @@ public class CastilloTest {
     public void edificioConstruirCastillo() throws Exception {
         Tablero unTablero = new Tablero(6,6);
 
-        Area zonaDeConstruccion = unTablero.definirArea(0, 0, Castillo.TAMANIO_LADO-1, Castillo.TAMANIO_LADO-1);
-
-        Edificio unEdificio = new Castillo(zonaDeConstruccion);
+        Edificio unEdificio = new Castillo(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
 
         Assert.assertFalse(unEdificio.enConstruccion());
@@ -201,11 +193,9 @@ public class CastilloTest {
     public void edificioRecibirDanioDeArqueroCastillo() throws Exception {
         Tablero unTablero = new Tablero();
 
-        Area zonaDeConstruccion = unTablero.definirArea(0,0,3,3);
-        Castillo unCastillo = new Castillo(zonaDeConstruccion);
+        Castillo unCastillo = new Castillo(0,0);
 
-        Area espacioArquero = unTablero.definirArea(4,4,4,4);
-        Arquero unArquero = new Arquero(espacioArquero);
+        Arquero unArquero = new Arquero(4,4);
 
         Assert.assertFalse(unCastillo.necesitaReparacion());
 
@@ -218,12 +208,10 @@ public class CastilloTest {
     public void edificioRecibirDanioDeEspadachinCastillo() throws Exception {
         Tablero unTablero = new Tablero();
 
-        Area zonaDeConstruccion = unTablero.definirArea(0,0,3,3);
-        Edificio unEdificio = new Castillo(zonaDeConstruccion);
+        Edificio unEdificio = new Castillo(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
 
-        Area espacioEspadachin = unTablero.definirArea(4,4,4,4);
-        Espadachin unEspadachin = new Espadachin(espacioEspadachin);
+        Espadachin unEspadachin = new Espadachin(4,4);
 
         Assert.assertFalse(unEdificio.necesitaReparacion());
 
@@ -239,7 +227,7 @@ public class CastilloTest {
         Tablero unTablero = new Tablero();
 
         Area zonaDeConstruccion = unTablero.definirArea(0,0,3,3);
-        Castillo unCastillo = new Castillo(zonaDeConstruccion);
+        Castillo unCastillo = new Castillo(0,0);
 
         Assert.assertTrue(unTablero.obtenerCasillaEn(3,3).estaOcupada());
         Assert.assertFalse(zonaDeConstruccion.estaLibre());
