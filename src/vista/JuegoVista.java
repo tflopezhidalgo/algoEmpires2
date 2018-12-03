@@ -3,6 +3,7 @@ package vista;
 
 import controlador.FinalizarTurnoHandler;
 import controlador.HerramientasMapa;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
@@ -15,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import modelo.Juego;
 import modelo.Tablero;
 
@@ -27,21 +29,25 @@ public class JuegoVista extends BorderPane {
 	public static final int TAMANIO_CASILLA = CasillaVista.TAMANIO_CASILLA;
 	
 	//--------------------------
+	private StackPane panelSuperior;
+	private StackPane panelIzquierdo;
+	private StackPane panelCentro;
+	private StackPane panelDerecho;	
+	private Pane botonesPanelIzquierdo;
 	
-	private HBox botones;
-	
+	private Stage stagePrincipal;
 	private Tablero elTablero;
-	
-	
+	private Pane mapa;
+
 	private PiezaVista piezaSeleccionada;
 	private CasillaVista casillaSeleccionada;
 	private Group grupoCasillas = new Group(); 
 	private Group grupoPiezas = new Group();
-	private Pane mapa;
 
-    public JuegoVista(Juego juegoNuevo){
+    public JuegoVista(Juego juegoNuevo, Stage stagePrincipal){
     	piezaSeleccionada = null;
     	casillaSeleccionada = null;
+    	this.stagePrincipal = stagePrincipal;
     	
         //juegoNuevo.iniciarJuego();
     	
@@ -55,10 +61,10 @@ public class JuegoVista extends BorderPane {
     	mapa = new Pane();
     	ScrollPane mapaSC = new ScrollPane();
     	
-    	mapaSC.addEventFilter(ScrollEvent.SCROLL, event -> {
+    	/*mapaSC.addEventFilter(ScrollEvent.SCROLL, event -> {
 			  zoomPane(event); // zoom en el panel en vez de scroll
 		      event.consume();
-    		});
+    		});*/
     	
     	elTablero = HerramientasMapa.crearMapa(this,grupoCasillas, grupoPiezas);
     	
@@ -68,40 +74,50 @@ public class JuegoVista extends BorderPane {
     }
     
     private void crearPanelSuperior() {   	
-    	StackPane panel = new StackPane();
-    	Image background = new Image("resources/images/ElementosMenu/mapa/panelSuperior/panelSuperior.png");
+    	this.panelSuperior = new StackPane();
+    	Image background = new Image("resources/images/elementosJuego/mapa/panelSuperior/panelSuperior.png");
     	ImageView backgroundView = new ImageView(background);
-    	backgroundView.setFitWidth(this.getMaxWidth());
+    	backgroundView.fitWidthProperty().bind(stagePrincipal.widthProperty());
     	backgroundView.setFitHeight(30);
-    	panel.getChildren().add(backgroundView);
+    	panelSuperior.getChildren().add(backgroundView);
     	
-    	setTop(panel);
+    	setTop(panelSuperior);
     }
     
     private void crearPanelInferior() {
     	HBox contenedor = new HBox();
-    	StackPane panelIzquierdo = new StackPane();
-    	StackPane panelCentro = new StackPane();
-    	StackPane panelDerecho = new StackPane();
+    	this.panelIzquierdo = new StackPane();
+    	this.panelCentro = new StackPane();
+    	this.panelDerecho = new StackPane();
     	contenedor.getChildren().addAll(panelIzquierdo, panelCentro, panelDerecho);
     	
-    	Image central = new Image("resources/images/ElementosMenu/mapa/panelInferior/panelInferiorCentro.png");
-    	ImageView panelCentralView = new ImageView(central);
-    	panelCentro.getChildren().add(panelCentralView);
-    	
-    	Image izquierdo = new Image("resources/images/ElementosMenu/mapa/panelInferior/panelInferiorIzquierdo.png");
+    	Image izquierdo = new Image("resources/images/elementosJuego/mapa/panelInferior/panelInferiorIzquierdo.png");
     	ImageView panelIzquierdoView = new ImageView(izquierdo);
+    	panelIzquierdoView.fitWidthProperty().bind(stagePrincipal.widthProperty().multiply(0.27));
+    	panelIzquierdoView.fitHeightProperty().bind(stagePrincipal.heightProperty().multiply(0.2));
     	panelIzquierdo.getChildren().add(panelIzquierdoView);
     	
-    	Image derecho = new Image("resources/images/ElementosMenu/mapa/panelInferior/panelInferiorDerecho.png");
+    	Image central = new Image("resources/images/elementosJuego/mapa/panelInferior/panelInferiorCentro.png");
+    	ImageView panelCentralView = new ImageView(central);
+    	panelCentralView.fitWidthProperty().bind(stagePrincipal.widthProperty().multiply(0.39));
+    	panelCentralView.fitHeightProperty().bind(stagePrincipal.heightProperty().multiply(0.2));
+    	panelCentro.getChildren().add(panelCentralView);
+    	
+    	Image derecho = new Image("resources/images/elementosJuego/mapa/panelInferior/panelInferiorDerecho.png");
     	ImageView panelDerechoView = new ImageView(derecho);
+    	panelDerechoView.fitWidthProperty().bind(stagePrincipal.widthProperty().multiply(0.34));
+    	panelDerechoView.fitHeightProperty().bind(stagePrincipal.heightProperty().multiply(0.2));
     	panelDerecho.getChildren().add(panelDerechoView);
 
-    	MenuBar menuAcciones = new MenuBar();
     	Button botonFinTurno = new Button("Finalizar Turno");
     	botonFinTurno.setOnAction( new FinalizarTurnoHandler(grupoPiezas));
-    	botones = new HBox(botonFinTurno, menuAcciones);
-    	panelCentro.getChildren().add(botones);
+    	panelDerecho.getChildren().add(botonFinTurno);
+    	StackPane.setAlignment(botonFinTurno, Pos.CENTER);
+    	
+    	HBox menuAcciones = new HBox();
+    	botonesPanelIzquierdo = new Pane(menuAcciones);
+    	panelIzquierdo.getChildren().add(botonesPanelIzquierdo);
+    	StackPane.setAlignment(botonesPanelIzquierdo, Pos.CENTER);
     	
     	setBottom(contenedor);	
     }
@@ -124,7 +140,7 @@ public class JuegoVista extends BorderPane {
     }
     
 	private void crearFuncionalidades() {
-		//------------------	ZOOM	---------------------
+		/*//------------------	ZOOM	---------------------
     	grupoCasillas.setAutoSizeChildren(true);
     	grupoPiezas.setAutoSizeChildren(true);
     	
@@ -152,9 +168,9 @@ public class JuegoVista extends BorderPane {
 		grupoPiezas.getChildren().add(piezaVista);
 	}
     
-    public void asignarMenuAcciones(MenuBar acciones) {
-    	botones.getChildren().remove(1);
-    	botones.getChildren().add(acciones);
+    public void asignarMenuAcciones(HBox acciones) {
+    	botonesPanelIzquierdo.getChildren().remove(0);
+    	botonesPanelIzquierdo.getChildren().add(acciones);
     }
 
 	public PiezaVista piezaSeleccionada() {

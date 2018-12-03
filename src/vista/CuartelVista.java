@@ -33,18 +33,18 @@ public class CuartelVista extends EdificioVista{
 		//-----------------------------------------
 	}
 
-	protected void prepararBotones() {		
-		Menu menuHabilidades = new Menu("Habilidades");
-
-		MenuItem crearEspadachin = new MenuItem("Crear Espadachin");
-		crearEspadachin.setOnAction( //new CrearEspadachinHandler(elMapa, modelo));
-				e->CrearEspadachin());
-		MenuItem crearArquero = new MenuItem("Crear Arquero");
-		crearArquero.setOnAction( //new CrearArqueroHandler(elMapa, modelo));
-				e->CrearArquero());
-
-		menuHabilidades.getItems().addAll(crearEspadachin,crearArquero);
-		acciones.getMenus().add(menuHabilidades);
+	protected void prepararBotones() {	
+        Image iconoEspadachin = new Image("resources/images/elementosJuego/botones/crearEspadachin.png");
+        ImageView iconoEspadachinView = new ImageView(iconoEspadachin);
+        BotonVistaPersonalizado construirEspadachin = new BotonVistaPersonalizado(iconoEspadachinView);
+        construirEspadachin.setOnMousePressed(e->CrearEspadachin());
+        
+        Image iconoArquero = new Image("resources/images/elementosJuego/botones/crearArquero.png");
+        ImageView iconoArqueroView = new ImageView(iconoArquero);
+        BotonVistaPersonalizado construirArquero = new BotonVistaPersonalizado(iconoArqueroView);
+        construirArquero.setOnMousePressed(e->CrearArquero());
+		
+		acciones.getChildren().addAll(construirEspadachin,construirArquero);
 	}
 	
 	private void CrearArquero() {

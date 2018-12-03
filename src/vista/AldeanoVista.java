@@ -26,19 +26,18 @@ public class AldeanoVista extends UnidadVista{
 	}
 
 	@Override
-	protected void prepararBotones() {		
-		Menu menuHabilidades = new Menu("Habilidades");
-		//menu.setGraphic(new ImageView("file:imagen.png"));
-
-		MenuItem construirCuartel = new MenuItem("Construir Cuartel");
-		construirCuartel.setOnAction( //new ConstruirCuartelHandler(elMapa,modelo));
-				e->ConstruirCuartel());
-		MenuItem construirPlaza = new MenuItem("Construir Plaza");
-		construirPlaza.setOnAction( //new ConstruirPlazaHandler(elMapa,modelo));
-				e->ConstruirPlaza());
-
-		menuHabilidades.getItems().addAll(construirCuartel,construirPlaza);
-		acciones.getMenus().add(menuHabilidades);
+	protected void prepararBotones() {
+        Image iconoPlaza = new Image("resources/images/elementosJuego/botones/construirPlaza.png");
+        ImageView iconoPlazaView = new ImageView(iconoPlaza);
+        BotonVistaPersonalizado construirPlaza = new BotonVistaPersonalizado(iconoPlazaView);
+        construirPlaza.setOnMousePressed(event -> ConstruirPlaza());
+        
+        Image iconoCuartel = new Image("resources/images/elementosJuego/botones/construirCuartel.png");
+        ImageView iconoCuartelView = new ImageView(iconoCuartel);
+        BotonVistaPersonalizado construirCuartel = new BotonVistaPersonalizado(iconoCuartelView);
+        construirCuartel.setOnMousePressed(event -> ConstruirCuartel());
+		
+		acciones.getChildren().addAll(construirPlaza,construirCuartel);
 	}
 	
 	private void ConstruirCuartel() {

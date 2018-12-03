@@ -2,6 +2,7 @@ package vista;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -16,7 +17,7 @@ public class AlgoOfEmpires extends Application{
     	Scene escenaInicial = new Scene(new MenuVista(primaryStage));
     	primaryStage.setTitle("Algo of Empires");
     	primaryStage.initStyle(StageStyle.UNDECORATED);
-    	primaryStage.setFullScreen(true);
+    	//primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     	primaryStage.setMaximized(true);
 
         primaryStage.setScene(escenaInicial);

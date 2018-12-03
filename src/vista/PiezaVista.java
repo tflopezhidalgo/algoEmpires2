@@ -3,6 +3,7 @@ package vista;
 import controlador.ClickPiezaHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.MenuBar;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -16,7 +17,8 @@ public abstract class PiezaVista extends StackPane {
 	protected Rectangle seleccion;
 	protected Rectangle barraVidaActual;
 	
-	protected MenuBar acciones;
+	//protected MenuBar acciones;
+	protected HBox acciones;
 	
 	public static int TAMANIO_CASILLA = CasillaVista.TAMANIO_CASILLA;
 	protected int ultimaX;
@@ -28,7 +30,8 @@ public abstract class PiezaVista extends StackPane {
 		modelo = unModelo;
 		elMapa = unMapa;
 		
-		acciones = new MenuBar();
+		//acciones = new MenuBar();
+		acciones = new HBox(10);
 
 		//-----------------------------------------
 		

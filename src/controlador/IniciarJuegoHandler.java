@@ -25,7 +25,7 @@ public class IniciarJuegoHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event){
         //prepararEscenaSiguiente(new Juego(nombreJugador1, nombreJugador2));
         Juego elJuego = new Juego(nombreJugador1, nombreJugador2);
-        primaryStage.getScene().setRoot(new JuegoVista(elJuego));
+        primaryStage.getScene().setRoot(new JuegoVista(elJuego, primaryStage));
         //primaryStage.setScene(escenaSiguiente);
     }
 	

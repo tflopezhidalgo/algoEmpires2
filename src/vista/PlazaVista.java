@@ -34,16 +34,12 @@ public class PlazaVista extends EdificioVista {
 	}
 
 	protected void prepararBotones() {
-		Menu menuHabilidades = new Menu("Habilidades");
-		//menu.setGraphic(new ImageView("file:imagen.png"));
-
-		MenuItem crearAldeano = new MenuItem("Crear Aldeano");
+        Image iconoAldeano = new Image("resources/images/elementosJuego/botones/crearAldeano.png");
+        ImageView iconoAldeanoView = new ImageView(iconoAldeano);
+        BotonVistaPersonalizado crearAldeano = new BotonVistaPersonalizado(iconoAldeanoView);
+        crearAldeano.setOnMousePressed(e->CrearAldeano());
 		
-		crearAldeano.setOnAction( //new CrearAldeanoHandler(this.elMapa, this.modelo));
-				e->CrearAldeano());
-
-		menuHabilidades.getItems().addAll(crearAldeano);
-		acciones.getMenus().add(menuHabilidades);
+		acciones.getChildren().add(crearAldeano);
 	}
 	
 	private void CrearAldeano() {

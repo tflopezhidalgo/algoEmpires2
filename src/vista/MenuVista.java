@@ -21,8 +21,8 @@ public class MenuVista extends BorderPane {
     	//--------------- Imagen de fondo -----------------------
         Image background = new Image("resources/images/ElementosMenu/menuBackground3.png");
         ImageView backgroundVista = new ImageView(background);
-        backgroundVista.setFitWidth(1280);
-        backgroundVista.setFitHeight(800);
+        backgroundVista.fitWidthProperty().bind(stagePrincipal.widthProperty());
+        backgroundVista.fitHeightProperty().bind(stagePrincipal.heightProperty());
         
     	StackPane panel = new StackPane(backgroundVista);
         setCenter(panel);

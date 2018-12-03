@@ -15,16 +15,13 @@ public class CastilloVista extends EdificioVista{
 	}
 
 	@Override
-	protected void prepararBotones() {		
-		Menu menuHabilidades = new Menu("Habilidades");
-		//menu.setGraphic(new ImageView("file:imagen.png"));
-
-		MenuItem crearArmaDeAsedio = new MenuItem("Crear Arma De Asedio");
-		crearArmaDeAsedio.setOnAction( //new CrearArmaDeAsedioHandler(elMapa, modelo));
-				e->CrearArmaDeAsedio());
-
-		menuHabilidades.getItems().addAll(crearArmaDeAsedio);
-		acciones.getMenus().add(menuHabilidades);
+	protected void prepararBotones() {
+        Image iconoArmaDeAsedio = new Image("resources/images/elementosJuego/botones/crearArmaDeAsedio.png");
+        ImageView iconoArmaDeAsedioView = new ImageView(iconoArmaDeAsedio);
+        BotonVistaPersonalizado construirArmaDeAsedio = new BotonVistaPersonalizado(iconoArmaDeAsedioView);
+        construirArmaDeAsedio.setOnMousePressed(e->CrearArmaDeAsedio());
+		
+		acciones.getChildren().addAll(construirArmaDeAsedio);
 	}
 	
 	private void CrearArmaDeAsedio() {
