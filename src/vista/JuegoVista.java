@@ -67,14 +67,9 @@ public class JuegoVista extends BorderPane {
     	setCenter(mapaSC);
     }
     
-    private void crearPanelSuperior() {
-    	
-    	System.out.println("Min: "+mapa.getMinWidth() +" Max: " +mapa.getMaxWidth() +" Pref: " + mapa.getMaxWidth()+" Normal: "+ mapa.getWidth());
-    	System.out.println("B-Min: "+mapa.minWidthProperty() +" Max: " +mapa.maxWidthProperty() +" Pref: " + mapa.prefWidthProperty()+" Other: "+ mapa.widthProperty());
-    	System.out.println("C-COMPUTED: "+ USE_COMPUTED_SIZE +" PREF: " + USE_PREF_SIZE);    	
-    	
+    private void crearPanelSuperior() {   	
     	StackPane panel = new StackPane();
-    	Image background = new Image("resources/images/ElementosMenu/mapa/panelSuperior/background.png");
+    	Image background = new Image("resources/images/ElementosMenu/mapa/panelSuperior/panelSuperior.png");
     	ImageView backgroundView = new ImageView(background);
     	backgroundView.setFitWidth(this.getMaxWidth());
     	backgroundView.setFitHeight(30);
@@ -90,9 +85,17 @@ public class JuegoVista extends BorderPane {
     	StackPane panelDerecho = new StackPane();
     	contenedor.getChildren().addAll(panelIzquierdo, panelCentro, panelDerecho);
     	
-    	Image background = new Image("resources/images/ElementosMenu/mapa/panelInferior/background.png");
-    	ImageView backgroundView = new ImageView(background);
-    	panelCentro.getChildren().add(backgroundView);
+    	Image central = new Image("resources/images/ElementosMenu/mapa/panelInferior/panelInferiorCentro.png");
+    	ImageView panelCentralView = new ImageView(central);
+    	panelCentro.getChildren().add(panelCentralView);
+    	
+    	Image izquierdo = new Image("resources/images/ElementosMenu/mapa/panelInferior/panelInferiorIzquierdo.png");
+    	ImageView panelIzquierdoView = new ImageView(izquierdo);
+    	panelIzquierdo.getChildren().add(panelIzquierdoView);
+    	
+    	Image derecho = new Image("resources/images/ElementosMenu/mapa/panelInferior/panelInferiorDerecho.png");
+    	ImageView panelDerechoView = new ImageView(derecho);
+    	panelDerecho.getChildren().add(panelDerechoView);
 
     	MenuBar menuAcciones = new MenuBar();
     	Button botonFinTurno = new Button("Finalizar Turno");
