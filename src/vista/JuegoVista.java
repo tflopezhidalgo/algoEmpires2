@@ -6,8 +6,6 @@ import controlador.HerramientasMapa;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -61,6 +59,7 @@ public class JuegoVista extends BorderPane {
     	mapa = new Pane();
     	ScrollPane mapaSC = new ScrollPane();
     	
+    	//Bloquea el scrolling para el ScrollPanel
     	/*mapaSC.addEventFilter(ScrollEvent.SCROLL, event -> {
 			  zoomPane(event); // zoom en el panel en vez de scroll
 		      event.consume();
@@ -117,7 +116,10 @@ public class JuegoVista extends BorderPane {
     	HBox menuAcciones = new HBox();
     	botonesPanelIzquierdo = new Pane(menuAcciones);
     	panelIzquierdo.getChildren().add(botonesPanelIzquierdo);
-    	StackPane.setAlignment(botonesPanelIzquierdo, Pos.CENTER);
+    	botonesPanelIzquierdo.setTranslateX(85);
+    	botonesPanelIzquierdo.setTranslateY(40);
+
+    	//StackPane.setAlignment(botonesPanelIzquierdo, Pos.CENTER);
     	
     	setBottom(contenedor);	
     }
@@ -147,6 +149,7 @@ public class JuegoVista extends BorderPane {
         setOnScroll(e-> zoomPane(e));
 		//------------------	FIN ZOOM	---------------------
 
+		//--------------	ARRASTRAR PANEL	    ---------------------
         /*setOnMousePressed(e->{
         	ultimoX = e.getSceneX();
         	ultimoY = e.getSceneY();
@@ -158,6 +161,7 @@ public class JuegoVista extends BorderPane {
             setTranslateY(e.getScreenY() - ultimoY);
             e.consume();
         });*/
+		//-------------	  FIN ARRASTRAR PANEL 	---------------------
 	}
 	
 	public Tablero obtenerTablero() {
