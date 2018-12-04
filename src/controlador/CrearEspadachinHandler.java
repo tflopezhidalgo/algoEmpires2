@@ -1,8 +1,7 @@
 package controlador;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import modelo.Area;
+import javafx.scene.input.MouseEvent;
 import modelo.Cuartel;
 import modelo.Pieza;
 import modelo.Unidad;
@@ -10,26 +9,26 @@ import modelo.factoryCuartel.TipoGuerrero;
 import vista.EspadachinVista;
 import vista.JuegoVista;
 
-public class CrearEspadachinHandler implements EventHandler<ActionEvent> {
+public class CrearEspadachinHandler implements EventHandler<MouseEvent> {
 
-	private JuegoVista elMapa;
+	private JuegoVista elJuego;
 	private Cuartel modelo;
 
-	public CrearEspadachinHandler(JuegoVista unMapa, Pieza modelo){
-		this.elMapa = unMapa;
+	public CrearEspadachinHandler(JuegoVista unJuego, Pieza modelo){
+		this.elJuego = unJuego;
 		this.modelo = (Cuartel)modelo;
 	}
 
 	@Override
-	public void handle(ActionEvent event) {
-		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
+	public void handle(MouseEvent event) {
+		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 		
 		//TODO chk: almaceno en Espadachin y casteo o almaceno en Unidad?
 		Unidad espadachin = ((Cuartel)modelo).crearGuerrero(x0, y0, TipoGuerrero.ESPADACHIN);
 		if(espadachin != null) {
-			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elMapa);
-			elMapa.aniadirPieza(espadachinVista);
+			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elJuego);
+			elJuego.agregar(espadachinVista);
 		}
 	};
 } 

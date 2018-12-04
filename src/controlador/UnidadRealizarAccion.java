@@ -4,14 +4,21 @@ import java.io.File;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import modelo.excepciones.PiezaNoEstaEnEquipoEnemigo;
 import vista.JuegoVista;
 import vista.PiezaVista;
+import vista.UnidadVista;
 
 public class UnidadRealizarAccion {
 
-	public UnidadRealizarAccion(JuegoVista unMapa, PiezaVista unidad) {
+	public UnidadRealizarAccion(JuegoVista unJuego, UnidadVista unidad) {
 		//Unidad esta siendo atacada
-		PiezaVista piezaAtacante = unMapa.piezaSeleccionada();
+		
+		if(!unJuego.enemigoContieneA(unidad.modelo())) {
+			throw new PiezaNoEstaEnEquipoEnemigo();
+		}
+		
+		PiezaVista piezaAtacante = unJuego.piezaSeleccionada();
 		
 		piezaAtacante.modelo().atacar(unidad.modelo());
 		String musicFile = "src/resources/sound/Generales/fight2.wav"; 
@@ -20,7 +27,7 @@ public class UnidadRealizarAccion {
 		mediaPlayer.play();
 		
 		if(unidad.modelo().estaDestruida()) {
-			unMapa.removerPieza(unidad);
+			unJuego.remover(unidad);
 		}
 			
 		unidad.actualizarVisualizacon();
