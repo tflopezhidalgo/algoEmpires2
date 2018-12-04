@@ -1,7 +1,5 @@
 package vista;
 
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import modelo.ArmaDeAsedio;
@@ -24,7 +22,7 @@ public class ArmaDeAsedioVista extends UnidadVista{
 
 	@Override
 	protected void prepararBotones() {
-        Image iconoAccionar = new Image("resources/images/elementosJuego/botones/accionarCatapulta.png");
+        Image iconoAccionar = new Image("resources/images/elementosJuego/panelInferior/izquierdo/botones/accionarCatapulta.png");
         ImageView iconoAccionarView = new ImageView(iconoAccionar);
         BotonVistaPersonalizado accionar = new BotonVistaPersonalizado(iconoAccionarView);
         accionar.setOnMousePressed( e ->{

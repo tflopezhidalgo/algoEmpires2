@@ -2,7 +2,6 @@ package vista;
 
 import controlador.ClickPiezaHandler;
 import javafx.geometry.Pos;
-import javafx.scene.control.MenuBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -12,7 +11,7 @@ import modelo.Pieza;
 public abstract class PiezaVista extends StackPane {
 
 	private Pieza modelo;
-	protected JuegoVista elMapa;
+	protected JuegoVista elJuego;
 	
 	protected Rectangle seleccion;
 	protected Rectangle barraVidaActual;
@@ -26,11 +25,10 @@ public abstract class PiezaVista extends StackPane {
 	protected int alto;
 	protected int ancho;
 	
-	public PiezaVista(int x, int y, Pieza unModelo, JuegoVista unMapa) {
+	public PiezaVista(int x, int y, Pieza unModelo, JuegoVista unJuego) {
 		modelo = unModelo;
-		elMapa = unMapa;
+		elJuego = unJuego;
 		
-		//acciones = new MenuBar();
 		acciones = new HBox(10);
 
 		//-----------------------------------------
@@ -48,7 +46,6 @@ public abstract class PiezaVista extends StackPane {
 		
 		//-----------------------------------------
 		//-----------------------------------------
-		//crearRepresentacion();
 		
 		//Cuadro de Seleccion
 		seleccion = new Rectangle(TAMANIO_CASILLA*(ancho-0.05), TAMANIO_CASILLA*(alto-0.05));
@@ -70,21 +67,9 @@ public abstract class PiezaVista extends StackPane {
 		prepararBotones();
 		//-----------------------------------------
 		
-		setOnMousePressed(new ClickPiezaHandler(elMapa, this));
+		setOnMousePressed(new ClickPiezaHandler(elJuego, this));
 
 	}
-	
-	/*
-	protected void seleccionarPieza() {
-		//sacar efecto a casilla anterior
-		PiezaVista piezaAnterior = elMapa.piezaSeleccionada();
-		if(piezaAnterior != null) {
-			elMapa.piezaSeleccionada().desSeleccionar();
-		}
-		//agregar efecto a casilla actual
-		seleccionar();
-		elMapa.seleccionarPieza(this);
-	}*/
 
 	public void desSeleccionar() {
 		seleccion.setVisible(false);
@@ -92,18 +77,12 @@ public abstract class PiezaVista extends StackPane {
 	
 	public void seleccionar() {
 		seleccion.setVisible(true);
-		elMapa.asignarMenuAcciones(acciones);
+		elJuego.asignarMenuAcciones(acciones);
 	}
 	
 	public abstract Pieza modelo();
-	/*{
-		System.out.println("Pieza getModelo : " + (modelo == null)); //TODO BORRAR
-
-		return modelo;
-	}*/
 	
 	public void nuevoTurno() {
-		modelo.nuevoTurno();
 		actualizarVisualizacon();
 	}
 	

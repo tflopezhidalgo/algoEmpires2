@@ -1,17 +1,16 @@
 package vista;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import modelo.Aldeano;
-import modelo.Area;
+import modelo.Cuartel;
 import modelo.Edificio;
+import modelo.Plaza;
 import modelo.excepciones.Excepcion;
 
 public class AldeanoVista extends UnidadVista{
 
-	public AldeanoVista(int x, int y, Aldeano unModelo, JuegoVista unMapa) throws Excepcion {
-		super(x,y,unModelo, unMapa);
+	public AldeanoVista(int x, int y, Aldeano unModelo, JuegoVista unJuego) throws Excepcion {
+		super(x,y,unModelo, unJuego);
 	}
 
 	@Override
@@ -27,12 +26,12 @@ public class AldeanoVista extends UnidadVista{
 
 	@Override
 	protected void prepararBotones() {
-        Image iconoPlaza = new Image("resources/images/elementosJuego/botones/construirPlaza.png");
+        Image iconoPlaza = new Image("resources/images/elementosJuego/panelInferior/izquierdo/botones/construirPlaza.png");
         ImageView iconoPlazaView = new ImageView(iconoPlaza);
         BotonVistaPersonalizado construirPlaza = new BotonVistaPersonalizado(iconoPlazaView);
         construirPlaza.setOnMousePressed(event -> ConstruirPlaza());
         
-        Image iconoCuartel = new Image("resources/images/elementosJuego/botones/construirCuartel.png");
+        Image iconoCuartel = new Image("resources/images/elementosJuego/panelInferior/izquierdo/botones/construirCuartel.png");
         ImageView iconoCuartelView = new ImageView(iconoCuartel);
         BotonVistaPersonalizado construirCuartel = new BotonVistaPersonalizado(iconoCuartelView);
         construirCuartel.setOnMousePressed(event -> ConstruirCuartel());
@@ -41,26 +40,26 @@ public class AldeanoVista extends UnidadVista{
 	}
 	
 	private void ConstruirCuartel() {
-		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
+		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 		
-		//TODO chk: almaceno en Cuartel y casteo o almaceno en Edificio?
+		elJuego.cobrarAJugadorActual(Cuartel.COSTO);
 		Edificio cuartel = ((Aldeano)modelo).crearCuartel(x0, y0);
 		if(cuartel != null) {
-			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elMapa);
-			elMapa.aniadirPieza(cuartelVisu);
+			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elJuego);
+			elJuego.agregar(cuartelVisu);
 		}
 	}
 	
 	private void ConstruirPlaza() {
-		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
+		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 		
-		//TODO chk: almaceno en Plaza y casteo o almaceno en Edificio?
+		elJuego.cobrarAJugadorActual(Plaza.COSTO);
 		Edificio plaza = ((Aldeano)modelo).crearPlaza(x0, y0);
 		if(plaza != null) {
-			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elMapa);
-			elMapa.aniadirPieza(plazaVisu);
+			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elJuego);
+			elJuego.agregar(plazaVisu);
 		}
 	}
 	

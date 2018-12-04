@@ -1,6 +1,5 @@
 package vista;
 
-import controlador.IniciarJuegoHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
@@ -10,7 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -43,15 +41,15 @@ public class ConfiguracionVista extends Pane{
         Text titulo = new Text(200, 100,"Configuracion");
         titulo.setTextOrigin(VPos.CENTER);
 
-        titulo.setFont(Font.loadFont("file:src/resources/fonts/Mairon.ttf", 30));
+        //titulo.setFont(Font.loadFont("file:src/resources/fonts/Mairon.ttf", 30));
 
         Button botonIniciarJuego = new Button("Iniciar Juego!");
         botonIniciarJuego.relocate(1000, 600);
 
-        botonIniciarJuego.setOnAction(new IniciarJuegoHandler(jugador1.getText(), jugador2.getText(), primaryStage));
+        botonIniciarJuego.setOnAction(//new IniciarJuegoHandler(jugador1.getText(), jugador2.getText(), primaryStage));
+        		e-> primaryStage.getScene().setRoot(new JuegoVista(jugador1.getText(), jugador2.getText(), primaryStage)));
 
         this.getChildren().addAll(fondoVista, campoInformacion, titulo, botonIniciarJuego);
     }
-
 
 }
