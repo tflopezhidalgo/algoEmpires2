@@ -433,6 +433,7 @@ public class ArmaDeAsedioTest {
         unArma.nuevoTurno();
         unArma.atacar(unAldeano);
 
+        //Puede atacar, ya que no consume turno al intentar atacar a una unidad
         boolean puedeAtacar=false;
         try{
             unArma.atacar(unaPlaza);
