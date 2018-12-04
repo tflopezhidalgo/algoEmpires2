@@ -8,12 +8,13 @@ public class Arquero extends Unidad {
      *      Costo: 75
      *      Distancia de ataque: 3
      */
+	public static final int COSTO = 75;
+	public static final int VIDA_MAX = 75;
+
 
 	public Arquero(int x0, int y0) {
-		super();
-		
-		this.COSTO = 75;
-		this.VIDA_MAX = 75;
+		super(75);
+
 		vida = VIDA_MAX;
 		this.DANIO_EDIFICIOS = 10;
 		this.DANIO_UNIDADES = 15;

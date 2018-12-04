@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import modelo.excepciones.CasillaInvalidaError;
+import modelo.excepciones.TableroEsDeTamanioInvalido;
 
 public class Tablero {
 
@@ -17,8 +18,12 @@ public class Tablero {
 	//TODO: Validar
 	public Tablero(int ancho, int alto){
 		
-		this.alto = 16 + alto;
-		this.ancho = 16 + ancho;
+		if(ancho <16 | alto <16) {
+			throw new TableroEsDeTamanioInvalido();
+		}
+		
+		this.alto = alto;
+		this.ancho = ancho;
 		
 		crearTableroVacio();
 		INSTANCIA = this;

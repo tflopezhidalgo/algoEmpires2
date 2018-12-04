@@ -1,7 +1,6 @@
 package modelo.estadoAldeano;
 
 import modelo.Aldeano;
-import modelo.Area;
 import modelo.Edificio;
 import modelo.excepciones.AldeanoConstruyendoNoPuedeReparar;
 import modelo.excepciones.AldeanoOcupadoConOtroEdificioError;

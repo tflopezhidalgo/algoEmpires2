@@ -6,20 +6,18 @@ public class Castillo extends Edificio {
 	
 	public static final int TAMANIO_LADO = 4;
     public static final int DISTANCIA_ATK = 3;
+	public static final int VIDA_MAX = 1000;
 
 	private CastilloListener castilloListener;
 
 	public Castillo(int x0, int y0) {
-		super();
+		super(1000);
 		
-		this.COSTO = 0;
-		this.VIDA_MAX = 1000;
 		vida = VIDA_MAX;
 		tiempoDeConstruccion = 0;
 		cantidadDeCuracion = 15;
 		
 		espacioOcupado = Tablero.INSTANCIA.definirArea(x0, y0, TAMANIO_LADO-1+x0, TAMANIO_LADO-1+y0);
-    	System.out.println("Castillo: tamEsp:" + espacioOcupado.obtenerCantidadDeCasillas());
 		espacioOcupado.ocupar();
 	}
 
@@ -35,7 +33,6 @@ public class Castillo extends Edificio {
 	    
         Casilla supuestaUbicacion = new Casilla(x0, y0); 
         if(distanciaMinimaA(supuestaUbicacion) > 1) {
-        	System.out.println("Castillo: dist:" + distanciaMinimaA(supuestaUbicacion));
             throw  new NoSePuedeConstruirTanLejosError();
         }
         
@@ -45,11 +42,10 @@ public class Castillo extends Edificio {
 		return unaArmaDeAsedio;
 	} 
 
+	//TODO tom explicame que onda esto
 	public void setCastilloListener(Juego unJuego){
-
 	    this.castilloListener = unJuego;
     }
-
 
 	@Override
     public void recibirDanio(int danio) {
@@ -59,6 +55,5 @@ public class Castillo extends Edificio {
             this.liberarUbicacion();
         }
     }
-
 
 }

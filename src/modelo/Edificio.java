@@ -6,11 +6,13 @@ public abstract class Edificio extends Pieza {
 
 	protected int tiempoDeConstruccion;
 	protected int cantidadDeCuracion;
+	private final int VIDA_MAX;
 
 	protected Aldeano aldeanoAsignado;
 
-	public Edificio() {
+	public Edificio(int vidaMax) {
 	    super();
+	    this.VIDA_MAX = vidaMax;
 
 	    this.aldeanoAsignado = null;
 	}
@@ -21,6 +23,10 @@ public abstract class Edificio extends Pieza {
 
         else if(this.aldeanoAsignado != unAldeano)
             throw new EdificioTieneOtroAldeanoAsignado();
+    }
+	
+    public double porcentajeVidaActual() {
+        return ((double)vida/VIDA_MAX);
     }
 
 	public void reparar() {

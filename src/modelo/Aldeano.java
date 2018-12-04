@@ -7,12 +7,12 @@ import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 public class Aldeano extends Unidad {
 
 	private EstadoAldeano estadoActual;
+	public static final int COSTO = 25;
+	public static final int VIDA_MAX = 50;
 	
 	public Aldeano(int x0, int y0){
-		super();
-		
-		this.COSTO = 25;
-		this.VIDA_MAX = 50;
+		super(50);
+
 		vida = VIDA_MAX;
 		this.DANIO_EDIFICIOS = 0;
 		this.DANIO_UNIDADES = 0;

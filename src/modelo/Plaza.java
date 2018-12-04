@@ -6,12 +6,12 @@ import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
 public class Plaza extends Edificio {
 	
 	public static final int TAMANIO_LADO = 2;
+	public static final int COSTO = 100;
+	public static final int VIDA_MAX = 450;
 	
 	public Plaza(int x0, int y0) {
-		super();
+		super(450);
 
-		this.COSTO = 100;
-		this.VIDA_MAX = 450;
 		vida = VIDA_MAX;
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 25;
@@ -22,10 +22,8 @@ public class Plaza extends Edificio {
 	
 	//TODO borrar el otro constructor y dejar este ?
 	public Plaza(int x0, int y0, boolean yaConstruida) {
-		super();
+		super(450);
 
-		this.COSTO = 100;
-		this.VIDA_MAX = 450;
 		vida = VIDA_MAX;
 		cantidadDeCuracion = 25;
 		

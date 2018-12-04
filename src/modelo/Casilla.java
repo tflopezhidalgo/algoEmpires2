@@ -57,7 +57,6 @@ public class Casilla {
 		int yFinal = this.ejeY();
 		int xInicial = casillaB.ejeX();
 		int yInicial = casillaB.ejeY();
-    	System.out.println("Casilla: coor1:" + xFinal+ ","+yFinal + " coor2: "+ xInicial+ "," +yInicial);
 
 		int diferenciaX = Math.abs(xFinal - xInicial);
 		int diferenciaY = Math.abs(yFinal - yInicial);

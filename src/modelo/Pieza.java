@@ -5,9 +5,6 @@ import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
 
 public abstract class Pieza {
 
-    protected int COSTO;
-    protected int VIDA_MAX;
-
     protected Area espacioOcupado;
 
 	protected int vida;
@@ -72,9 +69,7 @@ public abstract class Pieza {
 	
 	public boolean estaDestruida() { return (vida == 0); }
 
-    public double porcentajeVidaActual() {
-        return ((double)vida/VIDA_MAX);
-    }
+    public abstract double porcentajeVidaActual();
 
     public abstract void atacar(Pieza piezaEnemiga);
 

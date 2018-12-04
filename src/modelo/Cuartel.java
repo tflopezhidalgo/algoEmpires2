@@ -8,12 +8,12 @@ import modelo.factoryCuartel.TipoGuerrero;
 public class Cuartel extends Edificio {
 
     public static final int TAMANIO_LADO = 2;
+	public static final int COSTO = 50;
+	public static final int VIDA_MAX = 250;
 	
 	public Cuartel(int x0, int y0) {
-	    super();
-	    
-		this.COSTO = 50;
-		this.VIDA_MAX = 250;
+	    super(250);
+
 		vida = VIDA_MAX;
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 50;
