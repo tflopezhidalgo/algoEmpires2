@@ -6,13 +6,11 @@ public abstract class Edificio extends Pieza {
 
 	protected int tiempoDeConstruccion;
 	protected int cantidadDeCuracion;
-	private final int VIDA_MAX;
-
 	protected Aldeano aldeanoAsignado;
 
-	public Edificio(int vidaMax) {
-	    super();
-	    this.VIDA_MAX = vidaMax;
+	public Edificio(int vidaMax, int costo) {
+
+	    super(vidaMax, costo);
 
 	    this.aldeanoAsignado = null;
 	}

@@ -1,22 +1,14 @@
 package modelo;
 
-import modelo.estadoAldeano.AldeanoLibre;
-import modelo.estadoAldeano.EstadoAldeano;
+import modelo.estadoAldeano.*;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class Aldeano extends Unidad {
 
 	private EstadoAldeano estadoActual;
-	public static final int COSTO = 25;
-	public static final int VIDA_MAX = 50;
 	
 	public Aldeano(int x0, int y0){
-		super(50);
-
-		vida = VIDA_MAX;
-		this.DANIO_EDIFICIOS = 0;
-		this.DANIO_UNIDADES = 0;
-		this.DISTANCIA_ATK = 1;
+		super(50, 25, 0,0,1);
 
 		estadoActual = new AldeanoLibre();
 		
@@ -37,6 +29,7 @@ public class Aldeano extends Unidad {
     }
 
 	public void reparar(Edificio unEdificio) {
+
 	    siYaJugoElTurnoError();
 
 		chequearRango(unEdificio, DISTANCIA_ATK);
@@ -44,12 +37,9 @@ public class Aldeano extends Unidad {
 		turnoJugado = true;
 	}
 
-	//TODO: Retornar clases madres (Edificio)
-
 	public Edificio crearPlaza(int x0, int y0) {
 		siYaJugoElTurnoError();
 
-		//TODO TEMPORAL hay que modificarlo (si no se entiende preguntale a ivo)
         if(!enDistanciaDeConstruccion(x0, y0))
             throw new NoSePuedeConstruirTanLejosError();
 
@@ -62,7 +52,6 @@ public class Aldeano extends Unidad {
 	public Edificio crearCuartel(int x0, int y0) {
         siYaJugoElTurnoError();
 
-		//TODO TEMPORAL hay que modificarlo (si no se entiende preguntale a ivo)
 		if(!enDistanciaDeConstruccion(x0, y0))
 			throw new NoSePuedeConstruirTanLejosError();
 		

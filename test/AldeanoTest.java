@@ -14,6 +14,18 @@ public class AldeanoTest {
     /*
      *  Test de movimiento de modelo.Aldeano
      */
+
+    @Test
+    public void seCreaAldeanoConDatosIniciales(){
+
+        Tablero unTablero = new Tablero();
+        Aldeano unAldeano = new Aldeano(5, 5);
+
+
+
+    }
+
+
     @Test
     public void seCreaUnAldeano() {
     	Tablero unTablero = new Tablero(3,3);
@@ -620,7 +632,7 @@ public class AldeanoTest {
     }
 
     @Test
-    public void soloUnAldeanoPuedeRepararUnMismoEdificio() throws Exception{
+    public void soloUnAldeanoPuedeRepararUnMismoEdificio() {
 
         Tablero unTablero = new Tablero(5,5);
         Area espacioAldeano1 = unTablero.definirArea(0,0,0,0);

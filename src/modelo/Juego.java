@@ -2,25 +2,43 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
-import modelo.estadoJuego.EstadoJuego;
-import modelo.estadoJuego.JuegaJugador1;
-import modelo.estadoJuego.NoComenzado;
-import modelo.estadoJuego.Terminado;
+import modelo.estadoJuego.*;
 
 public class Juego implements CastilloListener{
+
+    public final int JUGADORES_MAXIMOS = 2;
 
     private List<Jugador> jugadores = new ArrayList<>();
     private Tablero tablero;
     private EstadoJuego estado;
-    public final int JUGADORES_MAXIMOS = 2;
+
+    private void seleccionarJugadorInicial(){
+
+        int numeroRandom = ThreadLocalRandom.current().nextInt(0, 2);
+
+        if(numeroRandom == 0)
+
+            this.estado = new JuegaJugador1();
+        else
+
+            this.estado = new JuegaJugador2();
+
+    }
 
     public Juego(){
-    	this.estado = new NoComenzado();
+
+        this.estado = new NoComenzado();
+    }
+
+    public Juego(String nombreJugador1, String nombreJugado2){
+
+        this.estado = new NoComenzado();
     }
     
     public void agregarJugador(Jugador unJugador) {
-    	if(jugadores.size()<JUGADORES_MAXIMOS) {
+    	if(jugadores.size() < JUGADORES_MAXIMOS) {
     		jugadores.add(unJugador);
     		unJugador.setListener(this);	
     	}
@@ -31,15 +49,9 @@ public class Juego implements CastilloListener{
     }
     
     public void iniciarJuego(){
-        this.estado = new JuegaJugador1();
-        //TODO eliminar Out's
-        System.out.println("Juego-Comienza " + this.getJugadorActual().obtenerNombre());
+
+        this.seleccionarJugadorInicial();
     }
-    
-//TODO uso el tablero?
-    /*public Tablero getTablero(){
-        return this.tablero;
-    }*/
 
     public Jugador getJugadorActual(){
         return (this.estado.getJugadorActual(this.jugadores));
@@ -50,6 +62,7 @@ public class Juego implements CastilloListener{
     }
 
     public void finalizarTurno(){
+
         this.estado = estado.finalizarTurno(jugadores);
     }
 

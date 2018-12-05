@@ -10,6 +10,7 @@ import modelo.excepciones.Excepcion;
 public class AldeanoVista extends UnidadVista{
 
 	public AldeanoVista(int x, int y, Aldeano unModelo, JuegoVista unJuego) throws Excepcion {
+
 		super(x,y,unModelo, unJuego);
 	}
 
@@ -42,9 +43,9 @@ public class AldeanoVista extends UnidadVista{
 	private void ConstruirCuartel() {
 		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
 		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
-		
-		elJuego.cobrarAJugadorActual(Cuartel.COSTO);
+
 		Edificio cuartel = ((Aldeano)modelo).crearCuartel(x0, y0);
+        elJuego.cobrarAJugadorActual(cuartel.COSTO);
 		if(cuartel != null) {
 			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elJuego);
 			elJuego.agregar(cuartelVisu);
@@ -54,9 +55,9 @@ public class AldeanoVista extends UnidadVista{
 	private void ConstruirPlaza() {
 		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
 		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
-		
-		elJuego.cobrarAJugadorActual(Plaza.COSTO);
+
 		Edificio plaza = ((Aldeano)modelo).crearPlaza(x0, y0);
+        elJuego.cobrarAJugadorActual(plaza.COSTO);
 		if(plaza != null) {
 			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elJuego);
 			elJuego.agregar(plazaVisu);

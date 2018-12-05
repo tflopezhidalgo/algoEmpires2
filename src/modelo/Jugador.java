@@ -2,7 +2,6 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import modelo.excepciones.CasillaInvalidaError;
 import modelo.excepciones.PoblacionLimiteSuperadaError;
 
@@ -22,6 +21,7 @@ public class Jugador {
 
     /*          Constructor         */
     public Jugador(String unNombre){
+
     	this.nombreJugador = unNombre;
     	this.cantidadDeOro = 100;
     	this.poblacion = 0;
@@ -43,13 +43,13 @@ public class Jugador {
             Unidad soldadoActual = losSoldados.get(i);
             soldadoActual.nuevoTurno();
         }
-        
+
         elCastillo.nuevoTurno();
     }
     
     public int hpCastillo() {
-    	//TODO poner un metodo, no acceder a variable
-    	return elCastillo.vida;
+
+        return elCastillo.getVidaActual();
     }
     
     public int cantidadSoldados() {
@@ -69,8 +69,8 @@ public class Jugador {
     }
 
     public void finalizarTurno(){
+
         finalizarTurnoDePiezas();
-    	System.out.println(nombreJugador + " termina turno con oro: " + cantidadDeOro); //TODO BORRAR
     }
     
     public String obtenerNombre() {
@@ -80,17 +80,11 @@ public class Jugador {
     public int obtenerOro(){
         return this.cantidadDeOro;
     }
-    
-    //TODO tom explicame para que es esto
+
 	public void setListener(Juego unJuego){
 	    elCastillo.setCastilloListener(unJuego);    
 	}
-    
-    //TODO hace falta eso o con el Listener ya estamos?
-    public boolean castilloFueDestruido(){
-    	return (elCastillo.estaDestruida());
-    }
-    
+
     public void cobrar(int monto) {
     	if(this.cantidadDeOro < monto) {
     		throw new CasillaInvalidaError();
@@ -99,7 +93,16 @@ public class Jugador {
     	cantidadDeOro -= monto;
     }
     
-    
+    public List<Pieza> getPiezas(){
+
+        List<Pieza> piezasTotales = new ArrayList<>();
+
+        piezasTotales.addAll(this.losAldeanos);
+        piezasTotales.addAll(this.losEdificios);
+        piezasTotales.addAll(this.losSoldados);
+
+        return piezasTotales;
+    }
 	//----------------------------------------------------------------------------
 	//---------------------      Manejo de Piezas     ----------------------------
     
@@ -109,7 +112,6 @@ public class Jugador {
     		elCastillo.recibirDanio(1000);
     	}
     	elCastillo = unCastillo;
-    	System.out.println("Agregado castillo a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
     }
     
     public void agregar(Unidad soldado) {
@@ -125,13 +127,12 @@ public class Jugador {
 	    	
 			losSoldados.add(soldado);
 			actualizarPoblacion();
-	    	System.out.println("Agregado soldado a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
 		}
     }
     
     public void agregar(Edificio edificio) {
-    	losEdificios.add(edificio);
-    	System.out.println("Agregado edificio a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
+
+        losEdificios.add(edificio);
     }
 
     public void agregar(Aldeano aldeano){
@@ -143,29 +144,27 @@ public class Jugador {
     	
 		losAldeanos.add(aldeano);
 		actualizarPoblacion();
-    	System.out.println("Agregado aldeano a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
-
     }
     
     public void remover(Aldeano aldeano){
+
 		losAldeanos.remove(aldeano);
 		actualizarPoblacion();
-    	System.out.println("Eliminando aldeano a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
     }
-    
+
     public void remover(Edificio edificio){
+
 		losEdificios.remove(edificio);
-    	System.out.println("Eliminando edificio a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
     }
     
     public void remover(Unidad soldado){
+
     	if(soldado instanceof Aldeano) {
-    		remover((Aldeano)soldado);
-    	}
+            remover((Aldeano) soldado);
+        }
     	else {
     		losSoldados.remove(soldado);
     		actualizarPoblacion();
-        	System.out.println("Eliminando soldado a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
     	}
     }
     
@@ -187,8 +186,14 @@ public class Jugador {
 	//----------------------------------------------------------------------------
       
     private void actualizarPoblacion(){
+
     	poblacion = losSoldados.size();
     	poblacion += losAldeanos.size();
+    }
+
+    public boolean tieneCastilloDestruido(){
+
+        return (this.elCastillo.getVidaActual() <= 0);
     }
 
 }

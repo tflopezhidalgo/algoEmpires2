@@ -42,9 +42,9 @@ public class PlazaVista extends EdificioVista {
 	private void CrearAldeano() {
 		int x0 = elJuego.casillaSeleccionada().modelo().ejeX(); 
 		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
-		
-		elJuego.cobrarAJugadorActual(Aldeano.COSTO);
-		Aldeano aldeano = ((Plaza)modelo).crearAldeano(x0, y0); 
+
+		Aldeano aldeano = ((Plaza)modelo).crearAldeano(x0, y0);
+        elJuego.cobrarAJugadorActual(aldeano.COSTO);
 		if(aldeano != null) {
 			AldeanoVista aldeanoVista = new AldeanoVista(x0,y0,aldeano,elJuego);
 			elJuego.agregar(aldeanoVista);

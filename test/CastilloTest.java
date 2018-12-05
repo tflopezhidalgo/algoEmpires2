@@ -144,7 +144,7 @@ public class CastilloTest {
     }
 
     @Test
-    public void edificioNecesitaReparacionCastillo() throws Exception {
+    public void edificioNecesitaReparacionCastillo() {
         Tablero unTablero = new Tablero(6,6);
 
         Edificio unEdificio = new Castillo(0,0);
@@ -159,7 +159,7 @@ public class CastilloTest {
     }
 
     @Test
-    public void edificioRepararCastillo() throws Exception {
+    public void edificioRepararCastillo() {
         Tablero unTablero = new Tablero(6,6);
 
         Edificio unEdificio = new Castillo(0,0);
@@ -178,7 +178,7 @@ public class CastilloTest {
     }
 
     @Test
-    public void edificioConstruirCastillo() throws Exception {
+    public void edificioConstruirCastillo() {
         Tablero unTablero = new Tablero(6,6);
 
         Edificio unEdificio = new Castillo(0,0);
@@ -190,7 +190,7 @@ public class CastilloTest {
     }
 
     @Test
-    public void edificioRecibirDanioDeArqueroCastillo() throws Exception {
+    public void edificioRecibirDanioDeArqueroCastillo() {
         Tablero unTablero = new Tablero();
 
         Castillo unCastillo = new Castillo(0,0);
@@ -205,7 +205,7 @@ public class CastilloTest {
     }
 
     @Test
-    public void edificioRecibirDanioDeEspadachinCastillo() throws Exception {
+    public void edificioRecibirDanioDeEspadachinCastillo() {
         Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Castillo(0,0);
@@ -223,7 +223,7 @@ public class CastilloTest {
 
     @Test
     public void liberarUbicacionCastillo() {
-        Juego unJuego = new Juego("Ivo", "Tomi");
+        //       Juego unJuego = new Juego("Ivo", "Tomi");
         Tablero unTablero = new Tablero();
 
         Area zonaDeConstruccion = unTablero.definirArea(0,0,3,3);
@@ -233,7 +233,7 @@ public class CastilloTest {
         Assert.assertFalse(zonaDeConstruccion.estaLibre());
         Assert.assertEquals(16,zonaDeConstruccion.obtenerCantidadDeCasillas());
 
-        unCastillo.setCastilloListener(unJuego);
+ //       unCastillo.setCastilloListener(unJuego);
         unCastillo.recibirDanio(1000);//Castillo.VIDA_MAX = 1000
 
         Assert.assertTrue(zonaDeConstruccion.estaLibre());

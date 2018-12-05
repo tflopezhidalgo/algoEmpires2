@@ -95,6 +95,7 @@ public class JuegoVista extends BorderPane {
     }
 
     public void cobrarAJugadorActual(int monto){
+
     	modelo.getJugadorActual().cobrar(monto);
     }
     
