@@ -2,9 +2,11 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import modelo.estadoJuego.EstadoJuego;
 import modelo.estadoJuego.JuegaJugador1;
+import modelo.estadoJuego.JuegaJugador2;
 import modelo.estadoJuego.NoComenzado;
 import modelo.estadoJuego.Terminado;
 
@@ -31,9 +33,16 @@ public class Juego implements CastilloListener{
     }
     
     public void iniciarJuego(){
-        this.estado = new JuegaJugador1();
-        //TODO eliminar Out's
-        System.out.println("Juego-Comienza " + this.getJugadorActual().obtenerNombre());
+    	seleccionarJugadorInicial();
+    }
+    
+    private void seleccionarJugadorInicial(){
+        int numeroRandom = ThreadLocalRandom.current().nextInt(0, 2);
+         if(numeroRandom == 0) {
+            this.estado = new JuegaJugador1();
+        }else {
+            this.estado = new JuegaJugador2();
+        }
     }
     
 //TODO uso el tablero?

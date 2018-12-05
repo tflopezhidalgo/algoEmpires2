@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.excepciones.CasillaInvalidaError;
+import modelo.excepciones.OroInsuficienteError;
 import modelo.excepciones.PoblacionLimiteSuperadaError;
 
 public class Jugador {
@@ -48,7 +49,7 @@ public class Jugador {
     }
     
     public int hpCastillo() {
-    	//TODO poner un metodo, no acceder a variable
+    	//TODO poner un metodo, no acceder a variable?
     	return elCastillo.vida;
     }
     
@@ -70,7 +71,6 @@ public class Jugador {
 
     public void finalizarTurno(){
         finalizarTurnoDePiezas();
-    	System.out.println(nombreJugador + " termina turno con oro: " + cantidadDeOro); //TODO BORRAR
     }
     
     public String obtenerNombre() {
@@ -93,9 +93,8 @@ public class Jugador {
     
     public void cobrar(int monto) {
     	if(this.cantidadDeOro < monto) {
-    		throw new CasillaInvalidaError();
-    	}
-    	
+    		throw new OroInsuficienteError();
+    	}	
     	cantidadDeOro -= monto;
     }
     
@@ -109,7 +108,6 @@ public class Jugador {
     		elCastillo.recibirDanio(1000);
     	}
     	elCastillo = unCastillo;
-    	System.out.println("Agregado castillo a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
     }
     
     public void agregar(Unidad soldado) {
@@ -125,13 +123,11 @@ public class Jugador {
 	    	
 			losSoldados.add(soldado);
 			actualizarPoblacion();
-	    	System.out.println("Agregado soldado a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
 		}
     }
     
     public void agregar(Edificio edificio) {
     	losEdificios.add(edificio);
-    	System.out.println("Agregado edificio a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
     }
 
     public void agregar(Aldeano aldeano){
@@ -143,19 +139,15 @@ public class Jugador {
     	
 		losAldeanos.add(aldeano);
 		actualizarPoblacion();
-    	System.out.println("Agregado aldeano a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
-
     }
     
     public void remover(Aldeano aldeano){
 		losAldeanos.remove(aldeano);
 		actualizarPoblacion();
-    	System.out.println("Eliminando aldeano a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
     }
     
     public void remover(Edificio edificio){
 		losEdificios.remove(edificio);
-    	System.out.println("Eliminando edificio a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
     }
     
     public void remover(Unidad soldado){
@@ -165,7 +157,6 @@ public class Jugador {
     	else {
     		losSoldados.remove(soldado);
     		actualizarPoblacion();
-        	System.out.println("Eliminando soldado a "+nombreJugador + " poblacion: " + poblacion); //TODO BORRAR
     	}
     }
     
@@ -178,8 +169,6 @@ public class Jugador {
 		d = elCastillo.equals(unaPieza);
 		
 		laContiene = (a | b | c | d);
-		
-    	System.out.println(nombreJugador + " contiene a la pieza: " + laContiene); //TODO BORRAR
 		return laContiene;
 	}
 
