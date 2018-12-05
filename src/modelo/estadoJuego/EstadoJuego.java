@@ -9,8 +9,10 @@ import modelo.excepciones.NoHayJuegoEnProcesoError;
 public abstract class EstadoJuego {
 
      abstract public Jugador getJugadorActual(List<Jugador> jugadores);
+     
+     abstract public Jugador getJugadorEnemigo(List<Jugador> jugadores);
 
-     public EstadoJuego finalizarTurno(){
+     public EstadoJuego finalizarTurno(List<Jugador> jugadores){
 
          throw new NoHayJuegoEnProcesoError();
      }

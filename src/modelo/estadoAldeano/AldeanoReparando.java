@@ -1,6 +1,7 @@
 package modelo.estadoAldeano;
 
-import modelo.*;
+import modelo.Aldeano;
+import modelo.Edificio;
 import modelo.excepciones.AldeanoOcupadoConOtroEdificioError;
 import modelo.excepciones.AldeanoReparandoNoPuedeConstruir;
 
@@ -16,12 +17,12 @@ public class AldeanoReparando extends EstadoAldeano {
         throw new AldeanoOcupadoConOtroEdificioError();
     }
 
-	public EstadoAldeano construirCuartel(Area unArea, Aldeano unAldeano) {
+	public EstadoAldeano construirCuartel(int x0, int y0, Aldeano unAldeano) {
 
     	throw new AldeanoReparandoNoPuedeConstruir();
 	}
 
-	public EstadoAldeano construirPlaza(Area unArea, Aldeano unAldeano){
+	public EstadoAldeano construirPlaza(int x0, int y0, Aldeano unAldeano){
 
         throw new AldeanoReparandoNoPuedeConstruir();
     }

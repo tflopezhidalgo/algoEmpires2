@@ -2,24 +2,21 @@ package modelo;
 
 public abstract class Unidad extends Pieza {
 
-    public final int DANIO_UNIDADES;
-    public final int DANIO_EDIFICIOS;
-    public final int DISTANCIA_ATK;
+    protected int DANIO_UNIDADES;
+    protected int DANIO_EDIFICIOS;
+    protected int DISTANCIA_ATK;
+    private final int VIDA_MAX;
 
-	public Unidad(Area unEspacio, int vidaMax, int costo, int danioUnidades, int danioEdificios, int distancia) {
-
-	    super(unEspacio, vidaMax, costo);
-
-	    DANIO_EDIFICIOS = danioEdificios;
-	    DANIO_UNIDADES = danioUnidades;
-	    DISTANCIA_ATK = distancia;
+	public Unidad(int vidaMax) {
+	    super();
+	    this.VIDA_MAX = vidaMax;
 	}
 
 	public void mover(Area nuevoEspacio){
 
 	    this.siYaJugoElTurnoError();
 
-	    nuevoEspacio.ocupar();  //Si está ocupado se lanza excepción CasillaOcupadaError.
+	    nuevoEspacio.ocupar();  //Si esta ocupado se lanza excepcion CasillaOcupadaError.
         espacioOcupado.liberar();
         espacioOcupado = nuevoEspacio;
         turnoJugado = true;
@@ -45,4 +42,9 @@ public abstract class Unidad extends Pieza {
 
         this.recibirDanio(unaUnidad.DANIO_UNIDADES);
     }
+    
+    public double porcentajeVidaActual() {
+        return ((double)vida/VIDA_MAX);
+    }
+
 }

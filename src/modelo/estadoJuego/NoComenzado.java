@@ -12,6 +12,11 @@ public class NoComenzado extends EstadoJuego{
 
         throw new NoExistenJugadoresActualesError();
     }
+    
+    public Jugador getJugadorEnemigo(List<Jugador> jugadores) {
+
+        throw new NoExistenJugadoresActualesError();
+    }
 
     @Override
     public Jugador seleccionarGanador(List<Jugador> jugadores) {
