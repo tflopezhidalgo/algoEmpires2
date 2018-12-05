@@ -20,6 +20,7 @@ public class AlgoOfEmpires extends Application{
     	primaryStage.setMaximized(true);
 
         primaryStage.setScene(escenaInicial);
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 

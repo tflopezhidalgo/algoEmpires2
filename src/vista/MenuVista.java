@@ -52,6 +52,7 @@ public class MenuVista extends BorderPane {
     }
 
 	private void prepararEscenaSiguiente(Stage stagePrincipal){
+
         this.escenaSiguiente = new Scene(new ConfiguracionVista(stagePrincipal));
 	}
 
