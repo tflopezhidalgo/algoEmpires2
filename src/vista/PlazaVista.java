@@ -59,7 +59,7 @@ public class PlazaVista extends EdificioVista {
 
             TextoError textoError = new TextoError("No se puede construir tan lejos");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
-            JuegoVista.INSTANCIA.getChildren().add(textoError);
+            elJuego.getChildren().add(textoError);
 
         }
 

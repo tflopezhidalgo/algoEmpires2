@@ -13,7 +13,7 @@ public class TextoError extends Text {
         this.setFill(Color.RED);
         this.setFont(new Font("Arial Black", 30));
         this.setTextOrigin(VPos.CENTER);
-        this.relocate(JuegoVista.INSTANCIA.getWidth()/3, 2 * JuegoVista.INSTANCIA.getHeight() / 3);
+        this.relocate(500, 600);
     }
 
     public void borrar(){
