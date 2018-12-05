@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 public class MenuVista extends BorderPane {
 
+	private MediaPlayer menuSoundtrackPlayer;
+
     public MenuVista(Stage stagePrincipal){
     	//-------------------------------------------------------
     	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
@@ -28,18 +30,6 @@ public class MenuVista extends BorderPane {
         
     	StackPane panel = new StackPane(backgroundVista);
         setCenter(panel);
-        //------------------ Sonidos ----------------------------
-		String menuHover = "src/resources/sound/Menu/menuhover.wav"; 
-//		Media menuHoverSound = new Media(new File(menuHover).toURI().toString());
-//		MediaPlayer menuHoverPlayer = new MediaPlayer(menuHoverSound);
-		
-		String menuSelect = "src/resources/sound/Menu/menuselect.wav"; 
-//		Media menuSelectSound = new Media(new File(menuSelect).toURI().toString());
-//		MediaPlayer menuSelectPlayer = new MediaPlayer(menuSelectSound);
-		/*
-		String menuSelect = "src/resources/sound/Menu/menuselect.wav"; 
-		Media menuSelectSound = new Media(new File(menuSelect).toURI().toString());
-		MediaPlayer menuSelectPlayer = new MediaPlayer(menuSelectSound);*/
         //--------------- Setup Botones -------------------------
         VBox botones = new VBox(40);
         
@@ -49,8 +39,9 @@ public class MenuVista extends BorderPane {
         comenzar.setFitHeight(37);
         
         BotonVistaPersonalizado elBotonComenzar = new BotonVistaPersonalizado(comenzar);
-        elBotonComenzar.setOnMousePressed(event -> stagePrincipal.getScene().setRoot(new ConfiguracionVista(stagePrincipal)));
-        											
+        elBotonComenzar.setOnMousePressed(event ->{
+        	stagePrincipal.getScene().setRoot(new ConfiguracionVista(stagePrincipal, menuSoundtrackPlayer));
+        });
 
         Image imagenSalir = new Image("resources/images/ElementosMenu/Botones/salir3.png");
         ImageView salir = new ImageView(imagenSalir);
@@ -58,11 +49,29 @@ public class MenuVista extends BorderPane {
         salir.setFitHeight(37);
         
         BotonVistaPersonalizado elBotonSalir = new BotonVistaPersonalizado(salir);
-        elBotonSalir.setOnMousePressed(event ->  stagePrincipal.close());
+        elBotonSalir.setOnMousePressed(event ->{
+        	menuSoundtrackPlayer.stop();
+        	stagePrincipal.close();
+        });
     	
         botones.getChildren().addAll(elBotonComenzar, elBotonSalir);
         panel.getChildren().add(botones);
-        botones.setTranslateY(primaryScreenBounds.getHeight()*0.6);
+        botones.setTranslateY(primaryScreenBounds.getHeight()*0.6);        
+        //------------------ Sonidos ----------------------------
+        configurarSonidos();
+    }
+    
+    private void configurarSonidos() {		
+		String menuSoundtrack = "src/resources/sound/menu/menuSoundtrack.mp3"; 
+		Media menuSoundtrackSound = new Media(new File(menuSoundtrack).toURI().toString());
+		menuSoundtrackPlayer = new MediaPlayer(menuSoundtrackSound);
+		menuSoundtrackPlayer.play();
+		menuSoundtrackPlayer.setOnEndOfMedia(new Runnable() {
+		    @Override
+		    public void run() {
+		    	menuSoundtrackPlayer.play();
+		    }
+		});
     }
 
 }

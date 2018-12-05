@@ -17,9 +17,10 @@ public class AlgoOfEmpires extends Application{
     	Scene escenaInicial = new Scene(new MenuVista(primaryStage));
     	primaryStage.setTitle("Algo of Empires");
     	primaryStage.initStyle(StageStyle.UNDECORATED);
+    	primaryStage.setFullScreen(true);
     	primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     	primaryStage.setMaximized(true);
-        primaryStage.setFullScreen(true);
+
         primaryStage.setScene(escenaInicial);
         primaryStage.show();
     }
