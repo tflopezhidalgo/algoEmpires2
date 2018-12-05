@@ -23,7 +23,7 @@ public class JugadorTest {
          Aldeano unAldeano = new Aldeano(0,0);
          unJugador.agregar(unAldeano);
          Assert.assertEquals( 1, unJugador.getPoblacion());
-         Assert.assertTrue(unJugador.castilloFueDestruido());
+         Assert.assertTrue(unJugador.tieneCastilloDestruido());
      }
      @Test
     public void castilloNoFueDestruido() throws Exception {
@@ -33,7 +33,7 @@ public class JugadorTest {
          Edificio unCastillo = new Castillo(0,0);
          unJugador.agregar(unCastillo);
          Assert.assertEquals( 0, unJugador.getPoblacion());
-        Assert.assertFalse(unJugador.castilloFueDestruido());
+        Assert.assertFalse(unJugador.tieneCastilloDestruido());
     }
      @Test
     public void seActualizaLaPoblacion() throws Exception{
@@ -49,6 +49,7 @@ public class JugadorTest {
          Assert.assertEquals( 1, unJugador.getPoblacion());
          unJugador.agregar(unAldeano);
          Assert.assertEquals(2, unJugador.getPoblacion());
+         //Fijate algun cambio que hayas hecho ultimo
     }
      @Test
     public void seRecolectaOroDeUnAldeano() throws Exception{
