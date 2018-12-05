@@ -16,8 +16,8 @@ import vista.PlazaVista;
 
 public class HerramientasMapa {
 	
-	private static int ANCHO = 65;
-	private static int ALTO = 28;
+	private static int ANCHO = 16;
+	private static int ALTO = 16;
 	private static Tablero elTablero;
 	private static Group grupoPiezas;
 	private static JuegoVista elMapa;

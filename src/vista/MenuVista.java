@@ -30,12 +30,12 @@ public class MenuVista extends BorderPane {
         setCenter(panel);
         //------------------ Sonidos ----------------------------
 		String menuHover = "src/resources/sound/Menu/menuhover.wav"; 
-		Media menuHoverSound = new Media(new File(menuHover).toURI().toString());
-		MediaPlayer menuHoverPlayer = new MediaPlayer(menuHoverSound);
+//		Media menuHoverSound = new Media(new File(menuHover).toURI().toString());
+//		MediaPlayer menuHoverPlayer = new MediaPlayer(menuHoverSound);
 		
 		String menuSelect = "src/resources/sound/Menu/menuselect.wav"; 
-		Media menuSelectSound = new Media(new File(menuSelect).toURI().toString());
-		MediaPlayer menuSelectPlayer = new MediaPlayer(menuSelectSound);
+//		Media menuSelectSound = new Media(new File(menuSelect).toURI().toString());
+//		MediaPlayer menuSelectPlayer = new MediaPlayer(menuSelectSound);
 		/*
 		String menuSelect = "src/resources/sound/Menu/menuselect.wav"; 
 		Media menuSelectSound = new Media(new File(menuSelect).toURI().toString());

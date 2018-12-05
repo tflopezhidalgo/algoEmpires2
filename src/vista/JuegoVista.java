@@ -1,27 +1,29 @@
 package vista;
 
-
 import controlador.FinalizarTurnoHandler;
 import controlador.HerramientasMapa;
+import controlador.TextoHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import modelo.Juego;
 import modelo.Jugador;
 import modelo.Pieza;
 import modelo.Tablero;
+import modelo.excepciones.CasillaOcupadaError;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class JuegoVista extends BorderPane {
+
+    public static JuegoVista INSTANCIA;
 
     final double SCALE_DELTA = 1.1;
 	double ultimoX;
@@ -74,20 +76,34 @@ public class JuegoVista extends BorderPane {
 
 
     public JuegoVista(String nombreJugador1, String nombreJugador2, Stage stagePrincipal){
+
+        INSTANCIA = this;
     	piezaSeleccionada = null;
     	casillaSeleccionada = null;
+
     	this.stagePrincipal = stagePrincipal;
     	
     	jugador1 = new Jugador(nombreJugador1);
     	jugador2 = new Jugador(nombreJugador2);
-    	
-    	modelo = HerramientasMapa.crearJuego(this,grupoCasillas, grupoPiezas, jugador1, jugador2);
-    	    	
+
+
+    	modelo = HerramientasMapa.crearJuego(this, grupoCasillas, grupoPiezas, jugador1, jugador2);
+
     	crearMapa();
     	crearPanelSuperior();
     	crearPanelInferior();
-    	
+
     	modelo.iniciarJuego();
+
+    	BorderPane panelTransparente = new BorderPane();
+    	Text jugadorInicial = new Text("Comienza: " + modelo.getJugadorActual().obtenerNombre());
+    	jugadorInicial.setFont(Font.loadFont("file:src/resources/fonts/Mairon.ttf", 40));
+    	jugadorInicial.setFill(Color.GOLD);
+    	jugadorInicial.setOnMouseMoved(new TextoHandler(jugadorInicial));
+        //Centrar esto, no se cmo
+    	panelTransparente.setCenter(jugadorInicial);
+
+        getChildren().add(panelTransparente);
     }
     
     public Juego modelo() {
@@ -103,26 +119,32 @@ public class JuegoVista extends BorderPane {
     }
     
     private void crearMapa(){
-    	mapa = new Pane();
-    	ScrollPane mapaSC = new ScrollPane();
 
-    	mapa.getChildren().addAll(grupoCasillas,grupoPiezas);
+    	mapa = new Pane();
+        mapa.getChildren().addAll(grupoCasillas, grupoPiezas);
+
+        ScrollPane mapaSC = new ScrollPane();
     	mapaSC.setContent(mapa);
     	setCenter(mapaSC);
     }
     
-    private void crearPanelSuperior() {   	
+    private void crearPanelSuperior() {
+
     	this.panelSuperior = new StackPane();
+
     	Image background = new Image("resources/images/elementosJuego/panelSuperior/panelSuperior.png");
     	ImageView backgroundView = new ImageView(background);
+
     	backgroundView.fitWidthProperty().bind(stagePrincipal.widthProperty());
     	backgroundView.setFitHeight(30);
+
     	panelSuperior.getChildren().add(backgroundView);
     	
     	setTop(panelSuperior);
     }
     
     private void crearPanelInferior() {
+
     	crearPanelInferiorIzquierdo();
     	crearPanelInferiorCentro();
     	crearPanelInferiorDerecho();
@@ -133,17 +155,22 @@ public class JuegoVista extends BorderPane {
     }
 
     private void crearPanelInferiorIzquierdo() {
+
     	this.panelIzquierdo = new StackPane();
     	
     	Image izquierdo = new Image("resources/images/elementosJuego/panelInferior/izquierdo/background.png");
     	ImageView panelIzquierdoView = new ImageView(izquierdo);
+
     	panelIzquierdoView.fitWidthProperty().bind(stagePrincipal.widthProperty().multiply(0.27));
     	panelIzquierdoView.fitHeightProperty().bind(stagePrincipal.heightProperty().multiply(0.2));
+
     	panelIzquierdo.getChildren().add(panelIzquierdoView);
     	
     	HBox menuPanelIzquierdo = new HBox();
     	botonesPanelIzquierdo = new StackPane(menuPanelIzquierdo);
+
     	panelIzquierdo.getChildren().add(botonesPanelIzquierdo);
+
     	botonesPanelIzquierdo.setAlignment(Pos.CENTER);
     	botonesPanelIzquierdo.setTranslateX(85);
     }
@@ -161,21 +188,26 @@ public class JuegoVista extends BorderPane {
     }
     
     private void crearPanelInferiorDerecho() {
+
+        //Accionessss
     	this.panelDerecho = new StackPane();
     	
     	Image derecho = new Image("resources/images/elementosJuego/panelInferior/derecho/background.png");
     	ImageView panelDerechoView = new ImageView(derecho);
+
     	panelDerechoView.fitWidthProperty().bind(stagePrincipal.widthProperty().multiply(0.34));
     	panelDerechoView.fitHeightProperty().bind(stagePrincipal.heightProperty().multiply(0.2));
     	panelDerecho.getChildren().add(panelDerechoView);
     	
     	Button botonFinTurno = new Button("Finalizar Turno");
     	botonFinTurno.setOnAction( new FinalizarTurnoHandler(this, grupoPiezas));
+
     	Button botonSalir = new Button("Salir");
     	botonSalir.setOnAction(event ->  stagePrincipal.close());
     	
     	VBox menuPanelDerecho = new VBox(10);
     	menuPanelDerecho.getChildren().addAll(botonFinTurno, botonSalir);
+
     	panelDerecho.getChildren().add(menuPanelDerecho);
     	menuPanelDerecho.setAlignment(Pos.CENTER);
     }

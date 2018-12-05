@@ -19,7 +19,7 @@ public class AlgoOfEmpires extends Application{
     	primaryStage.initStyle(StageStyle.UNDECORATED);
     	primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     	primaryStage.setMaximized(true);
-
+        primaryStage.setFullScreen(true);
         primaryStage.setScene(escenaInicial);
         primaryStage.show();
     }
