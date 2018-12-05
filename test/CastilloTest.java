@@ -12,7 +12,7 @@ public class CastilloTest {
 
     @Test
     public void castilloCreaCatapulta() {
-    	Tablero unTablero = new Tablero(6,6);
+    	Tablero unTablero = new Tablero();
 
         Castillo unCastillo = new Castillo(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
@@ -27,7 +27,7 @@ public class CastilloTest {
 
     @Test
     public void ColocarCastillo() {
-    	Tablero unTablero = new Tablero(5,5);
+    	Tablero unTablero = new Tablero();
 
         Area zonaDeConstruccion = unTablero.definirArea(1, 1, Castillo.TAMANIO_LADO, Castillo.TAMANIO_LADO);
         Assert.assertTrue(zonaDeConstruccion.estaLibre());
@@ -145,7 +145,7 @@ public class CastilloTest {
 
     @Test
     public void edificioNecesitaReparacionCastillo() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Castillo(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(3,3).estaOcupada());
@@ -160,7 +160,7 @@ public class CastilloTest {
 
     @Test
     public void edificioRepararCastillo() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Castillo(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());
@@ -179,7 +179,7 @@ public class CastilloTest {
 
     @Test
     public void edificioConstruirCastillo() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Castillo(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(3, 3).estaOcupada());

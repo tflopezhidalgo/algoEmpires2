@@ -12,7 +12,7 @@ public class PlazaCentralTest {
 
     @Test
     public void ColocarPlaza() throws Exception { 
-    	Tablero unTablero = new Tablero(5,5);
+    	Tablero unTablero = new Tablero();
 
         //voy a ocupar a partir de la (2,2)
         //se ocuparan las casillas en (2,2) (2,3) (3,2) (3,3)
@@ -32,7 +32,7 @@ public class PlazaCentralTest {
 
     @Test
     public void PlazaCentralCreaAldeano() throws Exception {
-        Tablero unTablero = new Tablero(5,5);
+        Tablero unTablero = new Tablero();
 
         Plaza unaPlaza = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1, 1).estaOcupada());
@@ -138,7 +138,7 @@ public class PlazaCentralTest {
 
     @Test
     public void edificioNecesitaReparacionPlaza() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -153,7 +153,7 @@ public class PlazaCentralTest {
 
     @Test
     public void edificioRepararPlaza() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -172,7 +172,7 @@ public class PlazaCentralTest {
 
     @Test
     public void edificioConstruirPlaza() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -193,7 +193,7 @@ public class PlazaCentralTest {
 
     @Test
     public void edificioRecibirDanioDeArqueroPlaza() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Plaza(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -235,7 +235,7 @@ public class PlazaCentralTest {
 
     @Test
     public void liberarUbicacionPlaza() {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Plaza.TAMANIO_LADO-1, Plaza.TAMANIO_LADO-1);
         Pieza unaPieza = new Plaza(0,0);
