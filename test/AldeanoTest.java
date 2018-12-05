@@ -317,11 +317,32 @@ public class AldeanoTest {
     public void RepararCastillo() {
         int turno=0;
 
-        Aldeano unAldeano = new Aldeano(0,0);
+       Juego unJuego = new Juego();
+       Tablero unTablero = new Tablero();
 
-        Castillo unCastillo = new Castillo(1,1);
+       unJuego.agregarTablero(unTablero);
 
-        unCastillo.recibirDanio(30);
+       Castillo unCastillo = new Castillo(0,0);
+       Castillo otroCastillo = new Castillo(12,12);
+
+       Aldeano otroAldeano = new Aldeano(5,5);
+       Aldeano unAldeano = new Aldeano(4,4);
+
+       Jugador unJugador = new Jugador("Ailen");
+       Jugador otroJugador = new Jugador("Laura");
+
+       unJugador.agregar(unCastillo);
+       unJugador.agregar(unAldeano);
+
+       otroJugador.agregar(otroCastillo);
+       otroJugador.agregar(otroAldeano);
+
+       unJuego.agregarJugador(unJugador);
+       unJuego.agregarJugador(otroJugador);
+
+       unJuego.iniciarJuego();
+
+       unCastillo.recibirDanio(30);
 
         while (turno<3) {
             turno++;

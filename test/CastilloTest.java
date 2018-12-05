@@ -58,42 +58,110 @@ public class CastilloTest {
 
     @Test
     public void atacarPiezaEnemiga() {
+        Juego unJuego = new Juego();
         Tablero unTablero = new Tablero();
+
+        unJuego.agregarTablero(unTablero);
+
         Castillo unCastillo = new Castillo(0,0);
+        Castillo otroCastillo = new Castillo(12,12);
+
+        Aldeano otroAldeano = new Aldeano(4,4);
         Aldeano unAldeano = new Aldeano(5,5);
 
-        Assert.assertFalse(unAldeano.estaDestruida());
-        unCastillo.atacar(unAldeano);
-        Assert.assertFalse(unAldeano.estaDestruida());
-        unCastillo.atacar(unAldeano);
-        Assert.assertFalse(unAldeano.estaDestruida());
-        unCastillo.atacar(unAldeano);
-        Assert.assertTrue(unAldeano.estaDestruida());
-    }
-/*
-    @Test //TODO: TE la debo...
-    public void castilloDestruido() throws Exception{
-        Tablero unTablero = new Tablero();
-        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+        Jugador unJugador = new Jugador("Ailen");
+        Jugador otroJugador = new Jugador("Laura");
 
-        unCastillo.recibirDanio(500);
-        unCastillo.recibirDanio(499); //El castillo se destruye cuando llega a 0 de vida
+        unJugador.agregar(unCastillo);
+        unJugador.agregar(unAldeano);
+
+        otroJugador.agregar(otroCastillo);
+        otroJugador.agregar(otroAldeano);
+
+        unJuego.agregarJugador(unJugador);
+        unJuego.agregarJugador(otroJugador);
+
+        unJuego.iniciarJuegoNoRandom();
+
+        //vidaAldeano=50
+        Assert.assertFalse(otroAldeano.estaDestruida());
+        unJugador.finalizarTurno();
+        //vidaAldeano=30
+        Assert.assertFalse(otroAldeano.estaDestruida());
+        unJugador.finalizarTurno();
+        //vidaAldeano=10
+        Assert.assertFalse(otroAldeano.estaDestruida());
+        unJugador.finalizarTurno();
+        //vidaAldeano=0
+        Assert.assertTrue(otroAldeano.estaDestruida());
+    }
+
+    @Test
+    public void castilloDestruido() throws Exception{
+        Juego unJuego = new Juego();
+        Tablero unTablero = new Tablero();
+
+        unJuego.agregarTablero(unTablero);
+
+        Castillo unCastillo = new Castillo(0,0);
+        Castillo otroCastillo = new Castillo(12,12);
+
+        Aldeano otroAldeano = new Aldeano(4,4);
+        Aldeano unAldeano = new Aldeano(5,5);
+
+        Jugador unJugador = new Jugador("Ailen");
+        Jugador otroJugador = new Jugador("Laura");
+
+        unJugador.agregar(unCastillo);
+        unJugador.agregar(unAldeano);
+
+        otroJugador.agregar(otroCastillo);
+        otroJugador.agregar(otroAldeano);
+
+        unJuego.agregarJugador(unJugador);
+        unJuego.agregarJugador(otroJugador);
+
+        unJuego.iniciarJuegoNoRandom();
+
+        unCastillo.recibirDanio(1000); //El castillo se destruye cuando llega a 0 de vida
 
         boolean lanzoUnError=false;
         try {
             unCastillo.recibirDanio(10);
-        } catch (CastilloDeJugadorFueDestruido e)
+        } catch (Exception e)
         {
             lanzoUnError=true;
-        };
+        }
 
-        Assert.assertEquals(true, lanzoUnError);
+        Assert.assertTrue(lanzoUnError);
     }
-*/
+
     @Test
     public void noSePuedeConstruirArmaDeAsedioTanLejos() {
+        Juego unJuego = new Juego();
         Tablero unTablero = new Tablero();
+
+        unJuego.agregarTablero(unTablero);
+
         Castillo unCastillo = new Castillo(0,0);
+        Castillo otroCastillo = new Castillo(12,12);
+
+        Aldeano otroAldeano = new Aldeano(4,4);
+        Aldeano unAldeano = new Aldeano(5,5);
+
+        Jugador unJugador = new Jugador("Ailen");
+        Jugador otroJugador = new Jugador("Laura");
+
+        unJugador.agregar(unCastillo);
+        unJugador.agregar(unAldeano);
+
+        otroJugador.agregar(otroCastillo);
+        otroJugador.agregar(otroAldeano);
+
+        unJuego.agregarJugador(unJugador);
+        unJuego.agregarJugador(otroJugador);
+
+        unJuego.iniciarJuego();
 
         ArmaDeAsedio unaCatapulta = (ArmaDeAsedio)unCastillo.crearCatapulta(4,0);
         unCastillo.nuevoTurno();
@@ -110,18 +178,38 @@ public class CastilloTest {
 
     @Test
     public void piezaFueraDeAlcanceParaAtacar() {
+        Juego unJuego = new Juego();
         Tablero unTablero = new Tablero();
-        Arquero unArquero = new Arquero(7,7);
+
+        unJuego.agregarTablero(unTablero);
+
         Castillo unCastillo = new Castillo(0,0);
+        Castillo otroCastillo = new Castillo(12,12);
 
-        boolean lanzaUnError=false;
-        try{
-            unCastillo.atacar(unArquero);
-        } catch (PiezaFueraDeAlcanceError e){
-            lanzaUnError=true;
-        }
+        Aldeano otroAldeano = new Aldeano(4,4);
+        Aldeano unAldeano = new Aldeano(5,5);
 
-        Assert.assertTrue(lanzaUnError);
+        Arquero unArquero = new Arquero(7,7);
+        /* El castillo que está en el (0,0) ocupa hasta el (3,3), y su alcance
+        es hasta 3 casillas, por lo que no llega a destruir al arquero */
+
+        Jugador unJugador = new Jugador("Ailen");
+        Jugador otroJugador = new Jugador("Laura");
+
+        unJugador.agregar(unCastillo);
+        unJugador.agregar(unAldeano);
+
+        otroJugador.agregar(otroCastillo);
+        otroJugador.agregar(otroAldeano);
+
+        unJuego.agregarJugador(unJugador);
+        unJuego.agregarJugador(otroJugador);
+
+        unJuego.iniciarJuego();
+
+        unCastillo.nuevoTurno();
+        Assert.assertFalse(unArquero.estaDestruida());
+
     }
 
     @Test
