@@ -21,7 +21,7 @@ public class JugadorTest {
          Jugador unJugador = new Jugador("Tomas");
          Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
          Aldeano unAldeano = new Aldeano(0,0);
-         unJugador.agregarPieza(unAldeano);
+         unJugador.agregar(unAldeano);
          Assert.assertEquals( 1, unJugador.getPoblacion());
          Assert.assertTrue(unJugador.castilloFueDestruido());
      }
@@ -31,7 +31,7 @@ public class JugadorTest {
          Jugador unJugador = new Jugador("Tomas");
          Area areaCasillo = unTablero.definirArea(0, 0, 3, 3);
          Edificio unCastillo = new Castillo(0,0);
-         unJugador.agregarPieza(unCastillo);
+         unJugador.agregar(unCastillo);
          Assert.assertEquals( 0, unJugador.getPoblacion());
         Assert.assertFalse(unJugador.castilloFueDestruido());
     }
@@ -43,11 +43,11 @@ public class JugadorTest {
          Area espacioAldeano = unTablero.definirArea(4, 4, 4, 4);
          Edificio unCastillo = new Castillo(0,0);
          Aldeano unAldeano = new Aldeano(4,4);
-         unJugador.agregarPieza(unCastillo);
+         unJugador.agregar(unCastillo);
          Assert.assertEquals(0, unJugador.getPoblacion());
-         unJugador.agregarPieza(unAldeano);
+         unJugador.agregar(unAldeano);
          Assert.assertEquals( 1, unJugador.getPoblacion());
-         unJugador.agregarPieza(unAldeano);
+         unJugador.agregar(unAldeano);
          Assert.assertEquals(2, unJugador.getPoblacion());
     }
      @Test
@@ -57,7 +57,7 @@ public class JugadorTest {
          Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
          Aldeano unAldeano = new Aldeano(0,0);
          Assert.assertEquals(100, unJugador.obtenerOro());
-         unJugador.agregarPieza(unAldeano);
+         unJugador.agregar(unAldeano);
          unJugador.finalizarTurno();
          Assert.assertEquals(95, unJugador.obtenerOro()); //100-25+20=95
          unJugador.finalizarTurno();
@@ -71,22 +71,22 @@ public class JugadorTest {
 
          //Le agrego a un jugador 50 aldeanos, siendo 50 el limite de la poblacion
          for(int i=0; i<16; i++){
-             unJugador.agregarPieza(new Aldeano(i,0));
+             unJugador.agregar(new Aldeano(i,0));
          }
          for(int j=1; j<16; j++){
-             unJugador.agregarPieza(new Aldeano(0,j));
+             unJugador.agregar(new Aldeano(0,j));
          }
          for(int k=1; k<16; k++){
-             unJugador.agregarPieza(new Aldeano(k,k));
+             unJugador.agregar(new Aldeano(k,k));
          }
          for(int l=2; l<6; l++){
-             unJugador.agregarPieza(new Aldeano(l,1));
+             unJugador.agregar(new Aldeano(l,1));
          }
 
 
          boolean lanzaUnError=false;
          try{
-             unJugador.agregarPieza(new Aldeano(6,1));
+             unJugador.agregar(new Aldeano(6,1));
          } catch (PoblacionLimiteSuperadaError e){
              lanzaUnError=true;
          }
@@ -103,7 +103,7 @@ public class JugadorTest {
         Assert.assertEquals(100, unJugador.obtenerOro());
         Assert.assertEquals(0, unJugador.getPoblacion());
 
-        unJugador.agregarPieza(unAldeano);
+        unJugador.agregar(unAldeano);
         unJugador.finalizarTurno();
         Assert.assertEquals(95, unJugador.obtenerOro());
         Assert.assertEquals(1, unJugador.getPoblacion());
@@ -119,7 +119,7 @@ public class JugadorTest {
         Assert.assertEquals(100, unJugador.obtenerOro());
         Assert.assertEquals(0, unJugador.getPoblacion());
 
-        unJugador.agregarPieza(unAldeano);
+        unJugador.agregar(unAldeano);
         unJugador.finalizarTurno();
         Assert.assertEquals(95, unJugador.obtenerOro());
         Assert.assertEquals(1, unJugador.getPoblacion());
@@ -135,21 +135,21 @@ public class JugadorTest {
 
         Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
         Aldeano unAldeano = new Aldeano(0,0);
-        unJugador.agregarPieza(unAldeano);
+        unJugador.agregar(unAldeano);
         unJugador.finalizarTurno();
         Assert.assertEquals(95, unJugador.obtenerOro()); //100-25+20=95
         Assert.assertEquals(1, unJugador.getPoblacion());
 
         Area espacioOtroAldeano = unTablero.definirArea(0, 1, 0, 1);
         Aldeano otroAldeano = new Aldeano(0,1);
-        unJugador.agregarPieza(otroAldeano);
+        unJugador.agregar(otroAldeano);
         unJugador.finalizarTurno();
         Assert.assertEquals(110, unJugador.obtenerOro()); //95-25+20+20=110
         Assert.assertEquals(2, unJugador.getPoblacion());
 
         Area espacioArquero = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
-        unJugador.agregarPieza(unArquero);
+        unJugador.agregar(unArquero);
         unJugador.finalizarTurno();
         Assert.assertEquals(75, unJugador.obtenerOro()); //110-75+20+20=75
         Assert.assertEquals(3, unJugador.getPoblacion());
@@ -164,31 +164,31 @@ public class JugadorTest {
 
         Area espacioUnidad = unTablero.definirArea(0, 0, 0, 0);
         Aldeano unAldeano = new Aldeano(0,0);
-        unJugador.agregarPieza(unAldeano);
+        unJugador.agregar(unAldeano);
         unJugador.finalizarTurno();
         Assert.assertEquals(1, unJugador.getPoblacion());
 
         espacioUnidad = unTablero.definirArea(0, 1, 0, 1);
         Aldeano otroAldeano = new Aldeano(0,1);
-        unJugador.agregarPieza(otroAldeano);
+        unJugador.agregar(otroAldeano);
         unJugador.finalizarTurno();
         Assert.assertEquals(2, unJugador.getPoblacion());
 
         espacioUnidad = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
-        unJugador.agregarPieza(unArquero);
+        unJugador.agregar(unArquero);
         unJugador.finalizarTurno();
         Assert.assertEquals(3, unJugador.getPoblacion());
 
         espacioUnidad = unTablero.definirArea(1, 2, 1, 2);
         Arquero otroArquero = new Arquero(1,2);
-        unJugador.agregarPieza(otroArquero);
+        unJugador.agregar(otroArquero);
         unJugador.finalizarTurno();
         Assert.assertEquals(4, unJugador.getPoblacion());
 
         espacioUnidad = unTablero.definirArea(2, 2, 2, 2);
         Arquero otroArquero2 = new Arquero(2,2);
-        unJugador.agregarPieza(otroArquero2);
+        unJugador.agregar(otroArquero2);
         unJugador.finalizarTurno();
         Assert.assertEquals(5, unJugador.getPoblacion());
 

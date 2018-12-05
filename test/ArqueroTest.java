@@ -20,7 +20,7 @@ public class ArqueroTest {
 
     @Test
     public void seCreaUnArquero() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
     	
     	Area espacioArquero = unTablero.definirArea(0, 0, 0, 0);
         Arquero unArquero = new Arquero(0,0);
@@ -32,7 +32,7 @@ public class ArqueroTest {
 
     @Test
     public void moverArqueroUnaPosicionHaciaArriba() throws Exception{
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioArquero = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
@@ -48,7 +48,7 @@ public class ArqueroTest {
 
     @Test
     public void moverArqueroUnaPosicionHaciaAbajo() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioArquero = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
@@ -64,7 +64,7 @@ public class ArqueroTest {
 
     @Test
     public void moverArqueroUnaPosicionHaciaDerecha() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioArquero = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
@@ -80,7 +80,7 @@ public class ArqueroTest {
 
     @Test
     public void moverArqueroUnaPosicionHaciaIzquierda() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioArquero = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
@@ -96,7 +96,7 @@ public class ArqueroTest {
 
     @Test
     public void moverArqueroUnaPosicionArribaDerecha() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioArquero = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
@@ -112,7 +112,7 @@ public class ArqueroTest {
 
     @Test
     public void moverArqueroUnaPosicionArribaIzquierda() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioArquero = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
@@ -128,7 +128,7 @@ public class ArqueroTest {
 
     @Test
     public void moverArqueroUnaPosicionAbajoIzquierda() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioArquero = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
@@ -144,7 +144,7 @@ public class ArqueroTest {
 
     @Test
     public void moverArqueroUnaPosicionAbajoDerecha() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioArquero = unTablero.definirArea(1, 1, 1, 1);
         Arquero unArquero = new Arquero(1,1);
@@ -165,7 +165,7 @@ public class ArqueroTest {
     @Test
     public void ataqueArqueroADistancia() throws Exception {
 
-    	Tablero unTablero = new Tablero(4,4);
+    	Tablero unTablero = new Tablero();
 
         Area espacioAldeano = unTablero.definirArea(0,0,0,0);
         Aldeano unAldeano = new Aldeano(0,0);
@@ -197,7 +197,7 @@ public class ArqueroTest {
 
     @Test
     public void atacarAUnaPieza() throws Exception{
-        Tablero unTablero = new Tablero(10,10);
+        Tablero unTablero = new Tablero();
         Arquero unArquero = new Arquero(0,4);
 
         Aldeano unAldeano = new Aldeano(5,5);
@@ -254,7 +254,7 @@ public class ArqueroTest {
 
     @Test
     public void liberarUbicacionArquero() {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Area espacioArquero = unTablero.definirArea(0, 0, 0, 0);
         Pieza unaPieza = new Arquero(0,0);

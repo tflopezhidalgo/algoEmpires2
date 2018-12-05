@@ -14,19 +14,17 @@ public class JuegoTest {
 
     @Test
     public void juegoNoTerminadoError() {
-        Juego unJuego = new Juego("Ailen", "Laura");
-        Tablero unTablero = unJuego.getTablero();
+        Juego unJuego = new Juego();
+        Jugador jugador1 = new Jugador("Laura");
+        Jugador jugador2 = new Jugador("Ailen");
 
-        List<Pieza> listaPiezas = new ArrayList<>();
-        listaPiezas.add(new Aldeano(2,2));
-        Castillo unCastillo = new Castillo(5,5);
-        listaPiezas.add(unCastillo);
+        unJuego.agregarJugador(jugador1);
+        unJuego.agregarJugador(jugador2);
 
-        List<Pieza> listaPiezas2 = new ArrayList<>();
-        Castillo otroCastillo = new Castillo(10,10);
-        listaPiezas2.add(otroCastillo);
+        jugador1.setListener(unJuego);
+        jugador2.setListener(unJuego);
 
-        unJuego.iniciarJuego(listaPiezas, listaPiezas2);
+        unJuego.iniciarJuego();
 
         boolean lanzaUnError=false;
         try{
@@ -38,7 +36,7 @@ public class JuegoTest {
 
     @Test
     public void noExistenJugadoresActuales() {
-        Juego unJuego = new Juego("Tomas", "Ivo");
+        Juego unJuego = new Juego();
 
         boolean lanzaUnError=false;
         try{
@@ -52,7 +50,7 @@ public class JuegoTest {
 
     @Test
     public void noHayJuegoEnProcesoError() {
-        Juego unJuego = new Juego("Ailen", "Laura");
+        Juego unJuego = new Juego();
 
         boolean lanzaUnError=false;
         try{
@@ -66,27 +64,26 @@ public class JuegoTest {
 
     @Test
     public void ganadorDePartida() throws Exception{
-        Juego unJuego = new Juego("Ailen", "Tomas");
-        Tablero unTablero = unJuego.getTablero();
-
-        List<Pieza> piezasJugador1 = new ArrayList<Pieza>();
-        List<Pieza> piezasJugador2 = new ArrayList<Pieza>();
+        Juego unJuego = new Juego();
+        Jugador jugador1 = new Jugador("Tomas");
+        Jugador jugador2 = new Jugador("Laura");
 
         Castillo unCastillo = new Castillo(0,0);
 
-        piezasJugador1.add(unCastillo);
-        piezasJugador2.add(new Castillo(4,4));
+        jugador1.agregar(unCastillo);
 
-        unJuego.iniciarJuego(piezasJugador1, piezasJugador2);
+        Castillo otroCastillo = new Castillo(4,4);
+
+        jugador2.agregar(otroCastillo);
+
+        unJuego.iniciarJuego();
 
         unJuego.finalizarTurno();
 
         unJuego.finalizarTurno(); //El juego ya cambia de jugador cuando le pasa finalizarTurno()
 
-        Castillo castilloJugador1 = unCastillo;
+        unCastillo.recibirDanio(1000);
 
-        castilloJugador1.recibirDanio(1000);
-
-        Assert.assertEquals("Tomas", unJuego.seleccionarGanador().obtenerNombre());
+        Assert.assertEquals("Laura", unJuego.seleccionarGanador().obtenerNombre());
     }
 }
