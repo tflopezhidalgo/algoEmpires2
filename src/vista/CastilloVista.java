@@ -26,9 +26,9 @@ public class CastilloVista extends EdificioVista{
 	private void CrearArmaDeAsedio() {
 		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
 		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
-		
-		elJuego.cobrarAJugadorActual(ArmaDeAsedio.COSTO);
+
 		Unidad armaDeAsedio = ((Castillo)modelo).crearCatapulta(x0, y0);
+        elJuego.cobrarAJugadorActual(armaDeAsedio.COSTO);
 		if(armaDeAsedio != null) {
 			ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0,y0,armaDeAsedio,elJuego);
 			elJuego.agregar(armaVisu);
