@@ -18,12 +18,12 @@ public class JuegoTest {
         Tablero unTablero = unJuego.getTablero();
 
         List<Pieza> listaPiezas = new ArrayList<>();
-        listaPiezas.add(new Aldeano(unTablero.definirArea(2,2,2,2)));
-        Castillo unCastillo = new Castillo(unTablero.definirArea(5,5,5,5));
+        listaPiezas.add(new Aldeano(2,2));
+        Castillo unCastillo = new Castillo(5,5);
         listaPiezas.add(unCastillo);
 
         List<Pieza> listaPiezas2 = new ArrayList<>();
-        Castillo otroCastillo = new Castillo(unTablero.definirArea(10,10,10,10));
+        Castillo otroCastillo = new Castillo(10,10);
         listaPiezas2.add(otroCastillo);
 
         unJuego.iniciarJuego(listaPiezas, listaPiezas2);
@@ -72,10 +72,10 @@ public class JuegoTest {
         List<Pieza> piezasJugador1 = new ArrayList<Pieza>();
         List<Pieza> piezasJugador2 = new ArrayList<Pieza>();
 
-        Castillo unCastillo = new Castillo(unTablero.definirArea(0,0,3,3));
+        Castillo unCastillo = new Castillo(0,0);
 
         piezasJugador1.add(unCastillo);
-        piezasJugador2.add(new Castillo(unTablero.definirArea(4,4,8,8)));
+        piezasJugador2.add(new Castillo(4,4));
 
         unJuego.iniciarJuego(piezasJugador1, piezasJugador2);
 
