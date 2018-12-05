@@ -1,35 +1,33 @@
 package controlador;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import modelo.Area;
+import javafx.scene.input.MouseEvent;
 import modelo.Cuartel;
 import modelo.Pieza;
 import modelo.Unidad;
 import modelo.factoryCuartel.TipoGuerrero;
 import vista.ArqueroVista;
-import vista.MapaVista;
+import vista.JuegoVista;
 
-public class CrearArqueroHandler implements EventHandler<ActionEvent> {
+public class CrearArqueroHandler implements EventHandler<MouseEvent> {
 
-	private MapaVista elMapa;
+	private JuegoVista elJuego;
 	private Cuartel modelo;
 
-	public CrearArqueroHandler(MapaVista unMapa, Pieza modelo){
-		this.elMapa = unMapa;
+	public CrearArqueroHandler(JuegoVista unJuego, Pieza modelo){
+		this.elJuego = unJuego;
 		this.modelo = (Cuartel)modelo;
 	}
 
 	@Override
-	public void handle(ActionEvent event) {
-		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
+	public void handle(MouseEvent event) {
+		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 		
-		Area espacioArquero = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
-		Unidad arquero = modelo.crearGuerrero(espacioArquero, TipoGuerrero.ARQUERO);
+		Unidad arquero = modelo.crearGuerrero(x0,y0, TipoGuerrero.ARQUERO);
 		if(arquero != null) {
-			ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elMapa);
-			elMapa.aniadirPieza(arqueroVista);
+			ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elJuego);
+			elJuego.agregar(arqueroVista);
 		}
 	};
 }

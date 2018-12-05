@@ -5,17 +5,17 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import modelo.Unidad;
 import vista.CasillaVista;
-import vista.MapaVista;
+import vista.JuegoVista;
 import vista.PiezaVista;
 import vista.UnidadVista;
 
 public class ClickCasillaHandler implements EventHandler<MouseEvent> {
 
 	private CasillaVista laCasilla;
-	private MapaVista elMapa;
+	private JuegoVista elJuego;
 	
-	public ClickCasillaHandler(MapaVista elMapa, CasillaVista laCasilla) {
-		this.elMapa = elMapa;
+	public ClickCasillaHandler(JuegoVista elJuego, CasillaVista laCasilla) {
+		this.elJuego = elJuego;
 		this.laCasilla = laCasilla;
 	}
 
@@ -32,18 +32,18 @@ public class ClickCasillaHandler implements EventHandler<MouseEvent> {
 	
 	private void seleccionarCasilla() {
 		//sacar efecto a casilla anterior
-		CasillaVista casillaAnterior = elMapa.casillaSeleccionada();
+		CasillaVista casillaAnterior = elJuego.casillaSeleccionada();
 		if(casillaAnterior != null) {
-			elMapa.casillaSeleccionada().desSeleccionar();
+			elJuego.casillaSeleccionada().desSeleccionar();
 		}
 		//agregar efecto a casilla actual
 		laCasilla.seleccionar();
-		elMapa.seleccionarCasilla(laCasilla);
+		elJuego.seleccionarCasilla(laCasilla);
 	}
 
 	
 	private void moverPiezaSeleccionada(){
-		PiezaVista piezaSeleccionada = elMapa.piezaSeleccionada();
+		PiezaVista piezaSeleccionada = elJuego.piezaSeleccionada();
 		if(piezaSeleccionada instanceof UnidadVista) {
 			int x0 = piezaSeleccionada.modelo().obtenerAreaOcupada().x0();
 			int y0 = piezaSeleccionada.modelo().obtenerAreaOcupada().y0();
@@ -55,7 +55,7 @@ public class ClickCasillaHandler implements EventHandler<MouseEvent> {
 			if( Math.abs(difX) <=1 & Math.abs(difY) <=1 ) {
 				UnidadVista unidadVista = (UnidadVista)(piezaSeleccionada);
 				Unidad laUnidad = (Unidad)(unidadVista.modelo());
-				elMapa.obtenerTablero().moverEnDireccion(laUnidad, difX, difY);
+				elJuego.obtenerTablero().moverEnDireccion(laUnidad, difX, difY);
 				
 				int xActual = laUnidad.obtenerAreaOcupada().x0();
 				int yActual = laUnidad.obtenerAreaOcupada().y0();

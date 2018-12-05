@@ -1,36 +1,32 @@
 package controlador;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import modelo.Aldeano;
-import modelo.Area;
 import modelo.Edificio;
 import modelo.Pieza;
-import vista.MapaVista;
+import vista.JuegoVista;
 import vista.PlazaVista;
 
-public class ConstruirPlazaHandler implements EventHandler<ActionEvent>{
+public class ConstruirPlazaHandler implements EventHandler<MouseEvent>{
 
-	private MapaVista elMapa;
+	private JuegoVista elJuego;
 	private Aldeano unAldeano;
 
-	public ConstruirPlazaHandler(MapaVista unMapa, Pieza unAldeano){
-		this.elMapa = unMapa;
+	public ConstruirPlazaHandler(JuegoVista unJuego, Pieza unAldeano){
+		this.elJuego = unJuego;
 		this.unAldeano = (Aldeano)unAldeano;
 	}
 	
 	@Override
-	public void handle(ActionEvent event) {
-		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
-
-		Area areaDeConstruccion = elMapa.obtenerTablero().definirArea(x0, y0, x0+1, y0+1);
+	public void handle(MouseEvent event) {
+		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 		
-		//TODO chk: almaceno en Plaza y casteo o almaceno en Edificio?
-		Edificio plaza = unAldeano.crearPlaza(areaDeConstruccion);
+		Edificio plaza = unAldeano.crearPlaza(x0,y0);
 		if(plaza != null) {
-			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elMapa);
-			elMapa.aniadirPieza(plazaVisu);
+			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elJuego);
+			elJuego.agregar(plazaVisu);
 		}
 	}
 	
