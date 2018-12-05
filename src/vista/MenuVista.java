@@ -62,8 +62,9 @@ public class MenuVista extends BorderPane {
     }
     
     private void configurarSonidos() {		
-        String menuSoundtrack = "src/resources/sound/menu/menuSoundtrack.mp3";
-        Media menuSoundtrackSound = new Media(new File(menuSoundtrack).toURI().toString());
+		String menuSoundtrack = "src/resources/sound/menu/menuSoundtrack.mp3"; 
+		Media menuSoundtrackSound = new Media(new File(menuSoundtrack).toURI().toString());
+		menuSoundtrackPlayer = new MediaPlayer(menuSoundtrackSound);
 		menuSoundtrackPlayer.play();
 		menuSoundtrackPlayer.setOnEndOfMedia(new Runnable() {
 		    @Override
