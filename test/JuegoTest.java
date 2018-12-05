@@ -14,24 +14,34 @@ public class JuegoTest {
 
     @Test
     public void juegoNoTerminadoError() {
+
+        Tablero nuevoTablero = new Tablero();
+
         Juego unJuego = new Juego();
+
         Jugador jugador1 = new Jugador("Laura");
         Jugador jugador2 = new Jugador("Ailen");
+
+        jugador1.agregar(new Castillo(2, 2));
+        jugador2.agregar(new Castillo(10,10));
 
         unJuego.agregarJugador(jugador1);
         unJuego.agregarJugador(jugador2);
 
-        jugador1.setListener(unJuego);
-        jugador2.setListener(unJuego);
-
         unJuego.iniciarJuego();
 
-        boolean lanzaUnError=false;
+        boolean lanzaUnError = false;
+
         try{
-            Jugador ganador = unJuego.seleccionarGanador();
+
+            unJuego.seleccionarGanador();
+
         } catch(JuegoNoTerminadoError e){
-            lanzaUnError=true;
+
+            lanzaUnError = true;
         }
+
+        Assert.assertTrue(lanzaUnError);
     }
 
     @Test
@@ -63,18 +73,26 @@ public class JuegoTest {
     }
 
     @Test
-    public void ganadorDePartida() throws Exception{
+    public void ganadorDePartida(){
+
         Juego unJuego = new Juego();
+
+        Tablero nuevoTablero = new Tablero();
+
         Jugador jugador1 = new Jugador("Tomas");
+
         Jugador jugador2 = new Jugador("Laura");
 
         Castillo unCastillo = new Castillo(0,0);
 
         jugador1.agregar(unCastillo);
 
-        Castillo otroCastillo = new Castillo(4,4);
+        Castillo otroCastillo = new Castillo(10,10);
 
         jugador2.agregar(otroCastillo);
+
+        unJuego.agregarJugador(jugador1);
+        unJuego.agregarJugador(jugador2);
 
         unJuego.iniciarJuego();
 

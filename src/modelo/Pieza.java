@@ -14,10 +14,11 @@ public abstract class Pieza {
 	/*          Constructor             */
 	public Pieza(int vidaMax, int costo) {
 
-        this.COSTO = costo;
-        this.vida = vidaMax;
-        this.VIDA_MAX = vidaMax;
-        turnoJugado = false;
+	    this.COSTO = costo;
+	    this.vida = vidaMax;
+	    this.VIDA_MAX = vidaMax;
+		turnoJugado = false;
+
 	}
 	
     protected void siYaJugoElTurnoError(){
