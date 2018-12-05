@@ -41,7 +41,7 @@ public class CuartelTest {
     @Test
     public void cuartelCreaEspadachin() {
 
-    	Tablero unTablero = new Tablero(5,5);
+    	Tablero unTablero = new Tablero();
 
         Cuartel unCuartel = new Cuartel(0,0);
         
@@ -215,7 +215,7 @@ public class CuartelTest {
 
     @Test
     public void edificioNecesitaReparacionCuartel() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Cuartel(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -230,7 +230,7 @@ public class CuartelTest {
 
     @Test
     public void edificioRepararCuartel() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Cuartel(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -249,7 +249,7 @@ public class CuartelTest {
 
     @Test
     public void edificioConstruirCuartel() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Cuartel(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -270,7 +270,7 @@ public class CuartelTest {
 
     @Test
     public void edificioRecibirDanioDeArqueroCuartel() throws Exception {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Edificio unEdificio = new Cuartel(0,0);
         Assert.assertTrue(unTablero.obtenerCasillaEn(1,1).estaOcupada());
@@ -312,7 +312,7 @@ public class CuartelTest {
 
     @Test
     public void liberarUbicacionCuartel() {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Area zonaDeConstruccion = unTablero.definirArea(0, 0, Cuartel.TAMANIO_LADO-1, Cuartel.TAMANIO_LADO-1);
         Pieza unaPieza = new Cuartel(0,0);

@@ -28,7 +28,7 @@ public class AldeanoTest {
 
     @Test
     public void seCreaUnAldeano() {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Aldeano unAldeano = new Aldeano(0,0);
 
@@ -38,7 +38,7 @@ public class AldeanoTest {
 
     @Test
     public void moverAldeanoUnaPosicionHaciaArriba() {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
         Aldeano unAldeano = new Aldeano(1,1);
 
@@ -53,7 +53,7 @@ public class AldeanoTest {
 
     @Test
     public void moverAldeanoUnaPosicionHaciaAbajo() {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
         Aldeano unAldeano = new Aldeano(1,1);
 
@@ -68,7 +68,7 @@ public class AldeanoTest {
 
     @Test
     public void moverAldeanoUnaPosicionHaciaDerecha() {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
         Aldeano unAldeano = new Aldeano(1,1);
 
@@ -83,7 +83,7 @@ public class AldeanoTest {
 
     @Test
     public void moverAldeanoUnaPosicionHaciaIzquierda() {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
         Aldeano unAldeano = new Aldeano(1,1);
@@ -99,7 +99,7 @@ public class AldeanoTest {
 
     @Test
     public void moverAldeanoUnaPosicionArribaDerecha() {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
         Aldeano unAldeano = new Aldeano(1,1);
@@ -115,7 +115,7 @@ public class AldeanoTest {
 
     @Test
     public void moverAldeanoUnaPosicionArribaIzquierda() {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
         Aldeano unAldeano = new Aldeano(1,1);
@@ -131,7 +131,7 @@ public class AldeanoTest {
 
     @Test
     public void moverAldeanoUnaPosicionAbajoIzquierda() {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
         Aldeano unAldeano = new Aldeano(1,1);
@@ -147,7 +147,7 @@ public class AldeanoTest {
 
     @Test
     public void moverAldeanoUnaPosicionAbajoDerecha() {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	Area espacioAldeano = unTablero.definirArea(1, 1, 1, 1);
         Aldeano unAldeano = new Aldeano(1,1);
@@ -170,7 +170,7 @@ public class AldeanoTest {
         int turno = 0;
         int oroJugador = 0;
 
-        Tablero unTablero = new Tablero(5, 5);
+        Tablero unTablero = new Tablero();
 
     	Area espacioAldeano = unTablero.definirArea(0,0,0,0);
         Aldeano unAldeano = new Aldeano(0,0);
@@ -232,7 +232,7 @@ public class AldeanoTest {
         int turno = 0;
         int oroJugador = 0;
 
-        Tablero unTablero = new Tablero(5,5);
+        Tablero unTablero = new Tablero();
 
     	Aldeano unAldeano = new Aldeano(0,0);
 
@@ -287,7 +287,7 @@ public class AldeanoTest {
     public void RepararPlazaCentral() {
         int turno=0;
 
-        Tablero unTablero = new Tablero(5,5);
+        Tablero unTablero = new Tablero();
 
     	Aldeano unAldeano = new Aldeano(0,0);
 
@@ -324,7 +324,7 @@ public class AldeanoTest {
     public void RepararCastillo() {
         int turno=0;
 
-        Tablero unTablero = new Tablero(5,5);
+        Tablero unTablero = new Tablero();
 
         Aldeano unAldeano = new Aldeano(0,0);
 
@@ -360,7 +360,7 @@ public class AldeanoTest {
     public void RepararCuartel() {
         int turno=0;
 
-        Tablero unTablero = new Tablero(5,5);
+        Tablero unTablero = new Tablero();
 
         Aldeano unAldeano = new Aldeano(0,0);
 
@@ -404,7 +404,7 @@ public class AldeanoTest {
         int turno=0;
         int oro=0;
 
-        Tablero unTablero = new Tablero(5,5);
+        Tablero unTablero = new Tablero();
 
         Aldeano unAldeano = new Aldeano(0,0);
 
@@ -634,7 +634,7 @@ public class AldeanoTest {
     @Test
     public void soloUnAldeanoPuedeRepararUnMismoEdificio() {
 
-        Tablero unTablero = new Tablero(5,5);
+        Tablero unTablero = new Tablero();
         Area espacioAldeano1 = unTablero.definirArea(0,0,0,0);
         Aldeano aldeano1 = new Aldeano(0,0);
 
@@ -819,7 +819,7 @@ public class AldeanoTest {
             lanzaUnError = true;
         }
 
-        Assert.assertEquals(true, lanzaUnError);
+        Assert.assertTrue(lanzaUnError);
     }
 
 
@@ -857,7 +857,7 @@ public class AldeanoTest {
 
     @Test
     public void liberarUbicacionAldeano() {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Area espacioAldeano = unTablero.definirArea(0, 0, 0, 0);
         Pieza unaPieza = new Aldeano(0,0);
