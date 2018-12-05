@@ -13,6 +13,7 @@ public class JuegaJugador2 extends EstadoJuego {
 
     @Override
     public EstadoJuego finalizarTurno(List<Jugador> jugadores){
+
     	jugadores.get(1).finalizarTurno();
         return (new JuegaJugador1());
     }

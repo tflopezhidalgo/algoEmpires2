@@ -21,9 +21,9 @@ public class Terminado extends EstadoJuego {
     public Jugador seleccionarGanador(List<Jugador> jugadores){
 
         //Suponemos un ganador SI o SI.
-        if(jugadores.get(0).castilloFueDestruido())
-            return jugadores.get(0);
-        else
+        if(jugadores.get(0).tieneCastilloDestruido())
             return jugadores.get(1);
+        else
+            return jugadores.get(0);
     }
 }

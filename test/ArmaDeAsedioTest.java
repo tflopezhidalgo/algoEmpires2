@@ -403,6 +403,47 @@ public class ArmaDeAsedioTest {
         Assert.assertTrue(espacioArmaDeAsedio.estaLibre());
     }
 
+    @Test
+    public void catapultaNoAtacaAUnidad() throws Exception{
+       Tablero unTablero = new Tablero();
+       ArmaDeAsedio unArma = new ArmaDeAsedio(0,0);
+       Aldeano unAldeano = new Aldeano(1,0);
+
+       double vidaAldeano = unAldeano.porcentajeVidaActual();
+
+       unArma.accionar();
+       unArma.nuevoTurno();
+       unArma.atacar(unAldeano);
+
+       Assert.assertEquals(vidaAldeano, unAldeano.porcentajeVidaActual());
+    }
+
+    @Test
+    public void catapultaPuedeAtacarAEdificioLuegoDeTratarDeAtacarAUnidad() throws Exception{
+        Tablero unTablero = new Tablero();
+        ArmaDeAsedio unArma = new ArmaDeAsedio(0,0);
+        Aldeano unAldeano = new Aldeano(1,0);
+        Plaza unaPlaza = new Plaza(1,1);
+
+        unaPlaza.construir();
+        unaPlaza.construir();
+        unaPlaza.construir();
+
+        unArma.accionar();
+        unArma.nuevoTurno();
+        unArma.atacar(unAldeano);
+
+        //Puede atacar, ya que no consume turno al intentar atacar a una unidad
+        boolean puedeAtacar=false;
+        try{
+            unArma.atacar(unaPlaza);
+        } catch (Exception e){
+            puedeAtacar=true;
+        }
+
+        Assert.assertTrue(puedeAtacar);
+    }
+
     //ES PRIVADO EL METODO
    /* @Test
     public void distanciaMinimaAUnArea() {

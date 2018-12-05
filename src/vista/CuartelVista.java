@@ -50,9 +50,9 @@ public class CuartelVista extends EdificioVista{
 	private void CrearArquero() {
 		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
 		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
-		
-		elJuego.cobrarAJugadorActual(Arquero.COSTO);
+
 		Unidad arquero = ((Cuartel)modelo).crearGuerrero(x0, y0, TipoGuerrero.ARQUERO);
+        elJuego.cobrarAJugadorActual(arquero.COSTO);
 		if(arquero != null) {
 			ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elJuego);
 			elJuego.agregar(arqueroVista);
@@ -62,9 +62,9 @@ public class CuartelVista extends EdificioVista{
 	private void CrearEspadachin() {
 		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
 		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
-		
-		elJuego.cobrarAJugadorActual(Espadachin.COSTO);
+
 		Unidad espadachin = ((Cuartel)modelo).crearGuerrero(x0, y0, TipoGuerrero.ESPADACHIN);
+        elJuego.cobrarAJugadorActual(espadachin.COSTO);
 		if(espadachin != null) {
 			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elJuego);
 			elJuego.agregar(espadachinVista);

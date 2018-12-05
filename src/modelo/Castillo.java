@@ -2,31 +2,43 @@ package modelo;
 
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
+import java.util.List;
+
 public class Castillo extends Edificio {
 	
 	public static final int TAMANIO_LADO = 4;
     public static final int DISTANCIA_ATK = 3;
-	public static final int VIDA_MAX = 1000;
 
 	private CastilloListener castilloListener;
 
 	public Castillo(int x0, int y0) {
-		super(1000);
-		
-		vida = VIDA_MAX;
+
+		super(1000, 0);
+
+		this.castilloListener = null;
 		tiempoDeConstruccion = 0;
 		cantidadDeCuracion = 15;
 		
-		espacioOcupado = Tablero.INSTANCIA.definirArea(x0, y0, TAMANIO_LADO-1+x0, TAMANIO_LADO-1+y0);
+		espacioOcupado = Tablero.INSTANCIA.definirArea(x0, y0, TAMANIO_LADO - 1 + x0, TAMANIO_LADO- 1 + y0);
 		espacioOcupado.ocupar();
 	}
 
-	@Override
-	public void atacar(Pieza piezaEnemiga){
+	private void atacarPiezasCercanas(List<Pieza> piezasEnemigas){
 
-	    chequearRango(piezaEnemiga, DISTANCIA_ATK);
-	    piezaEnemiga.recibirDanio(20);
-	}
+	    for(int i = 0; i < piezasEnemigas.size(); i++)
+	        if(distanciaMinimaA(piezasEnemigas.get(i).espacioOcupado) <= DISTANCIA_ATK)
+	            piezasEnemigas.get(i).recibirDanio(20);
+
+    }
+
+    @Override
+    public void nuevoTurno(){
+
+	    this.atacarPiezasCercanas(castilloListener.getJugadorEnemigo().getPiezas());
+
+        this.turnoJugado = false;
+    }
+
 	
 	public Unidad crearCatapulta(int x0, int y0) {
 	    siYaJugoElTurnoError();
@@ -42,7 +54,6 @@ public class Castillo extends Edificio {
 		return unaArmaDeAsedio;
 	} 
 
-	//TODO tom explicame que onda esto
 	public void setCastilloListener(Juego unJuego){
 	    this.castilloListener = unJuego;
     }
