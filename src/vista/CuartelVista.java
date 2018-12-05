@@ -1,19 +1,19 @@
 package vista;
 
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import modelo.Area;
+import modelo.Aldeano;
+import modelo.Arquero;
 import modelo.Cuartel;
 import modelo.Edificio;
+import modelo.Espadachin;
 import modelo.Unidad;
 import modelo.factoryCuartel.TipoGuerrero;
 
 public class CuartelVista extends EdificioVista{
 	
-	public CuartelVista(int x, int y, Edificio unModelo, MapaVista unMapa) {
-		super(x,y,unModelo, unMapa);
+	public CuartelVista(int x, int y, Edificio unModelo, JuegoVista unJuego) {
+		super(x,y,unModelo, unJuego);
 	}
 
 	protected void crearRepresentacion() {
@@ -33,43 +33,41 @@ public class CuartelVista extends EdificioVista{
 		//-----------------------------------------
 	}
 
-	protected void prepararBotones() {		
-		Menu menuHabilidades = new Menu("Habilidades");
-
-		MenuItem crearEspadachin = new MenuItem("Crear Espadachin");
-		crearEspadachin.setOnAction( //new CrearEspadachinHandler(elMapa, modelo));
-				e->CrearEspadachin());
-		MenuItem crearArquero = new MenuItem("Crear Arquero");
-		crearArquero.setOnAction( //new CrearArqueroHandler(elMapa, modelo));
-				e->CrearArquero());
-
-		menuHabilidades.getItems().addAll(crearEspadachin,crearArquero);
-		acciones.getMenus().add(menuHabilidades);
+	protected void prepararBotones() {	
+        Image iconoEspadachin = new Image("resources/images/elementosJuego/panelInferior/izquierdo/botones/crearEspadachin.png");
+        ImageView iconoEspadachinView = new ImageView(iconoEspadachin);
+        BotonVistaPersonalizado construirEspadachin = new BotonVistaPersonalizado(iconoEspadachinView);
+        construirEspadachin.setOnMousePressed(e->CrearEspadachin());
+        
+        Image iconoArquero = new Image("resources/images/elementosJuego/panelInferior/izquierdo/botones/crearArquero.png");
+        ImageView iconoArqueroView = new ImageView(iconoArquero);
+        BotonVistaPersonalizado construirArquero = new BotonVistaPersonalizado(iconoArqueroView);
+        construirArquero.setOnMousePressed(e->CrearArquero());
+		
+		acciones.getChildren().addAll(construirEspadachin,construirArquero);
 	}
 	
 	private void CrearArquero() {
-		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
+		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 		
-		Area espacioArquero = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
-		Unidad arquero = ((Cuartel)modelo).crearGuerrero(espacioArquero, TipoGuerrero.ARQUERO);
+		elJuego.cobrarAJugadorActual(Arquero.COSTO);
+		Unidad arquero = ((Cuartel)modelo).crearGuerrero(x0, y0, TipoGuerrero.ARQUERO);
 		if(arquero != null) {
-			ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elMapa);
-			elMapa.aniadirPieza(arqueroVista);
+			ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elJuego);
+			elJuego.agregar(arqueroVista);
 		}
 	}
 	
 	private void CrearEspadachin() {
-		int x0 = elMapa.casillaSeleccionada().modelo().ejeX();
-		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
+		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 		
-		Area espacioEspadachin = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
-		
-		//TODO chk: almaceno en Espadachin y casteo o almaceno en Unidad?
-		Unidad espadachin = ((Cuartel)modelo).crearGuerrero(espacioEspadachin, TipoGuerrero.ESPADACHIN);
+		elJuego.cobrarAJugadorActual(Espadachin.COSTO);
+		Unidad espadachin = ((Cuartel)modelo).crearGuerrero(x0, y0, TipoGuerrero.ESPADACHIN);
 		if(espadachin != null) {
-			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elMapa);
-			elMapa.aniadirPieza(espadachinVista);
+			EspadachinVista espadachinVista = new EspadachinVista(x0,y0,espadachin,elJuego);
+			elJuego.agregar(espadachinVista);
 		}
 	}
 

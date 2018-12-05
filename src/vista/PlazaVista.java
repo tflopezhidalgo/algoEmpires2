@@ -1,18 +1,15 @@
 package vista;
 
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import modelo.Aldeano;
-import modelo.Area;
 import modelo.Edificio;
 import modelo.Plaza;
 
 public class PlazaVista extends EdificioVista {
 	
-	public PlazaVista(int x, int y, Edificio unModelo, MapaVista unMapa) {
-		super(x,y,unModelo, unMapa);
+	public PlazaVista(int x, int y, Edificio unModelo, JuegoVista unJuego) {
+		super(x,y,unModelo, unJuego);
 	}
 
 	protected void crearRepresentacion() {
@@ -34,28 +31,23 @@ public class PlazaVista extends EdificioVista {
 	}
 
 	protected void prepararBotones() {
-		Menu menuHabilidades = new Menu("Habilidades");
-		//menu.setGraphic(new ImageView("file:imagen.png"));
-
-		MenuItem crearAldeano = new MenuItem("Crear Aldeano");
+        Image iconoAldeano = new Image("resources/images/elementosJuego/panelInferior/izquierdo/botones/crearAldeano.png");
+        ImageView iconoAldeanoView = new ImageView(iconoAldeano);
+        BotonVistaPersonalizado crearAldeano = new BotonVistaPersonalizado(iconoAldeanoView);
+        crearAldeano.setOnMousePressed(e->CrearAldeano());
 		
-		crearAldeano.setOnAction( //new CrearAldeanoHandler(this.elMapa, this.modelo));
-				e->CrearAldeano());
-
-		menuHabilidades.getItems().addAll(crearAldeano);
-		acciones.getMenus().add(menuHabilidades);
+		acciones.getChildren().add(crearAldeano);
 	}
 	
 	private void CrearAldeano() {
-		int x0 = elMapa.casillaSeleccionada().modelo().ejeX(); 
-		int y0 = elMapa.casillaSeleccionada().modelo().ejeY();
+		int x0 = elJuego.casillaSeleccionada().modelo().ejeX(); 
+		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 		
-		//TODO los mismos comentarios que en construir Plaza
-		Area espacioAldeano = elMapa.obtenerTablero().definirArea(x0, y0, x0, y0);
-		Aldeano aldeano = ((Plaza)modelo).crearAldeano(espacioAldeano); 
+		elJuego.cobrarAJugadorActual(Aldeano.COSTO);
+		Aldeano aldeano = ((Plaza)modelo).crearAldeano(x0, y0); 
 		if(aldeano != null) {
-			AldeanoVista aldeanoVista = new AldeanoVista(x0,y0,aldeano,elMapa);
-			elMapa.aniadirPieza(aldeanoVista);
+			AldeanoVista aldeanoVista = new AldeanoVista(x0,y0,aldeano,elJuego);
+			elJuego.agregar(aldeanoVista);
 		}
 	}
 

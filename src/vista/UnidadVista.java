@@ -7,8 +7,8 @@ public abstract class UnidadVista extends PiezaVista {
 	
 	protected Unidad modelo;
 	
-	public UnidadVista(int x, int y, Unidad unModelo, MapaVista unMapa){
-		super(x,y,unModelo,unMapa);
+	public UnidadVista(int x, int y, Unidad unModelo, JuegoVista elJuego){
+		super(x,y,unModelo,elJuego);
 		modelo = unModelo;
 		crearRepresentacion();
 	}
@@ -32,7 +32,7 @@ public abstract class UnidadVista extends PiezaVista {
 	
 	@Override
 	public void realizarAccionSobrePieza() {
-		new UnidadRealizarAccion(elMapa, this);
+		new UnidadRealizarAccion(elJuego, this);
 	}
 
 }

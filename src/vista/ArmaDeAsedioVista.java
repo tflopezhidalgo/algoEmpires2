@@ -1,7 +1,5 @@
 package vista;
 
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import modelo.ArmaDeAsedio;
@@ -17,24 +15,23 @@ public class ArmaDeAsedioVista extends UnidadVista{
 	private ImageView viewMover;
 	private ImageView viewAtaque;
 	
-	public ArmaDeAsedioVista(int x, int y, Unidad unModelo, MapaVista unMapa){
+	public ArmaDeAsedioVista(int x, int y, Unidad unModelo, JuegoVista unMapa){
 		super(x,y,unModelo, unMapa);
 		estadoActual = new CatapultaVistaDesarmada();
 	}
 
 	@Override
 	protected void prepararBotones() {
-		Menu menuHabilidades = new Menu("Habilidades");
-
-		MenuItem accionar = new MenuItem("Accionar");
-		accionar.setOnAction( e ->{
+        Image iconoAccionar = new Image("resources/images/elementosJuego/panelInferior/izquierdo/botones/accionarCatapulta.png");
+        ImageView iconoAccionarView = new ImageView(iconoAccionar);
+        BotonVistaPersonalizado accionar = new BotonVistaPersonalizado(iconoAccionarView);
+        accionar.setOnMousePressed( e ->{
 			//TODO aca hay un casteo pero no creo que se facil de eliminar
 			((ArmaDeAsedio)modelo).accionar();
 			estadoActual = estadoActual.cambiarEstado(viewMover,viewAtaque);
 		});
-
-		menuHabilidades.getItems().addAll(accionar);
-		acciones.getMenus().add(menuHabilidades);
+		
+		acciones.getChildren().add(accionar);
 	} 
 	
 	/*

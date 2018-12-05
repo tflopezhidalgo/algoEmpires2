@@ -1,5 +1,7 @@
 package vista;
 
+import java.io.File;
+
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -7,25 +9,37 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MenuVista extends BorderPane {
-	
-	Scene escenaSiguiente;
 
     public MenuVista(Stage stagePrincipal){
     	//-------------------------------------------------------
-        this.prepararEscenaSiguiente(stagePrincipal);
     	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+    	
     	//--------------- Imagen de fondo -----------------------
         Image background = new Image("resources/images/ElementosMenu/menuBackground3.png");
         ImageView backgroundVista = new ImageView(background);
-        backgroundVista.setFitWidth(1280);
-        backgroundVista.setFitHeight(800);
+        backgroundVista.fitWidthProperty().bind(stagePrincipal.widthProperty());
+        backgroundVista.fitHeightProperty().bind(stagePrincipal.heightProperty());
         
     	StackPane panel = new StackPane(backgroundVista);
         setCenter(panel);
+        //------------------ Sonidos ----------------------------
+		String menuHover = "src/resources/sound/Menu/menuhover.wav"; 
+		Media menuHoverSound = new Media(new File(menuHover).toURI().toString());
+		MediaPlayer menuHoverPlayer = new MediaPlayer(menuHoverSound);
+		
+		String menuSelect = "src/resources/sound/Menu/menuselect.wav"; 
+		Media menuSelectSound = new Media(new File(menuSelect).toURI().toString());
+		MediaPlayer menuSelectPlayer = new MediaPlayer(menuSelectSound);
+		/*
+		String menuSelect = "src/resources/sound/Menu/menuselect.wav"; 
+		Media menuSelectSound = new Media(new File(menuSelect).toURI().toString());
+		MediaPlayer menuSelectPlayer = new MediaPlayer(menuSelectSound);*/
         //--------------- Setup Botones -------------------------
         VBox botones = new VBox(40);
         
@@ -35,7 +49,8 @@ public class MenuVista extends BorderPane {
         comenzar.setFitHeight(37);
         
         BotonVistaPersonalizado elBotonComenzar = new BotonVistaPersonalizado(comenzar);
-        elBotonComenzar.setOnMousePressed(event -> stagePrincipal.setScene(escenaSiguiente));
+        elBotonComenzar.setOnMousePressed(event -> stagePrincipal.getScene().setRoot(new ConfiguracionVista(stagePrincipal)));
+        											
 
         Image imagenSalir = new Image("resources/images/ElementosMenu/Botones/salir3.png");
         ImageView salir = new ImageView(imagenSalir);
@@ -49,9 +64,5 @@ public class MenuVista extends BorderPane {
         panel.getChildren().add(botones);
         botones.setTranslateY(primaryScreenBounds.getHeight()*0.6);
     }
-
-	private void prepararEscenaSiguiente(Stage stagePrincipal){
-        this.escenaSiguiente = new Scene(new ConfiguracionVista(stagePrincipal));
-	}
 
 }
