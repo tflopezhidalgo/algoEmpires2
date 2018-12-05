@@ -52,6 +52,11 @@ public class Juego implements CastilloListener{
         this.seleccionarJugadorInicial();
     }
 
+    public void iniciarJuegoNoRandom(){
+
+        estado = new JuegaJugador1();
+    }
+
     public Jugador getJugadorActual(){
         return (this.estado.getJugadorActual(this.jugadores));
     }
