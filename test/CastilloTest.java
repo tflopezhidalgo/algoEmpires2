@@ -223,7 +223,7 @@ public class CastilloTest {
 
     @Test
     public void liberarUbicacionCastillo() {
-        Juego unJuego = new Juego("Ivo", "Tomi");
+        Juego unJuego = new Juego();
         Tablero unTablero = new Tablero();
 
         Area zonaDeConstruccion = unTablero.definirArea(0,0,3,3);
