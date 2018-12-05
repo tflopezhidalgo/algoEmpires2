@@ -1,18 +1,21 @@
 package modelo;
 
-import modelo.excepciones.PiezaFueraDeAlcanceError;
-import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
+import modelo.excepciones.*;
 
 public abstract class Pieza {
 
-    protected Area espacioOcupado;
+    public final int VIDA_MAX;
+    public final int COSTO;
 
 	protected int vida;
 	protected boolean turnoJugado;
+    protected Area espacioOcupado;
 
-	
 	/*          Constructor             */
-	public Pieza() {
+	public Pieza(int vidaMax, int costo) {
+
+	    this.COSTO = costo;
+	    this.VIDA_MAX = vidaMax;
 		turnoJugado = false;
 	}
 	
@@ -54,7 +57,9 @@ public abstract class Pieza {
         return minimaDistancia;
     }
 
-	public void recibirDanio(int danio) {
+    protected void liberarUbicacion() {espacioOcupado.liberar(); }
+
+    public void recibirDanio(int danio) {
 		vida = (vida - danio);
 		if(vida <= 0) {
 			vida = 0;
@@ -77,9 +82,11 @@ public abstract class Pieza {
 
 	public abstract void recibirDanioDe(Edificio unEdificio);
 
-    protected void liberarUbicacion() {espacioOcupado.liberar(); }
-
     public Area obtenerAreaOcupada() { return espacioOcupado; }
 
+    public int getVidaActual(){
+
+        return this.vida;
+    }
 
 }

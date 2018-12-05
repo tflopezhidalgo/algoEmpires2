@@ -1,20 +1,16 @@
 package modelo;
 
-import modelo.excepciones.NoSePuedeConstruirTanLejosError;
-import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
-import modelo.factoryCuartel.FactoryGuerrero;
-import modelo.factoryCuartel.TipoGuerrero;
+import modelo.excepciones.*;
+import modelo.factoryCuartel.*;
 
 public class Cuartel extends Edificio {
 
     public static final int TAMANIO_LADO = 2;
-	public static final int COSTO = 50;
-	public static final int VIDA_MAX = 250;
 	
 	public Cuartel(int x0, int y0) {
-	    super(250);
 
-		vida = VIDA_MAX;
+	    super(250, 50);
+
 		tiempoDeConstruccion = 3;
 		cantidadDeCuracion = 50;
 
@@ -23,9 +19,11 @@ public class Cuartel extends Edificio {
 	}
 
 	public Unidad crearGuerrero(int x0, int y0, TipoGuerrero tipoDeseado){
+
         siYaJugoElTurnoError();
 
-        Casilla supuestaUbicacion = new Casilla(x0, y0); 
+        Casilla supuestaUbicacion = new Casilla(x0, y0);
+
         if(distanciaMinimaA(supuestaUbicacion) > 1)
             throw  new NoSePuedeConstruirTanLejosError();
 
@@ -33,8 +31,9 @@ public class Cuartel extends Edificio {
             throw  new NoSePuedeCrearUnidadesDuranteConstruccionError();
 
         turnoJugado = true;
+
         return FactoryGuerrero.crearGuerrero(x0, y0, tipoDeseado);
-        
+
     }
 
 }

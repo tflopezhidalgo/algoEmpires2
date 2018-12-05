@@ -2,9 +2,7 @@ package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import modelo.excepciones.CasillaInvalidaError;
-import modelo.excepciones.OroInsuficienteError;
 import modelo.excepciones.PoblacionLimiteSuperadaError;
 
 public class Jugador {
@@ -23,6 +21,7 @@ public class Jugador {
 
     /*          Constructor         */
     public Jugador(String unNombre){
+
     	this.nombreJugador = unNombre;
     	this.cantidadDeOro = 100;
     	this.poblacion = 0;
@@ -44,13 +43,13 @@ public class Jugador {
             Unidad soldadoActual = losSoldados.get(i);
             soldadoActual.nuevoTurno();
         }
-        
+
         elCastillo.nuevoTurno();
     }
     
     public int hpCastillo() {
-    	//TODO poner un metodo, no acceder a variable?
-    	return elCastillo.vida;
+
+        return elCastillo.getVidaActual();
     }
     
     public int cantidadSoldados() {
@@ -70,6 +69,7 @@ public class Jugador {
     }
 
     public void finalizarTurno(){
+
         finalizarTurnoDePiezas();
     }
     
@@ -80,25 +80,29 @@ public class Jugador {
     public int obtenerOro(){
         return this.cantidadDeOro;
     }
-    
-    //TODO tom explicame para que es esto
+
 	public void setListener(Juego unJuego){
 	    elCastillo.setCastilloListener(unJuego);    
 	}
-    
-    //TODO hace falta eso o con el Listener ya estamos?
-    public boolean castilloFueDestruido(){
-    	return (elCastillo.estaDestruida());
-    }
-    
+
     public void cobrar(int monto) {
     	if(this.cantidadDeOro < monto) {
-    		throw new OroInsuficienteError();
-    	}	
+    		throw new CasillaInvalidaError();
+    	}
+    	
     	cantidadDeOro -= monto;
     }
     
-    
+    public List<Pieza> getPiezas(){
+
+        List<Pieza> piezasTotales = new ArrayList<>();
+
+        piezasTotales.addAll(this.losAldeanos);
+        piezasTotales.addAll(this.losEdificios);
+        piezasTotales.addAll(this.losSoldados);
+
+        return piezasTotales;
+    }
 	//----------------------------------------------------------------------------
 	//---------------------      Manejo de Piezas     ----------------------------
     
@@ -127,7 +131,8 @@ public class Jugador {
     }
     
     public void agregar(Edificio edificio) {
-    	losEdificios.add(edificio);
+
+        losEdificios.add(edificio);
     }
 
     public void agregar(Aldeano aldeano){
@@ -142,18 +147,21 @@ public class Jugador {
     }
     
     public void remover(Aldeano aldeano){
+
 		losAldeanos.remove(aldeano);
 		actualizarPoblacion();
     }
-    
+
     public void remover(Edificio edificio){
+
 		losEdificios.remove(edificio);
     }
     
     public void remover(Unidad soldado){
+
     	if(soldado instanceof Aldeano) {
-    		remover((Aldeano)soldado);
-    	}
+            remover((Aldeano) soldado);
+        }
     	else {
     		losSoldados.remove(soldado);
     		actualizarPoblacion();
@@ -169,6 +177,8 @@ public class Jugador {
 		d = elCastillo.equals(unaPieza);
 		
 		laContiene = (a | b | c | d);
+		
+    	System.out.println(nombreJugador + " contiene a la pieza: " + laContiene); //TODO BORRAR
 		return laContiene;
 	}
 
@@ -176,8 +186,14 @@ public class Jugador {
 	//----------------------------------------------------------------------------
       
     private void actualizarPoblacion(){
+
     	poblacion = losSoldados.size();
     	poblacion += losAldeanos.size();
+    }
+
+    public boolean tieneCastilloDestruido(){
+
+        return (this.elCastillo.getVidaActual() <= 0);
     }
 
 }

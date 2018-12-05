@@ -20,7 +20,7 @@ public class ArmaDeAsedioTest {
      */
     @Test
     public void seCreaArmaDeAsedio() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
 
     	ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(0,0);
 
@@ -33,7 +33,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void moverArmaDeAsedioUnaPosicionHaciaArriba() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
         ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(1,1); //Se inicia en modo mover (se mueve)
@@ -58,7 +58,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void moverArmaDeAsedioUnaPosicionHaciaAbajo() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
         ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(1,1); //Se inicia en modo mover (se mueve)
@@ -83,7 +83,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void moverArmaDeAsedioUnaPosicionHaciaDerecha() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
         ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(1,1); //Se inicia en modo mover (se mueve)
@@ -108,7 +108,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void moverArmaDeAsedioUnaPosicionHaciaIzquierda() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
         ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(1,1); //Se inicia en modo mover (se mueve)
@@ -133,7 +133,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void moverArmaDeAsedioUnaPosicionArribaDerecha() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
         ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(1,1); //Se inicia en modo mover (se mueve)
@@ -158,7 +158,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void moverArmaDeAsedioUnaPosicionArribaIzquierda() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
         ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(1,1); //Se inicia en modo mover (se mueve)
@@ -183,7 +183,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void moverArmaDeAsedioUnaPosicionAbajoIzquierda() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
         ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(1,1); //Se inicia en modo mover (se mueve)
@@ -208,7 +208,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void moverArmaDeAsedioUnaPosicionAbajoDerecha() throws Exception {
-    	Tablero unTablero = new Tablero(3,3);
+    	Tablero unTablero = new Tablero();
        	
     	Area espacioArmaDeAsedio = unTablero.definirArea(1, 1, 1, 1);
         ArmaDeAsedio unArmaDeAsedio = new ArmaDeAsedio(1,1); //Se inicia en modo mover (se mueve)
@@ -272,7 +272,7 @@ public class ArmaDeAsedioTest {
     
     @Test
     public void ataqueArmaDeAsedioAEdificio() throws Exception {
-    	Tablero unTablero = new Tablero(7, 7);
+    	Tablero unTablero = new Tablero();
 
         Area zonaDeConstruccion = unTablero.definirArea(5, 5, Plaza.TAMANIO_LADO+4, Plaza.TAMANIO_LADO+4);
         Plaza unaPlaza = new Plaza(5,5);
@@ -390,7 +390,7 @@ public class ArmaDeAsedioTest {
 
     @Test
     public void liberarUbicacionArmaDeAsedio() {
-        Tablero unTablero = new Tablero(6,6);
+        Tablero unTablero = new Tablero();
 
         Area espacioArmaDeAsedio = unTablero.definirArea(0, 0, 0, 0);
         Pieza unaPieza = new ArmaDeAsedio(0,0);
@@ -401,6 +401,47 @@ public class ArmaDeAsedioTest {
 
         unaPieza.recibirDanio(150); //ArmaDeAsedio.VIDA_MAX = 150
         Assert.assertTrue(espacioArmaDeAsedio.estaLibre());
+    }
+
+    @Test
+    public void catapultaNoAtacaAUnidad() throws Exception{
+       Tablero unTablero = new Tablero();
+       ArmaDeAsedio unArma = new ArmaDeAsedio(0,0);
+       Aldeano unAldeano = new Aldeano(1,0);
+
+       double vidaAldeano = unAldeano.porcentajeVidaActual();
+
+       unArma.accionar();
+       unArma.nuevoTurno();
+       unArma.atacar(unAldeano);
+
+       Assert.assertEquals(vidaAldeano, unAldeano.porcentajeVidaActual());
+    }
+
+    @Test
+    public void catapultaPuedeAtacarAEdificioLuegoDeTratarDeAtacarAUnidad() throws Exception{
+        Tablero unTablero = new Tablero();
+        ArmaDeAsedio unArma = new ArmaDeAsedio(0,0);
+        Aldeano unAldeano = new Aldeano(1,0);
+        Plaza unaPlaza = new Plaza(1,1);
+
+        unaPlaza.construir();
+        unaPlaza.construir();
+        unaPlaza.construir();
+
+        unArma.accionar();
+        unArma.nuevoTurno();
+        unArma.atacar(unAldeano);
+
+        //Puede atacar, ya que no consume turno al intentar atacar a una unidad
+        boolean puedeAtacar=false;
+        try{
+            unArma.atacar(unaPlaza);
+        } catch (Exception e){
+            puedeAtacar=true;
+        }
+
+        Assert.assertTrue(puedeAtacar);
     }
 
     //ES PRIVADO EL METODO
