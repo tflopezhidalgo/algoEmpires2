@@ -5,6 +5,7 @@ import java.io.File;
 
 import controlador.FinalizarTurnoHandler;
 import controlador.HerramientasMapa;
+import controlador.TextoHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -110,7 +111,7 @@ public class JuegoVista extends BorderPane {
     	Text jugadorInicial = new Text("Comienza: " + modelo.getJugadorActual().obtenerNombre());
     	jugadorInicial.setFont(Font.loadFont("file:src/resources/fonts/Mairon.ttf", 40));
     	jugadorInicial.setFill(Color.GOLD);
-    	//jugadorInicial.setOnMouseMoved(new TextoHandler(jugadorInicial));
+    	jugadorInicial.setOnMouseMoved(new TextoHandler(jugadorInicial));
         //Centrar esto, no se cmo
     	panelTransparente.setCenter(jugadorInicial);
         mapa.getChildren().add(panelTransparente);
@@ -230,8 +231,7 @@ public class JuegoVista extends BorderPane {
     	
     	panelCentro.getChildren().addAll(nombreJugador1, oro1, edificios1, hpCastillo1, aldeanos1, soldados1, poblacion1);
     	panelCentro.getChildren().addAll(nombreJugador2, oro2, edificios2, hpCastillo2, aldeanos2, soldados2, poblacion2);
-    	
-    	System.out.println("Resolucion: "+ imagenReferencia.getFitWidth()+" // " +imagenReferencia.getFitHeight());
+  
 
     	colocarTextoEn(90,60,imagenReferencia,oro1);
     	colocarTextoEn(90,115,imagenReferencia,edificios1);
@@ -260,10 +260,8 @@ public class JuegoVista extends BorderPane {
     private void colocarTextoEn(int x, int y, ImageView referencia, Label texto) {
     	texto.setManaged(false);
     	
-    	
     	x = (int)(referencia.getFitWidth()*((double)x/750));
     	y = (int)(referencia.getFitHeight()*((double)y/219));
-    	System.out.println("JV- X,Y "+x+", "+y);
     	
     	texto.resizeRelocate(x, y, 120, 30);
     	texto.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
