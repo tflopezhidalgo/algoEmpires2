@@ -7,6 +7,7 @@ import modelo.Unidad;
 import vista.CasillaVista;
 import vista.JuegoVista;
 import vista.PiezaVista;
+import vista.TextoError;
 import vista.UnidadVista;
 
 public class ClickCasillaHandler implements EventHandler<MouseEvent> {
@@ -26,7 +27,16 @@ public class ClickCasillaHandler implements EventHandler<MouseEvent> {
 		}
 		if(event.getButton() == MouseButton.SECONDARY ) {
 			//la casilla esta desocupada asique implica moviemiento
-			moverPiezaSeleccionada();
+			try {
+				moverPiezaSeleccionada();			
+			}
+			catch(Exception e) {
+				
+	        	elJuego.playError();
+	            TextoError textoError = new TextoError("La pieza seleccionada no puede mover");
+	            textoError.setOnMouseMoved(new TextoHandler(textoError));
+	            elJuego.getChildren().add(textoError);
+			}	
 		}
 	}
 	

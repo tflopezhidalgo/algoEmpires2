@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import modelo.excepciones.PiezaNoEstaEnEquipoAliado;
 import vista.JuegoVista;
 import vista.PiezaVista;
+import vista.TextoError;
 
 public class ClickPiezaHandler implements EventHandler<MouseEvent> {
 	
@@ -19,18 +20,29 @@ public class ClickPiezaHandler implements EventHandler<MouseEvent> {
 	
 	@Override
 	public void handle(MouseEvent event) {
-		if(event.getButton() == MouseButton.PRIMARY ) {
-			
-			if(!elJuego.aliadoContieneA(laPieza.modelo())) {
-				elJuego.playError();
+		try {
+			if(event.getButton() == MouseButton.PRIMARY ) {
 				
-				throw new PiezaNoEstaEnEquipoAliado();
+				if(!elJuego.aliadoContieneA(laPieza.modelo())) {
+					elJuego.playError();
+					
+					throw new PiezaNoEstaEnEquipoAliado();
+				}
+				
+				seleccionarPieza();
 			}
-			
-			seleccionarPieza();
+			if(event.getButton() == MouseButton.SECONDARY ) {
+	
+					laPieza.realizarAccionSobrePieza();				
+	
+			}
 		}
-		if(event.getButton() == MouseButton.SECONDARY ) {
-			laPieza.realizarAccionSobrePieza();
+		catch(Exception e) {
+			
+        	elJuego.playError();
+            TextoError textoError = new TextoError("No puede interactuar con esa pieza");
+            textoError.setOnMouseMoved(new TextoHandler(textoError));
+            elJuego.getChildren().add(textoError);
 		}
 	}
 	

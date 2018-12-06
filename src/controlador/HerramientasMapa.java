@@ -16,8 +16,8 @@ import vista.PlazaVista;
 
 public class HerramientasMapa {
 	
-	private static int ANCHO = 16;
-	private static int ALTO = 16;
+	private static int ANCHO = 64;
+	private static int ALTO = 28;
 	private static Tablero elTablero;
 	private static Group grupoPiezas;
 	private static JuegoVista elMapa;
@@ -53,26 +53,31 @@ public class HerramientasMapa {
 		CastilloVista castilloVisu = new CastilloVista(1,1,castillo,elMapa);
 		grupoPiezas.getChildren().add(castilloVisu);
 		jugador.agregar(castillo);
+		castilloVisu.colocarColor();
 		//-------------------
 		//Plaza
 		Plaza plaza = new Plaza(7,1,true);
 		PlazaVista plazaVisu = new PlazaVista(7,1,plaza,elMapa);
 		grupoPiezas.getChildren().add(plazaVisu);
 		jugador.agregar(plaza);
+		plazaVisu.colocarColor();
 		//-------------------
 		//Aldeanosx3
 		Aldeano aldeano1 = new Aldeano(6,4);
 		AldeanoVista aldeanoVisu1 = new AldeanoVista(6,4,aldeano1,elMapa);
 		grupoPiezas.getChildren().add(aldeanoVisu1);
 		jugador.agregar(aldeano1);
+		aldeanoVisu1.colocarColor();
 		Aldeano aldeano2 = new Aldeano(7,4);
 		AldeanoVista aldeanoVisu2 = new AldeanoVista(7,4,aldeano2,elMapa);
 		grupoPiezas.getChildren().add(aldeanoVisu2);
 		jugador.agregar(aldeano2);
+		aldeanoVisu2.colocarColor();
 		Aldeano aldeano3 = new Aldeano(8,4);
 		AldeanoVista aldeanoVisu3 = new AldeanoVista(8,4,aldeano3,elMapa);
 		grupoPiezas.getChildren().add(aldeanoVisu3);
 		jugador.agregar(aldeano3);
+		aldeanoVisu3.colocarColor();
 		//-------------------
 	}
 
