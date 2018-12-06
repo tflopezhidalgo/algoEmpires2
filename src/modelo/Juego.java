@@ -85,7 +85,8 @@ public class Juego implements CastilloListener{
     public void castilloFueDestruido(){
 
         estado = new Terminado();
-        this.juegoListener.decirGanador();
+        if(this.juegoListener != null)
+            this.juegoListener.decirGanador();
     }
 
 }
