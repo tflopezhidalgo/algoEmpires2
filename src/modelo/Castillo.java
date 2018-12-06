@@ -1,5 +1,6 @@
 package modelo;
 
+import modelo.excepciones.CasillaYaEstaLibreError;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 import java.util.List;
@@ -27,7 +28,12 @@ public class Castillo extends Edificio {
 
 	    for(int i = 0; i < piezasEnemigas.size(); i++)
 	        if(distanciaMinimaA(piezasEnemigas.get(i).espacioOcupado) <= DISTANCIA_ATK)
-	            piezasEnemigas.get(i).recibirDanio(20);
+	        	try {
+	        		piezasEnemigas.get(i).recibirDanio(20);	        		
+	        	}
+	    catch(CasillaYaEstaLibreError e) {
+	    	//TODO PORQUE SE LIBERA ANTES , FIJARSE EL RECORRIDO DE ELIMINAR UNA PIEZA CON UN CASTILLO
+	    }
 
     }
 
