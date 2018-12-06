@@ -57,15 +57,22 @@ public class CastilloVista extends EdificioVista{
 	@Override
 	protected void crearRepresentacion() {
 		//-----------------------------------------
- 		Image image = new Image("resources/images/4x4/castillo.png");
- 		construidoView = new ImageView(image);
- 		construidoView.setFitHeight(120);
- 		construidoView.setFitWidth(110);
-		getChildren().add(construidoView);
+ 		Image image = new Image("resources/images/4x4/castilloAzul.png");
+ 		construidoViewAzul = new ImageView(image);
+ 		construidoViewAzul.setFitHeight(120);
+ 		construidoViewAzul.setFitWidth(110);
+		//-----------------------------------------
+ 		image = new Image("resources/images/4x4/castilloRojo.png");
+ 		construidoViewRojo = new ImageView(image);
+ 		construidoViewRojo.setFitHeight(120);
+ 		construidoViewRojo.setFitWidth(110);
 		//-----------------------------------------
  		image = new Image("resources/images/4x4/enConstruccion3.png");
  		enConstruccionView = new ImageView(image);
- 		enConstruccionView.setVisible(false);
+		//-----------------------------------------
+ 		construidoView = construidoViewAzul;
+ 		construidoView.setVisible(!modelo.enConstruccion());
+		getChildren().addAll(construidoView);
 	}
 
 	@Override

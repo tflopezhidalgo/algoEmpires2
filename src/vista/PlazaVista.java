@@ -24,16 +24,20 @@ public class PlazaVista extends EdificioVista {
  		enConstruccionView = new ImageView(image);
  		enConstruccionView.setFitHeight(37);
  		enConstruccionView.setFitWidth(60);
- 		enConstruccionView.setVisible(modelo.enConstruccion());
-		getChildren().add(enConstruccionView);
 		//-----------------------------------------
- 		image = new Image("resources/images/2x2/plaza.png");
- 		construidoView = new ImageView(image);
- 		construidoView.setFitHeight(60);
- 		construidoView.setFitWidth(60);
+ 		image = new Image("resources/images/2x2/plazaAzul.png");
+ 		construidoViewAzul = new ImageView(image);
+ 		construidoViewAzul.setFitHeight(60);
+ 		construidoViewAzul.setFitWidth(60);
+		//-----------------------------------------
+ 		image = new Image("resources/images/2x2/plazaRojo.png");
+ 		construidoViewRojo = new ImageView(image);
+ 		construidoViewRojo.setFitHeight(60);
+ 		construidoViewRojo.setFitWidth(60);
+		//-----------------------------------------
+ 		construidoView = construidoViewAzul;
  		construidoView.setVisible(!modelo.enConstruccion());
-		getChildren().add(construidoView);
-		//-----------------------------------------
+		getChildren().addAll(enConstruccionView, construidoView);
 	}
 
 	protected void prepararBotones() {
@@ -43,7 +47,6 @@ public class PlazaVista extends EdificioVista {
 
         crearAldeano.setOnMousePressed(e -> CrearAldeano());
         acciones.getChildren().add(crearAldeano);
-
 	}
 	
 	private void CrearAldeano(){
@@ -79,7 +82,7 @@ public class PlazaVista extends EdificioVista {
 
 	@Override
 	protected void configurarSonidos() {
-		String seleccion = "src/resources/sound/seleccion/plaza.wav"; 
+		String seleccion = "src/resources/sound/seleccion/plaza.wav";
 		Media seleccionSound = new Media(new File(seleccion).toURI().toString());
 		sonidoSeleccionar = new MediaPlayer(seleccionSound);
 		

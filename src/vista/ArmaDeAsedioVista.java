@@ -16,8 +16,13 @@ public class ArmaDeAsedioVista extends UnidadVista{
 	public static int TAMANIO_CASILLA = CasillaVista.TAMANIO_CASILLA;
 
 	private EstadoCatapultaVista estadoActual;
+	//------------- Vista ---------------
 	private ImageView viewMover;
 	private ImageView viewAtaque;
+	private ImageView viewMoverAzul;
+	private ImageView viewAtaqueAzul;
+	private ImageView viewMoverRojo;
+	private ImageView viewAtaqueRojo;
 	
 	public ArmaDeAsedioVista(int x, int y, Unidad unModelo, JuegoVista unMapa){
 		super(x,y,unModelo, unMapa);
@@ -46,17 +51,29 @@ public class ArmaDeAsedioVista extends UnidadVista{
 
 	@Override
 	protected void crearRepresentacion() {
-		Image imagenMover = new Image("resources/images/Unidades/ArmaDeAsedio/modoMovimiento.png");
-		viewMover = new ImageView(imagenMover);
-		viewMover.setFitWidth(30);
-		viewMover.setFitHeight(24);
+		Image imagenMover = new Image("resources/images/Unidades/ArmaDeAsedio/modoMovimientoAzul.png");
+		viewMoverAzul = new ImageView(imagenMover);
+		viewMoverAzul.setFitWidth(30);
+		viewMoverAzul.setFitHeight(24);
 		//-----------------------------------------
-		Image imagenAtaque = new Image("resources/images/Unidades/ArmaDeAsedio/modoAtaque.png");
-		viewAtaque = new ImageView(imagenAtaque);
-		viewAtaque.setFitWidth(30);
-		viewAtaque.setFitHeight(29);
+		Image imagenAtaque = new Image("resources/images/Unidades/ArmaDeAsedio/modoAtaqueAzul.png");
+		viewAtaqueAzul = new ImageView(imagenAtaque);
+		viewAtaqueAzul.setFitWidth(30);
+		viewAtaqueAzul.setFitHeight(29);
+		//-----------------------------------------
+		imagenMover = new Image("resources/images/Unidades/ArmaDeAsedio/modoMovimientoRojo.png");
+		viewMoverRojo = new ImageView(imagenMover);
+		viewMoverRojo.setFitWidth(30);
+		viewMoverRojo.setFitHeight(24);
+		//-----------------------------------------
+		imagenAtaque = new Image("resources/images/Unidades/ArmaDeAsedio/modoAtaqueRojo.png");
+		viewAtaqueRojo = new ImageView(imagenAtaque);
+		viewAtaqueRojo.setFitWidth(30);
+		viewAtaqueRojo.setFitHeight(29);
+		
+		viewMover = viewMoverAzul;
+		viewAtaque = viewAtaqueAzul;
 		viewAtaque.setVisible(false);
-		//-----------------------------------------
 		getChildren().addAll(viewMover,viewAtaque);
 	}
 	
@@ -74,5 +91,20 @@ public class ArmaDeAsedioVista extends UnidadVista{
 		Media accionSound = new Media(new File(accion).toURI().toString());
 		sonidoAccion = new MediaPlayer(accionSound);
 	}
+
+	@Override
+	public void colocarColor() {		
+		if(elJuego.perteneceAJugador1(modelo)) {
+			viewAtaqueRojo.setVisible(viewAtaque.isVisible());
+			viewMoverRojo.setVisible(viewMover.isVisible());
+			viewAtaqueAzul.setVisible(false);
+			viewMoverAzul.setVisible(false);
+			viewMover = viewMoverRojo;
+			viewAtaque = viewAtaqueRojo;
+			getChildren().addAll(viewMover,viewAtaque);
+		}		
+	}
+	
+
 	
 }

@@ -387,18 +387,21 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener{
 	//---------------------      Manejo de Piezas     ----------------------------
 	public void agregar(AldeanoVista unAldeano) {
 		modelo.getJugadorActual().agregar(unAldeano.modelo());
+		unAldeano.colocarColor();
 		grupoPiezas.getChildren().add(unAldeano);
 		actualizarContadores();
 	}
 	
 	public void agregar(CastilloVista unCastillo) {
 		modelo.getJugadorActual().agregar(unCastillo.modelo());
+		unCastillo.colocarColor();
 		grupoPiezas.getChildren().add(unCastillo);
 		actualizarContadores();
 	}
 	
 	public void agregar(EdificioVista unEdificio) {
 		modelo.getJugadorActual().agregar(unEdificio.modelo());
+		unEdificio.colocarColor();
 		grupoPiezas.getChildren().add(unEdificio);
 		actualizarContadores();
 	}
@@ -409,6 +412,7 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener{
 		}
 		else {
 			modelo.getJugadorActual().agregar(unaUnidad.modelo());
+			unaUnidad.colocarColor();
 			grupoPiezas.getChildren().add(unaUnidad);
 		}
 		actualizarContadores();
@@ -445,6 +449,10 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener{
 	public boolean aliadoContieneA(Pieza unaPieza) {
 		return modelo.getJugadorActual().contieneA(unaPieza);
 	}
+	
+    public boolean perteneceAJugador1(Pieza unaPieza) {
+    	return jugador1.contieneA(unaPieza);
+    }
 
 	//---------------------      Fin Manejo de Piezas     ------------------------
 	//----------------------------------------------------------------------------

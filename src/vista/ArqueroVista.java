@@ -11,18 +11,28 @@ import modelo.excepciones.Excepcion;
 
 public class ArqueroVista extends UnidadVista{
 	
+	private ImageView azul;
+	private ImageView rojo;
+	
 	public ArqueroVista(int x, int y, Unidad unModelo, JuegoVista unMapa) throws Excepcion {
 		super(x,y,unModelo, unMapa);
 	}
 
 	@Override
 	protected void crearRepresentacion() {
- 		Image image = new Image("resources/images/Unidades/Arquero/arquero.png");
-		ImageView imageView = new ImageView(image);
-		imageView.setFitWidth(22);
-		imageView.setFitHeight(30);
+ 		Image image = new Image("resources/images/Unidades/Arquero/arqueroAzul.png");
+		azul = new ImageView(image);
+		azul.setFitWidth(22);
+		azul.setFitHeight(30);
+		azul.setVisible(true);
+		
+ 		image = new Image("resources/images/Unidades/Arquero/arqueroRojo.png");
+ 		rojo = new ImageView(image);
+		rojo.setFitWidth(22);
+		rojo.setFitHeight(30);
+		rojo.setVisible(false);
 		//-----------------------------------------
-		getChildren().add(imageView);
+		getChildren().addAll(azul,rojo);
 	}
 
 	@Override
@@ -38,5 +48,13 @@ public class ArqueroVista extends UnidadVista{
 		String accion = "src/resources/sound/accion/arrow.wav"; 
 		Media accionSound = new Media(new File(accion).toURI().toString());
 		sonidoAccion = new MediaPlayer(accionSound);
+	}
+	
+	@Override
+	public void colocarColor() {		
+		if(elJuego.perteneceAJugador1(modelo)) {
+			rojo.setVisible(true);
+			azul.setVisible(false);
+		}		
 	}
 }

@@ -2,6 +2,7 @@ package vista;
 
 import controlador.ClickPiezaHandler;
 import javafx.geometry.Pos;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
@@ -55,7 +56,6 @@ public abstract class PiezaVista extends StackPane {
 		configurarSonidos();
 		
 		setOnMousePressed(new ClickPiezaHandler(elJuego, this));
-
 	}
 	
 	protected abstract void configurarSonidos();
@@ -107,6 +107,8 @@ public abstract class PiezaVista extends StackPane {
 		double porcentaje = modelo.porcentajeVidaActual();
 		barraVidaActual.setWidth(TAMANIO_CASILLA*ancho*porcentaje);
 	}
+	
+	public abstract void colocarColor();
 	
 	public void playSeleccionar() {
 	    sonidoSeleccionar.stop();

@@ -14,6 +14,9 @@ import modelo.excepciones.Excepcion;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class AldeanoVista extends UnidadVista{
+		
+	private ImageView azul;
+	private ImageView rojo;
 
 	public AldeanoVista(int x, int y, Aldeano unModelo, JuegoVista unJuego) throws Excepcion {
 		super(x,y,unModelo, unJuego);
@@ -21,13 +24,19 @@ public class AldeanoVista extends UnidadVista{
 
 	@Override
 	protected void crearRepresentacion() {
- 		Image image = new Image("resources/images/Unidades/Aldeano/aldeano.png");
-		ImageView imageView = new ImageView(image);
-		imageView.setFitHeight(30);
-		imageView.setFitWidth(16);
+ 		Image image = new Image("resources/images/Unidades/Aldeano/aldeanoAzul.png");
+		azul = new ImageView(image);
+		azul.setFitHeight(30);
+		azul.setFitWidth(16);
+		azul.setVisible(true);
 		
+ 		image = new Image("resources/images/Unidades/Aldeano/aldeanoRojo.png");
+		rojo = new ImageView(image);
+		rojo.setFitHeight(30);
+		rojo.setFitWidth(16);
+		rojo.setVisible(false);
 		//-----------------------------------------
-		getChildren().add(imageView);
+		getChildren().addAll(azul,rojo);
 	}
 
 	@Override
@@ -99,6 +108,14 @@ public class AldeanoVista extends UnidadVista{
 		String accion = "src/resources/sound/accion/construir.wav"; 
 		Media accionSound = new Media(new File(accion).toURI().toString());
 		sonidoAccion = new MediaPlayer(accionSound);
+	}
+	
+	@Override
+	public void colocarColor() {		
+		if(elJuego.perteneceAJugador1(modelo)) {
+			rojo.setVisible(true);
+			azul.setVisible(false);
+		}		
 	}
 	
 }

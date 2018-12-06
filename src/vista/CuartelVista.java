@@ -26,15 +26,21 @@ public class CuartelVista extends EdificioVista{
  		enConstruccionView = new ImageView(image);
  		enConstruccionView.setFitHeight(37);
  		enConstruccionView.setFitWidth(60);
-		getChildren().add(enConstruccionView);
 		//-----------------------------------------
- 		image = new Image("resources/images/2x2/cuartel.png");
- 		construidoView = new ImageView(image);
- 		construidoView.setFitHeight(60);
- 		construidoView.setFitWidth(60);
- 		construidoView.setVisible(false);
-		getChildren().add(construidoView);
+ 		image = new Image("resources/images/2x2/cuartelAzul.png");
+ 		construidoViewAzul = new ImageView(image);
+ 		construidoViewAzul.setFitHeight(60);
+ 		construidoViewAzul.setFitWidth(60);
 		//-----------------------------------------
+ 		image = new Image("resources/images/2x2/cuartelRojo.png");
+ 		construidoViewRojo = new ImageView(image);
+ 		construidoViewRojo.setFitHeight(60);
+ 		construidoViewRojo.setFitWidth(60);
+		//-----------------------------------------
+ 		construidoView = construidoViewAzul;
+ 		construidoView.setVisible(!modelo.enConstruccion());
+		getChildren().addAll(enConstruccionView, construidoView);
+
 	}
 
 	protected void prepararBotones() {	
