@@ -6,20 +6,20 @@ public abstract class Unidad extends Pieza {
     public final int DANIO_EDIFICIOS;
     public final int DISTANCIA_ATK;
 
-	public Unidad(Area unEspacio, int vidaMax, int costo, int danioUnidades, int danioEdificios, int distancia) {
+	public Unidad(int vidaMax, int costo, int danioUnidades, int danioEdificios, int distanciaAtk) {
 
-	    super(unEspacio, vidaMax, costo);
+	    super(vidaMax, costo);
 
-	    DANIO_EDIFICIOS = danioEdificios;
-	    DANIO_UNIDADES = danioUnidades;
-	    DISTANCIA_ATK = distancia;
+	    this.DANIO_UNIDADES = danioUnidades;
+	    this.DANIO_EDIFICIOS = danioEdificios;
+	    this.DISTANCIA_ATK = distanciaAtk;
 	}
 
 	public void mover(Area nuevoEspacio){
 
 	    this.siYaJugoElTurnoError();
 
-	    nuevoEspacio.ocupar();  //Si está ocupado se lanza excepción CasillaOcupadaError.
+	    nuevoEspacio.ocupar();
         espacioOcupado.liberar();
         espacioOcupado = nuevoEspacio;
         turnoJugado = true;
@@ -38,11 +38,15 @@ public abstract class Unidad extends Pieza {
 
     public void recibirDanioDe(Edificio edificio){
 
-        //Edificios no atacan a las unidades.
     }
 
     public void recibirDanioDe(Unidad unaUnidad){
 
         this.recibirDanio(unaUnidad.DANIO_UNIDADES);
     }
+    
+    public double porcentajeVidaActual() {
+        return ((double)vida/VIDA_MAX);
+    }
+
 }

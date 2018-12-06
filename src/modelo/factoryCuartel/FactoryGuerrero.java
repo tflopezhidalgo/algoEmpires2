@@ -1,22 +1,19 @@
 package modelo.factoryCuartel;
 
-import modelo.Area;
 import modelo.Arquero;
 import modelo.Espadachin;
 import modelo.Unidad;
-import modelo.excepciones.NoSePuedeConstruirTanLejosError;
-import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
 import modelo.excepciones.TipoDeGuerreroInvalidoError;
 
 public class FactoryGuerrero {
 
-    public static Unidad crearGuerrero(Area unEspacio, TipoGuerrero tipoDeseado){
+    public static Unidad crearGuerrero(int x0, int y0, TipoGuerrero tipoDeseado){
 
         if(tipoDeseado == TipoGuerrero.ESPADACHIN)
-            return new Espadachin(unEspacio);
+            return new Espadachin(x0, y0);
 
         else if(tipoDeseado == TipoGuerrero.ARQUERO)
-            return new Arquero(unEspacio);
+            return new Arquero(x0, y0);
 
         else
             throw  new TipoDeGuerreroInvalidoError();
