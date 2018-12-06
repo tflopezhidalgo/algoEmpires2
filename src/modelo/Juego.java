@@ -10,7 +10,7 @@ public class Juego implements CastilloListener{
 
     public final int JUGADORES_MAXIMOS = 2;
 
-    private List<Jugador> jugadores = new ArrayList<>();
+    private List<Jugador> jugadores;
     private Tablero tablero;
     private EstadoJuego estado;
 
@@ -30,27 +30,31 @@ public class Juego implements CastilloListener{
     public Juego(){
 
         this.estado = new NoComenzado();
-    }
-
-    public Juego(String nombreJugador1, String nombreJugado2){
-
-        this.estado = new NoComenzado();
+        this.jugadores = new ArrayList();
+        this.tablero = null;
     }
     
     public void agregarJugador(Jugador unJugador) {
-    	if(jugadores.size() < JUGADORES_MAXIMOS) {
-    		jugadores.add(unJugador);
-    		unJugador.setListener(this);	
-    	}
+        if(this.jugadores.size() < 2) {
+
+            jugadores.add(unJugador);
+            unJugador.setListener(this);
+        }
     }
     
     public void agregarTablero(Tablero unTablero) {
+
     	tablero = unTablero;
     }
     
     public void iniciarJuego(){
 
         this.seleccionarJugadorInicial();
+    }
+
+    public void iniciarJuegoNoRandom(){
+
+        estado = new JuegaJugador1();
     }
 
     public Jugador getJugadorActual(){

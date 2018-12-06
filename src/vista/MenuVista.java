@@ -1,5 +1,7 @@
 package vista;
 
+import java.io.File;
+
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -7,17 +9,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class MenuVista extends BorderPane {
-	
-	Scene escenaSiguiente;
+
+	private MediaPlayer menuSoundtrackPlayer;
 
     public MenuVista(Stage stagePrincipal){
     	//-------------------------------------------------------
-        //this.prepararEscenaSiguiente(stagePrincipal);
     	Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+    	
     	//--------------- Imagen de fondo -----------------------
         Image background = new Image("resources/images/ElementosMenu/menuBackground3.png");
         ImageView backgroundVista = new ImageView(background);
@@ -35,8 +39,9 @@ public class MenuVista extends BorderPane {
         comenzar.setFitHeight(37);
         
         BotonVistaPersonalizado elBotonComenzar = new BotonVistaPersonalizado(comenzar);
-        elBotonComenzar.setOnMousePressed(event -> stagePrincipal.getScene().setRoot(new ConfiguracionVista(stagePrincipal)));//stagePrincipal.setScene(escenaSiguiente));
-        											
+        elBotonComenzar.setOnMousePressed(event ->{
+        	stagePrincipal.getScene().setRoot(new ConfiguracionVista(stagePrincipal, menuSoundtrackPlayer));
+        });
 
         Image imagenSalir = new Image("resources/images/ElementosMenu/Botones/salir3.png");
         ImageView salir = new ImageView(imagenSalir);
@@ -44,15 +49,29 @@ public class MenuVista extends BorderPane {
         salir.setFitHeight(37);
         
         BotonVistaPersonalizado elBotonSalir = new BotonVistaPersonalizado(salir);
-        elBotonSalir.setOnMousePressed(event ->  stagePrincipal.close());
+        elBotonSalir.setOnMousePressed(event ->{
+        	menuSoundtrackPlayer.stop();
+        	stagePrincipal.close();
+        });
     	
         botones.getChildren().addAll(elBotonComenzar, elBotonSalir);
         panel.getChildren().add(botones);
-        botones.setTranslateY(primaryScreenBounds.getHeight()*0.6);
+        botones.setTranslateY(primaryScreenBounds.getHeight()*0.6);        
+        //------------------ Sonidos ----------------------------
+        configurarSonidos();
     }
-
-	private void prepararEscenaSiguiente(Stage stagePrincipal){
-        this.escenaSiguiente = new Scene(new ConfiguracionVista(stagePrincipal));
-	}
+    
+    private void configurarSonidos() {		
+		String menuSoundtrack = "src/resources/sound/menu/menuSoundtrack.mp3"; 
+		Media menuSoundtrackSound = new Media(new File(menuSoundtrack).toURI().toString());
+		menuSoundtrackPlayer = new MediaPlayer(menuSoundtrackSound);
+		menuSoundtrackPlayer.play();
+		menuSoundtrackPlayer.setOnEndOfMedia(new Runnable() {
+		    @Override
+		    public void run() {
+		    	menuSoundtrackPlayer.play();
+		    }
+		});
+    }
 
 }

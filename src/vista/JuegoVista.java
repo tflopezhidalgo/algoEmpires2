@@ -1,8 +1,11 @@
 package vista;
 
 
+import java.io.File;
+
 import controlador.FinalizarTurnoHandler;
 import controlador.HerramientasMapa;
+import controlador.TextoHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -15,6 +18,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import modelo.Juego;
 import modelo.Jugador;
@@ -71,7 +79,10 @@ public class JuegoVista extends BorderPane {
 	Label poblacion1;
 	Label poblacion2;
 	//---------------------------------------------------------
-
+	//--------------------- Sonidos ---------------------------
+	private MediaPlayer ambienteInicial;
+	private MediaPlayer ambienteCombate;
+	//---------------------------------------------------------
 
     public JuegoVista(String nombreJugador1, String nombreJugador2, Stage stagePrincipal){
     	piezaSeleccionada = null;
@@ -86,8 +97,24 @@ public class JuegoVista extends BorderPane {
     	crearMapa();
     	crearPanelSuperior();
     	crearPanelInferior();
+    	configurarSonido();
     	
-    	modelo.iniciarJuego();
+    	iniciarJuego();
+    }
+    
+    private void iniciarJuego() {
+
+    	modelo.iniciarJuego(); 	
+    	
+    	BorderPane panelTransparente = new BorderPane();
+    	panelTransparente.setManaged(false);
+    	Text jugadorInicial = new Text("Comienza: " + modelo.getJugadorActual().obtenerNombre());
+    	jugadorInicial.setFont(Font.loadFont("file:src/resources/fonts/Mairon.ttf", 40));
+    	jugadorInicial.setFill(Color.GOLD);
+    	jugadorInicial.setOnMouseMoved(new TextoHandler(jugadorInicial));
+        //Centrar esto, no se cmo
+    	panelTransparente.setCenter(jugadorInicial);
+        mapa.getChildren().add(panelTransparente);
     }
     
     public Juego modelo() {
@@ -95,7 +122,6 @@ public class JuegoVista extends BorderPane {
     }
 
     public void cobrarAJugadorActual(int monto){
-
     	modelo.getJugadorActual().cobrar(monto);
     }
     
@@ -105,9 +131,9 @@ public class JuegoVista extends BorderPane {
     
     private void crearMapa(){
     	mapa = new Pane();
-    	ScrollPane mapaSC = new ScrollPane();
-
     	mapa.getChildren().addAll(grupoCasillas,grupoPiezas);
+    	
+    	ScrollPane mapaSC = new ScrollPane();
     	mapaSC.setContent(mapa);
     	setCenter(mapaSC);
     }
@@ -158,7 +184,7 @@ public class JuegoVista extends BorderPane {
     	panelCentralView.fitHeightProperty().bind(stagePrincipal.heightProperty().multiply(0.2));
     	panelCentro.getChildren().add(panelCentralView);
     	
-    	configurarCuadrosDeTexto();
+    	configurarCuadrosDeTexto(panelCentralView);
     }
     
     private void crearPanelInferiorDerecho() {
@@ -181,7 +207,7 @@ public class JuegoVista extends BorderPane {
     	menuPanelDerecho.setAlignment(Pos.CENTER);
     }
     
-    private void configurarCuadrosDeTexto() {
+    private void configurarCuadrosDeTexto(ImageView imagenReferencia) {
     	nombreJugador1 = new Label(jugador1.obtenerNombre());    	
     	nombreJugador2 = new Label(jugador2.obtenerNombre());
     	
@@ -205,58 +231,65 @@ public class JuegoVista extends BorderPane {
     	
     	panelCentro.getChildren().addAll(nombreJugador1, oro1, edificios1, hpCastillo1, aldeanos1, soldados1, poblacion1);
     	panelCentro.getChildren().addAll(nombreJugador2, oro2, edificios2, hpCastillo2, aldeanos2, soldados2, poblacion2);
+  
+
+    	colocarTextoEn(90,60,imagenReferencia,oro1);
+    	colocarTextoEn(90,115,imagenReferencia,edificios1);
+    	colocarTextoEn(90,170, imagenReferencia,hpCastillo1);
+    	colocarTextoEn(270,60,imagenReferencia,aldeanos1);
+    	colocarTextoEn(270,115,imagenReferencia,soldados1);
+    	colocarTextoEn(270,170,imagenReferencia,poblacion1);
     	
-    	oro1.setManaged(false);
-    	oro1.resizeRelocate(90, 60, 120, 30);
-    	oro1.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	edificios1.setManaged(false);
-    	edificios1.resizeRelocate(90, 115, 120, 30);  
-    	edificios1.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	hpCastillo1.setManaged(false);
-    	hpCastillo1.resizeRelocate(90, 170, 120, 30);  
-    	hpCastillo1.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	aldeanos1.setManaged(false);
-    	aldeanos1.resizeRelocate(270, 60, 120, 30);  
-    	aldeanos1.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	soldados1.setManaged(false);
-    	soldados1.resizeRelocate(270, 115, 120, 30);
-    	soldados1.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	poblacion1.setManaged(false);
-    	poblacion1.resizeRelocate(270, 170, 120, 30);
-    	poblacion1.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
+    	colocarTextoEn(545,60,imagenReferencia,oro2);
+    	oro2.setAlignment(Pos.CENTER);
+    	colocarTextoEn(545,115,imagenReferencia,edificios2);
+    	edificios2.setAlignment(Pos.CENTER);
+    	colocarTextoEn(545,170, imagenReferencia,hpCastillo2);
+    	hpCastillo2.setAlignment(Pos.CENTER);
+    	colocarTextoEn(355,60,imagenReferencia,aldeanos2);
+    	aldeanos2.setAlignment(Pos.CENTER);
+    	colocarTextoEn(355,115,imagenReferencia,soldados2);
+    	soldados2.setAlignment(Pos.CENTER);
+    	colocarTextoEn(355,170,imagenReferencia,poblacion2);
+    	poblacion2.setAlignment(Pos.CENTER);
     	
-    	oro2.setManaged(false);
-    	oro2.resizeRelocate(545, 60, 120, 30);
-    	oro2.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	oro2.setAlignment(Pos.CENTER_RIGHT);
-    	edificios2.setManaged(false);
-    	edificios2.resizeRelocate(545, 115, 120, 30);
-    	edificios2.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	edificios2.setAlignment(Pos.CENTER_RIGHT);
-    	hpCastillo2.setManaged(false);
-    	hpCastillo2.resizeRelocate(545, 170, 120, 30);
-    	hpCastillo2.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	hpCastillo2.setAlignment(Pos.CENTER_RIGHT);
-    	aldeanos2.setManaged(false);
-    	aldeanos2.resizeRelocate(355, 60, 120, 30);
-    	aldeanos2.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	aldeanos2.setAlignment(Pos.CENTER_RIGHT);
-    	soldados2.setManaged(false);
-    	soldados2.resizeRelocate(355, 115, 120, 30);
-    	soldados2.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	soldados2.setAlignment(Pos.CENTER_RIGHT);
-    	poblacion2.setManaged(false);
-    	poblacion2.resizeRelocate(355, 170, 120, 30);
-    	poblacion2.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	poblacion2.setAlignment(Pos.CENTER_RIGHT);
-    	
-    	nombreJugador1.setManaged(false);
-    	nombreJugador1.resizeRelocate(110, 30, 120, 30);
-    	nombreJugador1.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
-    	nombreJugador2.setManaged(false);
-    	nombreJugador2.resizeRelocate(550, 30, 120, 30);
-    	nombreJugador2.setStyle("-fx-font-weight: bold; -fx-font-size: 20px;");
+    	colocarTextoEn(110,30,imagenReferencia,nombreJugador1);
+    	colocarTextoEn(550,30,imagenReferencia,nombreJugador2);
     }
+    
+    private void colocarTextoEn(int x, int y, ImageView referencia, Label texto) {
+    	texto.setManaged(false);
+    	
+    	x = (int)(referencia.getFitWidth()*((double)x/750));
+    	y = (int)(referencia.getFitHeight()*((double)y/219));
+    	
+    	texto.resizeRelocate(x, y, 120, 30);
+    	texto.setStyle("-fx-font-weight: bold; -fx-font-size: 18px;");
+    }
+    
+    private void configurarSonido(){
+		String ambiente = "src/resources/sound/ambiente/ambiente.mp3"; 
+		Media ambienteSound = new Media(new File(ambiente).toURI().toString());
+		ambienteInicial = new MediaPlayer(ambienteSound);
+		
+		ambiente = "src/resources/sound/ambiente/ambienteCombate.mp3"; 
+		Media ambienteCombateSound = new Media(new File(ambiente).toURI().toString());
+		ambienteCombate = new MediaPlayer(ambienteCombateSound);
+		
+		ambienteInicial.play();
+		ambienteInicial.setOnEndOfMedia(new Runnable() {
+		    @Override
+		    public void run() {
+		    	ambienteCombate.play();
+		    }
+		});
+		ambienteCombate.setOnEndOfMedia(new Runnable() {
+		    @Override
+		    public void run() {
+		    	ambienteInicial.play();
+		    }
+		});
+	}
     
     public void actualizarContadores() {
     	oro1.setText(Integer.toString(jugador1.obtenerOro()));

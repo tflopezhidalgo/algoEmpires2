@@ -14,13 +14,14 @@ public class CrearAldeanoHandler implements EventHandler<ActionEvent> {
 	private Edificio modelo;
 
 	public CrearAldeanoHandler(JuegoVista unJuego, Edificio modelo){
+
 		this.elJuego = unJuego;
 		this.modelo = modelo;
-		System.out.println("C-CAH : modelo: " + (this.modelo == null));
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
+
 		int x0 = elJuego.casillaSeleccionada().modelo().ejeX(); 
 		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 		
@@ -29,5 +30,5 @@ public class CrearAldeanoHandler implements EventHandler<ActionEvent> {
 			AldeanoVista aldeanoVista = new AldeanoVista(x0,y0,aldeano,elJuego);
 			elJuego.agregar(aldeanoVista);
 		}
-	};
+	}
 }

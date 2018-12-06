@@ -1,9 +1,7 @@
 package modelo;
 
-import modelo.excepciones.NoSePuedeConstruirTanLejosError;
-import modelo.excepciones.NoSePuedeCrearUnidadesDuranteConstruccionError;
-import modelo.factoryCuartel.FactoryGuerrero;
-import modelo.factoryCuartel.TipoGuerrero;
+import modelo.excepciones.*;
+import modelo.factoryCuartel.*;
 
 public class Cuartel extends Edificio {
 
@@ -35,7 +33,7 @@ public class Cuartel extends Edificio {
         turnoJugado = true;
 
         return FactoryGuerrero.crearGuerrero(x0, y0, tipoDeseado);
-        
+
     }
 
 }

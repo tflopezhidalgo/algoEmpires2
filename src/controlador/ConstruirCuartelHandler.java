@@ -2,11 +2,8 @@ package controlador;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import modelo.Aldeano;
-import modelo.Edificio;
-import modelo.Pieza;
-import vista.CuartelVista;
-import vista.JuegoVista;
+import modelo.*;
+import vista.*;
 
 public class ConstruirCuartelHandler implements EventHandler<MouseEvent>{
 	

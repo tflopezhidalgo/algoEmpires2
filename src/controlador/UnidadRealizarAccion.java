@@ -21,7 +21,7 @@ public class UnidadRealizarAccion {
 		PiezaVista piezaAtacante = unJuego.piezaSeleccionada();
 		
 		piezaAtacante.modelo().atacar(unidad.modelo());
-		String musicFile = "src/resources/sound/Generales/fight2.wav"; 
+		String musicFile = "src/resources/sound/Accion/fight2.wav"; 
 		Media sound = new Media(new File(musicFile).toURI().toString());
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.play();

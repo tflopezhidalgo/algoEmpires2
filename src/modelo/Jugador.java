@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.excepciones.CasillaInvalidaError;
+import modelo.excepciones.JugadorSinCastilloError;
 import modelo.excepciones.PoblacionLimiteSuperadaError;
 
 public class Jugador {
@@ -20,11 +21,21 @@ public class Jugador {
     private int poblacion;
 
     /*          Constructor         */
+
+    public Jugador(){
+
+        this.nombreJugador = " ";
+        this.cantidadDeOro = 0;
+        this.poblacion = 0;
+        this.elCastillo = null;
+    }
+
     public Jugador(String unNombre){
 
     	this.nombreJugador = unNombre;
     	this.cantidadDeOro = 100;
     	this.poblacion = 0;
+    	this.elCastillo = null;
     }
 
     private void finalizarTurnoDePiezas() {
@@ -82,6 +93,9 @@ public class Jugador {
     }
 
 	public void setListener(Juego unJuego){
+        if(elCastillo == null)
+            throw new JugadorSinCastilloError();
+
 	    elCastillo.setCastilloListener(unJuego);    
 	}
 
@@ -117,6 +131,7 @@ public class Jugador {
     public void agregar(Unidad soldado) {
 		if(soldado instanceof Aldeano) {
 			agregar((Aldeano) soldado);
+			actualizarPoblacion();
 		}
 		else {
 	    	int poblacionLibre = POBLACION_MAX - poblacion;

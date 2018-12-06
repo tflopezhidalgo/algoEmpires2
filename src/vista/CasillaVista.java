@@ -9,6 +9,7 @@ import javafx.scene.shape.Rectangle;
 import modelo.Casilla;
 
 public class CasillaVista extends StackPane{
+
 	public static int TAMANIO_CASILLA = 30;
 	
 	private Rectangle seleccion;
@@ -16,6 +17,7 @@ public class CasillaVista extends StackPane{
 	private JuegoVista elMapa;
 	
 	public CasillaVista(int x, int y, Casilla unModelo, JuegoVista unMapa) {
+
 		elMapa = unMapa;
 		modelo = unModelo;
 		
@@ -38,6 +40,7 @@ public class CasillaVista extends StackPane{
 	}
 	
 	public void seleccionar() {
+
 		seleccion.setVisible(true);
 	}
 

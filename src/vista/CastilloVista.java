@@ -1,11 +1,13 @@
 package vista;
 
+import controlador.TextoHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import modelo.Aldeano;
 import modelo.ArmaDeAsedio;
 import modelo.Castillo;
 import modelo.Unidad;
+import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
 public class CastilloVista extends EdificioVista{
 	
@@ -27,12 +29,19 @@ public class CastilloVista extends EdificioVista{
 		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
 		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 
-		Unidad armaDeAsedio = ((Castillo)modelo).crearCatapulta(x0, y0);
-        elJuego.cobrarAJugadorActual(armaDeAsedio.COSTO);
-		if(armaDeAsedio != null) {
-			ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0,y0,armaDeAsedio,elJuego);
-			elJuego.agregar(armaVisu);
-		}
+		try {
+            Unidad armaDeAsedio = ((Castillo) modelo).crearCatapulta(x0, y0);
+            elJuego.cobrarAJugadorActual(armaDeAsedio.COSTO);
+            if (armaDeAsedio != null) {
+                ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0, y0, armaDeAsedio, elJuego);
+                elJuego.agregar(armaVisu);
+            }
+        }catch (NoSePuedeConstruirTanLejosError e){
+
+            TextoError textoError = new TextoError("No se puede construir tan lejos");
+            textoError.setOnMouseMoved(new TextoHandler(textoError));
+            elJuego.getChildren().add(textoError);
+        }
 	}
 	
 	@Override
