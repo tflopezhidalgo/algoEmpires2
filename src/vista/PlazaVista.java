@@ -1,8 +1,12 @@
 package vista;
 
+import java.io.File;
+
 import controlador.TextoHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import modelo.Aldeano;
 import modelo.Edificio;
 import modelo.Plaza;
@@ -20,16 +24,20 @@ public class PlazaVista extends EdificioVista {
  		enConstruccionView = new ImageView(image);
  		enConstruccionView.setFitHeight(37);
  		enConstruccionView.setFitWidth(60);
- 		enConstruccionView.setVisible(modelo.enConstruccion());
-		getChildren().add(enConstruccionView);
 		//-----------------------------------------
- 		image = new Image("resources/images/2x2/plaza.png");
- 		construidoView = new ImageView(image);
- 		construidoView.setFitHeight(60);
- 		construidoView.setFitWidth(60);
+ 		image = new Image("resources/images/2x2/plazaAzul.png");
+ 		construidoViewAzul = new ImageView(image);
+ 		construidoViewAzul.setFitHeight(60);
+ 		construidoViewAzul.setFitWidth(60);
+		//-----------------------------------------
+ 		image = new Image("resources/images/2x2/plazaRojo.png");
+ 		construidoViewRojo = new ImageView(image);
+ 		construidoViewRojo.setFitHeight(60);
+ 		construidoViewRojo.setFitWidth(60);
+		//-----------------------------------------
+ 		construidoView = construidoViewAzul;
  		construidoView.setVisible(!modelo.enConstruccion());
-		getChildren().add(construidoView);
-		//-----------------------------------------
+		getChildren().addAll(enConstruccionView, construidoView);
 	}
 
 	protected void prepararBotones() {
@@ -39,30 +47,30 @@ public class PlazaVista extends EdificioVista {
 
         crearAldeano.setOnMousePressed(e -> CrearAldeano());
         acciones.getChildren().add(crearAldeano);
-
 	}
 	
 	private void CrearAldeano(){
-
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX(); 
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
         try {
+			int x0 = elJuego.casillaSeleccionada().modelo().ejeX(); 
+			int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+
+			elJuego.cobrarAJugadorActual(25);
             Aldeano aldeano = ((Plaza) modelo).crearAldeano(x0, y0);
-
-            elJuego.cobrarAJugadorActual(aldeano.COSTO);
-
             if(aldeano != null) {
+            	playAccion();
                 AldeanoVista aldeanoVista = new AldeanoVista(x0, y0, aldeano, elJuego);
                 elJuego.agregar(aldeanoVista);
             }
-        }catch(NoSePuedeConstruirTanLejosError e){
+            else {
+            	elJuego.cobrarAJugadorActual(-25);
+            }
+        }catch(Exception e){
 
-            TextoError textoError = new TextoError("No se puede construir tan lejos");
+        	elJuego.playError();
+            TextoError textoError = new TextoError("Error al crear un aldeano");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
             elJuego.getChildren().add(textoError);
-
         }
-
 	}
 
 	@Override
@@ -70,6 +78,21 @@ public class PlazaVista extends EdificioVista {
 		super.actualizarVisualizacon();
  		enConstruccionView.setVisible(modelo.enConstruccion());
  		construidoView.setVisible(!modelo.enConstruccion());
+	}
+
+	@Override
+	protected void configurarSonidos() {
+		String seleccion = "src/resources/sound/seleccion/plaza.wav";
+		Media seleccionSound = new Media(new File(seleccion).toURI().toString());
+		sonidoSeleccionar = new MediaPlayer(seleccionSound);
+		
+		String muerte = "src/resources/sound/destruido/buildingdeath1.wav"; 
+		Media muerteSound = new Media(new File(muerte).toURI().toString());
+		sonidoMuerte = new MediaPlayer(muerteSound);
+		
+		String accion = "src/resources/sound/accion/crearAldeano.wav"; 
+		Media accionSound = new Media(new File(accion).toURI().toString());
+		sonidoAccion = new MediaPlayer(accionSound);
 	}
 	
 }

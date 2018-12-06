@@ -6,9 +6,12 @@ import modelo.Edificio;
 
 public abstract class EdificioVista extends PiezaVista{
 	
+	protected Edificio modelo;
+	//---------- Vista --------------------
 	protected ImageView enConstruccionView;
 	protected ImageView construidoView;
-	protected Edificio modelo;
+	protected ImageView construidoViewAzul;
+	protected ImageView construidoViewRojo;
 
 	public EdificioVista(int x, int y, Edificio unModelo, JuegoVista unJuego) {
 		super(x, y, unModelo, unJuego);
@@ -28,5 +31,24 @@ public abstract class EdificioVista extends PiezaVista{
 	protected abstract void prepararBotones();
 
 	protected abstract void crearRepresentacion();
+	
+	@Override
+	public void actualizarVisualizacon() {
+		double porcentaje = modelo.porcentajeVidaActual();
+		barraVidaActual.setWidth(TAMANIO_CASILLA*ancho*porcentaje);
+		if(porcentaje == 0) {
+			elJuego.remover(this);
+		}
+	}
+	
+	@Override
+	public void colocarColor() {		
+		if(elJuego.perteneceAJugador1(modelo)) {
+			construidoViewRojo.setVisible(construidoView.isVisible());
+			construidoViewAzul.setVisible(false);
+			construidoView = construidoViewRojo;
+			getChildren().addAll(construidoView);
+		}		
+	}
 	
 }

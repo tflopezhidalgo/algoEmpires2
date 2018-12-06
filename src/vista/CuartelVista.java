@@ -1,8 +1,12 @@
 package vista;
 
+import java.io.File;
+
 import controlador.TextoHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import modelo.Cuartel;
 import modelo.Edificio;
 import modelo.Unidad;
@@ -22,15 +26,21 @@ public class CuartelVista extends EdificioVista{
  		enConstruccionView = new ImageView(image);
  		enConstruccionView.setFitHeight(37);
  		enConstruccionView.setFitWidth(60);
-		getChildren().add(enConstruccionView);
 		//-----------------------------------------
- 		image = new Image("resources/images/2x2/cuartel.png");
- 		construidoView = new ImageView(image);
- 		construidoView.setFitHeight(60);
- 		construidoView.setFitWidth(60);
- 		construidoView.setVisible(false);
-		getChildren().add(construidoView);
+ 		image = new Image("resources/images/2x2/cuartelAzul.png");
+ 		construidoViewAzul = new ImageView(image);
+ 		construidoViewAzul.setFitHeight(60);
+ 		construidoViewAzul.setFitWidth(60);
 		//-----------------------------------------
+ 		image = new Image("resources/images/2x2/cuartelRojo.png");
+ 		construidoViewRojo = new ImageView(image);
+ 		construidoViewRojo.setFitHeight(60);
+ 		construidoViewRojo.setFitWidth(60);
+		//-----------------------------------------
+ 		construidoView = construidoViewAzul;
+ 		construidoView.setVisible(!modelo.enConstruccion());
+		getChildren().addAll(enConstruccionView, construidoView);
+
 	}
 
 	protected void prepararBotones() {	
@@ -48,40 +58,48 @@ public class CuartelVista extends EdificioVista{
 	}
 	
 	private void CrearArquero(){
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
-
 		try {
+			int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+			int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
 
+			elJuego.cobrarAJugadorActual(75);
             Unidad arquero = ((Cuartel) modelo).crearGuerrero(x0, y0, TipoGuerrero.ARQUERO);
-            elJuego.cobrarAJugadorActual(arquero.COSTO);
             if(arquero != null) {
+            	playAccion();
                 ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elJuego);
                 elJuego.agregar(arqueroVista);
             }
-        }catch (NoSePuedeConstruirTanLejosError e){
+            else {
+    			elJuego.cobrarAJugadorActual(-75);
+            }
+        }catch (Exception e){
 
-            TextoError textoError = new TextoError("No se puede construir tan lejos");
+        	elJuego.playError();
+            TextoError textoError = new TextoError("Error al crear un arquero");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
             elJuego.getChildren().add(textoError);
         }
-
 	}
 	
 	private void CrearEspadachin() {
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
-
 		try {
+			int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+			int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+
+			elJuego.cobrarAJugadorActual(50);
             Unidad espadachin = ((Cuartel) modelo).crearGuerrero(x0, y0, TipoGuerrero.ESPADACHIN);
-            elJuego.cobrarAJugadorActual(espadachin.COSTO);
             if (espadachin != null) {
+            	playAccion();
                 EspadachinVista espadachinVista = new EspadachinVista(x0, y0, espadachin, elJuego);
                 elJuego.agregar(espadachinVista);
             }
-        }catch (NoSePuedeConstruirTanLejosError e){
+            else {
+    			elJuego.cobrarAJugadorActual(-50);
+            }
+        }catch (Exception e){
 
-            TextoError textoError = new TextoError("No se puede construir tan lejos");
+        	elJuego.playError();
+            TextoError textoError = new TextoError("Error al crear un espadachin");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
             elJuego.getChildren().add(textoError);
         }
@@ -93,5 +111,20 @@ public class CuartelVista extends EdificioVista{
 		super.actualizarVisualizacon();
  		enConstruccionView.setVisible(modelo.enConstruccion());
  		construidoView.setVisible(!modelo.enConstruccion());
+	}
+
+	@Override
+	protected void configurarSonidos() {
+		String seleccion = "src/resources/sound/seleccion/cuartel.wav"; 
+		Media seleccionSound = new Media(new File(seleccion).toURI().toString());
+		sonidoSeleccionar = new MediaPlayer(seleccionSound);
+		
+		String muerte = "src/resources/sound/destruido/buildingdeath4.wav"; 
+		Media muerteSound = new Media(new File(muerte).toURI().toString());
+		sonidoMuerte = new MediaPlayer(muerteSound);
+		
+		String accion = "src/resources/sound/accion/crearSoldado.wav"; 
+		Media accionSound = new Media(new File(accion).toURI().toString());
+		sonidoAccion = new MediaPlayer(accionSound);
 	}
 }
