@@ -1,11 +1,16 @@
 package vista;
 
+import java.io.File;
+
 import controlador.TextoHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import modelo.Aldeano;
 import modelo.ArmaDeAsedio;
 import modelo.Castillo;
+import modelo.Tablero;
 import modelo.Unidad;
 import modelo.excepciones.NoSePuedeConstruirTanLejosError;
 
@@ -26,19 +31,24 @@ public class CastilloVista extends EdificioVista{
 	}
 	
 	private void CrearArmaDeAsedio() {
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
-
 		try {
+			int x0 = elJuego.casillaSeleccionada().modelo().ejeX();
+			int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+
+			elJuego.cobrarAJugadorActual(200);
             Unidad armaDeAsedio = ((Castillo) modelo).crearCatapulta(x0, y0);
-            elJuego.cobrarAJugadorActual(armaDeAsedio.COSTO);
             if (armaDeAsedio != null) {
+            	playAccion();
                 ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0, y0, armaDeAsedio, elJuego);
                 elJuego.agregar(armaVisu);
             }
-        }catch (NoSePuedeConstruirTanLejosError e){
+            else {
+            	elJuego.cobrarAJugadorActual(-200);
+            }
+		}catch (Exception e){
 
-            TextoError textoError = new TextoError("No se puede construir tan lejos");
+    		elJuego.playError();
+            TextoError textoError = new TextoError("Error al crear un arma de asedio");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
             elJuego.getChildren().add(textoError);
         }
@@ -56,6 +66,21 @@ public class CastilloVista extends EdificioVista{
  		image = new Image("resources/images/4x4/enConstruccion3.png");
  		enConstruccionView = new ImageView(image);
  		enConstruccionView.setVisible(false);
+	}
+
+	@Override
+	protected void configurarSonidos() {
+		String seleccion = "src/resources/sound/seleccion/castillo.wav"; 
+		Media seleccionSound = new Media(new File(seleccion).toURI().toString());
+		sonidoSeleccionar = new MediaPlayer(seleccionSound);
+		
+		String muerte = "src/resources/sound/destruido/buildingdeath3.wav"; 
+		Media muerteSound = new Media(new File(muerte).toURI().toString());
+		sonidoMuerte = new MediaPlayer(muerteSound);
+		
+		String accion = "src/resources/sound/accion/crearSoldado.wav"; 
+		Media accionSound = new Media(new File(accion).toURI().toString());
+		sonidoAccion = new MediaPlayer(accionSound);
 	}
 
 	

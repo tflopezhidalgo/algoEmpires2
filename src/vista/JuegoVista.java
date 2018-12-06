@@ -8,7 +8,6 @@ import controlador.HerramientasMapa;
 import controlador.TextoHandler;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
-import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,9 +27,13 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import modelo.*;
+import modelo.Juego;
+import modelo.JuegoTerminadoListener;
+import modelo.Jugador;
+import modelo.Pieza;
+import modelo.Tablero;
 
-public class JuegoVista extends BorderPane implements JuegoTerminadoListener {
+public class JuegoVista extends BorderPane implements JuegoTerminadoListener{
 
     final double SCALE_DELTA = 1.1;
 	double ultimoX;
@@ -83,6 +86,8 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener {
 	//--------------------- Sonidos ---------------------------
 	private MediaPlayer ambienteInicial;
 	private MediaPlayer ambienteCombate;
+	private MediaPlayer error;
+	private MediaPlayer finJuego;
 	//---------------------------------------------------------
 
     public JuegoVista(String nombreJugador1, String nombreJugador2, Stage stagePrincipal){
@@ -94,15 +99,15 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener {
     	jugador2 = new Jugador(nombreJugador2);
     	
     	modelo = HerramientasMapa.crearJuego(this,grupoCasillas, grupoPiezas, jugador1, jugador2);
+    	    	
     	modelo.setListenerJuegoTerminado(this);
-
+    	
     	crearMapa();
     	crearPanelSuperior();
     	crearPanelInferior();
     	configurarSonido();
     	
     	iniciarJuego();
-
     }
     
     private void iniciarJuego() {
@@ -125,13 +130,23 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener {
     }
 
     public void cobrarAJugadorActual(int monto){
-
-        modelo.getJugadorActual().cobrar(monto);
+    	modelo.getJugadorActual().cobrar(monto);
     }
     
     public void agregarTablero(Tablero unTablero) {
     	elTablero = unTablero;
     }
+    
+    public void decirGanador(){
+        Text unTexto = new Text("¡NUEVO GANADOR " + modelo.seleccionarGanador().obtenerNombre() + " !");
+       unTexto.setFont(Font.loadFont("file:src/resources/fonts/Mairon.ttf", 50));
+       unTexto.setTextAlignment(TextAlignment.CENTER);
+        //Esto es para calcular las dimensiones de pantalla pero no funciona me parece
+       Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        unTexto.relocate(screenBounds.getWidth() / 2 , screenBounds.getHeight() / 2);
+       unTexto.setOnMouseMoved(new TextoHandler(unTexto));
+        getChildren().add(unTexto);
+	}
     
     private void crearMapa(){
     	mapa = new Pane();
@@ -152,23 +167,7 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener {
     	
     	setTop(panelSuperior);
     }
-
-    public void decirGanador(){
-
-        Text unTexto = new Text("Â¡NUEVO GANADOR " + modelo.seleccionarGanador().obtenerNombre() + " !");
-        unTexto.setFont(Font.loadFont("file:src/resources/fonts/Mairon.ttf", 50));
-        unTexto.setTextAlignment(TextAlignment.CENTER);
-
-        //Esto es para calcular las dimensiones de pantalla pero no funciona me parece
-        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-
-        unTexto.relocate(screenBounds.getWidth() / 2 , screenBounds.getHeight() / 2);
-        unTexto.setOnMouseMoved(new TextoHandler(unTexto));
-
-        getChildren().add(unTexto);
-    }
-
-
+    
     private void crearPanelInferior() {
     	crearPanelInferiorIzquierdo();
     	crearPanelInferiorCentro();
@@ -220,9 +219,14 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener {
     	botonFinTurno.setOnAction( new FinalizarTurnoHandler(this, grupoPiezas));
     	Button botonSalir = new Button("Salir");
     	botonSalir.setOnAction(event ->  stagePrincipal.close());
+    	Button botonMute = new Button("Mute Ambiente");
+    	botonMute.setOnAction(event ->  {
+    		ambienteInicial.setMute(!ambienteInicial.isMute());
+    		ambienteCombate.setMute(!ambienteCombate.isMute());
+    	});
     	
     	VBox menuPanelDerecho = new VBox(10);
-    	menuPanelDerecho.getChildren().addAll(botonFinTurno, botonSalir);
+    	menuPanelDerecho.getChildren().addAll(botonFinTurno, botonSalir, botonMute);
     	panelDerecho.getChildren().add(menuPanelDerecho);
     	menuPanelDerecho.setAlignment(Pos.CENTER);
     }
@@ -275,6 +279,7 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener {
     	
     	colocarTextoEn(110,30,imagenReferencia,nombreJugador1);
     	colocarTextoEn(550,30,imagenReferencia,nombreJugador2);
+    	nombreJugador2.setAlignment(Pos.CENTER);
     }
     
     private void colocarTextoEn(int x, int y, ImageView referencia, Label texto) {
@@ -291,25 +296,47 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener {
 		String ambiente = "src/resources/sound/ambiente/ambiente.mp3"; 
 		Media ambienteSound = new Media(new File(ambiente).toURI().toString());
 		ambienteInicial = new MediaPlayer(ambienteSound);
+		ambienteInicial.setVolume(0.7);
 		
 		ambiente = "src/resources/sound/ambiente/ambienteCombate.mp3"; 
 		Media ambienteCombateSound = new Media(new File(ambiente).toURI().toString());
 		ambienteCombate = new MediaPlayer(ambienteCombateSound);
+		ambienteCombate.setVolume(0.7);
+		
+		String errorUrl = "src/resources/sound/ambiente/error.wav"; 
+		Media errorSound = new Media(new File(errorUrl).toURI().toString());
+		error = new MediaPlayer(errorSound);
+		
+		String victoria = "src/resources/sound/ambiente/victory.wav"; 
+		Media victoriaSound = new Media(new File(victoria).toURI().toString());
+		finJuego = new MediaPlayer(victoriaSound);
 		
 		ambienteInicial.play();
 		ambienteInicial.setOnEndOfMedia(new Runnable() {
 		    @Override
 		    public void run() {
+		    	ambienteInicial.stop();
 		    	ambienteCombate.play();
 		    }
 		});
 		ambienteCombate.setOnEndOfMedia(new Runnable() {
 		    @Override
 		    public void run() {
+		    	ambienteCombate.stop();
 		    	ambienteInicial.play();
 		    }
 		});
 	}
+    
+    public void playError() {
+    	error.stop();
+    	error.play();
+    }
+    
+    public void playFinJuego() {
+    	finJuego.stop();
+    	finJuego.play();
+    }
     
     public void actualizarContadores() {
     	oro1.setText(Integer.toString(jugador1.obtenerOro()));

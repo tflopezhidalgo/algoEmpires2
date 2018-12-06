@@ -2,7 +2,6 @@ package vista;
 
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -55,7 +54,7 @@ public class ConfiguracionVista extends Pane{
         titulo.setFont(Font.loadFont("file:src/resources/fonts/ringBearer.TTF", 40));
         titulo.setTextOrigin(VPos.CENTER);
 
-        Text botonIniciarJuego = new Text("Â¡Iniciar Juego!");
+        Text botonIniciarJuego = new Text("¡Iniciar Juego!");
         botonIniciarJuego.setFont(Font.loadFont("file:src/resources/fonts/ringBearer.TTF", 40));
         botonIniciarJuego.setFill(Color.WHITE);
         botonIniciarJuego.relocate(1100, 700);

@@ -1,7 +1,11 @@
 package vista;
 
+import java.io.File;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import modelo.ArmaDeAsedio;
 import modelo.Unidad;
 import vista.estadoArmaDeAsedioVista.CatapultaVistaDesarmada;
@@ -54,6 +58,21 @@ public class ArmaDeAsedioVista extends UnidadVista{
 		viewAtaque.setVisible(false);
 		//-----------------------------------------
 		getChildren().addAll(viewMover,viewAtaque);
+	}
+	
+	@Override
+	protected void configurarSonidos() {
+		String seleccion = "src/resources/sound/seleccion/armaDeAsedio.wav"; 
+		Media seleccionSound = new Media(new File(seleccion).toURI().toString());
+		sonidoSeleccionar = new MediaPlayer(seleccionSound);
+		
+		String muerte = "src/resources/sound/destruido/armaDeAsedio.wav"; 
+		Media muerteSound = new Media(new File(muerte).toURI().toString());
+		sonidoMuerte = new MediaPlayer(muerteSound);
+		
+		String accion = "src/resources/sound/accion/armaDeAsedio.wav"; 
+		Media accionSound = new Media(new File(accion).toURI().toString());
+		sonidoAccion = new MediaPlayer(accionSound);
 	}
 	
 }

@@ -1,7 +1,11 @@
 package vista;
 
+import java.io.File;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import modelo.Unidad;
 import modelo.excepciones.Excepcion;
 
@@ -28,4 +32,12 @@ public class EspadachinVista extends UnidadVista{
 		//Click derecho sobre Pieza = atacar
 	}	
 
+	
+	@Override
+	protected void configurarSonidos() {
+		super.configurarSonidos();
+		String accion = "src/resources/sound/accion/fight.wav"; 
+		Media accionSound = new Media(new File(accion).toURI().toString());
+		sonidoAccion = new MediaPlayer(accionSound);
+	}
 }

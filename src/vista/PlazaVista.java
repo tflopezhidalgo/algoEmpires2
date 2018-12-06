@@ -1,8 +1,12 @@
 package vista;
 
+import java.io.File;
+
 import controlador.TextoHandler;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import modelo.Aldeano;
 import modelo.Edificio;
 import modelo.Plaza;
@@ -43,26 +47,27 @@ public class PlazaVista extends EdificioVista {
 	}
 	
 	private void CrearAldeano(){
-
-		int x0 = elJuego.casillaSeleccionada().modelo().ejeX(); 
-		int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
         try {
+			int x0 = elJuego.casillaSeleccionada().modelo().ejeX(); 
+			int y0 = elJuego.casillaSeleccionada().modelo().ejeY();
+
+			elJuego.cobrarAJugadorActual(25);
             Aldeano aldeano = ((Plaza) modelo).crearAldeano(x0, y0);
-
-            elJuego.cobrarAJugadorActual(aldeano.COSTO);
-
             if(aldeano != null) {
+            	playAccion();
                 AldeanoVista aldeanoVista = new AldeanoVista(x0, y0, aldeano, elJuego);
                 elJuego.agregar(aldeanoVista);
             }
-        }catch(NoSePuedeConstruirTanLejosError e){
+            else {
+            	elJuego.cobrarAJugadorActual(-25);
+            }
+        }catch(Exception e){
 
-            TextoError textoError = new TextoError("No se puede construir tan lejos");
+        	elJuego.playError();
+            TextoError textoError = new TextoError("Error al crear un aldeano");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
             elJuego.getChildren().add(textoError);
-
         }
-
 	}
 
 	@Override
@@ -70,6 +75,21 @@ public class PlazaVista extends EdificioVista {
 		super.actualizarVisualizacon();
  		enConstruccionView.setVisible(modelo.enConstruccion());
  		construidoView.setVisible(!modelo.enConstruccion());
+	}
+
+	@Override
+	protected void configurarSonidos() {
+		String seleccion = "src/resources/sound/seleccion/plaza.wav"; 
+		Media seleccionSound = new Media(new File(seleccion).toURI().toString());
+		sonidoSeleccionar = new MediaPlayer(seleccionSound);
+		
+		String muerte = "src/resources/sound/destruido/buildingdeath1.wav"; 
+		Media muerteSound = new Media(new File(muerte).toURI().toString());
+		sonidoMuerte = new MediaPlayer(muerteSound);
+		
+		String accion = "src/resources/sound/accion/crearAldeano.wav"; 
+		Media accionSound = new Media(new File(accion).toURI().toString());
+		sonidoAccion = new MediaPlayer(accionSound);
 	}
 	
 }
