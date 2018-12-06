@@ -21,8 +21,9 @@ public class ClickPiezaHandler implements EventHandler<MouseEvent> {
 	public void handle(MouseEvent event) {
 		if(event.getButton() == MouseButton.PRIMARY ) {
 			
-			
 			if(!elJuego.aliadoContieneA(laPieza.modelo())) {
+				elJuego.playError();
+				
 				throw new PiezaNoEstaEnEquipoAliado();
 			}
 			
@@ -40,6 +41,8 @@ public class ClickPiezaHandler implements EventHandler<MouseEvent> {
 			elJuego.piezaSeleccionada().desSeleccionar();
 		}
 		//agregar efecto a casilla actual
+		laPieza.playSeleccionar();
+		
 		laPieza.seleccionar();
 		elJuego.seleccionarPieza(laPieza);
 	}

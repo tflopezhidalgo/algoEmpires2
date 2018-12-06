@@ -1,9 +1,5 @@
 package controlador;
 
-import java.io.File;
-
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import modelo.excepciones.PiezaNoEstaEnEquipoEnemigo;
 import vista.JuegoVista;
 import vista.PiezaVista;
@@ -15,18 +11,20 @@ public class UnidadRealizarAccion {
 		//Unidad esta siendo atacada
 		
 		if(!unJuego.enemigoContieneA(unidad.modelo())) {
+			unJuego.playError();
+			
 			throw new PiezaNoEstaEnEquipoEnemigo();
 		}
 		
 		PiezaVista piezaAtacante = unJuego.piezaSeleccionada();
 		
-		piezaAtacante.modelo().atacar(unidad.modelo());
-		String musicFile = "src/resources/sound/Accion/fight2.wav";
-		Media sound = new Media(new File(musicFile).toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.play();
+		piezaAtacante.playAccion();
 		
+		piezaAtacante.modelo().atacar(unidad.modelo());
 		if(unidad.modelo().estaDestruida()) {
+			
+			unidad.playMuerte();
+			
 			unJuego.remover(unidad);
 		}
 			

@@ -42,7 +42,6 @@ public class HerramientasMapa {
     	
     	elJuego.agregarJugador(jugador1);
     	elJuego.agregarJugador(jugador2);
-    	elJuego.agregarTablero(elTablero);
     	mapa.agregarTablero(elTablero);
 
     	return elJuego;
