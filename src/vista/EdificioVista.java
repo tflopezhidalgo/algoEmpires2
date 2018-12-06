@@ -33,6 +33,15 @@ public abstract class EdificioVista extends PiezaVista{
 	protected abstract void crearRepresentacion();
 	
 	@Override
+	public void actualizarVisualizacon() {
+		double porcentaje = modelo.porcentajeVidaActual();
+		barraVidaActual.setWidth(TAMANIO_CASILLA*ancho*porcentaje);
+		if(porcentaje == 0) {
+			elJuego.remover(this);
+		}
+	}
+	
+	@Override
 	public void colocarColor() {		
 		if(elJuego.perteneceAJugador1(modelo)) {
 			construidoViewRojo.setVisible(construidoView.isVisible());

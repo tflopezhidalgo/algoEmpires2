@@ -414,8 +414,8 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener{
 			modelo.getJugadorActual().agregar(unaUnidad.modelo());
 			unaUnidad.colocarColor();
 			grupoPiezas.getChildren().add(unaUnidad);
+			actualizarContadores();
 		}
-		actualizarContadores();
 	}
 	
 	//TODO necesito un remover para castillo o el programa corta muy rapido que no ?
@@ -426,9 +426,9 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener{
 		}
 		else {
 			modelo.getJugadorEnemigo().remover(unidadVista.modelo());
+			grupoPiezas.getChildren().remove(unidadVista);
+			actualizarContadores();
 		}
-		grupoPiezas.getChildren().remove(unidadVista);
-		actualizarContadores();
 	}
 	
 	public void remover(EdificioVista edificioVista) {

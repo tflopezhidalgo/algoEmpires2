@@ -103,10 +103,7 @@ public abstract class PiezaVista extends StackPane {
 	//Atacada si: piezaSeleccionada es Espadachin/Arquero/Castillo o ArmaDeAsedio y estaPieza es un Edificio
 	public abstract void realizarAccionSobrePieza();
 	
-	public void actualizarVisualizacon(){
-		double porcentaje = modelo.porcentajeVidaActual();
-		barraVidaActual.setWidth(TAMANIO_CASILLA*ancho*porcentaje);
-	}
+	public abstract void actualizarVisualizacon();
 	
 	public abstract void colocarColor();
 	
