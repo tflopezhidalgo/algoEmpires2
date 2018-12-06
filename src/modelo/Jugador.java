@@ -57,7 +57,12 @@ public class Jugador {
 
         elCastillo.nuevoTurno();
     }
-    
+
+    public Castillo getElCastillo(){
+
+        return this.elCastillo;
+    }
+
     public int hpCastillo() {
 
         return elCastillo.getVidaActual();

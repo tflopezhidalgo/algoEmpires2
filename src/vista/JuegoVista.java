@@ -7,6 +7,8 @@ import controlador.FinalizarTurnoHandler;
 import controlador.HerramientasMapa;
 import controlador.TextoHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,13 +25,12 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
-import modelo.Juego;
-import modelo.Jugador;
-import modelo.Pieza;
-import modelo.Tablero;
+import modelo.*;
 
-public class JuegoVista extends BorderPane {
+public class JuegoVista extends BorderPane implements JuegoTerminadoListener {
 
     final double SCALE_DELTA = 1.1;
 	double ultimoX;
@@ -93,13 +94,15 @@ public class JuegoVista extends BorderPane {
     	jugador2 = new Jugador(nombreJugador2);
     	
     	modelo = HerramientasMapa.crearJuego(this,grupoCasillas, grupoPiezas, jugador1, jugador2);
-    	    	
+    	modelo.setListenerJuegoTerminado(this);
+
     	crearMapa();
     	crearPanelSuperior();
     	crearPanelInferior();
     	configurarSonido();
     	
     	iniciarJuego();
+
     }
     
     private void iniciarJuego() {
@@ -122,7 +125,8 @@ public class JuegoVista extends BorderPane {
     }
 
     public void cobrarAJugadorActual(int monto){
-    	modelo.getJugadorActual().cobrar(monto);
+
+        modelo.getJugadorActual().cobrar(monto);
     }
     
     public void agregarTablero(Tablero unTablero) {
@@ -148,7 +152,23 @@ public class JuegoVista extends BorderPane {
     	
     	setTop(panelSuperior);
     }
-    
+
+    public void decirGanador(){
+
+        Text unTexto = new Text("¡NUEVO GANADOR " + modelo.seleccionarGanador().obtenerNombre() + " !");
+        unTexto.setFont(Font.loadFont("file:src/resources/fonts/Mairon.ttf", 50));
+        unTexto.setTextAlignment(TextAlignment.CENTER);
+
+        //Esto es para calcular las dimensiones de pantalla pero no funciona me parece
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
+        unTexto.relocate(screenBounds.getWidth() / 2 , screenBounds.getHeight() / 2);
+        unTexto.setOnMouseMoved(new TextoHandler(unTexto));
+
+        getChildren().add(unTexto);
+    }
+
+
     private void crearPanelInferior() {
     	crearPanelInferiorIzquierdo();
     	crearPanelInferiorCentro();
