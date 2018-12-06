@@ -138,7 +138,7 @@ public class JuegoVista extends BorderPane implements JuegoTerminadoListener{
     }
     
     public void decirGanador(){
-        Text unTexto = new Text("¡NUEVO GANADOR " + modelo.seleccionarGanador().obtenerNombre() + " !");
+        Text unTexto = new Text("NUEVO GANADOR " + modelo.seleccionarGanador().obtenerNombre() + " !");
        unTexto.setFont(Font.loadFont("file:src/resources/fonts/Mairon.ttf", 50));
        unTexto.setTextAlignment(TextAlignment.CENTER);
         //Esto es para calcular las dimensiones de pantalla pero no funciona me parece
