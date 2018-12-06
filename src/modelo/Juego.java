@@ -12,7 +12,6 @@ public class Juego implements CastilloListener{
 
     private List<Jugador> jugadores;
     private JuegoTerminadoListener juegoListener;
-    private Tablero tablero;
     private EstadoJuego estado;
 
     private void seleccionarJugadorInicial(){
@@ -29,30 +28,21 @@ public class Juego implements CastilloListener{
     }
 
     public Juego(){
-
-        this.juegoListener = null;
+    	
         this.estado = new NoComenzado();
-        this.jugadores = new ArrayList();
-        this.tablero = null;
+        this.jugadores = new ArrayList<Jugador>();
     }
 
     public void setListenerJuegoTerminado(JuegoTerminadoListener listener){
-
         this.juegoListener = listener;
-    }
-
-
+	}
+    
     public void agregarJugador(Jugador unJugador) {
         if(this.jugadores.size() < 2) {
 
             jugadores.add(unJugador);
             unJugador.setListener(this);
         }
-    }
-    
-    public void agregarTablero(Tablero unTablero) {
-
-    	tablero = unTablero;
     }
     
     public void iniciarJuego(){
@@ -83,7 +73,6 @@ public class Juego implements CastilloListener{
     }
 
     public void castilloFueDestruido(){
-
         estado = new Terminado();
         if(this.juegoListener != null)
             this.juegoListener.decirGanador();
