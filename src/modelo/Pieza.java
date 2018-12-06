@@ -1,19 +1,26 @@
 package modelo;
 
-import modelo.excepciones.PiezaFueraDeAlcanceError;
-import modelo.excepciones.PiezaYaJugoEnTurnoActualError;
+import modelo.excepciones.*;
 
 public abstract class Pieza {
 
-    final public int COSTO;
-    final public int VIDA_MAX;
+    public final int VIDA_MAX;
+    public final int COSTO;
 
 	protected int vida;
-	protected Area espacioOcupado;
 	protected boolean turnoJugado;
+    protected Area espacioOcupado;
 
-    protected void liberarUbicacion() {espacioOcupado.liberar(); }
+	/*          Constructor             */
+	public Pieza(int vidaMax, int costo) {
 
+	    this.COSTO = costo;
+	    this.vida = vidaMax;
+	    this.VIDA_MAX = vidaMax;
+		turnoJugado = false;
+
+	}
+	
     protected void siYaJugoElTurnoError(){
 
         if(turnoJugado){
@@ -45,31 +52,16 @@ public abstract class Pieza {
         }
         return minimaDistancia;
     }
+    
+    protected int distanciaMinimaA(Casilla casilla) {
 
-	/*          Constructor             */
-
-	public Pieza(){
-
-        espacioOcupado = null;
-        turnoJugado = false;
-
-        VIDA_MAX = 0;
-        COSTO = 0;
+    	int minimaDistancia = obtenerAreaOcupada().distanciaMinimaA(casilla);
+        return minimaDistancia;
     }
 
-	public Pieza(Area espacioAOcupar, int vidaMaxima, int costo) {
+    protected void liberarUbicacion() {espacioOcupado.liberar(); }
 
-        espacioAOcupar.ocupar();
-	    espacioOcupado = espacioAOcupar;
-		turnoJugado = false;
-
-		VIDA_MAX = vidaMaxima;
-		COSTO = costo;
-	}
-
-	public Area obtenerAreaOcupada() { return espacioOcupado; }
-
-	public void recibirDanio(int danio) {
+    public void recibirDanio(int danio) {
 		vida = (vida - danio);
 		if(vida <= 0) {
 			vida = 0;
@@ -84,14 +76,19 @@ public abstract class Pieza {
 	
 	public boolean estaDestruida() { return (vida == 0); }
 
-    public double porcentajeVidaActual() {
-        return ((double)vida/VIDA_MAX);
-    }
+    public abstract double porcentajeVidaActual();
 
     public abstract void atacar(Pieza piezaEnemiga);
 
 	public abstract void recibirDanioDe(Unidad unaUnidad);
 
 	public abstract void recibirDanioDe(Edificio unEdificio);
+
+    public Area obtenerAreaOcupada() { return espacioOcupado; }
+
+    public int getVidaActual(){
+
+        return this.vida;
+    }
 
 }

@@ -21,34 +21,34 @@ public class CasillaTest {
     @Test
     public void estaOcupada() throws Exception{
         Casilla unaCasilla = new Casilla(0,0);
-        Assert.assertEquals(false, unaCasilla.estaOcupada());
+        Assert.assertFalse(unaCasilla.estaOcupada());
 
         unaCasilla.ocupar();
-        Assert.assertEquals(true, unaCasilla.estaOcupada());
+        Assert.assertTrue(unaCasilla.estaOcupada());
     }
 
     @Test
     public void ocuparUnaCasilla() throws Exception{
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Aldeano unAldeano = new Aldeano(0,0);
         Casilla unaCasilla = unTablero.obtenerCasillaEn(1,1);
         Casilla otraCasilla = unTablero.obtenerCasillaEn(0,0);
 
-        Assert.assertEquals(false, unaCasilla.estaOcupada());
-        Assert.assertEquals(true, otraCasilla.estaOcupada());
+        Assert.assertFalse(unaCasilla.estaOcupada());
+        Assert.assertTrue(otraCasilla.estaOcupada());
     }
 
     @Test
     public void liberarCasilla() throws Exception{
 
         Tablero unTablero = new Tablero();
-        Aldeano unAldeano = new Aldeano(unTablero.definirArea(0,0,0,0));
+        Aldeano unAldeano = new Aldeano(0,0);
         Casilla unaCasilla = unTablero.obtenerCasillaEn(0,0);
 
-        Assert.assertEquals(true, unaCasilla.estaOcupada());
+        Assert.assertTrue(unaCasilla.estaOcupada());
 
         unaCasilla.liberar();
-        Assert.assertEquals(false, unaCasilla.estaOcupada());
+        Assert.assertFalse(unaCasilla.estaOcupada());
 
     }
 
@@ -77,7 +77,7 @@ public class CasillaTest {
             lanzoElError=true;
         };
 
-        Assert.assertEquals(true, lanzoElError);
+        Assert.assertTrue(lanzoElError);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class CasillaTest {
             lanzoElError=true;
         }
 
-        Assert.assertEquals(true, lanzoElError);
+        Assert.assertTrue(lanzoElError);
     }
 
     @Test
@@ -115,7 +115,7 @@ public class CasillaTest {
             lanzoElError=true;
         }
 
-        Assert.assertEquals(true, lanzoElError);
+        Assert.assertTrue(lanzoElError);
     }
 
 }

@@ -8,79 +8,73 @@ import modelo.estadoJuego.*;
 
 public class Juego implements CastilloListener{
 
+    public final int JUGADORES_MAXIMOS = 2;
+
     private List<Jugador> jugadores;
     private Tablero tablero;
     private EstadoJuego estado;
 
     private void seleccionarJugadorInicial(){
+
         int numeroRandom = ThreadLocalRandom.current().nextInt(0, 2);
 
-        if(numeroRandom == 0) {
+        if(numeroRandom == 0)
+
             this.estado = new JuegaJugador1();
-            System.out.print("Comienza " + this.getJugadorActual().obtenerNombre());
-        }else {
+        else
+
             this.estado = new JuegaJugador2();
-            System.out.print("Comienza " + this.getJugadorActual().obtenerNombre());
-        }
 
     }
 
-    public Juego(String nombreJugador1, String nombreJugador2){
+    public Juego(){
 
-        jugadores = new ArrayList<>();
-        this.tablero = new Tablero();
-        jugadores.add(new Jugador(nombreJugador1));
-        jugadores.add(new Jugador(nombreJugador2));
         this.estado = new NoComenzado();
+        this.jugadores = new ArrayList();
+        this.tablero = null;
+    }
+    
+    public void agregarJugador(Jugador unJugador) {
+        if(this.jugadores.size() < 2) {
+
+            jugadores.add(unJugador);
+            unJugador.setListener(this);
+        }
+    }
+    
+    public void agregarTablero(Tablero unTablero) {
+
+    	tablero = unTablero;
+    }
+    
+    public void iniciarJuego(){
+
+        this.seleccionarJugadorInicial();
     }
 
-    public void iniciarJuego(List<Pieza> piezasJugador1, List<Pieza> piezasJugador2){
+    public void iniciarJuegoNoRandom(){
 
-        seleccionarJugadorInicial();
-
-        Castillo castilloJugador1 = null;
-        Castillo castilloJugador2 = null;
-
-        for(int i = 0; i < piezasJugador1.size(); i++){
-            if(piezasJugador1.get(i) instanceof Castillo)
-                castilloJugador1 = (Castillo)piezasJugador1.get(i);
-        }
-
-        for(int i = 0; i < piezasJugador2.size(); i++){
-            if(piezasJugador2.get(i) instanceof Castillo)
-                castilloJugador2 = (Castillo)piezasJugador2.get(i);
-        }
-
-        castilloJugador1.setCastilloListener(this);
-        castilloJugador2.setCastilloListener(this);
-
-        jugadores.get(0).asignarPiezas(piezasJugador1);
-        jugadores.get(1).asignarPiezas(piezasJugador2);
-    }
-
-    public Tablero getTablero(){
-        return this.tablero;
+        estado = new JuegaJugador1();
     }
 
     public Jugador getJugadorActual(){
-
         return (this.estado.getJugadorActual(this.jugadores));
+    }
+    
+    public Jugador getJugadorEnemigo(){
+        return (this.estado.getJugadorEnemigo(this.jugadores));
     }
 
     public void finalizarTurno(){
 
-        this.estado.getJugadorActual(jugadores).finalizarTurno();
-        this.estado = estado.finalizarTurno();
+        this.estado = estado.finalizarTurno(jugadores);
     }
 
     public Jugador seleccionarGanador(){
-
         return (estado.seleccionarGanador(this.jugadores));
-
     }
 
     public void castilloFueDestruido(){
-
         estado = new Terminado();
     }
 

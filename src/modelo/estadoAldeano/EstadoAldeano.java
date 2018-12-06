@@ -1,6 +1,7 @@
 package modelo.estadoAldeano;
 
-import modelo.*;
+import modelo.Aldeano;
+import modelo.Edificio;
 import modelo.excepciones.AldeanOcupadoNoPuedeMoverse;
 
 public abstract class EstadoAldeano {
@@ -9,9 +10,9 @@ public abstract class EstadoAldeano {
 
     public abstract EstadoAldeano reparar(Edificio unEdificio, Aldeano unAldeano);
 
-    public abstract EstadoAldeano construirCuartel(Area unArea, Aldeano unAldeano);
+    public abstract EstadoAldeano construirCuartel(int x0, int y0, Aldeano unAldeano);
 
-    public abstract EstadoAldeano construirPlaza(Area unArea, Aldeano unAldeano);
+    public abstract EstadoAldeano construirPlaza(int x0, int y0, Aldeano unAldeano);
 
 	public abstract EstadoAldeano realizarTrabajoDeTurno();
 

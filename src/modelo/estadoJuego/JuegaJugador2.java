@@ -12,10 +12,16 @@ public class JuegaJugador2 extends EstadoJuego {
     }
 
     @Override
-    public EstadoJuego finalizarTurno(){
+    public EstadoJuego finalizarTurno(List<Jugador> jugadores){
 
+    	jugadores.get(1).finalizarTurno();
         return (new JuegaJugador1());
     }
+
+	public Jugador getJugadorEnemigo(List<Jugador> jugadores) {
+
+        return jugadores.get(0);
+	}
 
 
 }
