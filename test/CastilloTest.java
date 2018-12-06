@@ -61,8 +61,6 @@ public class CastilloTest {
         Juego unJuego = new Juego();
         Tablero unTablero = new Tablero();
 
-        unJuego.agregarTablero(unTablero);
-
         Castillo unCastillo = new Castillo(0,0);
         Castillo otroCastillo = new Castillo(12,12);
 
@@ -100,8 +98,6 @@ public class CastilloTest {
     public void castilloDestruido() throws Exception{
         Juego unJuego = new Juego();
         Tablero unTablero = new Tablero();
-
-        unJuego.agregarTablero(unTablero);
 
         Castillo unCastillo = new Castillo(0,0);
         Castillo otroCastillo = new Castillo(12,12);
@@ -141,8 +137,6 @@ public class CastilloTest {
         Juego unJuego = new Juego();
         Tablero unTablero = new Tablero();
 
-        unJuego.agregarTablero(unTablero);
-
         Castillo unCastillo = new Castillo(0,0);
         Castillo otroCastillo = new Castillo(12,12);
 
@@ -180,8 +174,6 @@ public class CastilloTest {
     public void piezaFueraDeAlcanceParaAtacar() {
         Juego unJuego = new Juego();
         Tablero unTablero = new Tablero();
-
-        unJuego.agregarTablero(unTablero);
 
         Castillo unCastillo = new Castillo(0,0);
         Castillo otroCastillo = new Castillo(12,12);
