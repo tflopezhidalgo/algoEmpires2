@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.excepciones.CasillaInvalidaError;
 import modelo.excepciones.JugadorSinCastilloError;
+import modelo.excepciones.OroInsuficienteError;
 import modelo.excepciones.PoblacionLimiteSuperadaError;
 
 public class Jugador {
@@ -57,12 +58,11 @@ public class Jugador {
 
         elCastillo.nuevoTurno();
     }
-
-    public Castillo getElCastillo(){
-
+    
+	public Castillo getElCastillo(){
         return this.elCastillo;
-    }
-
+	}
+    
     public int hpCastillo() {
 
         return elCastillo.getVidaActual();
@@ -106,7 +106,7 @@ public class Jugador {
 
     public void cobrar(int monto) {
     	if(this.cantidadDeOro < monto) {
-    		throw new CasillaInvalidaError();
+    		throw new OroInsuficienteError();
     	}
     	
     	cantidadDeOro -= monto;
@@ -136,7 +136,6 @@ public class Jugador {
     public void agregar(Unidad soldado) {
 		if(soldado instanceof Aldeano) {
 			agregar((Aldeano) soldado);
-			actualizarPoblacion();
 		}
 		else {
 	    	int poblacionLibre = POBLACION_MAX - poblacion;
@@ -198,7 +197,6 @@ public class Jugador {
 		
 		laContiene = (a | b | c | d);
 		
-    	System.out.println(nombreJugador + " contiene a la pieza: " + laContiene); //TODO BORRAR
 		return laContiene;
 	}
 

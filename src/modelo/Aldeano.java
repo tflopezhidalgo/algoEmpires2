@@ -18,8 +18,6 @@ public class Aldeano extends Unidad {
 
 	@Override
     public void atacar(Pieza unaPieza){
-
-
     }
 
 	@Override
