@@ -37,17 +37,13 @@ public class CastilloVista extends EdificioVista{
 
 			elJuego.cobrarAJugadorActual(200);
             Unidad armaDeAsedio = ((Castillo) modelo).crearCatapulta(x0, y0);
-            if (armaDeAsedio != null) {
-            	playAccion();
-                ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0, y0, armaDeAsedio, elJuego);
-                elJuego.agregar(armaVisu);
-            }
-            else {
-            	elJuego.cobrarAJugadorActual(-200);
-            }
+        	playAccion();
+            ArmaDeAsedioVista armaVisu = new ArmaDeAsedioVista(x0, y0, armaDeAsedio, elJuego);
+            elJuego.agregar(armaVisu);
 		}catch (Exception e){
 
     		elJuego.playError();
+        	elJuego.cobrarAJugadorActual(-200);
             TextoError textoError = new TextoError("Error al crear un arma de asedio");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
             elJuego.getChildren().add(textoError);

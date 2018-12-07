@@ -56,17 +56,13 @@ public class PlazaVista extends EdificioVista {
 
 			elJuego.cobrarAJugadorActual(25);
             Aldeano aldeano = ((Plaza) modelo).crearAldeano(x0, y0);
-            if(aldeano != null) {
-            	playAccion();
-                AldeanoVista aldeanoVista = new AldeanoVista(x0, y0, aldeano, elJuego);
-                elJuego.agregar(aldeanoVista);
-            }
-            else {
-            	elJuego.cobrarAJugadorActual(-25);
-            }
+        	playAccion();
+            AldeanoVista aldeanoVista = new AldeanoVista(x0, y0, aldeano, elJuego);
+            elJuego.agregar(aldeanoVista);
         }catch(Exception e){
 
         	elJuego.playError();
+        	elJuego.cobrarAJugadorActual(-25);
             TextoError textoError = new TextoError("Error al crear un aldeano");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
             elJuego.getChildren().add(textoError);

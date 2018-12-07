@@ -64,17 +64,13 @@ public class CuartelVista extends EdificioVista{
 
 			elJuego.cobrarAJugadorActual(75);
             Unidad arquero = ((Cuartel) modelo).crearGuerrero(x0, y0, TipoGuerrero.ARQUERO);
-            if(arquero != null) {
-            	playAccion();
-                ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elJuego);
-                elJuego.agregar(arqueroVista);
-            }
-            else {
-    			elJuego.cobrarAJugadorActual(-75);
-            }
+        	playAccion();
+            ArqueroVista arqueroVista = new ArqueroVista(x0,y0,arquero,elJuego);
+            elJuego.agregar(arqueroVista);
         }catch (Exception e){
 
         	elJuego.playError();
+			elJuego.cobrarAJugadorActual(-75);
             TextoError textoError = new TextoError("Error al crear un arquero");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
             elJuego.getChildren().add(textoError);
@@ -88,17 +84,13 @@ public class CuartelVista extends EdificioVista{
 
 			elJuego.cobrarAJugadorActual(50);
             Unidad espadachin = ((Cuartel) modelo).crearGuerrero(x0, y0, TipoGuerrero.ESPADACHIN);
-            if (espadachin != null) {
-            	playAccion();
-                EspadachinVista espadachinVista = new EspadachinVista(x0, y0, espadachin, elJuego);
-                elJuego.agregar(espadachinVista);
-            }
-            else {
-    			elJuego.cobrarAJugadorActual(-50);
-            }
+        	playAccion();
+            EspadachinVista espadachinVista = new EspadachinVista(x0, y0, espadachin, elJuego);
+            elJuego.agregar(espadachinVista);
         }catch (Exception e){
 
         	elJuego.playError();
+			elJuego.cobrarAJugadorActual(-50);
             TextoError textoError = new TextoError("Error al crear un espadachin");
             textoError.setOnMouseMoved(new TextoHandler(textoError));
             elJuego.getChildren().add(textoError);

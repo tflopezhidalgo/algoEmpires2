@@ -49,6 +49,7 @@ public class AldeanoVista extends UnidadVista{
         	catch (Exception e){
         		
         		elJuego.playError();
+    			elJuego.cobrarAJugadorActual(-100);
                 TextoError textoError = new TextoError("Error al construir");
                 textoError.setOnMouseMoved(new TextoHandler(textoError));
                 elJuego.getChildren().add(textoError);
@@ -60,8 +61,9 @@ public class AldeanoVista extends UnidadVista{
         construirCuartel.setOnMousePressed(event ->  {
         	try {ConstruirCuartel();}
         	catch (Exception e){
-
+        		
         		elJuego.playError();
+        		elJuego.cobrarAJugadorActual(-50);
                 TextoError textoError = new TextoError("Error al construir");
                 textoError.setOnMouseMoved(new TextoHandler(textoError));
                 elJuego.getChildren().add(textoError);
@@ -76,14 +78,9 @@ public class AldeanoVista extends UnidadVista{
 
 		elJuego.cobrarAJugadorActual(50);
 		Edificio cuartel = ((Aldeano)modelo).crearCuartel(x0, y0);
-		if(cuartel != null) {
-			playAccion();
-			CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elJuego);
-			elJuego.agregar(cuartelVisu);
-		}
-		else {
-			elJuego.cobrarAJugadorActual(-50);
-		}
+		playAccion();
+		CuartelVista cuartelVisu = new CuartelVista(x0,y0,cuartel,elJuego);
+		elJuego.agregar(cuartelVisu);
 	}
 	
 	private void ConstruirPlaza() {
@@ -92,14 +89,9 @@ public class AldeanoVista extends UnidadVista{
 
 		elJuego.cobrarAJugadorActual(100);
 		Edificio plaza = ((Aldeano)modelo).crearPlaza(x0, y0);
-		if(plaza != null) {
-			playAccion();
-			PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elJuego);
-			elJuego.agregar(plazaVisu);
-		}
-		else {
-			elJuego.cobrarAJugadorActual(-100);
-		}
+		playAccion();
+		PlazaVista plazaVisu = new PlazaVista(x0,y0,plaza,elJuego);
+		elJuego.agregar(plazaVisu);
 	}
 	
 	@Override
